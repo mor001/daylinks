@@ -4,25 +4,32 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
-class ApiController extends Controller
+use App\User;
+class AuthController extends Controller
 {
     //id,pwで認証してtokenを発行
     function login(){
         $credentials = request(['userid', 'password']);
-
+        logger('--- call login ---');
+        logger($credentials);
         //もし認証エラーなら
         if(!$token = auth('api')->attempt($credentials)){
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-
         //OKならtoken発行
         return $this->respondWithToken($token);
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+        return response()->json(['message' => 'logout']);
     }
 
     //自分の情報返す
     public function me()
     {
+        logger(auth()->user());
         return response()->json(auth()->user());
     }
 
