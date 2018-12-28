@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+
 class AuthController extends Controller
 {
     //id,pwで認証してtokenを発行
-    function login(){
+    public function login()
+    {
         $credentials = request(['userid', 'password']);
-        logger('--- call login ---');
-        logger($credentials);
+        //logger('--- call login ---');
         //もし認証エラーなら
         if(!$token = auth('api')->attempt($credentials)){
             return response()->json(['error' => 'Unauthorized'], 401);
@@ -29,7 +30,6 @@ class AuthController extends Controller
     //自分の情報返す
     public function me()
     {
-        logger(auth()->user());
         return response()->json(auth()->user());
     }
 
