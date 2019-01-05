@@ -3,7 +3,9 @@
 namespace App;
 
 use App\Scopes\TenantScope;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Schedule extends Model
 {
@@ -35,4 +37,14 @@ class Schedule extends Model
      */
     protected $hidden = [
     ];
+
+    public static function getMonthly($y = null, $m = null)
+    {
+        $current_y = $y == null ? date('Y') : $y;
+        $current_m = $m == null ? date('m') : $m;
+        $from = date('Y-m-d', mktime(0, 0, 0, $current_m, 1, $current_y));
+        $to = date('Y-m-d', mktime(0, 0, 0, $current_m + 1, 0, $current_y));
+
+        return self::whereBetween('date', array($from, $to))->get();
+    }
 }

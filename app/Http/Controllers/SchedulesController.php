@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Schedule;
 
 class SchedulesController extends Controller
 {
@@ -16,10 +17,12 @@ class SchedulesController extends Controller
         //$this->middleware('subdomain');
     }
 
-    public function hello(Request $request) {
+    public function getMonthly($y = null, $m = null) {
       //echo 'Hello '.$request->subdomain;
       //return view('vuetest');
-      return ['subdomain' => $request->subdomain, 'result' => true];
+
+      $data = Schedule::getMonthly($y, $m);
+      return ['data' => $data, 'y' => $y, 'm' => $m];
     }
 
     public function hoge(Request $request) {

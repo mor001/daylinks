@@ -21,4 +21,12 @@ Route::post('/login', 'AuthController@login');
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/me', 'AuthController@me');
     Route::get('/logout', 'AuthController@logout');
+    Route::get('/schedule/monthly/{year}/{month}', 'SchedulesController@getMonthly')->where([
+        'year' => '[0-9]{4}',
+        'month' => '[0-9]{2}'
+    ]);
+});
+
+Route::any('{all}', function() {
+    return App::abort(404);
 });
