@@ -6,6 +6,7 @@ use App\Scopes\TenantScope;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Schedule extends Model
 {
@@ -45,6 +46,15 @@ class Schedule extends Model
         $from = date('Y-m-d', mktime(0, 0, 0, $current_m, 1, $current_y));
         $to = date('Y-m-d', mktime(0, 0, 0, $current_m + 1, 0, $current_y));
 
-        return self::whereBetween('date', array($from, $to))->get();
+        $user = auth()->user();
+        return self::whereBetween('date', array($from, $to))
+                    ->with(['reserves' => function($query) {
+                        $query->where('user_id', Auth::user()->id);
+                    }])->get();
+    }
+
+    public function reserves()
+    {
+        return $this->hasMany('App\Reserve', 'schedule_id', 'id');
     }
 }

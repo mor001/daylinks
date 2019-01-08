@@ -19,8 +19,7 @@ class CreateReservesTable extends Migration
             $table->integer('schedule_id')->comment('スケジュールID');
             $table->integer('user_id')->comment('ユーザーID');
             $table->time('leave_school_time')->nullable()->comment('下校時間');
-            $table->enum('use', ['放課後利用','一日利用'])->comment('利用形態');
-            $table->enum('status', ['未予約','予約受付','予約確定','予約キャンセル'])->comment('ステータス');
+            $table->enum('status', [0, 1, 2, 3])->comment('ステータス');
             $table->softDeletes();
             $table->timestamps();
         });
