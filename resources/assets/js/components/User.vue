@@ -1,5 +1,6 @@
 <template>
     <div>
+        <p v-show="loading" class="loader">Now loading...</p>
         <p v-show="isError">情報の取得に失敗しました。</p>
         <h1>ユーザー情報</h1>
         <table>
@@ -31,6 +32,7 @@
     export default {
         data () {
             return {
+                loading: true,
                 isError: false,
                 user: {}
             }
@@ -38,6 +40,7 @@
         created() {
             axios.get('/api/me').then(res => {
                 this.user = res.data;
+                this.loading = false;
             }).catch(error => {
                 this.isError = true;
             });
