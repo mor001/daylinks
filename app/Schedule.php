@@ -50,7 +50,17 @@ class Schedule extends Model
         return self::whereBetween('date', array($from, $to))
                     ->with(['reserves' => function($query) {
                         $query->where('user_id', Auth::user()->id);
-                    }])->get();
+                    }])->with('reserves.comments')->get();
+    }
+
+    public static function getDaily($y = null, $m = null, $d = null)
+    {
+        $date = date('Y-m-d', mktime(0, 0, 0, $m, $d, $y));
+        $user = auth()->user();
+        return self::where('date', $date)
+                    ->with(['reserves' => function($query) {
+                        $query->where('user_id', Auth::user()->id);
+                    }])->with('reserves.comments')->get();
     }
 
     public function reserves()

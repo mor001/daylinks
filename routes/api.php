@@ -25,6 +25,11 @@ Route::group(['middleware' => 'auth:api'], function () {
         'year' => '[0-9]{4}',
         'month' => '[0-9]{2}'
     ]);
+    Route::get('/schedule/daily/{year}/{month}/{day}', 'SchedulesController@getDaily')->where([
+        'year' => '[0-9]{4}',
+        'month' => '[0-9]{2}',
+        'day' => '[0-9]{2}'
+    ]);
 });
 
 Route::any('{all}', function() {

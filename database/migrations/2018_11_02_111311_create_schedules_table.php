@@ -21,6 +21,7 @@ class CreateSchedulesTable extends Migration
             $table->text('description')->comment('説明');
             $table->integer('register')->comment('登録者');
             $table->timestamps();
+            $table->unique(['tid', 'date']);
         });
     }
 

@@ -17,12 +17,19 @@ class SchedulesController extends Controller
         //$this->middleware('subdomain');
     }
 
-    public function getMonthly($y = null, $m = null) {
+    public function getMonthly($y = null, $m = null)
+    {
       //echo 'Hello '.$request->subdomain;
       //return view('vuetest');
 
       $data = Schedule::getMonthly($y, $m);
       return ['data' => $data, 'y' => $y, 'm' => $m];
+    }
+
+    public function getDaily($y = null, $m = null, $d = null)
+    {
+      $data = Schedule::getDaily($y, $m, $d);
+      return ['data' => $data];
     }
 
     public function hoge(Request $request) {

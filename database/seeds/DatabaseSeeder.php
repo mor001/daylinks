@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             SchedulesTableSeeder::class,
             TensntsTableSeeder::class,
-            ReservesTableSeeder::class
+            ReservesTableSeeder::class,
+            CommentsTableSeeder::class
         ]);
     }
 }
