@@ -44373,7 +44373,8 @@ router.beforeEach(function (to, from, next) {
     if (to.matched.some(function (record) {
         return record.meta.requiresAuth;
     })) {
-        if (!__WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */].getters.isLogin) {
+        //if (!Store.getters.isLogin) {
+        if (!localStorage.isLogin) {
             next({
                 path: '/login',
                 query: { redirect: to.fullPath }
@@ -47095,7 +47096,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         var self = this;
-        axios.get('/api/schedule/monthly/2019/02').then(function (response) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.token;
+        axios.get('/api/schedule/monthly/2019/01').then(function (response) {
             _this.mylist = response.data;
             _this.y = response.data.y;
             _this.m = response.data.m;
@@ -47160,12 +47162,17 @@ var render = function() {
       "ul",
       { attrs: { id: "example-1" } },
       _vm._l(_vm.mylist.data, function(rec) {
-        return _c("li", { key: rec.id }, [
-          _c("a", { attrs: { href: _vm.detailUrl(rec.date) } }, [
-            _vm._v(_vm._s(rec.date))
-          ]),
-          _vm._v(" - " + _vm._s(rec.title) + "\n      ")
-        ])
+        return _c(
+          "li",
+          { key: rec.id },
+          [
+            _c("router-link", { attrs: { to: _vm.detailUrl(rec.date) } }, [
+              _vm._v(_vm._s(rec.date))
+            ]),
+            _vm._v(" - " + _vm._s(rec.title) + "\n      ")
+          ],
+          1
+        )
       }),
       0
     )
@@ -47267,6 +47274,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var token = res.data.access_token;
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
                 _this.$store.commit('setLogin', true);
+                localStorage.isLogin = true;
+                localStorage.token = token;
                 _this.$router.push({ path: '/' });
             }).catch(function (error) {
                 _this.isError = true;
@@ -47623,6 +47632,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -47636,7 +47663,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         axios.get('/api/schedule/daily/' + this.$route.params.year + '/' + this.$route.params.month + '/' + this.$route.params.day).then(function (response) {
-            _this.detail = response.data;
+            _this.detail = response.data.data;
             _this.loading = false;
         });
     }
@@ -47682,7 +47709,33 @@ var render = function() {
       [_vm._v("情報の取得に失敗しました。")]
     ),
     _vm._v(" "),
-    _c("h1", [_vm._v("詳細")])
+    _c("h1", [_vm._v("詳細")]),
+    _vm._v(" "),
+    _c("table", [
+      _c("tr", [
+        _c("th", [_vm._v("日付")]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.detail.date))])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("th", [_vm._v("タイトル")]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.detail.title))])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("th", [_vm._v("説明")]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.detail.description))])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("th", [_vm._v("登録日")]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.detail.created_at))])
+      ])
+    ])
   ])
 }
 var staticRenderFns = []
@@ -47889,6 +47942,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.get('/api/logout').then(function (res) {
                 _this.$store.commit('setLogin', false);
+                localStorage.isLogin = false;
                 _this.$router.push({ path: '/' });
             });
         }

@@ -28,6 +28,8 @@ export default {
                 const token = res.data.access_token;
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
                 this.$store.commit('setLogin', true);
+                localStorage.isLogin = true;
+                localStorage.token = token;
                 this.$router.push({path: '/'});
             }).catch(error => {
                 this.isError = true;

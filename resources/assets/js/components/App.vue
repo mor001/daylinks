@@ -18,6 +18,7 @@
             logout() {
                 axios.get('/api/logout').then(res => {
                     this.$store.commit('setLogin', false);
+                    localStorage.isLogin = false;
                     this.$router.push({path: '/'});
                 });
             }
