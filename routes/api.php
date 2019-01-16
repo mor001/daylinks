@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         'month' => '[0-9]{2}',
         'day' => '[0-9]{2}'
     ]);
+    Route::post('/schedule/create', 'SchedulesController@create');
 });
 
 Route::any('{all}', function() {
