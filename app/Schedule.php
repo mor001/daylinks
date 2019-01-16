@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class Schedule extends Model
 {
@@ -50,7 +51,10 @@ class Schedule extends Model
         return self::whereBetween('date', array($from, $to))
                     ->with(['reserves' => function($query) {
                         $query->where('user_id', Auth::user()->id);
-                    }])->with('reserves.comments')->get();
+                    }])
+                    ->with('reserves.comments')
+                    ->with('holiday')
+                    ->select([ '*', 'DAYOFWEEK(`date`) as `day_of_week`' ])->get();
     }
 
     public static function getDaily($y = null, $m = null, $d = null)
@@ -66,5 +70,22 @@ class Schedule extends Model
     public function reserves()
     {
         return $this->hasMany('App\Reserve', 'schedule_id', 'id');
+    }
+
+    public function holiday()
+    {
+        return $this->hasOne('App\Holiday', 'date', 'date');
+    }
+
+    /**
+     * 曜日を取得
+     *
+     * @param  string  $value
+     * @return int
+     */
+    public function getDayofweekAttribute($value)
+    {
+        $dt = Carbon::parse($value);
+        return $dt->dayOfWeek;
     }
 }
