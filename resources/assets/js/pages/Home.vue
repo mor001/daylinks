@@ -5,7 +5,7 @@
         <h1>ホーム</h1>
         <ul id="example-1">
           <li v-for="rec in mylist.data" :key = "rec.id">
-            <router-link v-bind:to="detailUrl(rec.date)">{{ rec.date }}</router-link> - {{ rec.title }}
+            <router-link v-bind:to="detailUrl(rec.date)">{{ rec.date }}({{rec.day_of_week}})</router-link> - {{ rec.title }}
           </li>
         </ul>
     </div>
@@ -25,7 +25,6 @@
         },
         mounted() {
             const self = this;
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.token;
             axios.get('/api/schedule/monthly/2019/01')
                 .then( response => {
                     this.mylist = response.data;

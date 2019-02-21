@@ -1,27 +1,43 @@
 <template>
-    <div>
-        <ul>
-            <li><router-link to="/">ホーム</router-link></li>
-            <li><router-link to="/login">ログイン</router-link></li>
-            <li><router-link to="/user">ユーザー情報</router-link></li>
-            <li @click="logout">ログアウト</li>
-            <li><router-link to="/detail/2019/01/15">test</router-link></li>
-        </ul>
-        <hr>
-        <router-view></router-view>
-    </div>
+  <div>
+    <header>
+      <Navbar />
+    </header>
+    <main>
+      <div class="container">
+        <RouterView />
+      </div>
+    </main>
+    <Footer />
+  </div>
 </template>
 
 <script>
-    export default {
-        methods: {
-            logout() {
-                axios.get('/api/logout').then(res => {
-                    this.$store.commit('setLogin', false);
-                    localStorage.isLogin = false;
-                    this.$router.push({path: '/'});
-                });
-            }
-        }
+import Navbar from './Navbar.vue'
+import Footer from './Footer.vue'
+
+export default {
+  components: {
+    Navbar,
+    Footer
+  },
+  mounted() {
+    axios.get('/api/me').then(res => {
+    }).catch(err => {
+        console.log('meに失敗');
+        console.log('err:', err);
+        this.$router.push({path: '/login'});
+    });
+    console.log('app mounted');
+  },
+  methods: {
+    logout() {
+      axios.get('/api/logout').then(res => {
+        this.$store.commit('auth/setLogin', false);
+        localStorage.setItem('isLogin', false);
+        this.$router.push({path: '/'});
+      });
     }
+  }
+}
 </script>

@@ -25,13 +25,17 @@ export default {
                 userid: this.userid,
                 password: this.password
             }).then(res => {
-                const token = res.data.access_token;
-                axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
-                this.$store.commit('setLogin', true);
-                localStorage.isLogin = true;
-                localStorage.token = token;
+                console.log('★★★');
+                const token = 'Bearer ' + res.data.access_token;
+                console.log(res);
+                axios.defaults.headers.common['Authorization'] = token;
+                this.$store.commit('auth/setLogin', true);
+                this.$store.commit('auth/setToken', token);
+                localStorage.setItem('isLogin', true);
+                localStorage.setItem('token', token);
                 this.$router.push({path: '/'});
             }).catch(error => {
+                localStorage.isLogin = false;
                 this.isError = true;
             });
         }

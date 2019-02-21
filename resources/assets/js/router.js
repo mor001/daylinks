@@ -1,11 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from './components/Home';
-import Login from './components/Login';
-import User from './components/User';
-import Detail from './components/ScheduleDetail';
-
-import Store from './store';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import User from './pages/User';
+import Detail from './pages/ScheduleDetail';
 
 Vue.use(VueRouter);
 

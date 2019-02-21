@@ -21,6 +21,7 @@
                 <td>{{ detail.created_at }}</td>
             </tr>
         </table>
+        <RouterLink class="button button--link" to="/">戻る</RouterLink>
     </div>
 </template>
 

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use DB;
 
 class Schedule extends Model
 {
@@ -54,7 +55,7 @@ class Schedule extends Model
                     }])
                     ->with('reserves.comments')
                     ->with('holiday')
-                    ->select([ '*', 'DAYOFWEEK(`date`) as `day_of_week`' ])->get();
+                    ->select([ '*', DB::raw('DAYOFWEEK(`date`) as `day_of_week`') ])->get();
     }
 
     public static function getDaily($y = null, $m = null, $d = null)
