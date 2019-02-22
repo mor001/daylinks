@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import User from './pages/User';
 import Detail from './pages/ScheduleDetail';
+import SystemError from './pages/errors/System.vue'
 
 Vue.use(VueRouter);
 
@@ -11,7 +12,8 @@ const routes = [
     { path: '/', component: Home, meta: { requiresAuth: true } },
     { path: '/detail/:year/:month/:day', component: Detail, meta: { requiresAuth: true } },
     { path: '/login', component: Login },
-    { path: '/user', component: User, meta: { requiresAuth: true } }
+    { path: '/user', component: User, meta: { requiresAuth: true } },
+    { path: '/500',  component: SystemError }
 ];
 
 const router = new VueRouter({

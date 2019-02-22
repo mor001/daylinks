@@ -29,7 +29,9 @@
 </template>
 
 <script>
+    import { Common } from '../common/common'
     export default {
+        mixins: [ Common ],
         data () {
             return {
                 loading: true,
@@ -40,10 +42,10 @@
         created() {
             axios.get('/api/me').then(res => {
                 this.user = res.data;
-                this.loading = false;
             }).catch(error => {
+                this.goError(error.response.status);
                 this.isError = true;
-            });
+            }).finally(() => this.loading = false) 
         }
     }
 </script>

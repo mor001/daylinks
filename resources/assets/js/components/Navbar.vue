@@ -4,16 +4,10 @@
       Home
     </RouterLink>
     <div class="navbar__menu">
-      <div v-if="isLogin" class="navbar__item">
-        <button class="button">
-          <i class="icon ion-md-add"></i>
-          Submit a photo
-        </button>
-      </div>
-      <span v-if="isLogin" class="navbar__item">
-        {{ username }}
+      <span v-if="isLogin" v-cloak class="navbar__item">
+        ようこそ、{{username}}さん
       </span>
-      <div class="navbar__item">
+      <div v-if="isLogin" class="navbar__item">
         <RouterLink class="button button--link" to="/user">
           user info
         </RouterLink>
@@ -31,11 +25,24 @@
 export default {
   computed: {
     isLogin () {
-      return this.$store.getters['auth/isLogin']
+      return this.$store.getters['auth/check']
     },
-    username () {
-      return this.$store.getters['auth/user'].name
-    }
-  }
+    async username() {
+      const user = await this.$store.dispatch('auth/currentUser')
+      if(user != null) {
+        console.log('111')
+        console.log(user)
+        return user.name
+      } else {
+        return '名無し'
+      }
+    },
+  },
 }
 </script>
+
+<style media="screen">
+[v-cloak] {
+  display: none;
+}
+</style>

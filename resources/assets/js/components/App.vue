@@ -24,17 +24,15 @@ export default {
   mounted() {
     axios.get('/api/me').then(res => {
     }).catch(err => {
-        console.log('meに失敗');
         console.log('err:', err);
         this.$router.push({path: '/login'});
     });
-    console.log('app mounted');
   },
   methods: {
     logout() {
       axios.get('/api/logout').then(res => {
-        this.$store.commit('auth/setLogin', false);
-        localStorage.setItem('isLogin', false);
+        localStorage.removeItem('isLogin');
+        localStorage.removeItem('token');
         this.$router.push({path: '/'});
       });
     }
