@@ -13208,7 +13208,6 @@ try {
 window.axios = __webpack_require__(21);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
@@ -44416,12 +44415,15 @@ var actions = {
               response = _context.sent;
 
               if (!(response.status === __WEBPACK_IMPORTED_MODULE_1__common_const__["b" /* OK */])) {
-                _context.next = 13;
+                _context.next = 14;
                 break;
               }
 
               console.log(response);
               token = 'Bearer ' + response.data.access_token;
+
+
+              window.axios.defaults.headers.common['Authorization'] = token;
 
               localStorage.setItem('token', token);
               localStorage.setItem('isLogin', true);
@@ -44430,7 +44432,7 @@ var actions = {
               context.commit('setUser', response.data);
               return _context.abrupt('return', false);
 
-            case 13:
+            case 14:
               context.commit('setApiStatus', false);
               if (response.status === __WEBPACK_IMPORTED_MODULE_1__common_const__["d" /* UNPROCESSABLE_ENTITY */]) {
                 context.commit('setLoginErrorMessages', response.data.errors);
@@ -44438,7 +44440,7 @@ var actions = {
                 context.commit('error/setCode', response.status, { root: true });
               }
 
-            case 15:
+            case 16:
             case 'end':
               return _context.stop();
           }

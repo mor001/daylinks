@@ -37,6 +37,9 @@ const actions = {
     if (response.status === CONSTS.OK) {
       console.log(response)
       const token = 'Bearer ' + response.data.access_token
+      
+      window.axios.defaults.headers.common['Authorization'] = token;
+
       localStorage.setItem('token', token)
       localStorage.setItem('isLogin', true)
       //localStorage.setItem('loginUser', JSON.stringify(response.data));
