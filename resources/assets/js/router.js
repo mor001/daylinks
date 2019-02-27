@@ -10,7 +10,8 @@ import store from './store'
 Vue.use(VueRouter);
 
 const routes = [
-    { path: '/', component: Home, meta: { requiresAuth: true } },
+    { path: '/:year/:month', name: 'home', component: Home, meta: { requiresAuth: true } },
+    { path: '/home/:year/:month', component: Home, meta: { requiresAuth: true } },
     { path: '/detail/:year/:month/:day', component: Detail, meta: { requiresAuth: true } },
     { path: '/login', component: Login },
     { path: '/user', component: User, meta: { requiresAuth: true } },

@@ -21,7 +21,7 @@
                 <td>{{ detail.created_at }}</td>
             </tr>
         </table>
-        <RouterLink class="button button--link" to="/">戻る</RouterLink>
+        <RouterLink class="button button--link" v-bind:to="'/'+this.$route.params.year+'/'+this.$route.params.month">戻る</RouterLink>
     </div>
 </template>
 

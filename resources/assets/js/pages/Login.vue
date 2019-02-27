@@ -31,8 +31,14 @@ export default {
       const self = this
       await this.$store.dispatch('auth/login' , this.loginForm)
       .then(function (response) {
-        self.$router.push('/')
+        let now   = new Date();
+        let year  = now.getFullYear(); //年
+        let month = now.getMonth() + 1;    //月
+        month < 10 ? '0' + month : month
+        let url = '/' + year + '/' + month
+        self.$router.push(url)
       }).catch(function (error) {
+        console.log(error)
         self.showAlert = true
         self.alertMessage = 'ログインに失敗しました。'
       })

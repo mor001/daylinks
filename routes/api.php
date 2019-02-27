@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/login', 'AuthController@login');
 Route::get('/logout', 'AuthController@logout');
 Route::post('/register', 'Auth\RegisterController@register')->name('register');
-Route::group(['middleware' => 'jwt.auth'], function () {
+Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/me', 'AuthController@me');
     Route::get('/schedule/monthly/{year}/{month}', 'SchedulesController@getMonthly')->where([
         'year' => '[0-9]{4}',
