@@ -2,86 +2,95 @@ import * as CONSTS from '../common/const';
 
 const state = {
   user: null,
-  apiStatus: null,
-  loginErrorMessages: null
+  token: null,
+  isLogin: false
 }
 
 const getters = {
-  check: state => true,
+  token: state => state.token,
   username: state => state.user ? state.user.name : '',
   user: state => state.user,
-  apiStatus: state => state.apiStatus
+  isLogin: state => state.isLogin
 }
 
 const computed = {
+
 }
 
 const mutations = {
-  setUser(state, user) {
+  setUser (state, user) {
     state.user = user;
   },
-  setApiStatus (state, status) {
-    state.apiStatus = status
+  setToken (state, token) {
+    state.token = token
   },
-  setLoginErrorMessages (state, messages) {
-    state.loginErrorMessages = messages
+  setIsLogin (state, islogin) {
+    state.isLogin = islogin
   }
 }
 
 const actions = {
   // ログイン
   async login(context, data) {
-    console.log(context)
-    context.commit('setApiStatus', null)
-    const response = await axios.post('/api/login', data)
-    if (response.status === CONSTS.OK) {
-      console.log(response)
+    await window.axios.post('/api/login', data)
+    .then(function (response) {
       const token = 'Bearer ' + response.data.access_token
-      
       window.axios.defaults.headers.common['Authorization'] = token;
-
+      //localStorage.setItem('user', JSON.stringify(response.data.user))
       localStorage.setItem('token', token)
-      localStorage.setItem('isLogin', true)
-      //localStorage.setItem('loginUser', JSON.stringify(response.data));
-      context.commit('setApiStatus', true)
-      context.commit('setUser', response.data)
-      return false
-    }
-    context.commit('setApiStatus', false)
-    if (response.status === CONSTS.UNPROCESSABLE_ENTITY) {
-      context.commit('setLoginErrorMessages', response.data.errors)
-    } else {
-      context.commit('error/setCode', response.status, { root: true })
-    }
+      //localStorage.setItem('isLogin', true)
+      context.commit('setUser', response.data.user) // state.userに値をセット
+      context.commit('setToken', token)
+      context.commit('setIsLogin', true)
+    })
+    .catch(function (error) { // => 失敗時
+      console.log(error)
+      context.commit('setUser', null)
+      context.commit('setToken', null)
+      context.commit('setIsLogin', false)
+      context.commit('error/setCode', error.response.status, { root: true })
+      context.commit('error/setMessage', 'ログインに失敗しました。', { root: true })
+      if (error.response.status === CONSTS.UNPROCESSABLE_ENTITY) {
+      } else {
+      }
+    })
   },
 
   // ログアウト
   async logout(context) {
-    context.commit('setApiStatus', null)
-    const response = await axios.get('/api/logout')
-    if (response.status === CONSTS.OK) {
+    await window.axios.get('/api/logout')
+    .then(function (response) {
+      window.axios.defaults.headers.common['Authorization'] = null;
       localStorage.removeItem('token')
-      localStorage.removeItem('isLogin')
-      localStorage.removeItem('loginUser')
-      context.commit('setApiStatus', true)
+      //localStorage.removeItem('isLogin')
+      //localStorage.removeItem('user')
       context.commit('setUser', null)
-      return false
-    }
-    context.commit('setApiStatus', false)
-    context.commit('error/setCode', response.status, { root: true })
+      context.commit('setToken', null)
+      context.commit('setIsLogin', false)
+    })
+    .catch(function (error) { // => 失敗時
+      context.dispatch('error/setError', error.response)
+      //context.commit('error/setCode', error.response.status, { root: true })
+      //context.commit('error/setMessage', error.response.data.errors, { root: true })
+    })
   },
-
-  // ログインユーザーチェック
-  async currentUser(context) {
-    context.commit('setApiStatus', null)
-    const response = await axios.get('/api/me')
-    if (response.status === CONSTS.OK) {
-      context.commit('setUser', response.data)
-      return response.data
-    }
-    context.commit('setApiStatus', false)
-    context.commit('error/setCode', response.status, { root: true })
+  
+  // トークンチェック
+  async checkToken() {
+    await window.axios.get('/api/me')
+    .then(function () {
+      console.log('checkToken 成功')
+      return true
+    })
+    .catch(function () {
+      console.log('checkToken 失敗')
+      return false
+    })
   }
+}
+
+const methods = {
+
 }
 
 export default {
@@ -90,5 +99,6 @@ export default {
   getters,
   computed,
   mutations,
-  actions
+  actions,
+  methods
 }

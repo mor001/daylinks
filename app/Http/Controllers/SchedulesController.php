@@ -35,7 +35,7 @@ class SchedulesController extends Controller
       $reserve->schedule_id = $request->schedule_id;
       $reserve->user_id = Auth::user()->id;
       $reserve->leave_school_time = $request->leave_school_time;
-      $reserve->status = 'accept';
+      $reserve->status = 'accept'; // 状態:受付
       $reserve->save();
       $last_insert_id = $reserve->id;
 
@@ -53,7 +53,11 @@ class SchedulesController extends Controller
     public function getDaily($y = null, $m = null, $d = null)
     {
       $data = Schedule::getDaily($y, $m, $d);
-      return ['data' => $data];
+      if(!empty($data)) {
+        return ['data' => $data];
+      } else {
+        return response()->json(['error' => 'Not Found'], 404);
+      }
     }
 
     public function hoge(Request $request) {

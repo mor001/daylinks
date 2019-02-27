@@ -30,13 +30,15 @@ class AuthController extends Controller
     //自分の情報返す
     public function me()
     {
-        return response()->json(auth()->user());
+        return response()->json(auth('api')->user());
     }
 
     //token発行（内部利用）
     protected function respondWithToken($token)
     {
+        $user = auth('api')->user();
         return response()->json([
+            'user' => $user,
             'access_token' => $token,
             'token_type' => 'bearer',
             'expire_in' => auth('api')->factory()->getTTL(),

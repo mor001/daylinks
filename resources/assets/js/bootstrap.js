@@ -21,7 +21,28 @@ try {
 
 window.axios = require('axios');
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.interceptors.response.use(function (response) {
+    return response
+}, function (error) {
+  if (error.response.status === 401) {
+    console.log('response status is 401')
+    window.location = "/login"
+  } else if (error.response.status === 500) {
+    console.log('response status is 500')
+    window.location = "/500"
+  }
+  return Promise.reject(error)
+  //return error
+})
+
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+window.axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
+
+//let jwtToken = localStorage.getItem('token');
+//if (jwtToken) {
+//    console.log('get token at bootstrap')
+//    window.axios.defaults.headers.common['Authorization'] = jwtToken;
+//}
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that

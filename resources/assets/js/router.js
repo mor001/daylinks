@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import User from './pages/User';
 import Detail from './pages/ScheduleDetail';
 import SystemError from './pages/errors/System.vue'
+import store from './store'
 
 Vue.use(VueRouter);
 
@@ -23,8 +24,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
-        //if (!Store.getters.isLogin) {
-        if (!localStorage.isLogin) {
+        if (!store.getters['auth/isLogin']) {
             next({
                 path: '/login',
                 query: { redirect: to.fullPath }

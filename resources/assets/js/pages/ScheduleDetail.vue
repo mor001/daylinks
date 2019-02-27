@@ -26,20 +26,20 @@
 </template>
 
 <script>
-    export default {
-        data() {
-          return {
-            loading: true,
-            isError: false,
-            detail: {}
-          }
-        },
-        mounted() {
-            axios.get('/api/schedule/daily/'+this.$route.params.year+'/'+this.$route.params.month+'/'+this.$route.params.day)
-                .then( response => {
-                    this.detail = response.data.data;
-                    this.loading = false;
-                });
-        }
+export default {
+  data() {
+    return {
+      loading: true,
+      isError: false,
+      detail: {}
     }
+  },
+  mounted() {
+    window.axios.get('/api/schedule/daily/'+this.$route.params.year+'/'+this.$route.params.month+'/'+this.$route.params.day)
+    .then( response => {
+      this.detail = response.data.data;
+      this.loading = false;
+    });
+  }
+}
 </script>

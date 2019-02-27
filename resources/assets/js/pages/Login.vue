@@ -1,45 +1,46 @@
 <template>
-    <div>
-        <p v-show="isError">認証に失敗しました。</p>
-        <form @submit.prevent="login">
-            <h1>ログイン</h1>
-            ユーザーID: <input type="userid" v-model="loginForm.userid">
-            パスワード: <input type="password" v-model="loginForm.password">
-            <button type="submit" class="btn btn-primary">ログイン</button>
-        </form>
+  <div>
+    <div class="alert alert-danger" role="alert" v-if="showAlert">
+      {{ alertMessage }}
     </div>
+    <form @submit.prevent="login">
+      <h1></h1>
+      <p>ユーザーID: <input type="userid" v-model="loginForm.userid"></p>
+      <p>パスワード: <input type="password" v-model="loginForm.password"></p>
+      <p><button type="submit" class="btn btn-primary">ログイン</button></p>
+    </form>
+  </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 export default {
-    data () {
-        return {
-            loading: true,
-            isError: false,
-            loginForm: {
-              userid: '',
-              password: ''
-            },
-        }
-    },
-    computed: {
-      ...mapState({
-        apiStatus: state => state.auth.apiStatus,
-        loginErrors: state => state.auth.loginErrorMessages
-      })
-    },    
-    methods: {
-      async login () {
-        // authストアのloginアクションを呼び出す
-        await this.$store.dispatch('auth/login', this.loginForm)
-        if (this.apiStatus) {
-          console.log(this.apiStatus);
-          // トップページに移動する
-          this.$router.push('/')
-        }
-      }
+  data () {
+    return {
+      loginForm: {
+        userid: 'muto',
+        password: 'aaa111'
+      },
+      showAlert: false,
+      alertMessage: '',
     }
+  },
+  computed: {
+  },
+  methods: {
+    async login () {
+      const self = this
+      await this.$store.dispatch('auth/login' , this.loginForm)
+      .then(function (response) {
+        self.$router.push('/')
+      }).catch(function (error) {
+        self.showAlert = true
+        self.alertMessage = 'ログインに失敗しました。'
+      })
+    }
+  },
+  created () {
+  },
+  mounted () {
+  },
 }
 </script>

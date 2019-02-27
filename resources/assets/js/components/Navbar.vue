@@ -5,17 +5,16 @@
     </RouterLink>
     <div class="navbar__menu">
       <span v-if="isLogin" v-cloak class="navbar__item">
-        ようこそ、{{username}}さん
+        ようこそ、{{ username }}さん
+      </span>
+      <span v-else v-cloak class="navbar__item">
+        <RouterLink to="/login">ログイン</RouterLink>してください
       </span>
       <div v-if="isLogin" class="navbar__item">
         <RouterLink class="button button--link" to="/user">
           user info
         </RouterLink>
-      </div>
-      <div class="navbar__item">
-        <RouterLink class="button button--link" to="/login">
-          Login / Register
-        </RouterLink>
+        <a v-if="isLogin" href="#" @click="logout">Logout</a>
       </div>
     </div>
   </nav>
@@ -23,20 +22,30 @@
 
 <script>
 export default {
+  data () {
+    return {
+    }
+  },
   computed: {
     isLogin () {
-      return this.$store.getters['auth/check']
+      return this.$store.getters['auth/isLogin']
     },
-    async username() {
-      const user = await this.$store.dispatch('auth/currentUser')
-      if(user != null) {
-        console.log('111')
-        console.log(user)
-        return user.name
-      } else {
-        return '名無し'
-      }
+    username () {
+      return this.$store.getters['auth/username']
+    }
+  },
+  methods: {
+    // ログアウト
+    async  logout() {
+      await this.$store.dispatch('auth/logout')
+      this.$router.push('/login')
     },
+  },
+  mounted() {
+    //console.log('Navbar mounted.')
+  },
+  updated() {
+    //console.log('Navbar updated.')
   },
 }
 </script>

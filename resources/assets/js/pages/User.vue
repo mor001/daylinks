@@ -1,7 +1,7 @@
 <template>
     <div>
         <p v-show="loading" class="loader">Now loading...</p>
-        <p v-show="isError">情報の取得に失敗しました。</p>
+        <p v-if="isError">情報の取得に失敗しました。</p>
         <h1>ユーザー情報</h1>
         <table>
             <tr>
@@ -29,23 +29,24 @@
 </template>
 
 <script>
-    import { Common } from '../common/common'
-    export default {
-        mixins: [ Common ],
-        data () {
-            return {
-                loading: true,
-                isError: false,
-                user: {}
-            }
-        },
-        created() {
-            axios.get('/api/me').then(res => {
-                this.user = res.data;
-            }).catch(error => {
-                this.goError(error.response.status);
-                this.isError = true;
-            }).finally(() => this.loading = false) 
-        }
+import { Common } from '../common/common'
+export default {
+  mixins: [ Common ],
+  data () {
+    return {
+      loading: true,
+      isError: false,
+      user: {}
     }
+  },
+  created() {
+    const self = this
+    window.axios.get('/api/me')
+    .then(response => {
+      this.user = response.data
+    }).catch(error => {
+      this.isError = true
+    }).finally(() => this.loading = false) 
+  }
+}
 </script>
