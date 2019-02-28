@@ -1,14 +1,14 @@
 <template>
     <div>
         <p v-show="loading" class="loader">Now loading...</p>
-        <p v-if="showAlert">情報の取得に失敗しました。</p>
+        <p v-if="showAlert">{{ alertMessage }}</p>
         <h1>ホーム</h1>
         <div>
           <a href="#" @click="prev">前月</a>
           <a href="#" @click="next">次月</a>
         </div>
         <ul id="example-1">
-          <li v-for="rec in schedules.data" :key = "rec.id">
+          <li v-for="rec in schedules" :key = "rec.id">
             <router-link v-bind:to="detailUrl(rec.date)">{{ rec.date }}({{rec.day_of_week}})</router-link> - {{ rec.title }}
           </li>
         </ul>
@@ -32,11 +32,17 @@
       fetchSchedules () {
         const self = this
         self.loading = true
+        self.showAlert = false
+        self.alertMessage = ''
         let url = '/api/schedule/monthly/' + this.y + '/' + this.m
         console.log('url: ' + url)
         window.axios.get(url)
         .then(function (response) {
-          self.schedules = response.data
+          if(response.data.schedules.length <= 0) {
+            self.showAlert = true
+            self.alertMessage = 'データが存在しませんでした。'
+          }
+          self.schedules = response.data.schedules
           self.y = response.data.y
           self.m = response.data.m
         }).catch(function (error) {
@@ -67,6 +73,12 @@
       const m = window.moment();
       this.y = this.$store.getters['appdata/currentYear']
       this.m = this.$store.getters['appdata/currentMonth']
+      if(!this.y) {
+        this.y = m.format("YYYY")
+      }
+      if(!this.m) {
+        this.m = m.format("MM")
+      }
       this.fetchSchedules()
     },
     computed: {

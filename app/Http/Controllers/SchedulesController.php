@@ -26,7 +26,7 @@ class SchedulesController extends Controller
       //return view('vuetest');
 
       $data = Schedule::getMonthly($y, $m);
-      return ['data' => $data, 'y' => $y, 'm' => $m];
+      return ['schedules' => $data, 'y' => $y, 'm' => $m];
     }
 
     public function create(Request $request)
@@ -54,7 +54,7 @@ class SchedulesController extends Controller
     {
       $data = Schedule::getDaily($y, $m, $d);
       if(!empty($data)) {
-        return ['data' => $data];
+        return ['schedules' => $data];
       } else {
         return response()->json(['error' => 'Not Found'], 404);
       }

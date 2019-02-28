@@ -63007,10 +63007,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     fetchSchedules: function fetchSchedules() {
       var self = this;
       self.loading = true;
+      self.showAlert = false;
+      self.alertMessage = '';
       var url = '/api/schedule/monthly/' + this.y + '/' + this.m;
       console.log('url: ' + url);
       window.axios.get(url).then(function (response) {
-        self.schedules = response.data;
+        if (response.data.schedules.length <= 0) {
+          self.showAlert = true;
+          self.alertMessage = 'データが存在しませんでした。';
+        }
+        self.schedules = response.data.schedules;
         self.y = response.data.y;
         self.m = response.data.m;
       }).catch(function (error) {
@@ -63041,6 +63047,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     var m = window.moment();
     this.y = this.$store.getters['appdata/currentYear'];
     this.m = this.$store.getters['appdata/currentMonth'];
+    if (!this.y) {
+      this.y = m.format("YYYY");
+    }
+    if (!this.m) {
+      this.m = m.format("MM");
+    }
     this.fetchSchedules();
   },
 
@@ -63355,7 +63367,7 @@ var render = function() {
       [_vm._v("Now loading...")]
     ),
     _vm._v(" "),
-    _vm.showAlert ? _c("p", [_vm._v("情報の取得に失敗しました。")]) : _vm._e(),
+    _vm.showAlert ? _c("p", [_vm._v(_vm._s(_vm.alertMessage))]) : _vm._e(),
     _vm._v(" "),
     _c("h1", [_vm._v("ホーム")]),
     _vm._v(" "),
@@ -63372,7 +63384,7 @@ var render = function() {
     _c(
       "ul",
       { attrs: { id: "example-1" } },
-      _vm._l(_vm.schedules.data, function(rec) {
+      _vm._l(_vm.schedules, function(rec) {
         return _c(
           "li",
           { key: rec.id },
@@ -64722,7 +64734,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     var _this = this;
 
     window.axios.get('/api/schedule/daily/' + this.$route.params.year + '/' + this.$route.params.month + '/' + this.$route.params.day).then(function (response) {
-      _this.detail = response.data.data;
+      _this.detail = response.data.schedules;
       _this.loading = false;
     });
   }

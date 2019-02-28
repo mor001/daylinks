@@ -37,7 +37,7 @@ export default {
   mounted() {
     window.axios.get('/api/schedule/daily/'+this.$route.params.year+'/'+this.$route.params.month+'/'+this.$route.params.day)
     .then( response => {
-      this.detail = response.data.data;
+      this.detail = response.data.schedules;
       this.loading = false;
     });
   }
