@@ -8,6 +8,9 @@ export const Common = {
      * @param {number} months - 何ヶ月先の日付を取得するか
      */
     get_nextmonth_date(date, months) {
+
+      const moment = require('moment');
+
       // monthsの指定がない場合は翌月を取得
       months = months || 1;
  

@@ -31,7 +31,7 @@ export default {
       const self = this
       await this.$store.dispatch('auth/login' , this.loginForm)
       .then(function (response) {
-        const m = window.moment();
+        const m = window.moment()
         self.$store.commit('appdata/setCurrentYear', m.format('YYYY'))
         self.$store.commit('appdata/setCurrentMonth', m.format('MM'))
         self.$router.push('/')

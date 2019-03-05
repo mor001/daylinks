@@ -1,21 +1,19 @@
 <template>
+  <div>
+    <p v-show="loading" class="loader">Now loading...</p>
+    <p v-if="showAlert">{{ alertMessage }}</p>
+    <h1>ホーム</h1>
     <div>
-        <p v-show="loading" class="loader">Now loading...</p>
-        <p v-if="showAlert">{{ alertMessage }}</p>
-        <h1>ホーム</h1>
-        <div>
-          <a href="#" @click="prev">前月</a>
-          <a href="#" @click="next">次月</a>
-        </div>
-        <ul id="example-1">
-          <li v-for="rec in schedules" :key = "rec.id">
-            <router-link v-bind:to="detailUrl(rec.date)">{{ rec.date }}({{rec.day_of_week}})</router-link> - {{ rec.title }}
-          </li>
-        </ul>
+      <a href="#" @click="prev">前月</a>
+      <a href="#" @click="next">次月</a>
     </div>
+    <p>{{this.y}}年{{this.m}}月度のデータを表示中</p>
+    <Calendar :schedules="schedules" :current-year="this.y" :current-month="this.m" />
+  </div>
 </template>
 
 <script>
+  import Calendar from '../components/Calendar'
   export default {
     data() {
       return {
@@ -27,6 +25,9 @@
         d: 0,
         loading: true,
       }
+    },
+    components: {
+      Calendar,
     },
     methods: {
       fetchSchedules () {
@@ -82,12 +83,6 @@
       this.fetchSchedules()
     },
     computed: {
-      detailUrl: function() {
-        return function (date) {
-          const arr = date.split('-')
-          return '/detail/'+arr[0]+'/'+arr[1]+'/'+arr[2]
-        }
-      },
     },
   }
 </script>
