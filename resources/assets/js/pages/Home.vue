@@ -36,7 +36,6 @@
         self.showAlert = false
         self.alertMessage = ''
         let url = '/api/schedule/monthly/' + this.y + '/' + this.m
-        console.log('url: ' + url)
         window.axios.get(url)
         .then(function (response) {
           if(response.data.schedules.length <= 0) {

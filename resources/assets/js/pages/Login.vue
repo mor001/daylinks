@@ -3,12 +3,38 @@
     <div class="alert alert-danger" role="alert" v-if="showAlert">
       {{ alertMessage }}
     </div>
-    <form @submit.prevent="login">
+    <b-form @submit.prevent="login">
       <h1></h1>
-      <p>ユーザーID: <input type="userid" v-model="loginForm.userid"></p>
-      <p>パスワード: <input type="password" v-model="loginForm.password"></p>
-      <p><button type="submit" class="btn btn-primary">ログイン</button></p>
-    </form>
+      <b-form-group
+        id="igUserId"
+        label="ユーザーID:"
+        label-for="userid"
+      >
+        <b-form-input
+          id="userid"
+          type="text"
+          v-model="loginForm.userid"
+          required />
+      </b-form-group>
+      <b-form-group
+        id="igPassword"
+        label="パスワード:"
+        label-for="password"
+      >
+        <b-form-input
+          id="password"
+          type="password"
+          v-model="loginForm.password"
+          required />
+      </b-form-group>
+
+      <b-button
+        size="lg"
+        type="submit"
+        variant="outline-primary">
+        ログイン
+      </b-button>
+    </b-form>
   </div>
 </template>
 

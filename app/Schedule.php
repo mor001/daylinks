@@ -48,14 +48,18 @@ class Schedule extends Model
         $from = date('Y-m-d', mktime(0, 0, 0, $current_m, 1, $current_y));
         $to = date('Y-m-d', mktime(0, 0, 0, $current_m + 1, 0, $current_y));
 
-        $user = auth()->user();
+        /*
+        $schedules = self::whereBetween('date', array($from, $to))->select(['*'])->with('holiday')->get();
+        return $schedules->load(['reserves' => function($query) {
+            $query->where('user_id', '=', Auth::user()->id);
+        }])->load('reserves.comments');
+        */
         return self::whereBetween('date', array($from, $to))
                     ->with(['reserves' => function($query) {
-                        $query->where('user_id', Auth::user()->id);
-                    }])
-                    ->with('reserves.comments')
+                        $query->where('user_id', '=', Auth::user()->id);
+                    }, 'reserves.comments'])
                     ->with('holiday')
-                    ->select([ '*', DB::raw('DAYOFWEEK(`date`) as `day_of_week`') ])->get();
+                    ->select(['*'])->get();
     }
 
     public static function getDaily($y = null, $m = null, $d = null)
