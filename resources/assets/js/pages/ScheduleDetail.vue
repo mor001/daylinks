@@ -139,6 +139,8 @@ export default {
       window.axios.post(url, this.commentForm)
       .then(function (response) {
         self.$set(self.detail, 'comments', response.data.comments)
+        self.$set(self.commentForm, 'contents', '')
+        this.commentForm.contents = ''
       }).catch(function (error) {
       }).finally(() => {
         self.loading = false

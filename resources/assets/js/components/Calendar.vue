@@ -13,22 +13,22 @@
           <span class="weekday">{{date.weekDay}}</span>
           <template v-if="date.schedule">
             <router-link v-bind:to="detailUrl(date.schedule.date)" class="title">{{date.schedule.title}}</router-link><br />
-            <template v-if="date.schedule.reserves.length > 0">
+            <template v-if="Array.isArray(date.schedule.reserves) && date.schedule.reserves.length > 0">
               <b-badge variant="info" v-if="date.schedule.reserves[0].status === 'app_r'">
                 予約申請中
-                <b-badge v-if="unread(date.schedule.reserves[0]) > 0" variant="light">{{unread(date.schedule.reserves[0])}}<span class="sr-only">未読メッセージ</span></b-badge>
+                <b-badge v-if="unread(date.schedule) > 0" variant="light">{{unread(date.schedule)}}<span class="sr-only">未読メッセージ</span></b-badge>
               </b-badge>
               <b-badge variant="success" v-if="date.schedule.reserves[0].status === 'reserved'">
                 予約済
-                <b-badge v-if="unread(date.schedule.reserves[0]) > 0" variant="light">{{unread(date.schedule.reserves[0])}}<span class="sr-only">未読メッセージ</span></b-badge>
+                <b-badge v-if="unread(date.schedule) > 0" variant="light">{{unread(date.schedule)}}<span class="sr-only">未読メッセージ</span></b-badge>
               </b-badge>
               <b-badge variant="warning" v-if="date.schedule.reserves[0].status === 'app_c'">
                 キャンセル申請中
-                <b-badge v-if="unread(date.schedule.reserves[0]) > 0" variant="light">{{unread(date.schedule.reserves[0])}}<span class="sr-only">未読メッセージ</span></b-badge>
+                <b-badge v-if="unread(date.schedule) > 0" variant="light">{{unread(date.schedule)}}<span class="sr-only">未読メッセージ</span></b-badge>
               </b-badge>
               <b-badge variant="danger" v-if="date.schedule.reserves[0].status === 'canceled'">
                 キャンセル済
-                <b-badge v-if="unread(date.schedule.reserves[0]) > 0" variant="light">{{unread(date.schedule.reserves[0])}}<span class="sr-only">未読メッセージ</span></b-badge>
+                <b-badge v-if="unread(date.schedule) > 0" variant="light">{{unread(date.schedule)}}<span class="sr-only">未読メッセージ</span></b-badge>
               </b-badge>
             </template>
             <template v-else>
@@ -50,7 +50,7 @@
       }
     },
     props: {
-      schedules: { required: true }, 
+      schedules: { required: true },
       currentYear: { required: true },
       currentMonth: { required: true },
     },
@@ -78,20 +78,20 @@
       },
       unread: function() {
         const self = this
-        return function(reserve) {
-          if(reserve.comments.length <= 0) {
+        return function(schedule) {
+          if(Array.isArray(schedule.comments) && schedule.comments.length <= 0) {
             return 0
           }
           let sum = 0;
-          for (var i = 0; i < reserve.comments.length; i++) {
-            const comment = reserve.comments[i]
+          for (var i = 0; i < schedule.comments.length; i++) {
+            const comment = schedule.comments[i]
             if(comment.is_read === 0) {
               sum++
             }
           }
           return sum
         }
-      },      
+      },
       dateList: function() {
         const year = this.currentYear
         const month = this.currentMonth
