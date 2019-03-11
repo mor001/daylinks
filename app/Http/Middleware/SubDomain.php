@@ -33,6 +33,7 @@ class SubDomain
         logger('subdomain: '.$subdomain);
         //$request->subdomain = $subdomain;
         config(['tid' => $subdomain]);
+        config(['tenantName' => $tenant->name]);
         //View::share(['subdomain' => $subdomain]);
         return $next($request);
     }

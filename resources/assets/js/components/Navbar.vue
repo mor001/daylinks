@@ -1,22 +1,29 @@
 <template>
   <nav class="navbar">
-    <RouterLink class="navbar__brand" to="/">
-      Home
-    </RouterLink>
-    <div class="navbar__menu">
-      <span v-if="isLogin" v-cloak class="navbar__item">
-        ようこそ、{{ username }}さん
-      </span>
-      <span v-else v-cloak class="navbar__item">
-        <RouterLink to="/login">ログイン</RouterLink>してください
-      </span>
-      <div v-if="isLogin" class="navbar__item">
-        <RouterLink class="button button--link" to="/user">
-          user info
+    <b-container>
+      <b-col cols="6">
+        <RouterLink to="/">
+          Home
         </RouterLink>
-        <a v-if="isLogin" href="#" @click="logout">Logout</a>
-      </div>
-    </div>
+      </b-col>
+      <b-col cols="3">
+        <span v-if="isLogin" v-cloak>
+          ようこそ、
+          <RouterLink to="/user">
+          {{ username }}
+          </RouterLink>さん
+        </span>
+        <span v-else v-cloak>
+          <RouterLink to="/login">ログイン</RouterLink>してください
+        </span>
+      </b-col>
+      <b-col v-if="isLogin">
+        <a href="#" @click="logout">通知</a>
+      </b-col>
+      <b-col v-if="isLogin">
+        <a v-if="isLogin" href="#" @click="logout">ログアウト</a>
+      </b-col>
+    </b-container>
   </nav>
 </template>
 

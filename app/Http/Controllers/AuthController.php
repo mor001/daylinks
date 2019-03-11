@@ -38,6 +38,7 @@ class AuthController extends Controller
     {
         $user = auth('api')->user();
         return response()->json([
+            'tenant' => config('tenantName'),
             'user' => $user,
             'access_token' => $token,
             'token_type' => 'bearer',

@@ -69,7 +69,7 @@ class Schedule extends Model
         return self::where('date', $date)
                     ->with(['reserves' => function($query) {
                         $query->where('user_id', Auth::user()->id);
-                    }])->with('reserves.comments')->first();
+                    }, 'reserves.comments'])->first();
     }
 
     public function reserves()

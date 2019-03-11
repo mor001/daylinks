@@ -1,9 +1,13 @@
 const state = {
+  tenantName: null,
   currentYear: null,
   currentMonth: null
 }
     
 const mutations = {
+  setTenantName (state, value) {
+    state.tenantName = value
+  },
   setCurrentYear (state, y) {
     state.currentYear = y
   },
@@ -13,6 +17,9 @@ const mutations = {
 }
   
 const getters = {
+  tenantName(state) {
+    return state.tenantName;
+  },
   currentYear(state) {
     return state.currentYear;
   },

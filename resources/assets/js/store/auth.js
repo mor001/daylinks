@@ -39,20 +39,21 @@ const actions = {
       //localStorage.setItem('user', JSON.stringify(response.data.user))
       localStorage.setItem('token', token)
       //localStorage.setItem('isLogin', true)
+      context.commit('appdata/setTenantName', response.data.tenant, { root: true }) 
       context.commit('setUser', response.data.user) // state.userに値をセット
       context.commit('setToken', token)
       context.commit('setIsLogin', true)
     })
     .catch(function (error) { // => 失敗時
       console.log(error)
+      context.commit('appdata/setTenantName', null)
       context.commit('setUser', null)
       context.commit('setToken', null)
       context.commit('setIsLogin', false)
-      context.commit('error/setCode', error.response.status, { root: true })
-      context.commit('error/setMessage', 'ログインに失敗しました。', { root: true })
-      if (error.response.status === CONSTS.UNPROCESSABLE_ENTITY) {
-      } else {
+      if(!error.response) {
+        context.commit('error/setCode', error.response.status, { root: true })
       }
+      context.commit('error/setMessage', 'ログインに失敗しました。', { root: true })
     })
   },
 

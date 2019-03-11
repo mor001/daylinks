@@ -13,7 +13,7 @@ class CommentsTableSeeder extends Seeder
     {
       DB::table('comments')->insert([
         'reserve_id'  => 1,
-        'from_to' => '0',
+        'flow' => 'user_to_tenant',
         'is_read' => false,
         'contents' => 'コメントの内容です。ご確認ください。',
         'created_at' => date('Y-m-d H:i:s'),
@@ -21,7 +21,7 @@ class CommentsTableSeeder extends Seeder
       ]);
       DB::table('comments')->insert([
         'reserve_id'  => 1,
-        'from_to' => '1',
+        'flow' => 'tenant_to_user',
         'is_read' => false,
         'contents' => 'コメントに対する返信です。',
         'created_at' => date('Y-m-d H:i:s'),

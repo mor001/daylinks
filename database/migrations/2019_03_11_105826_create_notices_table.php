@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCommentsTable extends Migration
+class CreateNoticesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('notices', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('reserve_id')->unsigned()->comment('予約ID');
-            $table->enum('flow', ['user_to_tenant', 'tenant_to_user'])->comment('返信区分');
+            $table->string('tid', 16)->comment('事業者ID');
+            $table->integer('user_id')->unsigned()->comment('ユーザーID');
+            $table->enum('flow', ['user_to_tenant', 'tenant_to_user'])->comment('通知区分');
             $table->boolean('is_read')->comment('既読フラグ');
             $table->string('contents', 255)->comment('内容');
             $table->timestamps();
-            $table->foreign('reserve_id')->references('id')->on('reserves');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -31,6 +32,6 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('notices');
     }
 }

@@ -35648,7 +35648,7 @@ module.exports = Cancel;
 /* unused harmony export CREATED */
 /* unused harmony export INTERNAL_SERVER_ERROR */
 /* unused harmony export UNAUTHENTICATED_ERROR */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UNPROCESSABLE_ENTITY; });
+/* unused harmony export UNPROCESSABLE_ENTITY */
 var OK = 200;
 var CREATED = 201;
 var INTERNAL_SERVER_ERROR = 500;
@@ -35684,7 +35684,7 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
   },
   plugins: [Object(__WEBPACK_IMPORTED_MODULE_2_vuex_persistedstate__["a" /* default */])({
     key: 'DayLinks',
-    paths: ['auth.user', 'auth.token', 'auth.isLogin'],
+    paths: ['appdata.tenantName', 'auth.user', 'auth.token', 'auth.isLogin'],
     storage: window.localStorage
   })]
 });
@@ -74469,6 +74469,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -74505,6 +74526,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return false;
       };
     },
+    unread: function unread() {
+      var self = this;
+      return function (reserve) {
+        if (reserve.comments.length <= 0) {
+          return 0;
+        }
+        var sum = 0;
+        for (var i = 0; i < reserve.comments.length; i++) {
+          var comment = reserve.comments[i];
+          if (comment.is_read === 0) {
+            sum++;
+          }
+        }
+        return sum;
+      };
+    },
     dateList: function dateList() {
       var year = this.currentYear;
       var month = this.currentMonth;
@@ -74537,9 +74574,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             dateList[index] = {};
           } else {
             var schedule = this.schedule(currentDate.format('YYYY-MM-DD'));
-            if (schedule.reserves && schedule.reserves.length > 0) {
-              console.log('予約あり: ' + schedule.date + " - ユーザーID: " + schedule.reserves[0].user_id);
-            }
             dateList[index] = {
               key: dayCount,
               dayNumber: dayCount,
@@ -74748,7 +74782,6 @@ var render = function() {
               _c("span", { staticClass: "weekday" }, [
                 _vm._v(_vm._s(date.weekDay))
               ]),
-              _c("br"),
               _vm._v(" "),
               date.schedule
                 ? [
@@ -74759,7 +74792,144 @@ var render = function() {
                         attrs: { to: _vm.detailUrl(date.schedule.date) }
                       },
                       [_vm._v(_vm._s(date.schedule.title))]
-                    )
+                    ),
+                    _c("br"),
+                    _vm._v(" "),
+                    date.schedule.reserves.length > 0
+                      ? [
+                          date.schedule.reserves[0].status === "app_r"
+                            ? _c(
+                                "b-badge",
+                                { attrs: { variant: "info" } },
+                                [
+                                  _vm._v(
+                                    "\n              予約申請中\n              "
+                                  ),
+                                  _vm.unread(date.schedule.reserves[0]) > 0
+                                    ? _c(
+                                        "b-badge",
+                                        { attrs: { variant: "light" } },
+                                        [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm.unread(
+                                                date.schedule.reserves[0]
+                                              )
+                                            )
+                                          ),
+                                          _c(
+                                            "span",
+                                            { staticClass: "sr-only" },
+                                            [_vm._v("未読メッセージ")]
+                                          )
+                                        ]
+                                      )
+                                    : _vm._e()
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          date.schedule.reserves[0].status === "reserved"
+                            ? _c(
+                                "b-badge",
+                                { attrs: { variant: "success" } },
+                                [
+                                  _vm._v(
+                                    "\n              予約済\n              "
+                                  ),
+                                  _vm.unread(date.schedule.reserves[0]) > 0
+                                    ? _c(
+                                        "b-badge",
+                                        { attrs: { variant: "light" } },
+                                        [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm.unread(
+                                                date.schedule.reserves[0]
+                                              )
+                                            )
+                                          ),
+                                          _c(
+                                            "span",
+                                            { staticClass: "sr-only" },
+                                            [_vm._v("未読メッセージ")]
+                                          )
+                                        ]
+                                      )
+                                    : _vm._e()
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          date.schedule.reserves[0].status === "app_c"
+                            ? _c(
+                                "b-badge",
+                                { attrs: { variant: "warning" } },
+                                [
+                                  _vm._v(
+                                    "\n              キャンセル申請中\n              "
+                                  ),
+                                  _vm.unread(date.schedule.reserves[0]) > 0
+                                    ? _c(
+                                        "b-badge",
+                                        { attrs: { variant: "light" } },
+                                        [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm.unread(
+                                                date.schedule.reserves[0]
+                                              )
+                                            )
+                                          ),
+                                          _c(
+                                            "span",
+                                            { staticClass: "sr-only" },
+                                            [_vm._v("未読メッセージ")]
+                                          )
+                                        ]
+                                      )
+                                    : _vm._e()
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          date.schedule.reserves[0].status === "canceled"
+                            ? _c(
+                                "b-badge",
+                                { attrs: { variant: "danger" } },
+                                [
+                                  _vm._v(
+                                    "\n              キャンセル済\n              "
+                                  ),
+                                  _vm.unread(date.schedule.reserves[0]) > 0
+                                    ? _c(
+                                        "b-badge",
+                                        { attrs: { variant: "light" } },
+                                        [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm.unread(
+                                                date.schedule.reserves[0]
+                                              )
+                                            )
+                                          ),
+                                          _c(
+                                            "span",
+                                            { staticClass: "sr-only" },
+                                            [_vm._v("未読メッセージ")]
+                                          )
+                                        ]
+                                      )
+                                    : _vm._e()
+                                ],
+                                1
+                              )
+                            : _vm._e()
+                        ]
+                      : [_c("span", [_vm._v("予約なし")])]
                   ]
                 : _vm._e()
             ],
@@ -76184,6 +76354,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -76193,11 +76402,53 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       detail: {}
     };
   },
+
+  computed: {
+    status: function status() {
+      if (this.detail.reserves) {
+        if (this.detail.reserves[0].status === 'app_r') {
+          return '予約申請中';
+        } else if (this.detail.reserves[0].status === 'reserved') {
+          return '予約済';
+        } else if (this.detail.reserves[0].status === 'app_c') {
+          return 'キャンセル申請中';
+        } else if (this.detail.reserves[0].status === 'canceled') {
+          return 'キャンセル済';
+        } else {
+          return this.detail.reserves[0].status;
+        }
+      } else {
+        return 'なし';
+      }
+    },
+    comments: function comments() {
+      if (this.detail.reserves) {
+        if (this.detail.reserves[0].comments.length > 0) {
+          return this.detail.reserves[0].comments;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    },
+    commentTarget: function commentTarget() {
+      return function (flow) {
+        if (flow === 'user_to_tenant') {
+          return this.$store.getters['auth/username'] + '様から' + this.$store.getters['appdata/tenantName'] + 'へ';
+        } else {
+          return this.$store.getters['appdata/tenantName'] + 'から' + this.$store.getters['auth/username'] + '様へ';
+        }
+      };
+    }
+  },
   mounted: function mounted() {
     var _this = this;
 
     window.axios.get('/api/schedule/daily/' + this.$route.params.year + '/' + this.$route.params.month + '/' + this.$route.params.day).then(function (response) {
       _this.detail = response.data.schedules;
+      console.log(_this.detail.reserves[0]);
+    }).finally(function () {
       _this.loading = false;
     });
   }
@@ -76270,13 +76521,123 @@ var render = function() {
           _c("th", [_vm._v("登録日")]),
           _vm._v(" "),
           _c("td", [_vm._v(_vm._s(_vm.detail.created_at))])
+        ]),
+        _vm._v(" "),
+        _c("tr", [
+          _c("th", [_vm._v("ステータス")]),
+          _vm._v(" "),
+          _c("td", [_vm._v(_vm._s(_vm.status))])
         ])
       ]),
       _vm._v(" "),
+      _vm.comments
+        ? _c(
+            "div",
+            { staticStyle: { margin: "2em" } },
+            [
+              _c("p", [_vm._v("お知らせ、お問い合わせ")]),
+              _vm._v(" "),
+              _vm._l(_vm.comments, function(comment, index) {
+                return _c("ul", { key: index }, [
+                  _c("li", [
+                    _vm._v(
+                      _vm._s(comment.created_at) +
+                        " " +
+                        _vm._s(_vm.commentTarget(comment.flow)) +
+                        " - " +
+                        _vm._s(comment.contents)
+                    )
+                  ])
+                ])
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                [
+                  _c(
+                    "b-form",
+                    [
+                      _c(
+                        "b-form-group",
+                        {
+                          attrs: {
+                            id: "exampleInputGroup1",
+                            label: "コメント",
+                            "label-for": "memo",
+                            description: ""
+                          }
+                        },
+                        [
+                          _c("b-form-input", {
+                            attrs: {
+                              id: "memo",
+                              type: "text",
+                              required: "",
+                              placeholder:
+                                "付随事項、お問い合わせ等があれば内容をご記入ください。"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-button",
+                        { attrs: { type: "submit", variant: "primary" } },
+                        [_vm._v("Submit")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            2
+          )
+        : _vm._e(),
+      _vm._v(" "),
       _c(
-        "RouterLink",
-        { staticClass: "button button--link", attrs: { to: "/" } },
-        [_vm._v("戻る")]
+        "b-row",
+        [
+          _c(
+            "b-col",
+            [
+              _c(
+                "router-link",
+                { attrs: { to: "/" } },
+                [_c("b-button", [_vm._v("戻る")])],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                { attrs: { to: "/" } },
+                [
+                  _c(
+                    "b-button",
+                    { attrs: { id: "myButton", variant: "primary" } },
+                    [_vm._v("予約する")]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                { attrs: { to: "/" } },
+                [
+                  _c("b-button", { attrs: { variant: "warning" } }, [
+                    _vm._v("予約をキャンセル")
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
       )
     ],
     1
@@ -77512,18 +77873,21 @@ var actions = {
                 //localStorage.setItem('user', JSON.stringify(response.data.user))
                 localStorage.setItem('token', token);
                 //localStorage.setItem('isLogin', true)
+                context.commit('appdata/setTenantName', response.data.tenant, { root: true });
                 context.commit('setUser', response.data.user); // state.userに値をセット
                 context.commit('setToken', token);
                 context.commit('setIsLogin', true);
               }).catch(function (error) {
                 // => 失敗時
                 console.log(error);
+                context.commit('appdata/setTenantName', null);
                 context.commit('setUser', null);
                 context.commit('setToken', null);
                 context.commit('setIsLogin', false);
-                context.commit('error/setCode', error.response.status, { root: true });
+                if (!error.response) {
+                  context.commit('error/setCode', error.response.status, { root: true });
+                }
                 context.commit('error/setMessage', 'ログインに失敗しました。', { root: true });
-                if (error.response.status === __WEBPACK_IMPORTED_MODULE_1__common_const__["a" /* UNPROCESSABLE_ENTITY */]) {} else {}
               });
 
             case 2:
@@ -77678,11 +78042,15 @@ var actions = {
 
 "use strict";
 var state = {
+  tenantName: null,
   currentYear: null,
   currentMonth: null
 };
 
 var mutations = {
+  setTenantName: function setTenantName(state, value) {
+    state.tenantName = value;
+  },
   setCurrentYear: function setCurrentYear(state, y) {
     state.currentYear = y;
   },
@@ -77692,6 +78060,9 @@ var mutations = {
 };
 
 var getters = {
+  tenantName: function tenantName(state) {
+    return state.tenantName;
+  },
   currentYear: function currentYear(state) {
     return state.currentYear;
   },
@@ -89824,6 +90195,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -89887,53 +90265,69 @@ var render = function() {
     "nav",
     { staticClass: "navbar" },
     [
-      _c("RouterLink", { staticClass: "navbar__brand", attrs: { to: "/" } }, [
-        _vm._v("\n    Home\n  ")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "navbar__menu" }, [
-        _vm.isLogin
-          ? _c("span", { staticClass: "navbar__item" }, [
-              _vm._v("\n      ようこそ、" + _vm._s(_vm.username) + "さん\n    ")
-            ])
-          : _c(
-              "span",
-              { staticClass: "navbar__item" },
-              [
-                _c("RouterLink", { attrs: { to: "/login" } }, [
-                  _vm._v("ログイン")
-                ]),
-                _vm._v("してください\n    ")
-              ],
-              1
-            ),
-        _vm._v(" "),
-        _vm.isLogin
-          ? _c(
-              "div",
-              { staticClass: "navbar__item" },
-              [
-                _c(
-                  "RouterLink",
-                  {
-                    staticClass: "button button--link",
-                    attrs: { to: "/user" }
-                  },
-                  [_vm._v("\n        user info\n      ")]
-                ),
-                _vm._v(" "),
+      _c(
+        "b-container",
+        [
+          _c(
+            "b-col",
+            { attrs: { cols: "6" } },
+            [
+              _c("RouterLink", { attrs: { to: "/" } }, [
+                _vm._v("\n        Home\n      ")
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("b-col", { attrs: { cols: "3" } }, [
+            _vm.isLogin
+              ? _c(
+                  "span",
+                  {},
+                  [
+                    _vm._v("\n        ようこそ、\n        "),
+                    _c("RouterLink", { attrs: { to: "/user" } }, [
+                      _vm._v("\n        " + _vm._s(_vm.username) + "\n        ")
+                    ]),
+                    _vm._v("さん\n      ")
+                  ],
+                  1
+                )
+              : _c(
+                  "span",
+                  {},
+                  [
+                    _c("RouterLink", { attrs: { to: "/login" } }, [
+                      _vm._v("ログイン")
+                    ]),
+                    _vm._v("してください\n      ")
+                  ],
+                  1
+                )
+          ]),
+          _vm._v(" "),
+          _vm.isLogin
+            ? _c("b-col", [
+                _c("a", { attrs: { href: "#" }, on: { click: _vm.logout } }, [
+                  _vm._v("通知")
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.isLogin
+            ? _c("b-col", [
                 _vm.isLogin
                   ? _c(
                       "a",
                       { attrs: { href: "#" }, on: { click: _vm.logout } },
-                      [_vm._v("Logout")]
+                      [_vm._v("ログアウト")]
                     )
                   : _vm._e()
-              ],
-              1
-            )
-          : _vm._e()
-      ])
+              ])
+            : _vm._e()
+        ],
+        1
+      )
     ],
     1
   )

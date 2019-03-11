@@ -15,7 +15,7 @@ const store = new Vuex.Store({
   },
   plugins: [createPersistedState({
     key: 'DayLinks',
-    paths: ['auth.user', 'auth.token', 'auth.isLogin'],
+    paths: ['appdata.tenantName', 'auth.user', 'auth.token', 'auth.isLogin'],
     storage: window.localStorage
   })]
 })
