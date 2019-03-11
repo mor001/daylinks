@@ -11,9 +11,4 @@ class Reserve extends Model
     {
         return $this->belongsTo('App\Schedule');
     }
-
-    public function comments()
-    {
-        return $this->hasMany('App\Comment', 'reserve_id', 'id');
-    }
 }

@@ -76393,13 +76393,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       loading: true,
       isError: false,
-      detail: {}
+      detail: {},
+      commentForm: {
+        schedule_id: null,
+        flow: 'user_to_tenant',
+        contents: ''
+      }
     };
   },
 
@@ -76422,9 +76430,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     comments: function comments() {
-      if (this.detail.reserves) {
-        if (this.detail.reserves[0].comments.length > 0) {
-          return this.detail.reserves[0].comments;
+      if (this.detail) {
+        if (Array.isArray(this.detail.comments) && this.detail.comments.length > 0) {
+          return this.detail.comments;
         } else {
           return false;
         }
@@ -76447,10 +76455,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     window.axios.get('/api/schedule/daily/' + this.$route.params.year + '/' + this.$route.params.month + '/' + this.$route.params.day).then(function (response) {
       _this.detail = response.data.schedules;
-      console.log(_this.detail.reserves[0]);
+      _this.commentForm.schedule_id = _this.detail.id;
+      console.log(_this.detail);
     }).finally(function () {
       _this.loading = false;
     });
+  },
+
+  methods: {
+    postComment: function postComment() {
+      var self = this;
+      this.loading = true;
+      this.isError = false;
+      var url = '/api/comment/save';
+      window.axios.post(url, this.commentForm).then(function (response) {
+        self.$set(self.detail, 'comments', response.data.comments);
+      }).catch(function (error) {}).finally(function () {
+        self.loading = false;
+      });
+    }
   }
 });
 
@@ -76530,72 +76553,95 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm.comments
-        ? _c(
+      _c(
+        "div",
+        { staticStyle: { margin: "2em" } },
+        [
+          _c("p", [_vm._v("お知らせ、お問い合わせ")]),
+          _vm._v(" "),
+          _vm._l(_vm.comments, function(comment, index) {
+            return _c("ul", { key: index }, [
+              _c("li", [
+                _vm._v(
+                  _vm._s(comment.created_at) +
+                    " " +
+                    _vm._s(_vm.commentTarget(comment.flow)) +
+                    " - " +
+                    _vm._s(comment.contents)
+                )
+              ])
+            ])
+          }),
+          _vm._v(" "),
+          _c(
             "div",
-            { staticStyle: { margin: "2em" } },
             [
-              _c("p", [_vm._v("お知らせ、お問い合わせ")]),
-              _vm._v(" "),
-              _vm._l(_vm.comments, function(comment, index) {
-                return _c("ul", { key: index }, [
-                  _c("li", [
-                    _vm._v(
-                      _vm._s(comment.created_at) +
-                        " " +
-                        _vm._s(_vm.commentTarget(comment.flow)) +
-                        " - " +
-                        _vm._s(comment.contents)
-                    )
-                  ])
-                ])
-              }),
-              _vm._v(" "),
               _c(
-                "div",
+                "b-form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.postComment($event)
+                    }
+                  }
+                },
                 [
+                  _c("input", {
+                    attrs: { id: "schedule_id", type: "hidden" },
+                    domProps: { value: _vm.commentForm.schedule_id }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { id: "flow", type: "hidden" },
+                    domProps: { value: _vm.commentForm.flow }
+                  }),
+                  _vm._v(" "),
                   _c(
-                    "b-form",
+                    "b-form-group",
+                    {
+                      attrs: {
+                        id: "exampleInputGroup1",
+                        label: "コメント",
+                        "label-for": "contents",
+                        description: ""
+                      }
+                    },
                     [
-                      _c(
-                        "b-form-group",
-                        {
-                          attrs: {
-                            id: "exampleInputGroup1",
-                            label: "コメント",
-                            "label-for": "memo",
-                            description: ""
-                          }
+                      _c("b-form-input", {
+                        attrs: {
+                          id: "contents",
+                          type: "text",
+                          required: "",
+                          placeholder:
+                            "付随事項、お問い合わせ等があれば内容をご記入ください。"
                         },
-                        [
-                          _c("b-form-input", {
-                            attrs: {
-                              id: "memo",
-                              type: "text",
-                              required: "",
-                              placeholder:
-                                "付随事項、お問い合わせ等があれば内容をご記入ください。"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-button",
-                        { attrs: { type: "submit", variant: "primary" } },
-                        [_vm._v("Submit")]
-                      )
+                        model: {
+                          value: _vm.commentForm.contents,
+                          callback: function($$v) {
+                            _vm.$set(_vm.commentForm, "contents", $$v)
+                          },
+                          expression: "commentForm.contents"
+                        }
+                      })
                     ],
                     1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-button",
+                    { attrs: { type: "submit", variant: "primary" } },
+                    [_vm._v("送信")]
                   )
                 ],
                 1
               )
             ],
-            2
+            1
           )
-        : _vm._e(),
+        ],
+        2
+      ),
       _vm._v(" "),
       _c(
         "b-row",
@@ -77919,6 +77965,7 @@ var actions = {
                 localStorage.removeItem('token');
                 //localStorage.removeItem('isLogin')
                 //localStorage.removeItem('user')
+                context.commit('appdata/setTenantName', null);
                 context.commit('setUser', null);
                 context.commit('setToken', null);
                 context.commit('setIsLogin', false);

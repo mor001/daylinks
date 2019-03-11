@@ -32,6 +32,8 @@ Route::group(['middleware' => 'auth:api'], function () {
         'day' => '[0-9]{2}'
     ]);
     Route::post('/schedule/create', 'SchedulesController@create');
+    Route::post('/comment/read', 'CommentsController@setRead');
+    Route::post('/comment/save', 'CommentsController@save');
 });
 
 Route::any('{all}', function() {

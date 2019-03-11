@@ -65,6 +65,7 @@ const actions = {
       localStorage.removeItem('token')
       //localStorage.removeItem('isLogin')
       //localStorage.removeItem('user')
+      context.commit('appdata/setTenantName', null)
       context.commit('setUser', null)
       context.commit('setToken', null)
       context.commit('setIsLogin', false)

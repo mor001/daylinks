@@ -57,8 +57,9 @@ class Schedule extends Model
         return self::whereBetween('date', array($from, $to))
                     ->with(['reserves' => function($query) {
                         $query->where('user_id', '=', Auth::user()->id);
-                    }, 'reserves.comments'])
+                    }])
                     ->with('holiday')
+                    ->with('comments')
                     ->select(['*'])->get();
     }
 
@@ -69,14 +70,20 @@ class Schedule extends Model
         return self::where('date', $date)
                     ->with(['reserves' => function($query) {
                         $query->where('user_id', Auth::user()->id);
-                    }, 'reserves.comments'])->first();
+                    }])
+                    ->with('holiday')
+                    ->with('comments')
+                    ->first();
     }
 
     public function reserves()
     {
         return $this->hasMany('App\Reserve', 'schedule_id', 'id');
     }
-
+    public function comments()
+    {
+        return $this->hasMany('App\Comment', 'schedule_id', 'id');
+    }
     public function holiday()
     {
         return $this->hasOne('App\Holiday', 'date', 'date');

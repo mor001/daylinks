@@ -12,7 +12,7 @@ class CommentsTableSeeder extends Seeder
     public function run()
     {
       DB::table('comments')->insert([
-        'reserve_id'  => 1,
+        'schedule_id'  => 119,
         'flow' => 'user_to_tenant',
         'is_read' => false,
         'contents' => 'コメントの内容です。ご確認ください。',
@@ -20,7 +20,7 @@ class CommentsTableSeeder extends Seeder
         'updated_at' => date('Y-m-d H:i:s'),
       ]);
       DB::table('comments')->insert([
-        'reserve_id'  => 1,
+        'schedule_id'  => 119,
         'flow' => 'tenant_to_user',
         'is_read' => false,
         'contents' => 'コメントに対する返信です。',

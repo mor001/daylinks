@@ -25,26 +25,29 @@
                 <td>{{ status }}</td>
             </tr>
         </table>
-        <div style="margin:2em;" v-if="comments">
+        <div style="margin:2em;">
           <p>お知らせ、お問い合わせ</p>
           <ul v-for="(comment, index) in comments" :key="index">
             <li>{{comment.created_at}} {{commentTarget(comment.flow)}} - {{comment.contents}}</li>
           </ul>
           <div>
-            <b-form>
+            <b-form @submit.prevent="postComment">
+              <input id="schedule_id" type="hidden" :value="commentForm.schedule_id" />
+              <input id="flow" type="hidden" :value="commentForm.flow" />
               <b-form-group
                 id="exampleInputGroup1"
                 label="コメント"
-                label-for="memo"
+                label-for="contents"
                 description=""
               >
               <b-form-input
-                id="memo"
+                id="contents"
                 type="text"
+                v-model="commentForm.contents"
                 required
                 placeholder="付随事項、お問い合わせ等があれば内容をご記入ください。" />
               </b-form-group>
-              <b-button type="submit" variant="primary">Submit</b-button>
+              <b-button type="submit" variant="primary">送信</b-button>
             </b-form>
           </div>
         </div>
@@ -70,7 +73,12 @@ export default {
     return {
       loading: true,
       isError: false,
-      detail: {}
+      detail: {},
+      commentForm: {
+        schedule_id: null,
+        flow: 'user_to_tenant',
+        contents: '',
+      },
     }
   },
   computed: {
@@ -92,9 +100,9 @@ export default {
       }
     },
     comments: function() {
-      if(this.detail.reserves) {
-        if(this.detail.reserves[0].comments.length > 0) {
-          return this.detail.reserves[0].comments
+      if(this.detail) {
+        if(Array.isArray(this.detail.comments) && this.detail.comments.length > 0) {
+          return this.detail.comments
         } else {
           return false
         }
@@ -103,7 +111,7 @@ export default {
       }
     },
     commentTarget: function() {
-      return function (flow) {
+      return function(flow) {
         if(flow === 'user_to_tenant') {
           return this.$store.getters['auth/username'] + '様から' + this.$store.getters['appdata/tenantName'] + 'へ'
         } else {
@@ -116,10 +124,26 @@ export default {
     window.axios.get('/api/schedule/daily/'+this.$route.params.year+'/'+this.$route.params.month+'/'+this.$route.params.day)
     .then( response => {
       this.detail = response.data.schedules
-      console.log(this.detail.reserves[0])
+      this.commentForm.schedule_id = this.detail.id
+      console.log(this.detail)
     }).finally(() => {
       this.loading = false
     })
-  }
+  },
+  methods: {
+    postComment() {
+      const self = this
+      this.loading = true
+      this.isError = false
+      let url = '/api/comment/save'
+      window.axios.post(url, this.commentForm)
+      .then(function (response) {
+        self.$set(self.detail, 'comments', response.data.comments)
+      }).catch(function (error) {
+      }).finally(() => {
+        self.loading = false
+      })
+    }
+  },
 }
 </script>

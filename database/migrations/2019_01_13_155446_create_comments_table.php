@@ -15,12 +15,12 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('reserve_id')->unsigned()->comment('予約ID');
+            $table->integer('schedule_id')->unsigned()->comment('スケジュールID');
             $table->enum('flow', ['user_to_tenant', 'tenant_to_user'])->comment('返信区分');
             $table->boolean('is_read')->comment('既読フラグ');
             $table->string('contents', 255)->comment('内容');
             $table->timestamps();
-            $table->foreign('reserve_id')->references('id')->on('reserves');
+            $table->foreign('schedule_id')->references('id')->on('schedules');
         });
     }
 
