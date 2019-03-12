@@ -1,58 +1,72 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+# 開発環境構築手順(Windows + xampp バージョン)
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Xamppインストール
+- インストールが終わったらApacheとMySQLをStart
+- ブラウザを立ち上げhttp://localhost にアクセスしてXamppの初期ページが表示されることを確認
+- MySQLのadminボタンを押す
+- phpMyAdminが開くのでDBを作成する  (phpMyAdmin消してるから画面分からん)
+- C:\xampp\apache\conf\httpd.confを開いて以下のように変更
+DocumentRoot "C:/xampp/htdocs" → DocumentRoot "C:/xampp/htdocs/public"
+<Directory "C:/xampp/htdocs"> → <Directory "C:/xampp/htdocs/public">
+- 修正したらapache再起動  stopボタン → startボタン
 
-## About Laravel
+## node.jsのインストール
+- https://nodejs.org/ja/ ここから推奨版をダウンロードしてインストールする
+https://qiita.com/taiponrock/items/9001ae194571feb63a5e
+- コマンドプロンプトを立ち上げてnpm -vと入力しエンター。コマンドが動くことを確認。
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+## Composerのインストール
+-  https://getcomposer.org/doc/00-intro.md#installation-windows から Composer-Setup.exe をダウンロードしてインストールする
+https://qiita.com/mikoski01/items/266469535e860312145d#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%A9%E3%83%BC%E3%81%AB%E3%82%88%E3%82%8B%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97
+- コマンドプロンプトを立ち上げて composer -V と入力しエンター。コマンドが動くことを確認。
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## GitとTortoiseGitのインストール
+- こちらを参考に。
+https://qiita.com/SkyLaptor/items/6347f38c8c010f4d5bd2
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
 
-## Learning Laravel
+## ソースコードの配置
+- C:\xampp\htdocs の中身を一旦全部消す
+- (zipの場合)https://github.com/mor001/test2/tree/develop からソースコードをダウンロード
+- (zipの場合)ダウンロードしたzipを解凍して中身を全てC:\xampp\htdocsに移動する
+- (gitの場合)https://github.com/mor001/test2/tree/develop からソースコードをOpen in desktop
+- (gitの場合)TortoiseGitのダイアログが表示されるのでURLはそのまま、ディレクトリをC:\xampp\htdocsに。
+- ※この時C:\xampp\htdocsが空でないと失敗するので注意。
+- C:\xampp\htdocs直下に .env.example が 存在するので .env にファイル名を変更する(先頭はピリオドなので注意)
+- .envを開き必要な箇所を書き換える
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
+```
+DB_DATABASE=(自分で作ったDBに合わせる)
+DB_USERNAME=root(自分で作ったDBに合わせる)
+DB_PASSWORD=(自分で作ったDBに合わせる)
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+(以下を追記する)
+DEBUGBAR_ENABLED=true
+JWT_SECRET=3yV5xVWwAAcrfh29aISjIEb1Rdscmkv4
+JWT_TTL=300
 
-## Laravel Sponsors
+```
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
+## 必要なライブラリのダウンロード
+- エクスプローラでC:\xampp\htdocsをShift＋右クリック → 「PowerShellウィンドウをここに開く」を選択
+- npm install と入力してエンター (しばらく時間がかかる)  ※ちなみにvue.jsが使用するライブラリをインストールしている
+- composer install と入力してエンター (しばらく時間がかかる) ※ちなみにLaravelが使用するライブラリをインストールしている
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Pulse Storm](http://www.pulsestorm.net/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
+## DBへデータ投入
+- そのままPowerShellの画面で、 php artisan migrate:refresh --seed と入力しエンター。DBにテーブル作成＋データ投入が行われる。
 
-## Contributing
+## hostsの書き換え
+- メモ帳を開く際に、【メモ帳アイコンを右クリック→管理者として実行】をしてからC:\Windows\System32\drivers\etc\hostsファイルを開く。
+- 以下の2行を追記する。  (※ちなみにhosts内で先頭に#が付く行はコメント行)
+127.0.0.1 test1.localhost
+127.0.0.1 test2.localhost
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## アプリ実行
+- そのままPowerShellの画面で、 npm run watch と入力しエンター
+  ※PowerShellはこれ以降監視モードになるので、止めるときはCtrl + C で止まる
+- http://test1.localhost にアクセス。画面が表示されたら成功。
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## ログインID
+- muto/aaa111
+- chono/aaa111
+- hashimoto/aaa111
