@@ -13,13 +13,18 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+Route::post('/admin/login', 'AuthController@adminLogin');
+Route::group(['middleware' => 'auth:admin'], function () {
+    Route::get('/admin/me', 'AuthController@adminMe');
+    Route::post('/register', 'Auth\RegisterController@register')->name('register');
 });
 
 Route::post('/login', 'AuthController@login');
 Route::get('/logout', 'AuthController@logout');
-Route::post('/register', 'Auth\RegisterController@register')->name('register');
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/me', 'AuthController@me');
     Route::get('/schedule/monthly/{year}/{month}', 'SchedulesController@getMonthly')->where([

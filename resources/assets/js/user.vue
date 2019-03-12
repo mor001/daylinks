@@ -1,5 +1,17 @@
 <template>
-  <RouterView />
+  <div>
+    <header>
+      <Navbar />
+    </header>
+    <main>
+      <div class="container">
+        <RouterView />
+      </div>
+    </main>
+    <footer>
+      <Footer />
+    </footer>
+  </div>
 </template>
 
 <script>
@@ -12,7 +24,7 @@ export default {
     Footer
   },
   async mounted() {
-    console.log('★ app.vue mounted')
+    console.log('★ user.vue mounted')
     /*
     const self = this
     if(localStorage.getItem('token')) {
