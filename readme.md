@@ -32,7 +32,8 @@ https://qiita.com/SkyLaptor/items/6347f38c8c010f4d5bd2
 - (gitの場合)https://github.com/mor001/test2/tree/develop からソースコードをOpen in desktop
 - (gitの場合)TortoiseGitのダイアログが表示されるのでURLはそのまま、ディレクトリをC:\xampp\htdocsに。
 - ※この時C:\xampp\htdocsが空でないと失敗するので注意。
-- C:\xampp\htdocs直下に .env.example が 存在するので .env にファイル名を変更する(先頭はピリオドなので注意)
+- (gitの場合)C:\xampp\htdocsで右クリック→TortoiseGit→切り替え→ダイアログが開くのでブランチをremotes/origin/developを選択しOK
+- C:\xampp\htdocs直下に .env.example が 存在するので .env にファイル名を変更する(先頭はピリオドなので注意。Windowsでは．で始まるファイル名はつけれないので.env.exampleをエディタで開いて必要な変更を加えた後ファイル名を.envで保存する)
 - .envを開き必要な箇所を書き換える
 
 ```
