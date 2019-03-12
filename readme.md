@@ -52,6 +52,7 @@ JWT_TTL=300
 - エクスプローラでC:\xampp\htdocsをShift＋右クリック → 「PowerShellウィンドウをここに開く」を選択
 - npm install と入力してエンター (しばらく時間がかかる)  ※ちなみにvue.jsが使用するライブラリをインストールしている
 - composer install と入力してエンター (しばらく時間がかかる) ※ちなみにLaravelが使用するライブラリをインストールしている
+- composer dump-autoload と入力してエンター
 
 ## DBへデータ投入
 - そのままPowerShellの画面で、 php artisan migrate:refresh --seed と入力しエンター。DBにテーブル作成＋データ投入が行われる。
