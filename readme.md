@@ -4,7 +4,7 @@
 - インストールが終わったらApacheとMySQLをStart
 - ブラウザを立ち上げhttp://localhost にアクセスしてXamppの初期ページが表示されることを確認
 - MySQLのadminボタンを押す
-- phpMyAdminが開くのでDBを作成する  (phpMyAdmin消してるから画面分からん)
+- phpMyAdminが開くので画面左のツリー一番上にあるNewをクリック → DB名にdaylinks(お好みでいい)、utf8_general_ciを選択し作成をクリック
 - C:\xampp\apache\conf\httpd.confを開いて以下のように変更
 DocumentRoot "C:/xampp/htdocs" → DocumentRoot "C:/xampp/htdocs/public"
 <Directory "C:/xampp/htdocs"> → <Directory "C:/xampp/htdocs/public">
