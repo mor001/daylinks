@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Adminホーム</h1>
+    <p>Adminホーム</p>
   </div>
 </template>
 

@@ -29,14 +29,21 @@ class SchedulesController extends Controller
       return ['schedules' => $data, 'y' => $y, 'm' => $m];
     }
 
-    public function create(Request $request)
+    public function reserve(Request $request)
     {
-      $reserve = new Reserve;
-      $reserve->schedule_id = $request->schedule_id;
-      $reserve->user_id = Auth::user()->id;
-      $reserve->leave_school_time = $request->leave_school_time;
-      $reserve->status = 'app_r'; // 状態:受付
+      if(empty($request->reserve_id)) {
+        $reserve = new Reserve;
+        $reserve->schedule_id = $request->schedule_id;
+        $reserve->user_id = Auth::user()->id;
+        $reserve->leave_school_time = $request->leave_school_time;
+        $reserve->status = $request->status;
+      } else {
+        $reserve = Reserve::where('id', $request->reserve_id)->first();
+        $reserve->leave_school_time = $request->leave_school_time;
+        $reserve->status = $request->status;
+      }
       $reserve->save();
+      /*
       $last_insert_id = $reserve->id;
 
       if(!empty($request->comment)) {
@@ -47,6 +54,7 @@ class SchedulesController extends Controller
         $comment->contents = $request->comment;
         $comment->save();
       }
+      */
       return ['result' => true];
     }
 

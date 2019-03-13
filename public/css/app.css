@@ -1,8 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@charset "UTF-8";
 
 /*!
- * Bootstrap v3.4.0 (https://getbootstrap.com/)
- * Copyright 2011-2018 Twitter, Inc.
+ * Bootstrap v3.4.1 (https://getbootstrap.com/)
+ * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
@@ -8335,5 +8335,19 @@ button.close {
 
 html {
   font-size: 18px;
+}
+
+.loading {
+  position: absolute;
+  margin-top: -100px;
+  /* 中央配置する要素の横幅の半分だけ上にずらす */
+  margin-left: -100px;
+  /* 中央配置する要素の縦幅の半分だけ左にずらす */
+  top: 50%;
+  /* 要素の上端を中央に */
+  left: 50%;
+  /* 要素の左端を中央に */
+  width: 200px;
+  height: 200px;
 }
 

@@ -1,3 +1,5 @@
+import router from './router'
+import store from './store'
 
 window._ = require('lodash');
 
@@ -26,7 +28,8 @@ window.axios.interceptors.response.use(function (response) {
 }, function (error) {
   if (error.response.status === 401) {
     console.log('response status is 401')
-    //window.location = "/login"
+    store.dispatch('auth/logout')
+    router.push('/login')
   } else if (error.response.status === 500) {
     console.log('response status is 500')
     window.location = "/500"
@@ -39,6 +42,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
 if (localStorage.getItem('token')) {
     console.log('get token at bootstrap')
+    console.log(router.currentRoute)
     window.axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
 }
 

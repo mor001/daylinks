@@ -5,6 +5,7 @@ import auth from './auth'
 import admin from './admin'
 import error from './error'
 import appdata from './appdata'
+import schedule from './schedule'
 
 Vue.use(Vuex)
 
@@ -14,6 +15,7 @@ const store = new Vuex.Store({
     error,
     appdata,
     admin,
+    schedule,
   },
   plugins: [createPersistedState({
     key: 'DayLinks',

@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import Navbar from './components/Navbar.vue'
-import Footer from './components/Footer.vue'
+import Navbar from '../components/Navbar.vue'
+import Footer from '../components/Footer.vue'
 
 export default {
   components: {
@@ -24,7 +24,7 @@ export default {
     Footer
   },
   async mounted() {
-    console.log('★ user.vue mounted')
+    console.log('★LAYOUT user.vue mounted')
     /*
     const self = this
     if(localStorage.getItem('token')) {

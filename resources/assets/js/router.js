@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import UserLayout from './user.vue';
+import UserLayout from './layouts/user.vue';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import User from './pages/User';
 import Detail from './pages/ScheduleDetail';
 
-import AdminLayout from './admin.vue';
+import AdminLayout from './layouts/admin.vue';
 import AdminLogin from './admin/pages/AdminLogin';
 import AdminHome from './admin/pages/AdminHome';
 
@@ -30,7 +30,7 @@ const routes = [
     { path: '/admin', component: AdminLayout,
         children: [
           { path: 'login', component: AdminLogin, },
-          { path: '', component: AdminHome, meta: { requiresAdminAuth: true } },
+          { path: '', name: 'adminHome', component: AdminHome, meta: { requiresAdminAuth: true } },
         ],
      },
     

@@ -30,28 +30,25 @@ const mutations = {
 const actions = {
   // ログイン
   async login(context, data) {
+    context.commit('error/setCode', null, { root: true })
+    context.commit('error/setMessage', '', { root: true })
     await window.axios.post('/api/admin/login', data)
     .then(function (response) {
-      const token = 'Bearer ' + response.data.access_token
-      window.axios.defaults.headers.common['Authorization'] = token;
-      //localStorage.setItem('user', JSON.stringify(response.data.user))
-      localStorage.setItem('token', token)
-      //localStorage.setItem('isLogin', true)
-      context.commit('appdata/setTenantName', response.data.tenant, { root: true }) 
-      context.commit('setStaff', response.data.user) // state.userに値をセット
-      context.commit('setToken', token)
-      context.commit('setIsLogin', true)
-    })
-    .catch(function (error) { // => 失敗時
-      console.log(error)
-      context.commit('appdata/setTenantName', null)
-      context.commit('setStaff', null)
-      context.commit('setToken', null)
-      context.commit('setIsLogin', false)
-      if(!error.response) {
-        context.commit('error/setCode', error.response.status, { root: true })
+      if(response.data.login) {
+        const token = 'Bearer ' + response.data.access_token
+        window.axios.defaults.headers.common['Authorization'] = token;
+        localStorage.setItem('token', token)
+        context.commit('appdata/setTenantName', response.data.tenant, { root: true }) 
+        context.commit('setStaff', response.data.user)
+        context.commit('setToken', token)
+        context.commit('setIsLogin', true)
+      } else {
+        context.commit('appdata/setTenantName', null, { root: true })
+        context.commit('setStaff', null)
+        context.commit('setToken', null)
+        context.commit('setIsLogin', false)
+        context.commit('error/setMessage', 'ログインに失敗しました。ID、パスワードをご確認ください。', { root: true })
       }
-      context.commit('error/setMessage', 'ログインに失敗しました。', { root: true })
     })
   },
 
@@ -61,17 +58,10 @@ const actions = {
     .then(function (response) {
       window.axios.defaults.headers.common['Authorization'] = null;
       localStorage.removeItem('token')
-      //localStorage.removeItem('isLogin')
-      //localStorage.removeItem('user')
-      context.commit('appdata/setTenantName', null)
+      context.commit('appdata/setTenantName', null, { root: true })
       context.commit('setStaff', null)
       context.commit('setToken', null)
       context.commit('setIsLogin', false)
-    })
-    .catch(function (error) { // => 失敗時
-      context.dispatch('error/setError', error.response)
-      //context.commit('error/setCode', error.response.status, { root: true })
-      //context.commit('error/setMessage', error.response.data.errors, { root: true })
     })
   },
   

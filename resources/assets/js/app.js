@@ -13,6 +13,7 @@ import store from './store'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import loading from "vue-spinner/src/MoonLoader"
 
 window.Vue = require('vue')
 
@@ -24,6 +25,7 @@ Vue.use(BootstrapVue)
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 Vue.component('app', require('./app.vue'))
+Vue.component('loading', loading)
 
 const app = new Vue({
   router,

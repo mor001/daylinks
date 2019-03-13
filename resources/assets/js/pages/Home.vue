@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p v-show="loading" class="loader">Now loading...</p>
+    <loading v-if="loading" class="loading"></loading>
     <p v-if="showAlert">{{ alertMessage }}</p>
     <h1>ホーム</h1>
     <div>
@@ -32,12 +32,16 @@
     methods: {
       fetchSchedules () {
         const self = this
-        self.loading = true
-        self.showAlert = false
-        self.alertMessage = ''
+        this.loading = true
+        this.showAlert = false
+        this.alertMessage = ''
+        
+        //this.$store.dispatch('schedule/fetchMonthly' , this.y, this.m)
+        //this.schedules = this.$store.getters['schedule/schedules']
+
         let url = '/api/schedule/monthly/' + this.y + '/' + this.m
         window.axios.get(url)
-        .then(function (response) {
+        .then(response => {
           if(response.data.schedules.length <= 0) {
             self.showAlert = true
             self.alertMessage = 'データが存在しませんでした。'
@@ -45,7 +49,7 @@
           self.schedules = response.data.schedules
           self.y = response.data.y
           self.m = response.data.m
-        }).catch(function (error) {
+        }).catch(error => {
           console.log(error.response)
           self.showAlert = true
           self.alertMessage = 'データ取得に失敗しました。'
@@ -69,7 +73,6 @@
       },
     },
     mounted() {
-      console.log('Home.vue mounted')
       const m = window.moment();
       this.y = this.$store.getters['appdata/currentYear']
       this.m = this.$store.getters['appdata/currentMonth']

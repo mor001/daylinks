@@ -1,7 +1,9 @@
 <template>
+  <b-container>
   <footer class="footer">
-    <a v-if="isLogin" href="#" @click="logout">Logout</a>
+    <p>copyright 2018-2019 mor001.</p>
   </footer>
+  </b-container>
 </template>
 
 <script>
@@ -11,16 +13,18 @@ export default {
     }
   },
   computed: {
-    isLogin () {
-      return this.$store.getters['auth/isLogin']
-    },
   },
   methods: {
-    // ログアウト
-    async  logout() {
-      await this.$store.dispatch('auth/logout')
-      this.$router.push('/login')
-    },
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.footer {
+  text-align: right;
+  margin-top: 4em;
+}
+.footer p {
+  font-size: 10pt;
+}
+</style>

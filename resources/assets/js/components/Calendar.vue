@@ -140,7 +140,7 @@
             index++
           }
         }
-        console.log(dateList)
+        //console.log(dateList)
         return dateList.filter(function() {
           return true;
         });

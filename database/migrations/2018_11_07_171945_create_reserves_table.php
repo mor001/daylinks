@@ -21,6 +21,7 @@ class CreateReservesTable extends Migration
             $table->enum('status', ['app_r', 'reserved', 'app_c', 'canceled'])->comment('ステータス');
             $table->softDeletes();
             $table->timestamps();
+            $table->unique(['schedule_id', 'user_id']);
             $table->foreign('schedule_id')->references('id')->on('schedules');
             $table->foreign('user_id')->references('id')->on('users');
         });

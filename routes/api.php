@@ -36,7 +36,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         'month' => '[0-9]{2}',
         'day' => '[0-9]{2}'
     ]);
-    Route::post('/schedule/create', 'SchedulesController@create');
+    Route::post('/schedule/reserve', 'SchedulesController@reserve');
     Route::post('/comment/read', 'CommentsController@setRead');
     Route::post('/comment/save', 'CommentsController@save');
 });

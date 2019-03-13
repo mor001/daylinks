@@ -41,27 +41,33 @@
 <script>
 export default {
   data () {
+    const self = this
     return {
       loginForm: {
         userid: 'muto',
         password: 'aaa111'
       },
       showAlert: false,
-      alertMessage: '',
+      alertMessage: self.$store.getters['error/message'],
     }
   },
   computed: {
   },
   methods: {
-    async login () {
+    login () {
       const self = this
-      await this.$store.dispatch('auth/login' , this.loginForm)
-      .then(function (response) {
-        const m = window.moment()
-        self.$store.commit('appdata/setCurrentYear', m.format('YYYY'))
-        self.$store.commit('appdata/setCurrentMonth', m.format('MM'))
-        self.$router.push('/')
-      }).catch(function (error) {
+      this.$store.dispatch('auth/login' , this.loginForm)
+      .then(response => {
+        if(self.$store.getters['error/message'] !== '') {
+          self.showAlert = true
+          self.alertMessage = self.$store.getters['error/message']
+        } else {
+          self.$store.commit('appdata/setCurrentYear', window.moment().format('YYYY'))
+          self.$store.commit('appdata/setCurrentMonth', window.moment().format('MM'))
+          self.$router.push('/')
+        }
+      }).catch(error => {
+        console.log('ログインに失敗しました。')
         console.log(error)
         self.showAlert = true
         self.alertMessage = 'ログインに失敗しました。'

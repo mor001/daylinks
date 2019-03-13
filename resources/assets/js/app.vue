@@ -11,7 +11,7 @@ export default {
     Navbar,
     Footer
   },
-  async mounted() {
+  mounted() {
     console.log('★ app.vue mounted')
     /*
     const self = this

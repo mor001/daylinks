@@ -18,7 +18,7 @@ class AuthController extends Controller
       //logger('--- call login ---');
       //もし認証エラーなら
       if(!$token = auth($target)->attempt($credentials)){
-          return response()->json(['error' => 'Unauthorized'], 401);
+          return response()->json(['login' => false, 'error' => 'The login attempt failed.'], 200);
       }
       //OKならtoken発行
       return $this->respondWithToken($token, $isAdmin);
@@ -52,6 +52,7 @@ class AuthController extends Controller
         $user = auth('api')->user();
       }
       $ret = response()->json([
+        'login' => true,
         'tenant' => config('tenantName'),
         'user' => $user,
         'access_token' => $token,

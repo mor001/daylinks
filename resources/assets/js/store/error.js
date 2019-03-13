@@ -1,6 +1,6 @@
 const state = {
   code: null,
-  message: null
+  message: '',
 }
   
 const mutations = {
