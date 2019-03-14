@@ -30,13 +30,13 @@
         </table>
         <div style="margin:2em;">
           <p>付帯事項、お問い合わせ</p>
-          <ul v-for="(comment, index) in comments" :key="index">
-            <li>{{comment.created_at}} {{commentTarget(comment.flow)}} - {{comment.contents}}</li>
+          <ul v-for="(contact, index) in contacts" :key="index">
+            <li>[{{contact.created_at}}] {{contact.contents}}</li>
           </ul>
           <div>
-            <b-form @submit.prevent="postComment">
-              <input id="schedule_id" type="hidden" :value="commentForm.schedule_id" />
-              <input id="flow" type="hidden" :value="commentForm.flow" />
+            <b-form @submit.prevent="postContact">
+              <input id="schedule_id" type="hidden" :value="contactForm.schedule_id" />
+              <input id="flow" type="hidden" :value="contactForm.flow" />
               <b-form-group
                 id="exampleInputGroup1"
                 label=""
@@ -46,7 +46,7 @@
               <b-form-input
                 id="contents"
                 type="text"
-                v-model="commentForm.contents"
+                v-model="contactForm.contents"
                 required
                 placeholder="付帯事項、お問い合わせ等があれば内容をご記入ください。" />
               </b-form-group>
@@ -74,7 +74,8 @@ export default {
       loading: true,
       showAlert: false,
       detail: null,
-      commentForm: {
+      contactForm: {
+        user_id: this.$store.getters['auth/user'].id,
         schedule_id: null,
         flow: 'user_to_tenant',
         contents: '',
@@ -106,24 +107,15 @@ export default {
         return null
       }
     },
-    comments: function() {
+    contacts: function() {
       if(this.detail) {
-        if(Array.isArray(this.detail.comments) && this.detail.comments.length > 0) {
-          return this.detail.comments
+        if(Array.isArray(this.detail.contacts) && this.detail.contacts.length > 0) {
+          return this.detail.contacts
         } else {
           return false
         }
       } else {
         return false
-      }
-    },
-    commentTarget: function() {
-      return function(flow) {
-        if(flow === 'user_to_tenant') {
-          return this.$store.getters['auth/username'] + '様から' + this.$store.getters['appdata/tenantName'] + 'へ'
-        } else {
-          return this.$store.getters['appdata/tenantName'] + 'から' + this.$store.getters['auth/username'] + '様へ'
-        }
       }
     },
   },
@@ -136,22 +128,21 @@ export default {
       .then( response => {
         //this.$set(this, 'detail', response.data.schedules)
         this.detail = response.data.schedules
-        this.commentForm.schedule_id = this.detail.id
+        this.contactForm.schedule_id = this.detail.id
         //console.log(this.detail)
       }).finally(() => {
         this.loading = false
       })
     },
-    postComment() {
+    postContact() {
       const self = this
       this.loading = true
       this.showAlert = false
-      let url = '/api/comment/save'
-      window.axios.post(url, this.commentForm)
+      let url = '/api/contact/save'
+      window.axios.post(url, this.contactForm)
       .then(function (response) {
-        self.$set(self.detail, 'comments', response.data.comments)
-        self.$set(self.commentForm, 'contents', '')
-        self.commentForm.contents = ''
+        self.$set(self.detail, 'contacts', response.data.contacts)
+        self.contactForm.contents = ''
       }).catch(function (error) {
         self.showAlert = true
       }).finally(() => {

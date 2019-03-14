@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import User from './pages/User';
 import Detail from './pages/ScheduleDetail';
+import Infomation from './pages/Infomation';
 
 import AdminLayout from './layouts/admin.vue';
 import AdminLogin from './admin/pages/AdminLogin';
@@ -24,6 +25,7 @@ const routes = [
           { path: '', component: Home, meta: { requiresAuth: true }, },
           { path: '/detail/:year/:month/:day', component: Detail, meta: { requiresAuth: true } },
           { path: '/user', component: User, meta: { requiresAuth: true } },
+          { path: '/info', component: Infomation, meta: { requiresAuth: true } },
 
         ],
     },

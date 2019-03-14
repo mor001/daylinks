@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Schedule;
 use App\Reserve;
-use App\Comment;
 
 class SchedulesController extends Controller
 {
@@ -43,18 +42,7 @@ class SchedulesController extends Controller
         $reserve->status = $request->status;
       }
       $reserve->save();
-      /*
-      $last_insert_id = $reserve->id;
-
-      if(!empty($request->comment)) {
-        $comment = new Comment;
-        $comment->reserve_id = $last_insert_id;
-        $comment->flow = 'user_to_tenant';
-        $comment->is_read = false;
-        $comment->contents = $request->comment;
-        $comment->save();
-      }
-      */
+      //$last_insert_id = $reserve->id;
       return ['result' => true];
     }
 

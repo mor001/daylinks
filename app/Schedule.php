@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Scopes\TenantScope;
+use App\Contact;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -48,41 +49,50 @@ class Schedule extends Model
         $from = date('Y-m-d', mktime(0, 0, 0, $current_m, 1, $current_y));
         $to = date('Y-m-d', mktime(0, 0, 0, $current_m + 1, 0, $current_y));
 
+        $schedules = self::whereBetween('date', array($from, $to))
+                     ->with(['reserves' => function($query) {
+                         $query->where('user_id', '=', Auth::user()->id);
+                     }])
+                     ->with('holiday')
+                     ->select(['*'])->get();
+
+        foreach($schedules as $schedule) {
+            $schedule->contacts = Contact::getContactAndReply($schedule->id, Auth::user()->id);
+        }
+
+        return $schedules;
         /*
-        $schedules = self::whereBetween('date', array($from, $to))->select(['*'])->with('holiday')->get();
-        return $schedules->load(['reserves' => function($query) {
-            $query->where('user_id', '=', Auth::user()->id);
-        }])->load('reserves.comments');
-        */
         return self::whereBetween('date', array($from, $to))
                     ->with(['reserves' => function($query) {
                         $query->where('user_id', '=', Auth::user()->id);
                     }])
                     ->with('holiday')
-                    ->with('comments')
+                    ->with('contacts')
                     ->select(['*'])->get();
+        */
     }
 
     public static function getDaily($y = null, $m = null, $d = null)
     {
         $date = date('Y-m-d', mktime(0, 0, 0, $m, $d, $y));
         $user = auth()->user();
-        return self::where('date', $date)
+        $schedule = self::where('date', $date)
                     ->with(['reserves' => function($query) {
                         $query->where('user_id', Auth::user()->id);
                     }])
                     ->with('holiday')
-                    ->with('comments')
                     ->first();
+        $schedule->contacts = Contact::getContactAndReply($schedule->id, Auth::user()->id);
+        return $schedule;
     }
 
     public function reserves()
     {
         return $this->hasMany('App\Reserve', 'schedule_id', 'id');
     }
-    public function comments()
+    public function contacts()
     {
-        return $this->hasMany('App\Comment', 'schedule_id', 'id');
+        return $this->hasMany('App\Contact', 'schedule_id', 'id');
     }
     public function holiday()
     {

@@ -79,13 +79,13 @@
       unread: function() {
         const self = this
         return function(schedule) {
-          if(Array.isArray(schedule.comments) && schedule.comments.length <= 0) {
+          if(Array.isArray(schedule.contacts) && schedule.contacts.length <= 0) {
             return 0
           }
           let sum = 0;
-          for (var i = 0; i < schedule.comments.length; i++) {
-            const comment = schedule.comments[i]
-            if(comment.is_read === 0) {
+          for (var i = 0; i < schedule.contacts.length; i++) {
+            const contact = schedule.contacts[i]
+            if(contact.is_read === 0) {
               sum++
             }
           }

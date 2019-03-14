@@ -1,24 +1,26 @@
 <template>
   <nav class="navbar">
     <b-container>
-      <b-col cols="6">
+      <b-col cols="5">
         <RouterLink to="/">
           Home
         </RouterLink>
       </b-col>
       <b-col cols="3">
         <span v-if="isLogin" v-cloak>
-          ようこそ、
-          <RouterLink to="/user">
-          {{ username }}
-          </RouterLink>さん
+          ようこそ、{{ username }}さん
         </span>
         <span v-else v-cloak>
           <RouterLink to="/login">ログイン</RouterLink>してください
         </span>
       </b-col>
       <b-col v-if="isLogin">
-        <a href="#" @click="logout">通知</a>
+        <RouterLink to="/user">マイページ</RouterLink>
+      </b-col>
+      <b-col v-if="isLogin">
+        <RouterLink to="/info">
+          お知らせ
+        </RouterLink>
       </b-col>
       <b-col v-if="isLogin">
         <a v-if="isLogin" href="#" @click="logout">ログアウト</a>

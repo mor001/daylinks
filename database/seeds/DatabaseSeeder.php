@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             HolidaysTableSeeder::class,
             SchedulesTableSeeder::class,
             ReservesTableSeeder::class,
-            CommentsTableSeeder::class,
+            ContactsTableSeeder::class,
+            RepliesTableSeeder::class,
         ]);
     }
 }
