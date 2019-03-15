@@ -62,7 +62,7 @@ JWT_TTL=300
 ## hostsの書き換え
 - メモ帳を開く際に、【メモ帳アイコンを右クリック→管理者として実行】をしてからC:\Windows\System32\drivers\etc\hostsファイルを開く。
 - 以下の2行を追記する。  (※ちなみにhosts内で先頭に#が付く行はコメント行)
-
+- MACではsudo vim /etc/hosts で /etc/hostsを編集する
 ```
 127.0.0.1 test1.localhost
 127.0.0.1 test2.localhost
