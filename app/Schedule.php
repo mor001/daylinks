@@ -42,6 +42,9 @@ class Schedule extends Model
     protected $hidden = [
     ];
 
+    /**
+     * 
+     */
     public static function getMonthly($y = null, $m = null)
     {
         $current_y = $y == null ? date('Y') : $y;
@@ -72,6 +75,9 @@ class Schedule extends Model
         */
     }
 
+    /**
+     * 
+     */
     public static function getDaily($y = null, $m = null, $d = null)
     {
         $date = date('Y-m-d', mktime(0, 0, 0, $m, $d, $y));
@@ -97,17 +103,5 @@ class Schedule extends Model
     public function holiday()
     {
         return $this->hasOne('App\Holiday', 'date', 'date');
-    }
-
-    /**
-     * 曜日を取得
-     *
-     * @param  string  $value
-     * @return int
-     */
-    public function getDayofweekAttribute($value)
-    {
-        $dt = Carbon::parse($value);
-        return $dt->dayOfWeek;
     }
 }

@@ -18,7 +18,7 @@
         <RouterLink to="/user">マイページ</RouterLink>
       </b-col>
       <b-col v-if="isLogin">
-        <RouterLink to="/info">
+        <RouterLink to="/notice">
           お知らせ
         </RouterLink>
       </b-col>

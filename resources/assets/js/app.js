@@ -14,10 +14,13 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import loading from "vue-spinner/src/MoonLoader"
+import 'v-slim-dialog/dist/v-slim-dialog.css'
+import SlimDialog from 'v-slim-dialog'
 
 window.Vue = require('vue')
 
 Vue.use(BootstrapVue)
+Vue.use(SlimDialog)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

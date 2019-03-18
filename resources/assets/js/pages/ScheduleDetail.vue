@@ -149,7 +149,20 @@ export default {
         self.loading = false
       })
     },
-    postReserve(id, status) {
+    async postReserve(id, status) {
+      let msg = ''
+      let ret = false
+      if(id == null) {
+        msg = '予約申請を行います。よろしいですか？'
+      } else {
+        msg = '予約キャンセル申請を行います。よろしいですか？'
+      }
+      const options = {title: '確認', size: 'lg', okLabel: 'OK', cancelLabel: 'キャンセル'}
+      await this.$dialogs.confirm(msg, options)
+      .then(res => {
+        ret = res.ok // {ok: true|false|undefined}
+      })
+      if(ret !== true) return
       const self = this
       this.loading = true
       this.showAlert = false

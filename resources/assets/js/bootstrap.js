@@ -41,8 +41,6 @@ window.axios.interceptors.response.use(function (response) {
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
 if (localStorage.getItem('token')) {
-    console.log('get token at bootstrap')
-    console.log(router.currentRoute)
     window.axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
 }
 

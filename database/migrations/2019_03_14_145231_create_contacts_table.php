@@ -16,7 +16,7 @@ class CreateContactsTable extends Migration
         Schema::create('contacts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->comment('ユーザーID');
-            $table->integer('schedule_id')->unsigned()->nullable()->comment('スケジュールID');
+            $table->integer('schedule_id')->unsigned()->comment('スケジュールID');
             $table->boolean('is_read')->comment('既読フラグ');
             $table->string('contents', 255)->comment('内容');
             $table->timestamps();

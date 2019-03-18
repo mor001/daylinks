@@ -26,7 +26,7 @@ class ContactsController extends Controller
       $contact->is_read = false;
       $contact->contents = $request->contents;
       $contact->save();
-      return ['result' => true, 'contacts' => $contact::where('schedule_id', $request->schedule_id)->get()];
+      return ['result' => true, 'contacts' => Contact::getContactAndReply($request->schedule_id, Auth::user()->id)];
     }
     public function setRead(Request $request)
     {

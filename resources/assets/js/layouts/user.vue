@@ -19,9 +19,15 @@ import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
 
 export default {
+  data() {
+    return {
+    }
+  },
   components: {
     Navbar,
-    Footer
+    Footer,
+  },
+  methods: {
   },
   async mounted() {
     console.log('★LAYOUT user.vue mounted')

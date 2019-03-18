@@ -17,10 +17,10 @@ class CreateNoticesTable extends Migration
             $table->increments('id');
             $table->string('tid', 16)->comment('事業者ID');
             $table->integer('user_id')->unsigned()->comment('ユーザーID');
-            $table->enum('flow', ['user_to_tenant', 'tenant_to_user'])->comment('通知区分');
             $table->boolean('is_read')->comment('既読フラグ');
             $table->string('contents', 255)->comment('内容');
             $table->timestamps();
+            $table->foreign('tid')->references('tid')->on('tenants');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

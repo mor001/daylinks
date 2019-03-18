@@ -21,6 +21,7 @@ Route::post('/admin/login', 'AuthController@adminLogin');
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/admin/me', 'AuthController@adminMe');
     Route::post('/register', 'Auth\RegisterController@register')->name('register');
+    Route::get('/admin/notice/unread', 'NoticesController@getUnreadAdmin');
 });
 
 Route::post('/login', 'AuthController@login');
@@ -39,6 +40,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/schedule/reserve', 'SchedulesController@reserve');
     Route::post('/contact/read', 'ContactsController@setRead');
     Route::post('/contact/save', 'ContactsController@save');
+    Route::get('/notice', 'NoticesController@getUnread');
+    Route::post('/notice/read', 'NoticesController@setRead');
 });
 
 Route::any('{all}', function() {

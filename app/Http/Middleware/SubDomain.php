@@ -23,12 +23,12 @@ class SubDomain
         //$subdomain = $request->('subdomain');
         if(empty($subdomain))
         {
-          die('死んだンゴ');
+          die('テナントが指定されてないので死んだンゴ');
         }
         $tenant = Tenant::find($subdomain);
         if(empty($tenant))
         {
-          die('見つからンゴ');
+          die('テナントがDBに見つからンゴ');
         }
         logger('subdomain: '.$subdomain);
         //$request->subdomain = $subdomain;

@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             ReservesTableSeeder::class,
             ContactsTableSeeder::class,
             RepliesTableSeeder::class,
+            NoticesTableSeeder::class,
         ]);
     }
 }
