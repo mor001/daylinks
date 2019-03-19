@@ -9,11 +9,17 @@
       <div v-if="isActive === '1'">
         <template v-if="notices">
           <ul v-for="(notice, index) in notices" :key="index">
-            <li>[{{notice.created_at}}] {{notice.contents}} <a href="#" @click="read(notice)">{{ readLabel(notice) }}</a></li>
+            <li>[{{notice.created_at}}] {{notice.contents}} <a href="#" @click="readNotice(notice)">{{ readLabel(notice) }}</a></li>
           </ul>
         </template>
       </div>
-      <div v-else-if="isActive === '2'">Tab News</div>
+      <div v-else-if="isActive === '2'">
+        <template v-if="contacts">
+          <ul v-for="(contact, index) in contacts" :key="index">
+            <li>[{{contact.created_at}}] {{contact.contents}} <a href="#" @click="readNotice(contact)">{{ readLabel(contact) }}</a></li>
+          </ul>
+        </template>
+      </div>
     </div>
 
   </div>
@@ -24,6 +30,7 @@
     data() {
       return {
         notices: null,
+        contacts: null,
         showAlert: false,
         alertMessage: '',
         loading: true,
@@ -46,6 +53,20 @@
             //self.alertMessage = 'データが存在しませんでした。'
           }
           self.$set(self, 'notices', response.data.notices)
+          //self.$set(self, 'contacts', response.data.contacts)
+        }).catch(error => {
+          console.log(error.response)
+          self.showAlert = true
+          self.alertMessage = 'データ取得に失敗しました。'
+        }).finally(() => {
+          self.loading = false
+        })
+
+        url = '/api/contact/general'
+        window.axios.get(url)
+        .then(response => {
+          console.log(response.data)
+          self.$set(self, 'contacts', response.data.contacts)
         }).catch(error => {
           console.log(error.response)
           self.showAlert = true
@@ -54,7 +75,7 @@
           self.loading = false
         })
       },
-      read (notice) {
+      readNotice (notice) {
         const self = this
         this.loading = true
         this.showAlert = false
@@ -79,8 +100,8 @@
     },
     computed: {
       readLabel: function() {
-        return function (notice) {
-          if(notice.is_read === 1) {
+        return function (obj) {
+          if(obj.is_read === 1) {
             return '既読'
           } else {
             return '既読にする'

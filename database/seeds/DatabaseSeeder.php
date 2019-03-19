@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
             SchedulesTableSeeder::class,
             ReservesTableSeeder::class,
             ContactsTableSeeder::class,
-            RepliesTableSeeder::class,
             NoticesTableSeeder::class,
         ]);
     }

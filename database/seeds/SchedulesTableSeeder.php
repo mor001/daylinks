@@ -11,6 +11,7 @@ class SchedulesTableSeeder extends Seeder
      */
     public function run()
     {
+      DB::table('schedules')->delete();
 
       $y = 2019;
       $m = 1;

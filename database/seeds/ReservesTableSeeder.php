@@ -11,6 +11,8 @@ class ReservesTableSeeder extends Seeder
      */
     public function run()
     {
+      DB::table('reserves')->delete();
+      
       DB::table('reserves')->insert([
         'schedule_id' => 119,
         'user_id' => 1,

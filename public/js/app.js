@@ -48424,11 +48424,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       notices: null,
+      contacts: null,
       showAlert: false,
       alertMessage: '',
       loading: true,
@@ -48450,6 +48457,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           //self.alertMessage = 'データが存在しませんでした。'
         }
         self.$set(self, 'notices', response.data.notices);
+        //self.$set(self, 'contacts', response.data.contacts)
+      }).catch(function (error) {
+        console.log(error.response);
+        self.showAlert = true;
+        self.alertMessage = 'データ取得に失敗しました。';
+      }).finally(function () {
+        self.loading = false;
+      });
+
+      url = '/api/contact/general';
+      window.axios.get(url).then(function (response) {
+        console.log(response.data);
+        self.$set(self, 'contacts', response.data.contacts);
       }).catch(function (error) {
         console.log(error.response);
         self.showAlert = true;
@@ -48458,7 +48478,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         self.loading = false;
       });
     },
-    read: function read(notice) {
+    readNotice: function readNotice(notice) {
       var self = this;
       this.loading = true;
       this.showAlert = false;
@@ -48483,8 +48503,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   computed: {
     readLabel: function readLabel() {
-      return function (notice) {
-        if (notice.is_read === 1) {
+      return function (obj) {
+        if (obj.is_read === 1) {
           return '既読';
         } else {
           return '既読にする';
@@ -48556,7 +48576,7 @@ var render = function() {
                               attrs: { href: "#" },
                               on: {
                                 click: function($event) {
-                                  return _vm.read(notice)
+                                  return _vm.readNotice(notice)
                                 }
                               }
                             },
@@ -48570,7 +48590,39 @@ var render = function() {
               2
             )
           : _vm.isActive === "2"
-          ? _c("div", [_vm._v("Tab News")])
+          ? _c(
+              "div",
+              [
+                _vm.contacts
+                  ? _vm._l(_vm.contacts, function(contact, index) {
+                      return _c("ul", { key: index }, [
+                        _c("li", [
+                          _vm._v(
+                            "[" +
+                              _vm._s(contact.created_at) +
+                              "] " +
+                              _vm._s(contact.contents) +
+                              " "
+                          ),
+                          _c(
+                            "a",
+                            {
+                              attrs: { href: "#" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.readNotice(contact)
+                                }
+                              }
+                            },
+                            [_vm._v(_vm._s(_vm.readLabel(contact)))]
+                          )
+                        ])
+                      ])
+                    })
+                  : _vm._e()
+              ],
+              2
+            )
           : _vm._e()
       ])
     ],

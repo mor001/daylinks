@@ -11,6 +11,8 @@ class TenantsTableSeeder extends Seeder
      */
     public function run()
     {
+      DB::table('tenants')->delete();
+
       DB::table('tenants')->insert([
         'tid'  => 'test1',
         'name' => 'テスト事業者1',

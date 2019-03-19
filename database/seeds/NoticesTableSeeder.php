@@ -11,6 +11,8 @@ class NoticesTableSeeder extends Seeder
      */
     public function run()
     {
+      DB::table('notices')->delete();
+
       DB::table('notices')->insert([
         'tid' => 'test1',
         'user_id' => 1,

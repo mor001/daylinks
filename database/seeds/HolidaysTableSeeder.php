@@ -11,6 +11,8 @@ class HolidaysTableSeeder extends Seeder
      */
     public function run()
     {
+      DB::table('holidays')->delete();
+
       $holidays = array(
 '2019-01-01' => '元日',
 '2019-01-14' => '成人の日',

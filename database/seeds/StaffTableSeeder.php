@@ -11,6 +11,8 @@ class StaffTableSeeder extends Seeder
      */
     public function run()
     {
+      DB::table('staff')->delete();
+
       DB::table('staff')->insert([
           'tid'  => 'test1',
           'userid' => 'admin',
