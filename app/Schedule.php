@@ -60,7 +60,7 @@ class Schedule extends Model
                      ->select(['*'])->get();
 
         foreach($schedules as $schedule) {
-            $schedule->contacts = Contact::getContactAndReply($schedule->id, Auth::user()->id);
+            $schedule->contacts = Contact::getScheduleContact($schedule->id, Auth::user()->id);
         }
 
         return $schedules;
@@ -88,7 +88,7 @@ class Schedule extends Model
                     }])
                     ->with('holiday')
                     ->first();
-        $schedule->contacts = Contact::getContactAndReply($schedule->id, Auth::user()->id);
+        $schedule->contacts = Contact::getScheduleContact($schedule->id, Auth::user()->id);
         return $schedule;
     }
 
