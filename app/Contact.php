@@ -20,7 +20,7 @@ class Contact extends Model
         */
         return DB::table('contacts')->where('user_id', $user_id)->where('schedule_id', $schedule_id)->orderBy('updated_at', 'asc')->get();
     }
-
+    
     public function replies()
     {
         return $this->hasMany('App\Contact', 'reply_id', 'id');

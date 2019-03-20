@@ -48595,29 +48595,48 @@ var render = function() {
               [
                 _vm.contacts
                   ? _vm._l(_vm.contacts, function(contact, index) {
-                      return _c("ul", { key: index }, [
-                        _c("li", [
-                          _vm._v(
-                            "[" +
-                              _vm._s(contact.created_at) +
-                              "] " +
-                              _vm._s(contact.contents) +
-                              " "
-                          ),
-                          _c(
-                            "a",
-                            {
-                              attrs: { href: "#" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.readNotice(contact)
+                      return _c(
+                        "div",
+                        { key: index },
+                        [
+                          _c("p", [
+                            _vm._v(
+                              "[" +
+                                _vm._s(contact.created_at) +
+                                "] " +
+                                _vm._s(contact.contents) +
+                                " 返信:" +
+                                _vm._s(contact.replies.length) +
+                                "件 "
+                            ),
+                            _c(
+                              "a",
+                              {
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.readNotice(contact)
+                                  }
                                 }
-                              }
-                            },
-                            [_vm._v(_vm._s(_vm.readLabel(contact)))]
-                          )
-                        ])
-                      ])
+                              },
+                              [_vm._v(_vm._s(_vm.readLabel(contact)))]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm._l(contact.replies, function(reply, index) {
+                            return _c("p", { key: index }, [
+                              _vm._v(
+                                "\n            [" +
+                                  _vm._s(reply.created_at) +
+                                  "] " +
+                                  _vm._s(reply.contents) +
+                                  "\n          "
+                              )
+                            ])
+                          })
+                        ],
+                        2
+                      )
                     })
                   : _vm._e()
               ],

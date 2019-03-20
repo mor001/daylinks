@@ -15,9 +15,12 @@
       </div>
       <div v-else-if="isActive === '2'">
         <template v-if="contacts">
-          <ul v-for="(contact, index) in contacts" :key="index">
-            <li>[{{contact.created_at}}] {{contact.contents}} <a href="#" @click="readNotice(contact)">{{ readLabel(contact) }}</a></li>
-          </ul>
+          <div v-for="(contact, index) in contacts" :key="index">
+            <p>[{{contact.created_at}}] {{contact.contents}} 返信:{{contact.replies.length}}件 <a href="#" @click="readNotice(contact)">{{ readLabel(contact) }}</a></p>
+            <p v-for="(reply, index) in contact.replies" :key="index">
+              [{{reply.created_at}}] {{reply.contents}}
+            </p>
+          </div>
         </template>
       </div>
     </div>

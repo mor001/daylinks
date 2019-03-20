@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Schedule;
 use App\Reserve;
+use App\Contact;
 
 class SchedulesController extends Controller
 {
@@ -50,6 +51,10 @@ class SchedulesController extends Controller
     {
       $data = Schedule::getDaily($y, $m, $d);
       if(!empty($data)) {
+        // 取得した問合せは既読に設定する
+        foreach($data->contacts as $contact) {
+          Contact::where('id', $contact->id)->update(['is_read' => true]);
+        }
         return ['schedules' => $data];
       } else {
         return response()->json(['error' => 'Not Found'], 404);

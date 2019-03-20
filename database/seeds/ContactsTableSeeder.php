@@ -23,16 +23,37 @@ class ContactsTableSeeder extends Seeder
         'created_at' => '2019-03-01 10:00:00',
         'updated_at' => '2019-03-01 10:00:00',
       ]);
+      $lastInsertId = DB::getPdo()->lastInsertId();
       DB::table('contacts')->insert([
         'user_id' => 1,
         'schedule_id'  => null,
         'is_read' => false,
         'contents' => '＞あなたは絶対ちょうど同じ授業論とかいうののためがなっなない。<br/> 返信です。',
         'destination' => '1',
-        'reply_id' => DB::getPdo()->lastInsertId(),
-        'created_at' => '2019-03-01 10:00:00',
-        'updated_at' => '2019-03-01 10:00:00',
+        'reply_id' => $lastInsertId,
+        'created_at' => '2019-03-01 11:00:00',
+        'updated_at' => '2019-03-01 11:00:00',
       ]);
+      DB::table('contacts')->insert([
+        'user_id' => 1,
+        'schedule_id'  => null,
+        'is_read' => false,
+        'contents' => '2度目の問合せです。',
+        'destination' => '0',
+        'reply_id' => $lastInsertId,
+        'created_at' => '2019-03-01 12:00:00',
+        'updated_at' => '2019-03-01 12:00:00',
+      ]);
+      DB::table('contacts')->insert([
+        'user_id' => 1,
+        'schedule_id'  => null,
+        'is_read' => false,
+        'contents' => '「2度目の問合せです。」に対する返信です。',
+        'destination' => '1',
+        'reply_id' => $lastInsertId,
+        'created_at' => '2019-03-01 13:00:00',
+        'updated_at' => '2019-03-01 13:00:00',
+      ]);      
       DB::table('contacts')->insert([
         'user_id' => 1,
         'schedule_id'  => 119,
