@@ -22,6 +22,8 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/admin/me', 'AuthController@adminMe');
     Route::post('/register', 'Auth\RegisterController@register')->name('register');
     Route::get('/admin/notice/unread', 'NoticesController@getUnreadAdmin');
+    Route::get('/admin/users/list', 'UsersController@getUserlist');
+    
 });
 
 Route::post('/login', 'AuthController@login');

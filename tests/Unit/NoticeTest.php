@@ -15,17 +15,17 @@ class NoticeTest extends TestCase
     const SUBDOMAIN = 'test1';
     const HOST = 'http://'.self::SUBDOMAIN.'.localhost2/api';
 
-    //public function setUp() {
-        //parent::setUp();
-        //Artisan::call('migrate:refresh');
-        //Artisan::call('db:seed');
-    //}
+    public function setUp() {
+        parent::setUp();
+        Artisan::call('migrate:refresh');
+        Artisan::call('db:seed');
+    }
     /**
      * A basic test example.
      *
      * @return void
      */
-    public function testExample()
+    public function testテストだよーん()
     {
         config(['tid' => self::SUBDOMAIN]);
 
@@ -34,10 +34,9 @@ class NoticeTest extends TestCase
         $credentials = array('userid' => 'admin', 'password' => 'aaa111');
 
         if(!$token = auth('admin')->attempt($credentials)){
-            echo "失敗\n";
+            //echo "トークン取得失敗\n";
         } else {
-            echo "成功\n";
-            echo $token;
+            //echo "トークン取得成功\n";
         }
 
         $headers = ['Authorization' => 'Bearer ' . $token];
@@ -45,6 +44,6 @@ class NoticeTest extends TestCase
         $response = $this->json('GET', $url, $params, $headers);
         $response->assertStatus(200);
 
-        print_r($response->getData());
+        //print_r($response->getData());
     }
 }
