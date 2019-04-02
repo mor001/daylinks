@@ -3,8 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Tenant;
 //use Log;
-//use View;
 class SubDomain
 {
     /**
@@ -16,17 +16,16 @@ class SubDomain
      */
     public function handle($request, Closure $next)
     {
-
+        // https://foo123.example.com から foo123 を取り出す
+        // もしhttps://example.com でアクセスされた場合はexample.comが$subdomainにセットされる
         list($subdomain) = explode('.', $request->getHost(), 2);
-
-        //$subdomain = $request->('subdomain');
-        if(empty($subdomain)) {
-          die('死んだンゴ');
+        $tenant = Tenant::find($subdomain);
+        if(empty($tenant))
+        {
+          die('テナントがDBに見つからンゴ(´･ω･`)');
         }
-        logger('subdomain: '.$subdomain);
-        //$request->subdomain = $subdomain;
         config(['tid' => $subdomain]);
-        //View::share(['subdomain' => $subdomain]);
+        config(['tenantName' => $tenant->name]);
         return $next($request);
     }
 }

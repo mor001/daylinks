@@ -16,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
+        // クエリイベントのリッスン
         \DB::listen(function ($query) {
           $sql = $query->sql;
           for ($i = 0; $i < count($query->bindings); $i++) {

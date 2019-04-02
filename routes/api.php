@@ -13,14 +13,44 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+Route::post('/admin/login', 'AuthController@adminLogin');
+Route::group(['middleware' => 'auth:admin'], function () {
+    Route::get('/admin/me', 'AuthController@adminMe');
+    Route::post('/register', 'Auth\RegisterController@register')->name('register');
+    Route::get('/admin/notice/unread', 'NoticesController@getUnreadAdmin');
+    Route::get('/admin/users/list', 'UsersController@getUserlist');
+    
 });
 
-Route::group(['middleware' => 'guest:api'], function(){
-    Route::post('/login', 'ApiController@login');
+Route::post('/login', 'AuthController@login');
+Route::get('/logout', 'AuthController@logout');
+Route::post('/password/reset/request', 'UsersController@sendResetLinkEmail');
+//Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('/password/reset', 'UsersController@resetPassword');
+
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('/me', 'AuthController@me');
+    Route::get('/schedule/monthly/{year}/{month}', 'SchedulesController@getMonthly')->where([
+        'year' => '[0-9]{4}',
+        'month' => '[0-9]{2}'
+    ]);
+    Route::get('/schedule/daily/{year}/{month}/{day}', 'SchedulesController@getDaily')->where([
+        'year' => '[0-9]{4}',
+        'month' => '[0-9]{2}',
+        'day' => '[0-9]{2}'
+    ]);
+    Route::post('/schedule/reserve', 'SchedulesController@reserve');
+    Route::post('/contact/read', 'ContactsController@setRead');
+    Route::post('/contact/save', 'ContactsController@save');
+    Route::get('/contact/general', 'ContactsController@getGeneralContacts');
+    Route::get('/notice', 'NoticesController@getUnread');
+    Route::post('/notice/read', 'NoticesController@setRead');
 });
 
-Route::group(['middleware' => 'auth:api'], function(){
-    Route::get('/me', 'ApiController@me');
+Route::any('{all}', function() {
+    return App::abort(404);
 });

@@ -1,3 +1,5 @@
+import router from './router'
+import store from './store'
 
 window._ = require('lodash');
 
@@ -21,7 +23,28 @@ try {
 
 window.axios = require('axios');
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.interceptors.response.use(function (response) {
+    return response
+}, function (error) {
+  if (error.response.status === 401) {
+    console.log('response status is 401')
+    store.dispatch('auth/logout')
+    router.push('/login')
+  } else if (error.response.status === 500) {
+    console.log('response status is 500')
+    window.location = "/500"
+  }
+  return Promise.reject(error)
+  //return error
+})
+
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+
+if (localStorage.getItem('token')) {
+    window.axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+}
+
+window.moment = require('moment');
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
