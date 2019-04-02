@@ -64,19 +64,6 @@ const actions = {
       context.commit('setIsLogin', false)
     })
   },
-  
-  // トークンチェック
-  async checkToken() {
-    await window.axios.get('/api/admin/me')
-    .then(function () {
-      console.log('checkToken 成功')
-      return true
-    })
-    .catch(function () {
-      console.log('checkToken 失敗')
-      return false
-    })
-  }
 }
 
 const methods = {

@@ -28,6 +28,10 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
 Route::post('/login', 'AuthController@login');
 Route::get('/logout', 'AuthController@logout');
+Route::post('/password/reset/request', 'UsersController@sendResetLinkEmail');
+//Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('/password/reset', 'UsersController@resetPassword');
+
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/me', 'AuthController@me');
     Route::get('/schedule/monthly/{year}/{month}', 'SchedulesController@getMonthly')->where([

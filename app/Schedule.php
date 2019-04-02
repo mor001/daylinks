@@ -51,8 +51,9 @@ class Schedule extends Model
         $current_m = $m == null ? date('m') : $m;
         $from = date('Y-m-d', mktime(0, 0, 0, $current_m, 1, $current_y));
         $to = date('Y-m-d', mktime(0, 0, 0, $current_m + 1, 0, $current_y));
-
+        $now = date('Y-m-d H:i:s');
         $schedules = self::whereBetween('date', array($from, $to))
+                     ->where('publish', '<=', $now)
                      ->with(['reserves' => function($query) {
                          $query->where('user_id', '=', Auth::user()->id);
                      }])

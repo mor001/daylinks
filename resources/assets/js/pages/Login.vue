@@ -35,7 +35,9 @@
         ログイン
       </b-button>
     </b-form>
+    <p><RouterLink to="/forgot">パスワードを忘れた方はこちら</RouterLink></p>
   </div>
+
 </template>
 
 <script>

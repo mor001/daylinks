@@ -25,7 +25,7 @@
           </tr>
           <tr>
             <th>ステータス</th>
-            <td>{{ status }}</td>
+            <td>{{ reserve_status }}</td>
           </tr>
         </table>
         <div style="margin:2em;">
@@ -59,8 +59,13 @@
             <router-link to="/">
               <b-button>戻る</b-button>
             </router-link>
-            <b-button v-if="status === 'なし'" id="myButton" variant="success" @click="postReserve(null, 'app_r')">予約する</b-button>
-            <b-button v-if="status === '予約済' || status === '予約申請中'" variant="warning" @click="postReserve(reserve_id, 'app_c')">予約をキャンセル</b-button>
+            <template v-if="canReserve === false">
+              <p>締切されました。</p>
+            </template>
+            <template v-else>
+              <b-button v-if="reserve_status === 'なし'" id="myButton" variant="success" @click="postReserve(null, 'app_r')">予約する</b-button>
+              <b-button v-if="reserve_status === '予約済' || reserve_status === '予約申請中'" variant="warning" @click="postReserve(reserve_id, 'app_c')">予約をキャンセル</b-button>
+            </template>
           </b-col>
         </b-row>
       </div>
@@ -83,7 +88,18 @@ export default {
     }
   },
   computed: {
-    status: function() {
+    canReserve: function() {
+      if(this.detail.status === 'open') {
+        if(moment().isBefore(moment(this.detail.date), 'day')) {
+          return true
+        } else {
+          return false
+        }
+      } else {
+        return false
+      }
+    },
+    reserve_status: function() {
       if(Array.isArray(this.detail.reserves) && this.detail.reserves.length > 0) {
         if(this.detail.reserves[0].status === 'app_r') {
           return '予約申請中'

@@ -7,6 +7,8 @@ import Login from './pages/Login';
 import User from './pages/User';
 import Detail from './pages/ScheduleDetail';
 import Notice from './pages/Notice';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 import AdminLayout from './layouts/admin.vue';
 import AdminLogin from './admin/pages/AdminLogin';
@@ -21,7 +23,9 @@ Vue.use(VueRouter);
 const routes = [
     { path: '/', component: UserLayout,
         children: [
-          { path: 'login', component: Login, },
+          { path: '/login', component: Login, },
+          { path: '/forgot', component: ForgotPassword, },
+          { path: '/reset/:token', component: ResetPassword, },
           { path: '', component: Home, meta: { requiresAuth: true }, },
           { path: '/detail/:year/:month/:day', component: Detail, meta: { requiresAuth: true } },
           { path: '/user', component: User, meta: { requiresAuth: true } },
