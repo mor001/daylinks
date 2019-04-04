@@ -1,15 +1,31 @@
 <template>
-  <div>
+  <main id="main">
     <loading v-if="loading" class="loading"></loading>
     <p v-if="showAlert">{{ alertMessage }}</p>
-    <h1>ホーム</h1>
-    <div>
-      <a href="#" @click="prev">前月</a>
-      <a href="#" @click="next">次月</a>
-    </div>
-    <p>{{this.y}}年{{this.m}}月度のデータを表示中</p>
-    <Calendar :schedules="schedules" :current-year="this.y" :current-month="this.m" />
-  </div>
+    <div id="main_contents">
+      <article class="container">
+        <div class="common_cnt">
+          <h2>{{$store.getters['appdata/tenantName']}}</h2>
+        </div>
+        <div class="calendar_wrap month-type">
+          <div class="pager_wrap">
+            <div>
+              <a href="#" class="prev" @click="prev"><i class="fas fa-caret-square-left"></i></a>
+              <p><span>{{this.y}}</span>年<span>{{this.m}}</span>月</p>
+              <a href="#" class="next" @click="next"><i class="fas fa-caret-square-right"></i></a>
+            </div>
+            <nav class="clearfix">
+              <ul>
+                <li class="trigger-month carrent" title="月表示"><a href="index.html"></a></li>
+                <li class="trigger-list" title="リスト表示"><a href="list.html"></a></li>
+              </ul>
+            </nav>
+          </div>
+          <Calendar :schedules="schedules" :current-year="this.y" :current-month="this.m" />
+        </div> <!--.calendar_wrap-->
+      </article><!--.container-->
+    </div><!--#main_contents-->
+  </main><!--#main-->
 </template>
 
 <script>
@@ -85,6 +101,8 @@
       this.fetchSchedules()
     },
     computed: {
+    },
+    filters: {
     },
   }
 </script>

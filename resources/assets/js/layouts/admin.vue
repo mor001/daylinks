@@ -1,27 +1,12 @@
 <template>
-  <div>
-    <header>
-      <Navbar />
-    </header>
-    <main>
-      <div class="container">
-        <RouterView />
-      </div>
-    </main>
-    <footer>
-      <Footer />
-    </footer>
-  </div>
+  <transition mode="out-in">
+    <RouterView />
+  </transition>
 </template>
 
 <script>
-import Navbar from '../components/Navbar.vue'
-import Footer from '../components/Footer.vue'
-
 export default {
   components: {
-    Navbar,
-    Footer
   },
   async mounted() {
     console.log('★LAYOUT admin.vue mounted')

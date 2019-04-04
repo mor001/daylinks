@@ -10,7 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::match(['get', 'post'], 'admin/{any}', function () {
+    return view('admin');
+})->where(['all' => '.*']);
 Route::any('{all}', function () {
     return view('app');
 })->where(['all' => '.*']);

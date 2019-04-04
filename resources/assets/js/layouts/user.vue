@@ -1,13 +1,11 @@
 <template>
   <div>
-    <header>
+    <header v-if="isLogin">
       <Navbar />
     </header>
-    <main>
-      <div class="container">
-        <RouterView />
-      </div>
-    </main>
+    <transition mode="out-in">
+      <RouterView />
+    </transition>
     <footer>
       <Footer />
     </footer>
@@ -22,6 +20,11 @@ export default {
   data() {
     return {
     }
+  },
+  computed: {
+    isLogin () {
+      return this.$store.getters['auth/isLogin']
+    },
   },
   components: {
     Navbar,
@@ -46,3 +49,12 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.v-enter-active, .v-leave-active {
+  transition: opacity .5s;
+}
+.v-enter, .v-leave-to {
+  opacity: 0;
+}
+</style>

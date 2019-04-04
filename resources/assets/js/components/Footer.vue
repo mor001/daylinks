@@ -1,9 +1,7 @@
 <template>
-  <b-container>
   <footer class="footer">
     <p>copyright 2018-2019 mor001.</p>
   </footer>
-  </b-container>
 </template>
 
 <script>

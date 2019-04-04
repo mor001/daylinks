@@ -1,7 +1,7 @@
 const state = {
   tenantName: null,
   currentYear: null,
-  currentMonth: null
+  currentMonth: null,
 }
     
 const mutations = {
@@ -13,7 +13,7 @@ const mutations = {
   },
   setCurrentMonth (state, m) {
     state.currentMonth = m
-  }
+  },
 }
   
 const getters = {

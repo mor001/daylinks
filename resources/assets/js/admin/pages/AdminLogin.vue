@@ -1,42 +1,30 @@
 <template>
-  <div>
-    <div class="alert alert-danger" role="alert" v-if="showAlert">
-      {{ alertMessage }}
-    </div>
-    <h3>管理画面ログイン</h3>
-    <b-form @submit.prevent="login">
-      <h1></h1>
-      <b-form-group
-        id="igUserId"
-        label="ユーザーID:"
-        label-for="userid"
-      >
-        <b-form-input
-          id="userid"
-          type="text"
-          v-model="loginForm.userid"
-          required />
-      </b-form-group>
-      <b-form-group
-        id="igPassword"
-        label="パスワード:"
-        label-for="password"
-      >
-        <b-form-input
-          id="password"
-          type="password"
-          v-model="loginForm.password"
-          required />
-      </b-form-group>
-
-      <b-button
-        size="lg"
-        type="submit"
-        variant="outline-primary">
-        ログイン
-      </b-button>
-    </b-form>
-  </div>
+<v-app id="inspire">
+  <v-content>
+    <v-container fluid fill-height>
+      <v-layout align-center justify-center>
+        <v-flex xs12 sm8 md4>
+          <v-card class="elevation-12">
+            <v-toolbar dark color="primary">
+              <v-toolbar-title>管理画面ログイン</v-toolbar-title>
+              <v-spacer></v-spacer>
+            </v-toolbar>
+            <v-card-text>
+              <v-form>
+                <v-text-field prepend-icon="person" name="userid" label="ユーザーID" type="text" v-model="loginForm.userid"></v-text-field>
+                <v-text-field prepend-icon="lock" name="password" label="パスワード" id="password" type="password" v-model="loginForm.password"></v-text-field>
+              </v-form>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn @click="login" color="primary">ログイン</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </v-content>
+</v-app>
 </template>
 
 <script>

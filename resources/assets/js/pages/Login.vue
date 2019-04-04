@@ -1,43 +1,35 @@
 <template>
-  <div>
-    <div class="alert alert-danger" role="alert" v-if="showAlert">
-      {{ alertMessage }}
-    </div>
-    <b-form @submit.prevent="login">
-      <h1></h1>
-      <b-form-group
-        id="igUserId"
-        label="ユーザーID:"
-        label-for="userid"
-      >
-        <b-form-input
-          id="userid"
-          type="text"
-          v-model="loginForm.userid"
-          required />
-      </b-form-group>
-      <b-form-group
-        id="igPassword"
-        label="パスワード:"
-        label-for="password"
-      >
-        <b-form-input
-          id="password"
-          type="password"
-          v-model="loginForm.password"
-          required />
-      </b-form-group>
+  <main id="main">
+    <article class="login">
+      <h1><img src="images/logo_green.png" alt="ロゴマーク" /></h1>
+      <!--▼▼エラーメッセージここから-->
+      <div id="login_message" class="login_error" v-if="showAlert">
+        <p>{{ alertMessage }}</p>
+      </div>
+      <!--▲▲エラーメッセージここまで-->
+      <div id="login_form">
+        <form @submit.prevent="login">
+          <div class="login_item">
+            <label for="text"></label>
+            <input type="text" name="userid" id="userid"  required="required" placeholder="ユーザーID" v-model="loginForm.userid" />
+          </div>
+          <div class="login_item">
+            <label for="password"></label>
+            <input type="password" name="password" required="required" placeholder="パスワード" v-model="loginForm.password" />
+          </div>
+          <div class="button-panel">
+            <input type="submit" class="button" title="ログイン" value="ログイン">
+          </div>
+        </form>
+      </div><!--#login_form-->
 
-      <b-button
-        size="lg"
-        type="submit"
-        variant="outline-primary">
-        ログイン
-      </b-button>
-    </b-form>
-    <p><RouterLink to="/forgot">パスワードを忘れた方はこちら</RouterLink></p>
-  </div>
-
+      <!--▼▼初期画面のみ、lost_passwordkから遷移した場合はここから下の中身を消してください。-->
+      <div class="login-footer">
+        <p><RouterLink to="/forgot">パスワードを忘れた方はこちら<i class="fas fa-long-arrow-alt-right left_pd"></i></RouterLink></p>
+      </div>
+      <!--▲▲初期画面のみ、lost_passwordkから遷移した場合はここから上の中身を消してください。-->
+    </article>
+  </main><!--#main-->
 </template>
 
 <script>
