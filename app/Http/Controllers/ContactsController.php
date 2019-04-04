@@ -34,7 +34,7 @@ class ContactsController extends Controller
       $contact->schedule_id = $request->schedule_id;
       $contact->is_read = false;
       $contact->contents = $request->contents;
-      $contact->destination = '0';
+      $contact->destination = $request->destination;
       $contact->reply_id = null;
       $contact->save();
       return ['result' => true, 'contacts' => Contact::getScheduleContact($request->schedule_id, Auth::user()->id)];

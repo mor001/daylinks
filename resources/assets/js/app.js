@@ -10,16 +10,15 @@ require('./bootstrap')
 import Vue from 'vue'
 import router from './router'
 import store from './store'
-import BootstrapVue from 'bootstrap-vue'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import Vuetify from 'vuetify';
+import 'vuetify/dist/vuetify.min.css'
 import loading from "vue-spinner/src/MoonLoader"
 import 'v-slim-dialog/dist/v-slim-dialog.css'
 import SlimDialog from 'v-slim-dialog'
 
 window.Vue = require('vue')
 
-Vue.use(BootstrapVue)
+Vue.use(Vuetify)
 Vue.use(SlimDialog)
 
 /**
@@ -33,4 +32,4 @@ Vue.component('loading', loading)
 const app = new Vue({
   router,
   store,
-}).$mount('#app')
+}).$mount('#wrapper')

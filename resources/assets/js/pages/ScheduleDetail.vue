@@ -1,75 +1,87 @@
 <template>
-    <div>
-      <loading v-if="loading" class="loading"></loading>
-      <div v-if="showAlert" class="error">
-        <p>情報の取得に失敗しました。</p>
-      </div>
-      <div v-if="detail" class="content">
-        <h1>詳細</h1>
-        <table>
-          <tr>
-            <th>日付</th>
-            <td>{{ detail.date }}</td>
-          </tr>
-          <tr>
-            <th>タイトル</th>
-            <td>{{ detail.title }}</td>
-          </tr>
-          <tr>
-            <th>説明</th>
-            <td>{{ detail.description }}</td>
-          </tr>
-          <tr>
-            <th>登録日</th>
-            <td>{{ detail.created_at }}</td>
-          </tr>
-          <tr>
-            <th>ステータス</th>
-            <td>{{ reserve_status }}</td>
-          </tr>
-        </table>
-        <div style="margin:2em;">
-          <p>付帯事項、お問い合わせ</p>
-          <ul v-for="(contact, index) in contacts" :key="index">
-            <li>[{{contact.created_at}}] {{contact.contents}}</li>
-          </ul>
-          <div>
-            <b-form @submit.prevent="postContact">
-              <input id="schedule_id" type="hidden" :value="contactForm.schedule_id" />
-              <input id="flow" type="hidden" :value="contactForm.flow" />
-              <b-form-group
-                id="exampleInputGroup1"
-                label=""
-                label-for="contents"
-                description=""
-              >
-              <b-form-input
-                id="contents"
-                type="text"
-                v-model="contactForm.contents"
-                required
-                placeholder="付帯事項、お問い合わせ等があれば内容をご記入ください。" />
-              </b-form-group>
-              <b-button type="submit" variant="primary">送信</b-button>
-            </b-form>
-          </div>
+  <div>
+    <loading v-if="loading" class="loading"></loading>
+    <div v-if="showAlert" class="error">
+      <p>情報の取得に失敗しました。</p>
+    </div>
+    <div v-if="detail" id="main_contents">
+      <article class="container">
+        <div class="common_cnt">
+          <h2>{{$store.getters['appdata/tenantName']}}</h2>
         </div>
-        <b-row>
-          <b-col>
-            <router-link to="/">
-              <b-button>戻る</b-button>
-            </router-link>
+        <div class="detail_wrap">
+          <h3>
+            <span class="month">{{this.$route.params.month}}月</span>
+            <span class="date">{{this.$route.params.day}}<span class="date_list_type">日</span></span>
+            <span class="day">X曜日</span>
+          </h3>
+          <div class="detail_cnt">
+            <div class="inner">
+              <h4 class="main_title">{{detail.title}}</h4>
+              <div class="text_box">
+                <p>
+                  {{ detail.description }}
+                </p>
+              </div>
+              <!--****************************************************************
+                main_titleにクラス名をつける
+                予約申請中 : "reserve_info"          予約済み："reserve_success"
+                キャンセル申請中："reserve_warning"  キャンセル済："reserve_danger"
+              ********************************************************************-->
+              <h4 class="main_title reserve_info"><span>ステータス  ：  </span><span>{{ reserve_status }}</span></h4>
+            </div>
+            <div class="chat_wrap">
+              <h4>お知らせ、お問い合わせ</h4>
+              <div class="inner" v-for="(contact, index) in contacts" :key="index">
+                <div v-bind:class="{ 'mycomment': contact.destination === '0', 'facility_cnt': contact.destination === '1' }">
+                  <div class="chatting">
+                    <div class="says">
+                      <p>{{contact.contents}}</p>
+                      <span class="time">{{contact.created_at}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div><!--.inner-->
+            </div><!--.chat_wrap-->
+            <div class="comment_wrap">
+              <div class="mycomment">
+                <div class="chatting">
+                  <div class="says">
+                    <form @submit.prevent="postContact">
+                      <div class="textarea_wrap">
+                          <input id="schedule_id" type="hidden" :value="contactForm.schedule_id" />
+                          <input id="destination" type="hidden" :value="contactForm.destination" />
+                          <textarea id="contents" class="textlines" v-model="contactForm.contents" placeholder="お問い合わせ・連絡事項などを入力して送信ボタンをクリックしてください。"></textarea>
+                      </div>
+                      <div class="submit_wrap">
+                        <button type="submit" value="送信する"><i class="fas fa-envelope fa-fw fa-lg"></i>送信する</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="btn_cnt">
+            <div class="btn">
+              <router-link to="/"><button type="submit" class="back" value="戻る"><i class="fas fa-undo-alt fa-fw"></i>戻る</button></router-link>
+            </div>
             <template v-if="canReserve === false">
               <p>締切されました。</p>
             </template>
             <template v-else>
-              <b-button v-if="reserve_status === 'なし'" id="myButton" variant="success" @click="postReserve(null, 'app_r')">予約する</b-button>
-              <b-button v-if="reserve_status === '予約済' || reserve_status === '予約申請中'" variant="warning" @click="postReserve(reserve_id, 'app_c')">予約をキャンセル</b-button>
+              <div class="btn" v-if="reserve_status === 'なし'">
+                <button type="submit" class="reserve_info" value="予約する" @click="postReserve(null, 'app_r')">予約する</button>
+              </div>
+              <div class="btn" v-if="reserve_status === '予約済' || reserve_status === '予約申請中'">
+                <button type="submit" class="reserve_warning" value="予約をキャンセル" @click="postReserve(reserve_id, 'app_c')">予約をキャンセル</button>
+              </div>
             </template>
-          </b-col>
-        </b-row>
-      </div>
-    </div>
+          </div>
+        </div><!--.detail_wrap-->
+      </article><!--.container-->
+    </div><!--#main_contents-->
+  </div>
 </template>
 
 <script>
@@ -82,7 +94,7 @@ export default {
       contactForm: {
         user_id: this.$store.getters['auth/user'].id,
         schedule_id: null,
-        flow: 'user_to_tenant',
+        destination: '0',
         contents: '',
       },
     }
@@ -145,7 +157,7 @@ export default {
         //this.$set(this, 'detail', response.data.schedules)
         this.detail = response.data.schedules
         this.contactForm.schedule_id = this.detail.id
-        //console.log(this.detail)
+        console.log(this.detail)
       }).finally(() => {
         this.loading = false
       })

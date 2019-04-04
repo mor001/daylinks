@@ -3,15 +3,10 @@
 </template>
 
 <script>
-import Navbar from './components/Navbar.vue'
-import Footer from './components/Footer.vue'
 export default {
   components: {
-    Navbar,
-    Footer,
   },
   mounted() {
-    console.log('★ app.vue mounted')
     /*
     const self = this
     if(localStorage.getItem('token')) {

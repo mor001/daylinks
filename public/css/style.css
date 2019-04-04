@@ -1,0 +1,2760 @@
+@charset "UTF-8";
+/*
+Eric Meyer's CSS Reset
+http://meyerweb.com/eric/tools/css/reset/
+v1.0 | 20080212
+CSSresetr.com
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+/* remember to define focus styles! */
+:focus {
+  outline: 0; }
+
+/* remember to highlight inserts somehow! */
+ins {
+  text-decoration: none; }
+
+del {
+  text-decoration: line-through; }
+
+/* tables still need 'cellspacing=0' in the markup */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* Body
+------------------------------------------------------*/
+@font-face {
+  font-family: YuGothicM;
+  src: local("Yu Gothic Medium"); }
+/* 明朝体
+$body-font-family: "a-otf-ryumin-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+$midashi-font-family: "a-otf-futo-min-a101-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+------------------------------------------------------*/
+/* Breackpoint
+------------------------------------------------------*/
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* BOXシャドウ　
+--------------------------------------------------------------------------------------------------------*/
+/* 拡散型シャドウ　http://photoshopvip.net/91770
+--------------------------------------------------------------------------------------------------------*/
+/* hover under-line https://www.nxworld.net/tips/css-hover-underline-animation-examples-and-sass-mixin.html
+
+type（タイプ） $dir（方向） $weight（ラインウェイト） $color（ラインカラー）
+--------------------------------------------------------------------------------------------------------*/
+/*-----------------------
+カラー
+-------------------------*/
+html {
+  font-size: 100%;
+  font-size: 62.5%;
+  /* 16px x 0.625 = 10px(=1rem) */
+  font-size: 10px 1rem; }
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block; }
+
+h3, h5, h6 {
+  padding-top: 6px;
+  margin-bottom: 12px; }
+
+h1 {
+  font-size: 4rem;
+  line-height: 5.6rem; }
+
+h2 {
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  padding: 12px 0 0 0;
+  color: #009688; }
+
+h3 {
+  font-size: 1.6rem;
+  line-height: 2rem;
+  font-weight: bold;
+  padding-left: 6px;
+  border-bottom: 2px solid #009688;
+  margin: 12px 0; }
+
+h4 {
+  font-size: 2rem;
+  line-height: 3rem; }
+
+h5 {
+  font-size: 2rem;
+  line-height: 3.2rem; }
+
+h6 {
+  font-size: 1.8rem;
+  line-height: 3rem; }
+
+p {
+  font-size: 1.6rem;
+  line-height: 2.6rem; }
+
+a {
+  text-decoration: underline;
+  color: #3366ff; }
+  a:hover {
+    text-decoration: none;
+    color: #3292FF; }
+
+ul, ol {
+  font-size: 1.6rem;
+  line-height: 2.6rem; }
+
+dl {
+  font-size: 1.6rem;
+  line-height: 2.6rem; }
+
+table {
+  margin: 10px 0;
+  width: 100%;
+  border: 1px solid #aaa;
+  font-size: 1.6rem; }
+  table thead th, table thead td {
+    font-weight: bold; }
+
+th, td {
+  padding: 7px;
+  border: 1px solid #aaa;
+  text-align: left;
+  font-size: 1.6rem;
+  line-height: 2.4rem; }
+
+th {
+  vertical-align: middle;
+  font-weight: normal;
+  padding: 9px 7px; }
+
+img {
+  display: block; }
+
+article, aside, details, footer, header, main, menu, nav, section, summary {
+  display: block; }
+
+@media only screen and (min-width: 750px), print {
+  h2 {
+    font-size: 3rem;
+    line-height: 4rem;
+    padding-top: 24px;
+    padding-bottom: 0;
+    margin-bottom: 12px; }
+
+  h3 {
+    font-size: 2.8rem;
+    line-height: 3rem;
+    padding-top: 24px;
+    padding-left: 12px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #009688;
+    margin-bottom: 24px; } }
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* Body
+------------------------------------------------------*/
+@font-face {
+  font-family: YuGothicM;
+  src: local("Yu Gothic Medium"); }
+/* 明朝体
+$body-font-family: "a-otf-ryumin-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+$midashi-font-family: "a-otf-futo-min-a101-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+------------------------------------------------------*/
+/* Breackpoint
+------------------------------------------------------*/
+/* BOXシャドウ　
+--------------------------------------------------------------------------------------------------------*/
+/* 拡散型シャドウ　http://photoshopvip.net/91770
+--------------------------------------------------------------------------------------------------------*/
+/* hover under-line https://www.nxworld.net/tips/css-hover-underline-animation-examples-and-sass-mixin.html
+
+type（タイプ） $dir（方向） $weight（ラインウェイト） $color（ラインカラー）
+--------------------------------------------------------------------------------------------------------*/
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* Body
+------------------------------------------------------*/
+@font-face {
+  font-family: YuGothicM;
+  src: local("Yu Gothic Medium"); }
+/* 明朝体
+$body-font-family: "a-otf-ryumin-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+$midashi-font-family: "a-otf-futo-min-a101-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+------------------------------------------------------*/
+/* Breackpoint
+------------------------------------------------------*/
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+.clearfix:before,
+.clearfix:after,
+.row:before,
+.row:after {
+  content: " ";
+  display: table; }
+
+.clearfix:after,
+.row:after {
+  clear: both; }
+
+.clearfix
+.row {
+  *zoom: 1; }
+
+.clear_both {
+  clear: both; }
+
+[class*="col-"] {
+  display: block;
+  position: relative;
+  float: left;
+  width: 100%; }
+
+.col-1 {
+  width: 8.3333333333%; }
+
+.col-2 {
+  width: 16.6666666667%; }
+
+.col-3 {
+  width: 25%; }
+
+.col-4 {
+  width: 33.3333333333%; }
+
+.col-5 {
+  width: 41.6666666667%; }
+
+.col-6 {
+  width: 50%; }
+
+.col-7 {
+  width: 58.3333333333%; }
+
+.col-8 {
+  width: 66.6666666667%; }
+
+.col-9 {
+  width: 75%; }
+
+.col-10 {
+  width: 83.3333333333%; }
+
+.col-11 {
+  width: 91.6666666667%; }
+
+.col-12 {
+  width: 100%; }
+
+@media only screen and (min-width: 400px) {
+  .col-xs-1 {
+    width: 8.3333333333%; }
+
+  .col-xs-2 {
+    width: 16.6666666667%; }
+
+  .col-xs-3 {
+    width: 25%; }
+
+  .col-xs-4 {
+    width: 33.3333333333%; }
+
+  .col-xs-5 {
+    width: 41.6666666667%; }
+
+  .col-xs-6 {
+    width: 50%; }
+
+  .col-xs-7 {
+    width: 58.3333333333%; }
+
+  .col-xs-8 {
+    width: 66.6666666667%; }
+
+  .col-xs-9 {
+    width: 75%; }
+
+  .col-xs-10 {
+    width: 83.3333333333%; }
+
+  .col-xs-11 {
+    width: 91.6666666667%; }
+
+  .col-xs-12 {
+    width: 100%; } }
+@media only screen and (min-width: 500px) {
+  .col-sm-1 {
+    width: 8.3333333333%; }
+
+  .col-sm-2 {
+    width: 16.6666666667%; }
+
+  .col-sm-3 {
+    width: 25%; }
+
+  .col-sm-4 {
+    width: 33.3333333333%; }
+
+  .col-sm-5 {
+    width: 41.6666666667%; }
+
+  .col-sm-6 {
+    width: 50%; }
+
+  .col-sm-7 {
+    width: 58.3333333333%; }
+
+  .col-sm-8 {
+    width: 66.6666666667%; }
+
+  .col-sm-9 {
+    width: 75%; }
+
+  .col-sm-10 {
+    width: 83.3333333333%; }
+
+  .col-sm-11 {
+    width: 91.6666666667%; }
+
+  .col-sm-12 {
+    width: 100%; } }
+@media only screen and (min-width: 750px), print {
+  .col-md-1 {
+    width: 8.3333333333%; }
+
+  .col-md-2 {
+    width: 16.6666666667%; }
+
+  .col-md-3 {
+    width: 25%; }
+
+  .col-md-4 {
+    width: 33.3333333333%; }
+
+  .col-md-5 {
+    width: 41.6666666667%; }
+
+  .col-md-6 {
+    width: 50%; }
+
+  .col-md-7 {
+    width: 58.3333333333%; }
+
+  .col-md-8 {
+    width: 66.6666666667%; }
+
+  .col-md-9 {
+    width: 75%; }
+
+  .col-md-10 {
+    width: 83.3333333333%; }
+
+  .col-md-11 {
+    width: 91.6666666667%; }
+
+  .col-md-12 {
+    width: 100%; } }
+@media only screen and (min-width: 960px), print {
+  .col-lg-1 {
+    width: 8.3333333333%; }
+
+  .col-lg-2 {
+    width: 16.6666666667%; }
+
+  .col-lg-3 {
+    width: 25%; }
+
+  .col-lg-4 {
+    width: 33.3333333333%; }
+
+  .col-lg-5 {
+    width: 41.6666666667%; }
+
+  .col-lg-6 {
+    width: 50%; }
+
+  .col-lg-7 {
+    width: 58.3333333333%; }
+
+  .col-lg-8 {
+    width: 66.6666666667%; }
+
+  .col-lg-9 {
+    width: 75%; }
+
+  .col-lg-10 {
+    width: 83.3333333333%; }
+
+  .col-lg-11 {
+    width: 91.6666666667%; }
+
+  .col-lg-12 {
+    width: 100%; } }
+.gutter {
+  padding-left: 12px !important;
+  padding-right: 12px !important; }
+
+.column {
+  padding-top: 12px !important;
+  padding-bottom: 12px !important; }
+
+/*-----------------------
+ clearfix
+-------------------------*/
+.clearfix:before,
+.clearfix:after,
+.row:before,
+.row:after {
+  content: " ";
+  display: table; }
+
+.clearfix:after,
+.row:after {
+  clear: both; }
+
+.clearfix
+.row {
+  *zoom: 1; }
+
+.clear_both {
+  clear: both; }
+
+.row {
+  margin-left: -12px !important;
+  margin-right: -12px !important; }
+
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* Body
+------------------------------------------------------*/
+@font-face {
+  font-family: YuGothicM;
+  src: local("Yu Gothic Medium"); }
+/* 明朝体
+$body-font-family: "a-otf-ryumin-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+$midashi-font-family: "a-otf-futo-min-a101-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+------------------------------------------------------*/
+/* Breackpoint
+------------------------------------------------------*/
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+html {
+  height: auto !important;
+  overflow-x: hidden;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent; }
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit; }
+
+body {
+  margin: 0;
+  padding: 0;
+  color: #545454;
+  font-family: 　-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", メイリオ, Meiryo, sans-serif;
+  font-size: 1.6rem 16px;
+  line-height: 2.8rem 28px;
+  -webkit-text-size-adjust: 100%;
+  cursor: auto;
+  position: relative;
+  left: 0;
+  height: auto !important;
+  background-color: #F0F0F0; }
+
+body {
+  font-feature-settings: "palt"; }
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  ::i-block-chrome, body {
+    font-feature-settings: "pkna"; } }
+ol, ul {
+  list-style: none; }
+
+p.br, a.br, li.br, h3.br, h2.br, .br {
+  display: inline-block; }
+
+.border_none {
+  border: none !important; }
+
+#wrapper {
+  width: 100%;
+  height: auto;
+  position: relative; }
+
+.display_pc {
+  display: block !important; }
+
+.display_sp {
+  display: none !important; }
+
+@media only screen and (max-width: 750px) {
+  .display_pc {
+    display: none !important; }
+
+  .display_sp {
+    display: block !important; } }
+.container {
+  position: relative;
+  width: 100%;
+  text-align: left;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 12px;
+  padding-right: 12px; }
+
+.container_w {
+  position: relative;
+  width: 100%;
+  text-align: left;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px; }
+
+.full-width {
+  margin: 0 -5000px;
+  padding: 0 5000px; }
+
+.full-img {
+  width: 100%;
+  max-width: auto; }
+
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* Body
+------------------------------------------------------*/
+@font-face {
+  font-family: YuGothicM;
+  src: local("Yu Gothic Medium"); }
+/* 明朝体
+$body-font-family: "a-otf-ryumin-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+$midashi-font-family: "a-otf-futo-min-a101-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+------------------------------------------------------*/
+/* Breackpoint
+------------------------------------------------------*/
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* BOXシャドウ　
+--------------------------------------------------------------------------------------------------------*/
+/* 拡散型シャドウ　http://photoshopvip.net/91770
+--------------------------------------------------------------------------------------------------------*/
+/* hover under-line https://www.nxworld.net/tips/css-hover-underline-animation-examples-and-sass-mixin.html
+
+type（タイプ） $dir（方向） $weight（ラインウェイト） $color（ラインカラー）
+--------------------------------------------------------------------------------------------------------*/
+header {
+  padding-bottom: 10px;
+  top: 0;
+  width: 100%;
+  position: fixed;
+  height: 50px;
+  background: white;
+  webkit-box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 4px 5px 0 rgba(0, 0, 0, 0.06), 0 1px 10px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 4px 5px 0 rgba(0, 0, 0, 0.06), 0 1px 10px 0 rgba(0, 0, 0, 0.08);
+  z-index: 10; }
+
+#nav-drawer {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  z-index: 100; }
+
+/*
+#logout {
+  position: absolute;
+  top: $navPosition_top;
+  right: $gutter-width / 2;
+  z-index: 50;
+  .log_btn, .log_btn i {
+    color: $color-black-pale;
+    cursor: pointer;
+    font-size: 2.6rem;
+    &:hover {
+      opacity: .7;
+    }
+  }
+  .log_btn {
+    font-size: 1rem;
+  }
+}
+*/
+.is-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  webkit-box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 4px 5px 0 rgba(0, 0, 0, 0.06), 0 1px 10px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 4px 5px 0 rgba(0, 0, 0, 0.06), 0 1px 10px 0 rgba(0, 0, 0, 0.08); }
+
+/*チェックボックス等は非表示に*/
+.nav-unshown {
+  display: none; }
+
+/*アイコンのスペース*/
+#nav-open {
+  display: inline-block;
+  width: 30px;
+  height: 22px;
+  vertical-align: middle; }
+
+/*ハンバーガーの形をCSSで表現*/
+#nav-open span.burger, #nav-open span.burger:before, #nav-open span.burger:after {
+  position: absolute;
+  height: 3px;
+  /*線の太さ*/
+  width: 30px;
+  /*長さ*/
+  border-radius: 3px;
+  background: #444444;
+  display: block;
+  content: '';
+  cursor: pointer; }
+
+#nav-open {
+  position: relative; }
+  #nav-open span.burger:before {
+    bottom: -8px; }
+  #nav-open span.burger:after {
+    bottom: -16px; }
+  #nav-open span.text {
+    font-size: 1rem;
+    font-weight: bold;
+    position: absolute;
+    bottom: -12px; }
+
+/*閉じる用の薄黒箇所*/
+#nav-close {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  opacity: 0;
+  transition: .3s ease-in-out; }
+
+/*メニューの中身*/
+#nav-content {
+  overflow: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: 24px;
+  width: 75%;
+  max-width: 350px;
+  /*最大幅（お好みで調整を）*/
+  height: 100%;
+  background: #fff;
+  transition: .3s ease-in-out;
+  -webkit-transform: translateX(-105%);
+  transform: translateX(-105%); }
+  #nav-content .logo_wrap {
+    margin-bottom: 24px;
+    position: relative; }
+    #nav-content .logo_wrap a img {
+      width: 120px;
+      height: auto;
+      padding-left: 12px; }
+    #nav-content .logo_wrap span {
+      text-align: right;
+      margin-left: auto;
+      position: absolute;
+      top: 5px;
+      right: 0;
+      font-size: 2rem; }
+      #nav-content .logo_wrap span:hover {
+        opacity: .7; }
+  #nav-content .sideNav {
+    position: static;
+    top: 0;
+    margin: 0;
+    width: 100%;
+    border-bottom: 1px solid #aaa; }
+    #nav-content .sideNav ul li {
+      display: inline-block; }
+      #nav-content .sideNav ul li a {
+        font-size: 1.4rem; }
+        #nav-content .sideNav ul li a:before {
+          position: static;
+          display: inherit;
+          padding-right: 12px; }
+      #nav-content .sideNav ul li:first-child {
+        margin-right: 12px; }
+  #nav-content .menu ul li {
+    border-bottom: 1px solid #aaa; }
+    #nav-content .menu ul li a {
+      display: block;
+      padding: 12px;
+      text-decoration: none;
+      color: inherit; }
+      #nav-content .menu ul li a:hover {
+        background-color: #E5E5E5; }
+      #nav-content .menu ul li a i {
+        padding-right: 6px; }
+    #nav-content .menu ul li:first-child a span.msg_wrap {
+      display: none; }
+    #nav-content .menu ul li:first-child a span.msg_wrap.available {
+      display: block;
+      font-size: 0.8em;
+      color: #f44336; }
+      #nav-content .menu ul li:first-child a span.msg_wrap.available .num {
+        font-size: 1.5em;
+        font-weight: bold;
+        padding: 0 0.25em;
+        line-height: 1; }
+      #nav-content .menu ul li:first-child a span.msg_wrap.available:after {
+        font-family: "Font Awesome 5 Free";
+        content: "\f4ad";
+        font-weight: bold;
+        padding-left: 6px; }
+  #nav-content .menu ul li.carrent a {
+    background-color: #c9fffa; }
+    #nav-content .menu ul li.carrent a:hover {
+      background-color: #c9fffa; }
+
+/*チェックがついたら表示させる*/
+#nav-input:checked ~ #nav-close {
+  display: block;
+  opacity: .5; }
+
+#nav-input:checked ~ #nav-content {
+  -webkit-transform: translateX(0%);
+  transform: translateX(0%);
+  box-shadow: 6px 0 25px rgba(0, 0, 0, 0.15); }
+
+.header-logo-menu {
+  display: flex;
+  display: -moz-flex;
+  display: -o-flex;
+  display: -webkit-flex;
+  display: -ms-flex;
+  flex-direction: row;
+  -moz-flex-direction: row;
+  -o-flex-direction: row;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row; }
+
+/*ロゴやサイトタイトルをセンタリング*/
+.logo-erea {
+  position: relative; }
+  .logo-erea h1 {
+    display: inline-block;
+    padding-top: 6px;
+    margin-left: 40px; }
+    .logo-erea h1 img {
+      width: 100px;
+      height: auto;
+      background-color: white;
+      margin-left: 12px; }
+  .logo-erea .menu {
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    right: 0; }
+    .logo-erea .menu ul li {
+      display: inline-block;
+      margin-right: 12px; }
+      .logo-erea .menu ul li a {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        font-size: 1.4rem;
+        font-weight: bold; }
+        .logo-erea .menu ul li a i {
+          padding-right: 5px; }
+        .logo-erea .menu ul li a:hover {
+          opacity: .7; }
+      .logo-erea .menu ul li:last-child {
+        margin-right: 0; }
+    .logo-erea .menu ul li.carrent a {
+      color: #009688; }
+      .logo-erea .menu ul li.carrent a:hover {
+        opacity: 1; }
+
+nav {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: 30px; }
+  nav ul li {
+    display: inline-block;
+    font-size: 1.4rem;
+    position: relative; }
+    nav ul li a {
+      text-decoration: none;
+      text-align: center;
+      margin: 0 auto;
+      color: #aaa; }
+      nav ul li a:hover {
+        color: #E5E5E5; }
+      nav ul li a:before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: bold;
+        font-size: 2.4rem;
+        display: block;
+        position: absolute;
+        top: -20px; }
+  nav ul li.carrent a {
+    color: white; }
+  nav ul .trigger-month a {
+    margin-right: 10px;
+    padding-left: 0.15em; }
+    nav ul .trigger-month a:before {
+      content: "\f073"; }
+  nav ul .trigger-list a {
+    margin-right: 10px;
+    padding-left: 0.15em; }
+    nav ul .trigger-list a:before {
+      content: "\f784";
+      left: 12px; }
+
+nav.sideNav {
+  padding: 12px;
+  background-color: #545454; }
+
+.logo-erea nav {
+  background-color: #545454;
+  height: 50px;
+  width: 92px;
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-right: -12px; }
+  .logo-erea nav ul {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 30px; }
+    .logo-erea nav ul li a {
+      color: #aaa; }
+      .logo-erea nav ul li a:hover {
+        color: #E5E5E5; }
+      .logo-erea nav ul li a span {
+        visibility: hidden; }
+    .logo-erea nav ul li.carrent a {
+      color: white; }
+      .logo-erea nav ul li.carrent a:hover {
+        color: #E5E5E5; }
+
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* Body
+------------------------------------------------------*/
+@font-face {
+  font-family: YuGothicM;
+  src: local("Yu Gothic Medium"); }
+/* 明朝体
+$body-font-family: "a-otf-ryumin-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+$midashi-font-family: "a-otf-futo-min-a101-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+------------------------------------------------------*/
+/* Breackpoint
+------------------------------------------------------*/
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* BOXシャドウ　
+--------------------------------------------------------------------------------------------------------*/
+/* 拡散型シャドウ　http://photoshopvip.net/91770
+--------------------------------------------------------------------------------------------------------*/
+/* hover under-line https://www.nxworld.net/tips/css-hover-underline-animation-examples-and-sass-mixin.html
+
+type（タイプ） $dir（方向） $weight（ラインウェイト） $color（ラインカラー）
+--------------------------------------------------------------------------------------------------------*/
+#footer_box {
+  width: 90%;
+  padding: 0 12px;
+  padding-top: 29px;
+  padding-bottom: 0;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  -webkit-transform: translateY(-50%) translateX(-50%);
+  border: 1px solid #aaa;
+  z-index: 2;
+  background: white; }
+  #footer_box div {
+    float: left;
+    font-size: 1.4rem; }
+    #footer_box div .lg {
+      padding: 0 2px;
+      font-weight: bold;
+      font-size: 2rem; }
+  #footer_box ul {
+    float: right; }
+    #footer_box ul li {
+      display: inline-block;
+      font-size: 1.4rem;
+      position: relative; }
+      #footer_box ul li a {
+        text-decoration: none;
+        text-align: center;
+        margin: 0 auto;
+        color: #545454; }
+        #footer_box ul li a:hover {
+          color: #009688; }
+        #footer_box ul li a:before {
+          font-family: "Font Awesome 5 Free";
+          font-weight: bold;
+          font-size: 2.4rem;
+          display: block;
+          position: absolute;
+          top: -22px; }
+    #footer_box ul li.carrent a {
+      color: #009688; }
+    #footer_box ul .trigger-month a {
+      margin-right: 10px;
+      padding-left: 0.15em; }
+      #footer_box ul .trigger-month a:before {
+        content: "\f073"; }
+    #footer_box ul .trigger-list a {
+      margin-right: 10px;
+      padding-left: 0.15em; }
+      #footer_box ul .trigger-list a:before {
+        content: "\f784";
+        left: 9px; }
+
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* Body
+------------------------------------------------------*/
+@font-face {
+  font-family: YuGothicM;
+  src: local("Yu Gothic Medium"); }
+/* 明朝体
+$body-font-family: "a-otf-ryumin-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+$midashi-font-family: "a-otf-futo-min-a101-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+------------------------------------------------------*/
+/* Breackpoint
+------------------------------------------------------*/
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* BOXシャドウ　
+--------------------------------------------------------------------------------------------------------*/
+/* 拡散型シャドウ　http://photoshopvip.net/91770
+--------------------------------------------------------------------------------------------------------*/
+/* hover under-line https://www.nxworld.net/tips/css-hover-underline-animation-examples-and-sass-mixin.html
+
+type（タイプ） $dir（方向） $weight（ラインウェイト） $color（ラインカラー）
+--------------------------------------------------------------------------------------------------------*/
+/*-----------------------
+カラー
+-------------------------*/
+/*reset------------------------------*/
+button {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; }
+
+/*button-----------------------------
+http://design.aekana.com/blog/css-mouseover-effect----*/
+.btn_wrap p {
+  margin-bottom: 10px; }
+
+.btn_a, .btn_b, .btn_c {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  text-decoration: none; }
+
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* Body
+------------------------------------------------------*/
+@font-face {
+  font-family: YuGothicM;
+  src: local("Yu Gothic Medium"); }
+/* 明朝体
+$body-font-family: "a-otf-ryumin-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+$midashi-font-family: "a-otf-futo-min-a101-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+------------------------------------------------------*/
+/* Breackpoint
+------------------------------------------------------*/
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* Body
+------------------------------------------------------*/
+@font-face {
+  font-family: YuGothicM;
+  src: local("Yu Gothic Medium"); }
+/* 明朝体
+$body-font-family: "a-otf-ryumin-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+$midashi-font-family: "a-otf-futo-min-a101-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+------------------------------------------------------*/
+/* Breackpoint
+------------------------------------------------------*/
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* BOXシャドウ　
+--------------------------------------------------------------------------------------------------------*/
+/* 拡散型シャドウ　http://photoshopvip.net/91770
+--------------------------------------------------------------------------------------------------------*/
+/* hover under-line https://www.nxworld.net/tips/css-hover-underline-animation-examples-and-sass-mixin.html
+
+type（タイプ） $dir（方向） $weight（ラインウェイト） $color（ラインカラー）
+--------------------------------------------------------------------------------------------------------*/
+main {
+  padding-top: 50px; }
+
+.common_cnt {
+  padding-top: 0; }
+
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* Body
+------------------------------------------------------*/
+@font-face {
+  font-family: YuGothicM;
+  src: local("Yu Gothic Medium"); }
+/* 明朝体
+$body-font-family: "a-otf-ryumin-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+$midashi-font-family: "a-otf-futo-min-a101-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+------------------------------------------------------*/
+/* Breackpoint
+------------------------------------------------------*/
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* BOXシャドウ　
+--------------------------------------------------------------------------------------------------------*/
+/* 拡散型シャドウ　http://photoshopvip.net/91770
+--------------------------------------------------------------------------------------------------------*/
+/* hover under-line https://www.nxworld.net/tips/css-hover-underline-animation-examples-and-sass-mixin.html
+
+type（タイプ） $dir（方向） $weight（ラインウェイト） $color（ラインカラー）
+--------------------------------------------------------------------------------------------------------*/
+.saturday {
+  color: #03a9f4 !important; }
+
+.sunday, .holiday {
+  color: #f44336 !important; }
+
+.reserve_info .reserve {
+  background-color: #03a9f4 !important; }
+
+.reserve_success .reserve {
+  background-color: #00bfa5 !important;
+  padding-top: 1.1em !important;
+  padding-bottom: 1.1em !important; }
+
+.reserve_warning .reserve {
+  background-color: #ffeb3b !important;
+  color: #545454 !important; }
+
+.reserve_danger .reserve {
+  background-color: #f44336 !important; }
+
+.status_cnt .reserve {
+  color: white;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px; }
+
+.msg_cnt.unread {
+  color: #3366ff; }
+
+.msg_cnt.already-read {
+  color: #aaa; }
+  .msg_cnt.already-read .num {
+    display: none; }
+
+.msg_cnt.msg-none:before, .msg_cnt.msg-none .num {
+  display: none; }
+
+.calendar_wrap.month-type {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+  .calendar_wrap.month-type .today {
+    background-color: #c9fffa !important;
+    border: 1px solid #009688 !important; }
+  .calendar_wrap.month-type .calendar_header {
+    display: flex;
+    text-align: center;
+    margin: 0 auto;
+    border-bottom: 1px solid #ccc; }
+    .calendar_wrap.month-type .calendar_header .weekday, .calendar_wrap.month-type .calendar_header .saturday, .calendar_wrap.month-type .calendar_header .sunday {
+      width: calc(100% / 7);
+      padding: 0.7em 0; }
+      .calendar_wrap.month-type .calendar_header .weekday span, .calendar_wrap.month-type .calendar_header .saturday span, .calendar_wrap.month-type .calendar_header .sunday span {
+        font-size: 1.6rem;
+        font-weight: bold; }
+  .calendar_wrap.month-type .calendar_body {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    margin: 0 auto; }
+    .calendar_wrap.month-type .calendar_body .date_wrap {
+      width: calc(100% / 7);
+      min-height: 5rem;
+      border-bottom: 1px solid #ccc;
+      padding: 0.5em 0.2em; }
+      .calendar_wrap.month-type .calendar_body .date_wrap a {
+        text-decoration: none;
+        color: inherit; }
+        .calendar_wrap.month-type .calendar_body .date_wrap a:hover {
+          color: inherit; }
+          .calendar_wrap.month-type .calendar_body .date_wrap a:hover .date_cnt, .calendar_wrap.month-type .calendar_body .date_wrap a:hover .status_cnt {
+            opacity: .7; }
+  .calendar_wrap.month-type .date_cnt {
+    padding-bottom: 0.3em; }
+    .calendar_wrap.month-type .date_cnt .month, .calendar_wrap.month-type .date_cnt .day {
+      display: none; }
+    .calendar_wrap.month-type .date_cnt .date {
+      font-size: 1.6rem;
+      font-weight: bold; }
+      .calendar_wrap.month-type .date_cnt .date .date_list_type {
+        display: none; }
+  .calendar_wrap.month-type .title_cnt {
+    display: none; }
+  .calendar_wrap.month-type .status_cnt .reserve {
+    display: inline-block;
+    font-size: 0.8rem;
+    line-height: 1.1rem;
+    padding: 0.5em 0.3em;
+    width: 100%;
+    height: 38px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    .calendar_wrap.month-type .status_cnt .reserve .inner {
+      display: block;
+      width: 100%; }
+  .calendar_wrap.month-type .msg_cnt {
+    font-size: 1.4rem;
+    margin-top: 0.3em; }
+    .calendar_wrap.month-type .msg_cnt .message {
+      display: none; }
+    .calendar_wrap.month-type .msg_cnt:before {
+      font-family: "Font Awesome 5 Free";
+      content: "\f4ad";
+      font-weight: bold; }
+  .calendar_wrap.month-type .pager_wrap {
+    margin: 0 auto;
+    padding: 0.5em 0;
+    background-color: #009688;
+    margin-top: 6px;
+    position: relative;
+    color: white; }
+    .calendar_wrap.month-type .pager_wrap p {
+      padding: 0.25em;
+      font-weight: bold; }
+    .calendar_wrap.month-type .pager_wrap p, .calendar_wrap.month-type .pager_wrap a {
+      display: inline-block; }
+    .calendar_wrap.month-type .pager_wrap a {
+      text-decoration: underline;
+      font-size: 1.2rem;
+      color: white; }
+      .calendar_wrap.month-type .pager_wrap a:hover {
+        text-decoration: none;
+        color: #ffeb3b !important;
+        opacity: .7; }
+      .calendar_wrap.month-type .pager_wrap a i {
+        font-size: 1.3em;
+        padding: 6px 12px; }
+  .calendar_wrap.month-type nav {
+    display: inline-block;
+    position: absolute;
+    right: 36px;
+    top: 0; }
+    .calendar_wrap.month-type nav ul li {
+      display: inline-block;
+      font-size: 1.4rem;
+      position: relative; }
+      .calendar_wrap.month-type nav ul li a {
+        text-decoration: none;
+        text-align: center;
+        margin: 0 auto;
+        color: white !important; }
+        .calendar_wrap.month-type nav ul li a:hover {
+          color: #ffeb3b !important;
+          opacity: .7; }
+        .calendar_wrap.month-type nav ul li a:before {
+          font-family: "Font Awesome 5 Free";
+          font-weight: bold;
+          font-size: 2.4rem;
+          display: block; }
+    .calendar_wrap.month-type nav ul li.carrent a {
+      color: #ffeb3b !important; }
+    .calendar_wrap.month-type nav ul .trigger-month a {
+      margin-right: 10px;
+      padding-left: 0.15em;
+      position: relative; }
+      .calendar_wrap.month-type nav ul .trigger-month a:before {
+        content: "\f073";
+        position: absolute;
+        right: -4px;
+        top: -10px; }
+    .calendar_wrap.month-type nav ul .trigger-list a {
+      margin-right: 10px;
+      padding-left: 0.15em;
+      position: relative; }
+      .calendar_wrap.month-type nav ul .trigger-list a:before {
+        content: "\f784";
+        position: absolute;
+        right: 0;
+        top: -10px; }
+
+.calendar_wrap.list-type .reserve_info .reserve, .calendar_wrap.list-type .reserve_success .reserve, .calendar_wrap.list-type .reserve_warning .reserve, .calendar_wrap.list-type .reserve_danger .reserve {
+  display: inline-block;
+  padding: 0.5em !important;
+  width: 120px;
+  text-align: center;
+  margin: 0 auto; }
+.calendar_wrap.list-type .today {
+  background-color: #c9fffa !important;
+  margin-left: -12px;
+  margin-right: -12px;
+  padding-left: 12px;
+  padding-right: 12px; }
+  .calendar_wrap.list-type .today:hover {
+    background-color: #7dfff3 !important; }
+.calendar_wrap.list-type .calendar_header {
+  display: none; }
+.calendar_wrap.list-type .pager_wrap {
+  background-color: #009688;
+  margin-left: -12px;
+  margin-right: -12px;
+  padding-left: 12px;
+  padding-right: 12px; }
+.calendar_wrap.list-type .calendar_body {
+  border-bottom: 1px solid #aaa; }
+  .calendar_wrap.list-type .calendar_body a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 1.4rem; }
+  .calendar_wrap.list-type .calendar_body .date_wrap, .calendar_wrap.list-type .calendar_body .date_cnt {
+    margin-left: -12px;
+    margin-right: -12px;
+    padding-left: 12px;
+    padding-right: 12px; }
+  .calendar_wrap.list-type .calendar_body .date_cnt {
+    background-color: #E5E5E5;
+    font-weight: bold;
+    color: #545454;
+    padding-top: 6px;
+    padding-bottom: 6px; }
+  .calendar_wrap.list-type .calendar_body .date_wrap {
+    background-color: white; }
+  .calendar_wrap.list-type .calendar_body .title_cnt {
+    padding-top: 0.5em; }
+    .calendar_wrap.list-type .calendar_body .title_cnt span {
+      display: block; }
+    .calendar_wrap.list-type .calendar_body .title_cnt .title {
+      font-weight: bold;
+      padding-bottom: 0.25em;
+      color: #3366ff;
+      text-decoration: underline; }
+      .calendar_wrap.list-type .calendar_body .title_cnt .title:hover {
+        color: #3292FF;
+        text-decoration: none; }
+  .calendar_wrap.list-type .calendar_body .status_cnt {
+    padding-top: 0.3em;
+    padding-bottom: 0.5em; }
+    .calendar_wrap.list-type .calendar_body .status_cnt .reserve {
+      padding: 0.25em 1em;
+      margin-bottom: 0.3em; }
+    .calendar_wrap.list-type .calendar_body .status_cnt .msg_cnt {
+      display: block; }
+      .calendar_wrap.list-type .calendar_body .status_cnt .msg_cnt .message {
+        font-size: 1.2rem; }
+      .calendar_wrap.list-type .calendar_body .status_cnt .msg_cnt:before {
+        font-family: "Font Awesome 5 Free";
+        content: "\f4ad";
+        font-weight: bold;
+        font-size: 1.6rem; }
+    .calendar_wrap.list-type .calendar_body .status_cnt .msg_cnt.msg-none {
+      display: none; }
+    .calendar_wrap.list-type .calendar_body .status_cnt .msg_cnt.already-read .num {
+      display: inline; }
+.calendar_wrap.list-type .date_wrap.none {
+  display: none;
+  border: none;
+  margin: 0; }
+.calendar_wrap.list-type .pager_wrap p {
+  padding: 0.25em 12px;
+  color: white;
+  font-weight: bold; }
+.calendar_wrap.list-type .pager_wrap p, .calendar_wrap.list-type .pager_wrap a {
+  display: inline-block; }
+.calendar_wrap.list-type .pager_wrap a {
+  text-decoration: underline;
+  font-size: 1.2rem;
+  color: white; }
+  .calendar_wrap.list-type .pager_wrap a:hover {
+    text-decoration: none;
+    color: #ffeb3b;
+    opacity: .7; }
+  .calendar_wrap.list-type .pager_wrap a i {
+    font-size: 1.3em; }
+.calendar_wrap.list-type nav {
+  display: inline-block;
+  position: absolute;
+  right: 36px;
+  top: 34px; }
+  .calendar_wrap.list-type nav ul li {
+    display: inline-block;
+    font-size: 1.4rem;
+    position: relative; }
+    .calendar_wrap.list-type nav ul li a {
+      text-decoration: none;
+      text-align: center;
+      margin: 0 auto;
+      color: white !important; }
+      .calendar_wrap.list-type nav ul li a:hover {
+        color: #ffeb3b !important;
+        opacity: .7; }
+      .calendar_wrap.list-type nav ul li a:before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: bold;
+        font-size: 2.4rem;
+        display: block; }
+  .calendar_wrap.list-type nav ul li.carrent a {
+    color: #ffeb3b !important; }
+  .calendar_wrap.list-type nav ul .trigger-month a {
+    margin-right: 10px;
+    padding-left: 0.15em;
+    position: relative; }
+    .calendar_wrap.list-type nav ul .trigger-month a:before {
+      content: "\f073";
+      position: absolute;
+      right: -4px;
+      top: -16px; }
+  .calendar_wrap.list-type nav ul .trigger-list a {
+    margin-right: 10px;
+    padding-left: 0.15em;
+    position: relative; }
+    .calendar_wrap.list-type nav ul .trigger-list a:before {
+      content: "\f784";
+      position: absolute;
+      right: 0;
+      top: -16px; }
+
+@media only screen and (min-width: 400px) {
+  .calendar_wrap.month-type .status_cnt .reserve {
+    font-size: 1rem;
+    line-height: 1.4rem; }
+
+  .reserve_success .reserve {
+    padding-top: 1.2em !important;
+    padding-bottom: 1.2em !important; } }
+@media only screen and (min-width: 500px) {
+  .calendar_wrap.month-type .status_cnt .reserve {
+    font-size: 1.2rem;
+    line-height: 1.8rem; }
+
+  .reserve_info .reserve {
+    padding-top: 1.2em !important;
+    padding-bottom: 1.2em !important; }
+
+  .reserve_danger .reserve {
+    padding-top: 1.2em !important;
+    padding-bottom: 1.2em !important; } }
+@media only screen and (min-width: 750px), print {
+  .calendar_wrap.month-type .calendar_header .weekday,
+  .calendar_wrap.month-type .calendar_header .saturday,
+  .calendar_wrap.month-type .calendar_header .sunday {
+    padding: 2em 0;
+    border-right: 1px solid #aaa; }
+    .calendar_wrap.month-type .calendar_header .weekday span,
+    .calendar_wrap.month-type .calendar_header .saturday span,
+    .calendar_wrap.month-type .calendar_header .sunday span {
+      font-size: 2rem !important; }
+    .calendar_wrap.month-type .calendar_header .weekday:last-child,
+    .calendar_wrap.month-type .calendar_header .saturday:last-child,
+    .calendar_wrap.month-type .calendar_header .sunday:last-child {
+      border-right: none; }
+
+  .calendar_wrap.month-type .status_cnt .reserve {
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+    padding: 0.7em;
+    height: 52px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px; }
+
+  .calendar_wrap.month-type .calendar_body .date_wrap {
+    padding: 1.2em 0.6em;
+    border-right: 1px solid #aaa; }
+    .calendar_wrap.month-type .calendar_body .date_wrap:nth-child(1), .calendar_wrap.month-type .calendar_body .date_wrap:nth-child(8), .calendar_wrap.month-type .calendar_body .date_wrap:nth-child(15), .calendar_wrap.month-type .calendar_body .date_wrap:nth-child(22), .calendar_wrap.month-type .calendar_body .date_wrap:nth-child(29) {
+      cursor: pointer; }
+    .calendar_wrap.month-type .calendar_body .date_wrap:nth-child(7), .calendar_wrap.month-type .calendar_body .date_wrap:nth-child(14), .calendar_wrap.month-type .calendar_body .date_wrap:nth-child(21), .calendar_wrap.month-type .calendar_body .date_wrap:nth-child(28), .calendar_wrap.month-type .calendar_body .date_wrap:nth-child(35) {
+      border-right: none;
+      cursor: pointer; }
+    .calendar_wrap.month-type .calendar_body .date_wrap:nth-child(29), .calendar_wrap.month-type .calendar_body .date_wrap:nth-child(30), .calendar_wrap.month-type .calendar_body .date_wrap:nth-child(31), .calendar_wrap.month-type .calendar_body .date_wrap:nth-child(32), .calendar_wrap.month-type .calendar_body .date_wrap:nth-child(33), .calendar_wrap.month-type .calendar_body .date_wrap:nth-child(34), .calendar_wrap.month-type .calendar_body .date_wrap:nth-child(35) {
+      border-bottom: none;
+      cursor: pointer; }
+    .calendar_wrap.month-type .calendar_body .date_wrap:hover {
+      background-color: #E5E5E5; }
+
+  .calendar_wrap.month-type .calendar_body .date_wrap.none:hover {
+    background-color: white; }
+
+  .calendar_wrap.month-type .today:hover {
+    background-color: #7dfff3 !important; }
+
+  .calendar_wrap.month-type .date_cnt {
+    padding-bottom: 1em; }
+    .calendar_wrap.month-type .date_cnt .date {
+      font-size: 2rem; }
+
+  .calendar_wrap.month-type .msg_cnt {
+    font-size: 1.6rem; }
+
+  .calendar_wrap.month-type .today .date_cnt .date:before {
+    top: 45%;
+    left: -5px;
+    margin-top: -12px;
+    height: 32px;
+    width: 32px; }
+
+  .calendar_wrap.month-type .title_cnt {
+    display: block;
+    text-align: left;
+    margin-right: auto;
+    padding-bottom: 0.5em; }
+    .calendar_wrap.month-type .title_cnt .title {
+      font-size: 1.4rem;
+      line-height: 2rem; }
+    .calendar_wrap.month-type .title_cnt .sub_title {
+      display: none; }
+
+  .calendar_wrap.list-type .calendar_body .date_cnt {
+    margin-left: 0;
+    margin-right: 0;
+    font-size: 1.6rem !important;
+    font-weight: bold;
+    padding: 0.5em 12px; }
+
+  .calendar_wrap.list-type .calendar_body .title_cnt {
+    font-size: 1.6rem;
+    padding: 0 12px;
+    padding-top: 12px; }
+    .calendar_wrap.list-type .calendar_body .title_cnt .title {
+      font-size: 1.8rem;
+      margin-bottom: 0.5em; }
+    .calendar_wrap.list-type .calendar_body .title_cnt .sub_title {
+      font-size: 1.6rem;
+      margin-bottom: 0; }
+
+  .calendar_wrap.list-type .calendar_body .status_cnt {
+    padding: 6px 12px; }
+    .calendar_wrap.list-type .calendar_body .status_cnt .reserve {
+      padding: 0.5em;
+      font-size: 1.6rem; }
+      .calendar_wrap.list-type .calendar_body .status_cnt .reserve:hover {
+        opacity: .7; }
+    .calendar_wrap.list-type .calendar_body .status_cnt .msg_cnt, .calendar_wrap.list-type .calendar_body .status_cnt .msg_cnt .message {
+      font-size: 1.6rem; }
+
+  .calendar_wrap.list-type .calendar_body .date_wrap:hover {
+    background-color: #F0F0F0; }
+
+  .calendar_wrap.list-type .reserve_info .reserve, .calendar_wrap.list-type .reserve_success .reserve, .calendar_wrap.list-type .reserve_warning .reserve, .calendar_wrap.list-type .reserve_danger .reserve {
+    padding: 0.7em !important;
+    width: 200px; }
+
+  .calendar_wrap.list-type .calendar_body .status_cnt .msg_cnt {
+    display: inline-block;
+    text-align: right;
+    margin-left: auto;
+    margin-left: 1em; }
+
+  .calendar_wrap.month-type .pager_wrap {
+    margin: 0; }
+    .calendar_wrap.month-type .pager_wrap p {
+      padding: 0.5em;
+      font-size: 2.2rem;
+      line-height: 1; }
+    .calendar_wrap.month-type .pager_wrap a {
+      font-size: 2rem; }
+      .calendar_wrap.month-type .pager_wrap a i {
+        font-size: 1em;
+        padding: 0 48px; }
+
+  .calendar_wrap.list-type .date_wrap {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out; }
+
+  .calendar_wrap.list-type .pager_wrap {
+    margin: 0;
+    text-align: left;
+    padding: 6px 12px; }
+    .calendar_wrap.list-type .pager_wrap p {
+      padding: 0.5em 2em;
+      font-size: 2.2rem;
+      line-height: 1; }
+    .calendar_wrap.list-type .pager_wrap a {
+      font-size: 2rem;
+      padding: 0 24px; }
+      .calendar_wrap.list-type .pager_wrap a i {
+        font-size: 1em;
+        padding: 0; }
+
+  .calendar_wrap.month-type nav {
+    top: 6px;
+    right: 48px; }
+    .calendar_wrap.month-type nav ul li a:before {
+      font-size: 3.2rem; }
+    .calendar_wrap.month-type nav ul .trigger-month a:before {
+      right: 4px; }
+
+  .calendar_wrap.list-type nav {
+    top: 80px;
+    right: 40px; }
+    .calendar_wrap.list-type nav ul li a:before {
+      font-size: 3.2rem; }
+    .calendar_wrap.list-type nav ul .trigger-month a:before {
+      right: 0px;
+      top: -8px; }
+    .calendar_wrap.list-type nav ul .trigger-list a:before {
+      top: -8px; }
+
+  .calendar_wrap.list-type nav ul li {
+    padding-right: 12px; }
+
+  .calendar_wrap.list-type .calendar_body .date_wrap,
+  .calendar_wrap.list-type .calendar_body .date_cnt {
+    margin: 0;
+    padding-right: 0;
+    padding-left: 0; }
+
+  .calendar_wrap.list-type .calendar_body .date_cnt {
+    padding: 12px; }
+
+  .calendar_wrap.list-type .calendar_body .date_wrap {
+    margin-bottom: 12px; } }
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* Body
+------------------------------------------------------*/
+@font-face {
+  font-family: YuGothicM;
+  src: local("Yu Gothic Medium"); }
+/* 明朝体
+$body-font-family: "a-otf-ryumin-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+$midashi-font-family: "a-otf-futo-min-a101-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+------------------------------------------------------*/
+/* Breackpoint
+------------------------------------------------------*/
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* BOXシャドウ　
+--------------------------------------------------------------------------------------------------------*/
+/* 拡散型シャドウ　http://photoshopvip.net/91770
+--------------------------------------------------------------------------------------------------------*/
+/* hover under-line https://www.nxworld.net/tips/css-hover-underline-animation-examples-and-sass-mixin.html
+
+type（タイプ） $dir（方向） $weight（ラインウェイト） $color（ラインカラー）
+--------------------------------------------------------------------------------------------------------*/
+.user_table .title, .user_table .content, .user_table .button {
+  display: block;
+  padding: 0.5em 12px;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc; }
+.user_table .title {
+  background-color: #E5E5E5;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc; }
+.user_table .button {
+  padding-top: 0;
+  padding-bottom: 1em;
+  text-align: right;
+  margin-left: auto; }
+  .user_table .button input {
+    background-color: #009688;
+    color: white;
+    padding: 0.3em 0.7em;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .3s; }
+    .user_table .button input:hover {
+      background-color: #004a43; }
+.user_table .keep_wrap .content:last-child {
+  border-bottom: 1px solid #ccc; }
+
+@media only screen and (min-width: 750px), print {
+  .user_table .title, .user_table .content, .user_table .button {
+    padding: 1em; }
+
+  .user_table .title, .user_table .content {
+    display: inline-block;
+    border: none;
+    border-top: 1px solid #ccc;
+    border-right: 1px solid #ccc; }
+  .user_table .title {
+    width: 30%;
+    background-color: inherit;
+    border-left: 1px solid #ccc;
+    background-color: #E5E5E5; }
+  .user_table .content {
+    width: 70%; }
+  .user_table .change_wrap {
+    position: relative;
+    font-size: 0; }
+    .user_table .change_wrap .title, .user_table .change_wrap .content, .user_table .change_wrap .button {
+      font-size: 1.6rem; }
+    .user_table .change_wrap .content {
+      width: 50%; }
+    .user_table .change_wrap .button {
+      width: 20%;
+      position: absolute;
+      text-align: center;
+      margin: 0 auto;
+      right: 0;
+      top: 0;
+      padding: 37px 0;
+      border: none;
+      border: 1px solid #ccc;
+      border-left: none;
+      border-bottom: none; }
+      .user_table .change_wrap .button input {
+        padding: 12px 24px; }
+    .user_table .change_wrap div:last-child {
+      display: none !important; }
+  .user_table .keep_wrap {
+    font-size: 0; }
+    .user_table .keep_wrap .title, .user_table .keep_wrap .content {
+      font-size: 1.6rem; }
+    .user_table .keep_wrap div:nth-last-child(2) {
+      border-bottom: 1px solid #ccc; } }
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* Body
+------------------------------------------------------*/
+@font-face {
+  font-family: YuGothicM;
+  src: local("Yu Gothic Medium"); }
+/* 明朝体
+$body-font-family: "a-otf-ryumin-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+$midashi-font-family: "a-otf-futo-min-a101-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+------------------------------------------------------*/
+/* Breackpoint
+------------------------------------------------------*/
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* Form Layout */
+.login {
+  padding: 8% 0 0;
+  margin: auto;
+  margin-top: -50px;
+  height: 100vh; }
+  .login #login_message {
+    width: calc(100% - 24px);
+    max-width: 400px;
+    background-color: #03a9f4;
+    text-align: left;
+    color: white;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 24px;
+    padding: 12px;
+    font-weight: bold; }
+    .login #login_message p {
+      text-align: left;
+      margin-right: auto;
+      font-size: 1.4rem;
+      line-height: 2rem; }
+  .login #login_message.login_error {
+    background-color: #f44336; }
+  .login #login_form {
+    background: white;
+    width: calc(100% - 24px);
+    max-width: 400px;
+    padding: 12px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    text-align: center;
+    margin: 0 auto; }
+    .login #login_form form .login_item {
+      width: 100%; }
+      .login #login_form form .login_item input {
+        background: white;
+        border: none;
+        border-bottom: 2px solid #aaa;
+        color: #666;
+        font-size: 1.6rem;
+        height: 50px;
+        transition: border-color 0.3s;
+        width: 100%; }
+        .login #login_form form .login_item input:focus {
+          box-shadow: none;
+          background: #c9fffa;
+          border-bottom: 2px solid #009688;
+          outline: none; }
+  .login h1 {
+    padding-bottom: 24px; }
+    .login h1 img {
+      width: 100px;
+      height: auto;
+      text-align: center;
+      margin: 0 auto; }
+
+.button-panel {
+  margin: 24px 0;
+  width: 100%; }
+  .button-panel .button {
+    background: #009688;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    height: 50px;
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    text-align: center;
+    text-transform: uppercase;
+    transition: background 0.3s ease-in-out;
+    width: 100%;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    line-height: 2rem; }
+    .button-panel .button:hover {
+      background: #004a43; }
+
+.login-footer {
+  width: calc(100% - 24px);
+  max-width: 400px;
+  font-size: 1.4rem;
+  padding-top: 12px;
+  text-align: left;
+  padding-left: 12px;
+  text-align: center;
+  margin: 0 auto; }
+  .login-footer p {
+    text-align: left;
+    margin-right: auto; }
+  .login-footer a {
+    font-size: 1.4rem; }
+
+i.right_pd {
+  padding-right: 6px; }
+
+i.left_pd {
+  padding-left: 6px; }
+
+@media only screen and (min-width: 750px), print {
+  .button-panel .button,
+  .login #login_message p,
+  .login-footer a {
+    font-size: 1.6rem;
+    line-height: 2.4rem; }
+
+  .login #login_form {
+    padding: 24px; } }
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* Body
+------------------------------------------------------*/
+@font-face {
+  font-family: YuGothicM;
+  src: local("Yu Gothic Medium"); }
+/* 明朝体
+$body-font-family: "a-otf-ryumin-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+$midashi-font-family: "a-otf-futo-min-a101-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+------------------------------------------------------*/
+/* Breackpoint
+------------------------------------------------------*/
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* BOXシャドウ　
+--------------------------------------------------------------------------------------------------------*/
+/* 拡散型シャドウ　http://photoshopvip.net/91770
+--------------------------------------------------------------------------------------------------------*/
+/* hover under-line https://www.nxworld.net/tips/css-hover-underline-animation-examples-and-sass-mixin.html
+
+type（タイプ） $dir（方向） $weight（ラインウェイト） $color（ラインカラー）
+--------------------------------------------------------------------------------------------------------*/
+.detail_wrap .reserve_info, .detail_wrap .reserve_success, .detail_wrap .reserve_danger {
+  color: white; }
+.detail_wrap .reserve_info {
+  background-color: #03a9f4 !important; }
+.detail_wrap .reserve_success {
+  background-color: #00bfa5 !important; }
+.detail_wrap .reserve_warning {
+  background-color: #ffeb3b !important; }
+.detail_wrap .reserve_danger {
+  background-color: #f44336 !important; }
+.detail_wrap h4 {
+  background-color: #E5E5E5;
+  padding: 0.2em 0.5em;
+  font-size: 1.4rem;
+  line-height: 2rem;
+  border: 1px solid #ccc; }
+.detail_wrap p, .detail_wrap li {
+  font-size: 1.4rem;
+  line-height: 2rem; }
+.detail_wrap .text_box {
+  border: 1px solid #ccc;
+  border-top: none;
+  padding: 0.5em;
+  background-color: white; }
+.detail_wrap .bring_title {
+  padding: 0.5em 0 0 10px;
+  margin-top: 0.7em;
+  border-top: 2px dotted #ccc;
+  font-weight: bold; }
+.detail_wrap .bring li {
+  position: relative;
+  margin-left: 10px; }
+  .detail_wrap .bring li:before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background-color: #aaa;
+    display: inline-block;
+    padding-right: 4px;
+    position: absolute;
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%); }
+.detail_wrap .reserve_info, .detail_wrap .reserve_success, .detail_wrap .reserve_danger, .detail_wrap .reserve_warning {
+  border: none;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em; }
+
+/*以下、②左側のコメント*/
+.chat_wrap {
+  padding-top: 12px;
+  text-align: right;
+  background-color: white; }
+  .chat_wrap h4 {
+    padding: 0;
+    background-color: inherit;
+    margin: 12px 0;
+    padding-left: 0.5em;
+    text-align: left;
+    border: none;
+    border-bottom: 2px solid #ccc; }
+  .chat_wrap .inner {
+    padding: 12px 0;
+    background-color: white;
+    min-height: 70px; }
+
+.mycomment {
+  position: relative;
+  margin: 12px 0; }
+  .mycomment .chatting {
+    width: 100%;
+    padding: 0 34px 0 42px;
+    text-align: left; }
+    .mycomment .chatting:before {
+      font-family: "Font Awesome 5 Free";
+      content: "\f2bd";
+      font-weight: bold;
+      font-size: 2.4rem;
+      display: inline-block;
+      position: absolute;
+      left: 8px;
+      color: #009688; }
+    .mycomment .chatting:after {
+      content: '利用者';
+      font-size: 1.2rem;
+      position: absolute;
+      top: 28px;
+      left: 0;
+      color: #009688; }
+  .mycomment .says {
+    background-color: #c9fffa; }
+    .mycomment .says:after {
+      border-right: 18px solid #c9fffa; }
+
+.says {
+  text-align: left;
+  margin-right: auto;
+  display: block;
+  position: relative;
+  padding: 6px 12px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px; }
+  .says:after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 3px;
+    left: -19px;
+    border: 8px solid transparent;
+    -ms-transform: rotate(35deg);
+    -webkit-transform: rotate(35deg);
+    transform: rotate(35deg); }
+  .says p {
+    padding: 6px;
+    font-size: 1.4rem; }
+  .says span.time {
+    display: block;
+    text-align: right;
+    padding-bottom: 6px;
+    font-size: 1rem;
+    color: #aaa; }
+    .says span.time:before {
+      font-family: "Font Awesome 5 Free";
+      content: "\f017";
+      font-weight: bold;
+      padding-right: 4px; }
+
+/*以下、③右側の緑コメント*/
+.facility_cnt {
+  margin: 12px 0;
+  position: relative; }
+  .facility_cnt .chatting {
+    width: 100%;
+    text-align: right;
+    padding: 0 26px 0 42px; }
+    .facility_cnt .chatting:before {
+      font-family: "Font Awesome 5 Free";
+      content: "\f2bd";
+      font-weight: bold;
+      font-size: 2.4rem;
+      display: inline-block;
+      position: absolute;
+      right: 0; }
+    .facility_cnt .chatting:after {
+      content: '運営';
+      font-size: 1rem;
+      position: absolute;
+      top: 28px;
+      right: 0; }
+  .facility_cnt .says {
+    position: relative;
+    margin: 0 10px 0 0;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    background-color: #E5E5E5; }
+    .facility_cnt .says p:after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      right: -19px;
+      border: 8px solid transparent;
+      border-left: 18px solid #E5E5E5;
+      -ms-transform: rotate(-35deg);
+      -webkit-transform: rotate(-35deg);
+      transform: rotate(-35deg); }
+
+.comment_wrap {
+  padding: 12px 0;
+  background-color: white;
+  /*
+  .textarea_wrap {
+    &:after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      right: -19px;
+      border: 8px solid transparent;
+      border-left: 18px solid $color-main-pale;
+      -ms-transform: rotate(-35deg);
+      -webkit-transform: rotate(-35deg);
+      transform: rotate(-35deg);
+    }
+  }
+  */ }
+  .comment_wrap h4 {
+    padding: 0;
+    background-color: inherit;
+    margin: 12px 0;
+    padding-left: 0.5em;
+    text-align: left;
+    border: none; }
+  .comment_wrap .mycomment .chatting {
+    padding: 0 34px 0 42px; }
+    .comment_wrap .mycomment .chatting .says {
+      padding: 24px; }
+  .comment_wrap .textlines {
+    border: 1px solid #aaa;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    padding: 0.5em 1em;
+    background-color: inherit;
+    width: 100%;
+    height: 80px;
+    font-size: 1.4em;
+    line-height: 2rem;
+    background-color: white; }
+    .comment_wrap .textlines:focus {
+      box-shadow: none;
+      border-color: #009688;
+      background-color: white; }
+  .comment_wrap button {
+    float: right;
+    font-size: 3rem;
+    text-align: right;
+    margin-left: auto;
+    color: #03a9f4;
+    cursor: pointer; }
+  .comment_wrap .submit_wrap {
+    padding-top: 12px; }
+    .comment_wrap .submit_wrap button {
+      padding: 0.5em 1em;
+      color: white;
+      float: none;
+      font-size: 1.2rem;
+      background-color: #009688; }
+      .comment_wrap .submit_wrap button i {
+        padding-right: 6px; }
+
+.detail_wrap .btn_cnt {
+  margin-top: 12px; }
+  .detail_wrap .btn_cnt .back {
+    background-color: #ccc;
+    color: #666; }
+  .detail_wrap .btn_cnt .reserve_info {
+    background-color: #03a9f4 !important;
+    color: white; }
+  .detail_wrap .btn_cnt .reserve_warning {
+    background-color: #ffeb3b !important;
+    color: #545454; }
+  .detail_wrap .btn_cnt .btn {
+    padding: 0.5em;
+    display: inline-block; }
+    .detail_wrap .btn_cnt .btn:first-child {
+      padding-left: 0; }
+    .detail_wrap .btn_cnt .btn button {
+      width: 110px;
+      padding: 0.7em 0.5em;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      font-size: 1.2rem; }
+      .detail_wrap .btn_cnt .btn button:hover {
+        opacity: .7; }
+
+@media only screen and (min-width: 750px), print {
+  .detail_wrap {
+    padding: 4em 10em;
+    background-color: #F5F5F5; }
+    .detail_wrap h3 {
+      margin-top: 0;
+      padding-top: 0; }
+
+  .detail_cnt {
+    border: 1px solid #ccc; }
+
+  .comment_wrap {
+    padding: 24px; }
+    .comment_wrap button:hover {
+      opacity: .7; }
+    .comment_wrap .textlines {
+      font-size: 1.6rem; }
+
+  .detail_wrap h4, .detail_wrap .text_box {
+    border: none; }
+  .detail_wrap h4 {
+    font-size: 2rem;
+    line-height: 2.8rem;
+    padding: 12px; }
+  .detail_wrap p, .detail_wrap li {
+    font-size: 1.6rem;
+    line-height: 2.4rem; }
+  .detail_wrap .text_box {
+    padding: 12px; }
+
+  .chat_wrap .inner {
+    padding: 24px;
+    min-height: 100px; }
+
+  .detail_wrap .btn_cnt {
+    margin-top: 24px; }
+    .detail_wrap .btn_cnt .btn {
+      padding: 1em; }
+      .detail_wrap .btn_cnt .btn:first-child {
+        padding-left: 0; }
+      .detail_wrap .btn_cnt .btn button {
+        width: 140px;
+        padding: 1em;
+        -webkit-border-radius: 7px;
+        -moz-border-radius: 7px;
+        border-radius: 7px;
+        font-size: 1.4rem;
+        font-weight: bold; } }
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* Body
+------------------------------------------------------*/
+@font-face {
+  font-family: YuGothicM;
+  src: local("Yu Gothic Medium"); }
+/* 明朝体
+$body-font-family: "a-otf-ryumin-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+$midashi-font-family: "a-otf-futo-min-a101-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+------------------------------------------------------*/
+/* Breackpoint
+------------------------------------------------------*/
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* BOXシャドウ　
+--------------------------------------------------------------------------------------------------------*/
+/* 拡散型シャドウ　http://photoshopvip.net/91770
+--------------------------------------------------------------------------------------------------------*/
+/* hover under-line https://www.nxworld.net/tips/css-hover-underline-animation-examples-and-sass-mixin.html
+
+type（タイプ） $dir（方向） $weight（ラインウェイト） $color（ラインカラー）
+--------------------------------------------------------------------------------------------------------*/
+/*タブ切り替え全体のスタイル*/
+.tabs {
+  margin-top: 50px;
+  padding-bottom: 24px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  margin: 0 auto; }
+
+/*タブのスタイル*/
+.tab_item {
+  width: calc(100%/2);
+  height: 36px;
+  border-bottom: 3px solid #009688;
+  background-color: #d9d9d9;
+  line-height: 36px;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #565656;
+  display: block;
+  float: left;
+  text-align: center;
+  font-weight: bold;
+  transition: all 0.2s ease; }
+
+.tab_item:hover {
+  opacity: 0.75; }
+
+/*ラジオボタンを全て消す*/
+input[name="tab_item"] {
+  display: none; }
+
+/*タブ切り替えの中身のスタイル*/
+.tab_content {
+  display: none;
+  padding: 12px;
+  clear: both;
+  overflow: hidden; }
+  .tab_content h4 {
+    font-size: 1.6rem;
+    border: none !important; }
+
+/*選択されているタブのコンテンツのみを表示*/
+#tabs_01:checked ~ #tabs_01_content,
+#tabs_02:checked ~ #tabs_02_content,
+#tabs_03:checked ~ #tabs_03_content {
+  display: block; }
+
+/*選択されているタブのスタイルを変える*/
+.tabs input:checked + .tab_item {
+  background-color: #009688;
+  color: #fff; }
+
+.status {
+  margin: 0;
+  float: right; }
+  .status li {
+    float: left; }
+    .status li input[type=radio], .status li input[type=checkbox] {
+      display: none; }
+    .status li input[type=radio]:checked + .button0,
+    .status li input[type=checkbox]:checked + .button0,
+    .status li input[type=radio]:checked + .button2,
+    .status li input[type=checkbox]:checked + .button2 {
+      background-color: #f44336;
+      color: white; }
+    .status li input[type=radio]:checked + .button1,
+    .status li input[type=checkbox]:checked + .button1,
+    .status li input[type=radio]:checked + .button3,
+    .status li input[type=checkbox]:checked + .button3 {
+      background-color: #03a9f4;
+      color: white; }
+    .status li label {
+      display: block;
+      background-color: #E5E5E5;
+      color: #aaa;
+      text-align: center;
+      margin: 0 auto;
+      cursor: pointer;
+      padding: 6px;
+      line-height: 1;
+      transition: 0.2s;
+      width: 60px; }
+
+.tabs_01_inner h4, .tabs_02_inner h4 {
+  float: left; }
+
+ul.list_news {
+  margin-top: 12px;
+  font-size: 1.4rem;
+  line-height: 2rem; }
+  ul.list_news li {
+    border-bottom: 2px dotted #ccc;
+    padding: 12px 0;
+    text-align: right;
+    margin-left: auto; }
+    ul.list_news li:first-child {
+      border-top: 2px dotted #ccc; }
+    ul.list_news li .news_date, ul.list_news li .news_text_wrap {
+      text-align: left;
+      display: block; }
+    ul.list_news li .news_text_wrap a {
+      text-decoration: none; }
+      ul.list_news li .news_text_wrap a span {
+        display: block; }
+      ul.list_news li .news_text_wrap a .news_title {
+        color: #009688;
+        font-size: 1.4rem;
+        font-weight: bold; }
+      ul.list_news li .news_text_wrap a .news_comment {
+        color: #545454;
+        text-decoration: underline; }
+      ul.list_news li .news_text_wrap a:hover .news_title {
+        color: #7dfff3; }
+      ul.list_news li .news_text_wrap a:hover .news_comment {
+        color: #aaa;
+        text-decoration: none; }
+    ul.list_news li .news_btn {
+      font-size: 1.2rem;
+      display: inline-block;
+      padding: 0.2em 0.5em;
+      border: 1px solid #03a9f4;
+      color: #03a9f4;
+      margin-top: 0.5em;
+      transition: .3s;
+      text-decoration: none; }
+      ul.list_news li .news_btn:hover {
+        background-color: #03a9f4;
+        color: white; }
+
+.chat_scroll, .comment_wrap {
+  max-height: 600px !important;
+  overflow-y: auto !important;
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+
+.tabs_02_inner {
+  /*
+    .child {
+      padding-left: 20px;
+      margin-bottom: 0.5em;
+      position: relative;
+      color: $color-font;
+      &:before {
+        content: "";
+        width: 12px;
+        height: 12px;
+        border-left: 3px solid $color-gray-deep;
+        border-bottom: 3px solid $color-gray-deep;
+        position: absolute;
+        left: 5px;
+        top: 0;
+        font-size: 0.5em;
+      }
+      &:hover {
+        color: $color-gray-deep;
+      }
+    }
+    .mail_comment.facility,
+    .mail_comment.user,
+    .mail_comment.new {
+      display: inline-block;
+      &:before, &:after  {
+        margin-left: 4px;
+        font-size: 1.2rem;
+        line-height: 1.4rem;
+        padding: 0.2em 0.5em;
+        border: 1px solid $color-font;
+        width: 55px;
+        text-align: center;
+        margin: 0 auto;
+      }
+    }
+    .mail_comment.facility {
+      position: relative;
+      &:before {
+        content: "運営";
+        position: absolute;
+        top: 0;
+        right: -60px;
+        background-color: $color-font;
+        color: $color-white;
+      }
+      &:hover {
+        &:before {
+          background-color: $color-white;
+          color: $color-font;
+        }
+      }
+    }
+    .mail_comment.user {
+      position: relative;
+      color: $color-main;
+      &:before {
+        content: "利用者";
+        position: absolute;
+        top: 0;
+        right: -60px;
+        border-color: $color-main;
+        background-color: $color-main;
+        color: $color-white;
+      }
+      &:hover {
+        color: $color-main-light;
+        &:before {
+          background-color: $color-white;
+          color: $color-main;
+        }
+      }
+    }
+    .mail_comment.unread {
+      position: relative;
+      &:after {
+        content: "未読";
+        position: absolute;
+        top: 0;
+        right: -120px;
+        border-color: $color-base-red;
+        background-color: $color-base-red;
+        color: $color-white;
+      }
+      &:hover {
+        &:after {
+          background-color: $color-white;
+          color: $color-base-red;
+        }
+      }
+    }
+  */ }
+  .tabs_02_inner .chat_wrap {
+    border-bottom: 1px solid #ccc; }
+  .tabs_02_inner a .contact_title {
+    color: #545454;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-decoration: underline; }
+    .tabs_02_inner a .contact_title:hover {
+      text-decoration: none;
+      color: #aaa; }
+
+.news_detail_wrap .chat_wrap {
+  padding-top: 0; }
+.news_detail_wrap .inner .chat_scroll {
+  padding-top: 0; }
+.news_detail_wrap .btn_cnt {
+  text-align: right; }
+  .news_detail_wrap .btn_cnt .back {
+    background-color: #222222;
+    color: white; }
+  .news_detail_wrap .btn_cnt .btn {
+    padding: 0.5em;
+    display: inline-block; }
+    .news_detail_wrap .btn_cnt .btn:first-child {
+      padding-left: 0; }
+    .news_detail_wrap .btn_cnt .btn button {
+      width: 110px;
+      padding: 0.7em 0.5em;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      font-size: 1.2rem; }
+      .news_detail_wrap .btn_cnt .btn button:hover {
+        opacity: .7; }
+
+@media only screen and (min-width: 750px), print {
+  .tab_item {
+    height: 50px;
+    line-height: 50px;
+    font-size: 1.6rem; }
+
+  .tab_content h4 {
+    font-size: 2rem; }
+
+  ul.list_news {
+    font-size: 1.6rem; }
+    ul.list_news li {
+      *zoom: 1; }
+      ul.list_news li .news_date {
+        margin-bottom: 0.7em; }
+      ul.list_news li .news_text_wrap {
+        float: left;
+        width: calc(100% - 100px);
+        padding-right: 12px; }
+        ul.list_news li .news_text_wrap a .news_title, ul.list_news li .news_text_wrap a .contact_title {
+          font-size: 1.8rem;
+          margin-bottom: 0.3em; }
+      ul.list_news li .news_btn {
+        float: right;
+        width: 100px;
+        text-align: center;
+        margin: 0 auto; }
+      ul.list_news li:before, ul.list_news li:after {
+        content: " ";
+        display: table; }
+      ul.list_news li:after {
+        clear: both; }
+
+  .status li label {
+    font-size: 1.4rem;
+    width: 100px;
+    padding: 0.7em 0; } }
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* Body
+------------------------------------------------------*/
+@font-face {
+  font-family: YuGothicM;
+  src: local("Yu Gothic Medium"); }
+/* 明朝体
+$body-font-family: "a-otf-ryumin-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+$midashi-font-family: "a-otf-futo-min-a101-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+------------------------------------------------------*/
+/* Breackpoint
+------------------------------------------------------*/
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* BOXシャドウ　
+--------------------------------------------------------------------------------------------------------*/
+/* 拡散型シャドウ　http://photoshopvip.net/91770
+--------------------------------------------------------------------------------------------------------*/
+/* hover under-line https://www.nxworld.net/tips/css-hover-underline-animation-examples-and-sass-mixin.html
+
+type（タイプ） $dir（方向） $weight（ラインウェイト） $color（ラインカラー）
+--------------------------------------------------------------------------------------------------------*/
+/*
+https://www.nxworld.net/tips/15-useful-css-snippets-in-form-style.html
+*/
+/*reset------------------------------*/
+input, button, textarea, select {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; }
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea, select {
+  outline: none;
+  border: 3px solid #ccc;
+  background-color: #fff;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+  padding: 10px;
+  width: 100%;
+  font-family: 　-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", メイリオ, Meiryo, sans-serif;
+  font-size: 1.6rem; }
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+textarea:focus, select:focus {
+  box-shadow: 0 0 7px #333;
+  border-color: #555;
+  background: #888; }
+
+@media only screen and (max-width: 750px) {
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  textarea, select {
+    padding: 3px;
+    font-size: 1.4rem; } }
+/*placeholder-----------------*/
+/* Chrome */
+::-webkit-input-placeholder {
+  color: #ccc; }
+
+/* Firefox */
+::-moz-placeholder {
+  color: #ccc; }
+
+/* IE */
+:-ms-input-placeholder {
+  color: #ccc; }
+
+/*textareaのリサイズ機能を制限する-----------------*/
+/* 横のみリサイズ可
+textarea {
+  resize: horizontal;
+}
+*/
+/* 縦のみリサイズ可
+textarea {
+  resize: vertical;
+}
+*/
+/* 縦横ともにリサイズ不可 */
+textarea {
+  resize: none; }
+
+/*checkbox-----------------*/
+input[type=checkbox] {
+  display: none; }
+
+input[type=checkbox]:checked + .checkbox:before {
+  opacity: 1; }
+
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* Body
+------------------------------------------------------*/
+@font-face {
+  font-family: YuGothicM;
+  src: local("Yu Gothic Medium"); }
+/* 明朝体
+$body-font-family: "a-otf-ryumin-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+$midashi-font-family: "a-otf-futo-min-a101-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+------------------------------------------------------*/
+/* Breackpoint
+------------------------------------------------------*/
+/* original
+------------------------------------------------------*/
+/* base color
+------------------------------------------------------*/
+/* Gray color
+------------------------------------------------------*/
+/* BOXシャドウ　
+--------------------------------------------------------------------------------------------------------*/
+/* 拡散型シャドウ　http://photoshopvip.net/91770
+--------------------------------------------------------------------------------------------------------*/
+/* hover under-line https://www.nxworld.net/tips/css-hover-underline-animation-examples-and-sass-mixin.html
+
+type（タイプ） $dir（方向） $weight（ラインウェイト） $color（ラインカラー）
+--------------------------------------------------------------------------------------------------------*/
+@media print {
+  body {
+    height: auto;
+    -webkit-print-color-adjust: exact; }
+
+  .head_wrap, .ft_top, .ft_main,
+  #page_top {
+    display: none !important; }
+
+  .other #main {
+    padding-top: 0 !important; } }
+
+/*# sourceMappingURL=style.css.map */

@@ -1,48 +1,60 @@
 <template>
   <div class="calendar">
-    <div class="b-calendar__calendar">
-      <div class="b-calendar__weekdays">
-        <div class="weekday" v-for="(day, index) in days" :key="index">
-          <strong>{{day}}</strong>
-        </div>
-      </div>
-      <div class="b-calendar__dates">
-        <div class="date" :class="{'today': date.today, 'blank': date.blank, }"
-             v-for="date in dateList" :key="date.key" :data-date="date.date">
-          <span class="day">{{date.dayNumber}}</span>
-          <span class="weekday">{{date.weekDay}}</span>
-          <template v-if="date.schedule">
-            <router-link v-bind:to="detailUrl(date.schedule.date)" class="title">{{date.schedule.title}}</router-link><br />
+    <div class="calendar_header">
+      <div class="sunday"><span>日</span></div>
+      <div class="weekday"><span>月</span></div>
+      <div class="weekday"><span>火</span></div>
+      <div class="weekday"><span>水</span></div>
+      <div class="weekday"><span>木</span></div>
+      <div class="weekday"><span>金</span></div>
+      <div class="saturday"><span>土</span></div>
+    </div><!--.calendar_header-->
+    <div class="calendar_body">
+      <!--ここから繰り返し(calendar_body内 date_wrap)-->
+      <!--****************************************************************
+        date_cntにクラス名をつける ( date_wrap > a > date_cnt )
+        平日 : "weekday"  土曜 : "saturday"  日曜 : "sunday"  祝日 : "holiday"
+        status_cntにクラス名をつける ( date_wrap > a > status_cnt )
+        予約申請中 : "reserve_info"          予約済み："reserve_success"
+        キャンセル申請中："reserve_warning"  キャンセル済："reserve_danger"
+      ********************************************************************-->
+      <div class="date_wrap" :class="{'today': date.today, 'blank': date.blank, }"
+            v-for="date in dateList" :key="date.key" :data-date="date.date">
+        <div class="date_cnt">
+          <span class="month">{{this.currentMonth}}月</span>
+          <span class="date">{{date.dayNumber}}<span class="date_list_type">日</span></span>
+          <span class="day">{{date.weekDay}}</span>
+        </div><!--date_cnt-->
+
+        <template v-if="date.schedule">
+          <router-link v-bind:to="detailUrl(date.schedule.date)" class="title">
+            <div class="title_cnt">
+              <span class="title">{{date.schedule.title}}<br /></span>
+              <!--<span class="sub_title">イベントのサブタイトルなどの詳細</span>-->
+            </div><!--title_cnt-->
             <template v-if="Array.isArray(date.schedule.reserves) && date.schedule.reserves.length > 0">
-              <b-badge variant="info" v-if="date.schedule.reserves[0].status === 'app_r'">
-                予約申請中
-                <b-badge v-if="unread(date.schedule) > 0" variant="light">{{unread(date.schedule)}}<span class="sr-only">未読メッセージ</span></b-badge>
-              </b-badge>
-              <b-badge variant="success" v-if="date.schedule.reserves[0].status === 'reserved'">
-                予約済
-                <b-badge v-if="unread(date.schedule) > 0" variant="light">{{unread(date.schedule)}}<span class="sr-only">未読メッセージ</span></b-badge>
-              </b-badge>
-              <b-badge variant="warning" v-if="date.schedule.reserves[0].status === 'app_c'">
-                キャンセル申請中
-                <b-badge v-if="unread(date.schedule) > 0" variant="light">{{unread(date.schedule)}}<span class="sr-only">未読メッセージ</span></b-badge>
-              </b-badge>
-              <b-badge variant="danger" v-if="date.schedule.reserves[0].status === 'canceled'">
-                キャンセル済
-                <b-badge v-if="unread(date.schedule) > 0" variant="light">{{unread(date.schedule)}}<span class="sr-only">未読メッセージ</span></b-badge>
-              </b-badge>
+              <div class="status_cnt reserve_info">
+                <span v-if="date.schedule.reserves[0].status === 'app_r'" class="reserve"><span class="inner">予約<span class="br">申請中</span></span></span>
+                <span v-if="date.schedule.reserves[0].status === 'reserved'" class="reserve"><span class="inner">予約<span class="br">済</span></span></span>
+                <span v-if="date.schedule.reserves[0].status === 'app_c'" class="reserve"><span class="inner">キャンセル<span class="br">申請中</span></span></span>
+                <span v-if="date.schedule.reserves[0].status === 'canceled'" class="reserve"><span class="inner">キャンセル<span class="br">済</span></span></span>
+                <div class="msg_cnt unread" v-if="unread(date.schedule) > 0">
+                  <span  class="num">{{unread(date.schedule)}}</span>
+                  <span class="message">件の未読メッセージ</span>
+                </div><!--.msg_cnt-->
+              </div><!--.status_cnt-->
             </template>
             <template v-else>
               <span>予約なし</span>
             </template>
-          </template>
-        </div>
-      </div>
-    </div>
-  </div>
+          </router-link>
+        </template>
+      </div><!--.date_wrap-->
+    </div><!--.calendar_body-->
+  </div><!-- calendar -->
 </template>
 
 <script>
-  import CalendarDay from '../components/CalendarDay'
   export default {
     data() {
       return {
@@ -55,7 +67,6 @@
       currentMonth: { required: true },
     },
     components: {
-      CalendarDay,
     },
     computed: {
       detailUrl: function() {
