@@ -20,10 +20,10 @@ use Illuminate\Http\Request;
 Route::post('/admin/login', 'AuthController@adminLogin');
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/admin/me', 'AuthController@adminMe');
-    Route::post('/register', 'Auth\RegisterController@register')->name('register');
     Route::get('/admin/notice/unread', 'NoticesController@getUnreadAdmin');
-    Route::get('/admin/users/list', 'UsersController@getUserlist');
-    
+    Route::get('/admin/users/list', 'UsersController@getUserslist');
+    Route::get('/admin/users/detail/{id}', 'UsersController@getUserDetail')->where(['id' => '[0-9]']);
+    Route::post('/admin/users/save', 'UsersController@save');
 });
 
 Route::post('/login', 'AuthController@login');

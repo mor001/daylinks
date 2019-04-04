@@ -18,15 +18,30 @@ class UsersController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest');
+        //$this->middleware('guest');
     }
     
     //
-    public function getUserlist()
+    public function getUserslist()
     {
         return ['result' => true, 'users' => User::all()];
     }
+    public function getUserDetail($id = null)
+    {
+        return ['result' => true, 'users' => User::where('id', $id)->get()];
+    }
+    public function save(Request $request)
+    {
+        $validatedData = $request->validate([
+          'userid' => 'required|unique:users|max:16|alpha_num',
+          'name'  => 'required|max:32',
+          'email' => 'email',
+          'password'=> 'required',
+          'limit' => 'required|integer',
+        ]);
 
+        return ['result' => false, 'message' => '利用者登録に失敗しますた(´・ω・｀)'];
+    }
     public function sendResetLinkEmail(Request $request)
     {
         $this->validateEmail($request);
@@ -36,8 +51,8 @@ class UsersController extends Controller
         );
 
         return $response == Password::RESET_LINK_SENT
-            ? response()->json(['message' => 'Reset link sent to your email.', 'status' => true], 200)
-            : response()->json(['message' => 'Unable to send reset link', 'status' => false], 200);
+            ? response()->json(['result' => true, 'message' => 'Reset link sent to your email.'], 200)
+            : response()->json(['result' => false, 'message' => 'Unable to send reset link'], 200);
     }
 
     /**
@@ -63,8 +78,8 @@ class UsersController extends Controller
         // the application's home authenticated view. If there is an error we can
         // redirect them back to where they came from with their error message.
         return $response == Password::PASSWORD_RESET
-            ? response()->json(['message' => trans($response), 'status' => true], 200)
-            : response()->json(['message' => trans($response), 'status' => false], 200);
+            ? response()->json(['result' => true, 'message' => trans($response)], 200)
+            : response()->json(['result' => false, 'message' => trans($response)], 200);
     }
 
     /**

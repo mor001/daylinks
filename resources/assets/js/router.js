@@ -13,6 +13,7 @@ import ResetPassword from './pages/ResetPassword';
 import AdminLayout from './layouts/admin.vue';
 import AdminLogin from './admin/pages/AdminLogin';
 import AdminHome from './admin/pages/AdminHome';
+import AdminUsersList from './admin/pages/AdminUsersList';
 
 import SystemError from './pages/errors/System.vue'
 import NotFound from './pages/errors/NotFound.vue'
@@ -23,13 +24,13 @@ Vue.use(VueRouter);
 const routes = [
     { path: '/', component: UserLayout,
         children: [
-          { path: '/login', component: Login, },
-          { path: '/forgot', component: ForgotPassword, },
-          { path: '/reset/:token', component: ResetPassword, },
+          { path: 'login', component: Login, },
+          { path: 'forgot', component: ForgotPassword, },
+          { path: 'reset/:token', component: ResetPassword, },
           { path: '', component: Home, meta: { requiresAuth: true }, },
-          { path: '/detail/:year/:month/:day', component: Detail, meta: { requiresAuth: true } },
-          { path: '/user', component: User, meta: { requiresAuth: true } },
-          { path: '/notice', component: Notice, meta: { requiresAuth: true } },
+          { path: 'detail/:year/:month/:day', component: Detail, meta: { requiresAuth: true } },
+          { path: 'user', component: User, meta: { requiresAuth: true } },
+          { path: 'notice', component: Notice, meta: { requiresAuth: true } },
 
         ],
     },
@@ -37,6 +38,7 @@ const routes = [
         children: [
           { path: 'login', component: AdminLogin, },
           { path: '', name: 'adminHome', component: AdminHome, meta: { requiresAdminAuth: true } },
+          { path: 'users/list', component: AdminUsersList, meta: { requiresAdminAuth: true } },
         ],
      },
     

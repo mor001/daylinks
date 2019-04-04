@@ -18,6 +18,9 @@ class CreateUsersTable extends Migration
             $table->string('tid', 16)->comment('事業者ID');
             $table->string('userid', 16)->comment('ユーザーID');
             $table->string('name')->comment('氏名');
+            $table->string('kana')->comment('氏名かな');
+            $table->string('parents')->nullable()->comment('保護者名');
+            $table->string('parents_kana')->nullable()->comment('保護者名かな');
             $table->string('email')->unique()->nullable()->comment('メールアドレス');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->comment('パスワード');
