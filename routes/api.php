@@ -29,7 +29,6 @@ Route::group(['middleware' => 'auth:admin'], function () {
 Route::post('/login', 'AuthController@login');
 Route::get('/logout', 'AuthController@logout');
 Route::post('/password/reset/request', 'UsersController@sendResetLinkEmail');
-//Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('/password/reset', 'UsersController@resetPassword');
 
 Route::group(['middleware' => 'auth:api'], function () {
@@ -51,6 +50,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/notice/read', 'NoticesController@setRead');
 });
 
-Route::any('{all}', function() {
-    return App::abort(404);
-});
+Route::any('/{any}', function() {
+    return response()->json(['message' => 'API Not Found'], 404);
+})->where('any', '.*');

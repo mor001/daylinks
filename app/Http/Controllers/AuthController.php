@@ -15,7 +15,7 @@ class AuthController extends Controller
       if($isAdmin) $target = 'admin';
 
       $credentials = request(['userid', 'password']);
-      logger($credentials);
+
       //もし認証エラーなら
       if(!$token = auth($target)->attempt($credentials)){
           return response()->json(['login' => false, 'error' => 'The login attempt failed.'], 200);

@@ -1,8 +1,8 @@
 <template>
   <main id="main">
-    <loading v-if="loading" class="loading"></loading>
+    <div v-show="loading" class="loader">読み込み中...</div>
     <p v-if="showAlert">{{ alertMessage }}</p>
-    <div id="main_contents">
+    <div v-show="!loading" id="main_contents">
       <article class="container">
         <div class="common_cnt">
           <h2>{{$store.getters['appdata/tenantName']}}</h2>

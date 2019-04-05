@@ -1,5 +1,3 @@
-import * as CONSTS from '../common/const';
-
 const state = {
   user: null,
   token: null,

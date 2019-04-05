@@ -14,6 +14,7 @@ import AdminLayout from './layouts/admin.vue';
 import AdminLogin from './admin/pages/AdminLogin';
 import AdminHome from './admin/pages/AdminHome';
 import AdminUsersList from './admin/pages/AdminUsersList';
+import AdminUserForm from './admin/pages/AdminUserForm';
 
 import SystemError from './pages/errors/System.vue'
 import NotFound from './pages/errors/NotFound.vue'
@@ -39,6 +40,8 @@ const routes = [
           { path: 'login', component: AdminLogin, },
           { path: '', name: 'adminHome', component: AdminHome, meta: { requiresAdminAuth: true } },
           { path: 'users/list', component: AdminUsersList, meta: { requiresAdminAuth: true } },
+          { path: 'user/form/:userid', component: AdminUserForm, meta: { requiresAdminAuth: true } },
+          { path: 'user/form', component: AdminUserForm, meta: { requiresAdminAuth: true } },
         ],
      },
     

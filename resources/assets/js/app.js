@@ -10,16 +10,8 @@ require('./bootstrap')
 import Vue from 'vue'
 import router from './router'
 import store from './store'
-import Vuetify from 'vuetify';
-import 'vuetify/dist/vuetify.min.css'
-import loading from "vue-spinner/src/MoonLoader"
-import 'v-slim-dialog/dist/v-slim-dialog.css'
-import SlimDialog from 'v-slim-dialog'
 
 window.Vue = require('vue')
-
-Vue.use(Vuetify)
-Vue.use(SlimDialog)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -27,7 +19,6 @@ Vue.use(SlimDialog)
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 Vue.component('app', require('./app.vue'))
-Vue.component('loading', loading)
 
 const app = new Vue({
   router,
