@@ -85,7 +85,6 @@
 </template>
 
 <script>
-import DialogHelper from '@/DialogHelper';
 export default {
   data() {
     return {
@@ -179,6 +178,7 @@ export default {
       })
     },
     async postReserve(id, status) {
+      /*
       let msg = ''
       let ret = false
       if(id == null) {
@@ -192,6 +192,7 @@ export default {
         ret = res.ok // {ok: true|false|undefined}
       })
       if(ret !== true) return
+      */
       const self = this
       this.loading = true
       this.showAlert = false
