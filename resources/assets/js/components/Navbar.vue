@@ -19,7 +19,7 @@
                       available　クラスがない場合は非表示
                     ********************************************************************-->
                     <span class="name_wrap"><span class="name">{{ username }}</span>さん</span>
-                    <span class="msg_wrap available">未読メッセージが<span class="num">2</span>通あります。</span>
+                    <span class="msg_wrap available" v-if="unreadNotice > 0">未読メッセージが<span class="num">{{unreadNotice}}</span>通あります。</span>
                   </RouterLink>
                 </li>
                 <li class="carrent"><RouterLink to="/"><i class="fas fa-home fa-lg"></i>ホーム</RouterLink></li>
@@ -56,11 +56,14 @@ export default {
   },
   computed: {
     isLogin () {
-      return this.$store.getters['auth/isLogin']
+      return this.$store.getters['user/isLogin']
     },
     username () {
-      return this.$store.getters['auth/username']
-    }
+      return this.$store.getters['user/username']
+    },
+    unreadNotice () {
+      return this.$store.getters['user/unread_notice']
+    },
   },
   methods: {
     // ログアウト

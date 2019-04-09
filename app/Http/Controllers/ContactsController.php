@@ -20,12 +20,7 @@ class ContactsController extends Controller
     }
     public function getGeneralContacts()
     {
-      $contacts = Contact::whereNull('schedule_id')
-                         ->where('user_id', Auth::user()->id)
-                         ->where('is_read', 0) 
-                         ->whereNull('reply_id')
-                         ->orderBy('updated_at', 'asc')->with('replies')->get();
-      return ['result' => true, 'contacts' => $contacts];
+      return ['result' => true, 'contacts' => Contact::getGeneralContacts(Auth::user()->id, 0)];
     }
     public function save(Request $request)
     {
@@ -37,11 +32,11 @@ class ContactsController extends Controller
       $contact->destination = $request->destination;
       $contact->reply_id = null;
       $contact->save();
-      return ['result' => true, 'contacts' => Contact::getScheduleContact($request->schedule_id, Auth::user()->id)];
+      return ['result' => true, 'contacts' => Contact::getScheduleContacts($request->schedule_id, Auth::user()->id)];
     }
     public function setRead(Request $request)
     {
       Contact::where('id', $request->id)->update(['is_read' => true]);
-      return ['result' => true];
+      return ['result' => true, 'contacts' =>  Contact::getGeneralContacts(Auth::user()->id, 0)];
     }
 }

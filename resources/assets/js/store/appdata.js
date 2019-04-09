@@ -3,7 +3,7 @@ const state = {
   currentYear: null,
   currentMonth: null,
 }
-    
+
 const mutations = {
   setTenantName (state, value) {
     state.tenantName = value

@@ -23,7 +23,7 @@ export default {
   },
   computed: {
     isLogin () {
-      return this.$store.getters['auth/isLogin']
+      return this.$store.getters['user/isLogin']
     },
   },
   components: {
@@ -32,20 +32,8 @@ export default {
   },
   methods: {
   },
-  async mounted() {
+  mounted() {
     console.log('★LAYOUT user.vue mounted')
-    /*
-    const self = this
-    if(localStorage.getItem('token')) {
-      await window.axios.get('/api/me')
-      .then(function (response) {
-      }).catch(async function (error) {
-        console.log('[app.vueで/api/meに失敗してリダイレクト]')
-        await self.$store.dispatch('auth/logout')
-        self.$router.push('/login')
-      })
-    }
-    */
   },
 }
 </script>

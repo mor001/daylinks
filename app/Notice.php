@@ -3,6 +3,7 @@
 namespace App;
 use App\Scopes\TenantScope;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Notice extends Model
 {
@@ -15,5 +16,10 @@ class Notice extends Model
     {
         parent::boot();
         static::addGlobalScope(new TenantScope);
+    }
+
+    public static function getUnreadCount()
+    {
+        return self::where('user_id', '=', Auth::user()->id)->where('is_read', 0)->count();
     }
 }

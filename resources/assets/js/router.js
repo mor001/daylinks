@@ -57,8 +57,8 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!store.getters['auth/isLogin']) {
-      console.log('[VueRouterでloginにリダイレクト] isLogin: ' + store.getters['auth/isLogin'])
+    if (!store.getters['user/isLogin']) {
+      console.log('[VueRouterでloginにリダイレクト] isLogin: ' + store.getters['user/isLogin'])
       next({
         path: '/login',
         query: { redirect: to.fullPath }

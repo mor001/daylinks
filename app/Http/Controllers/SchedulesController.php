@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Schedule;
 use App\Reserve;
 use App\Contact;
+use App\Notice;
 
 class SchedulesController extends Controller
 {
@@ -22,11 +23,15 @@ class SchedulesController extends Controller
 
     public function getMonthly($y = null, $m = null)
     {
-      //echo 'Hello '.$request->subdomain;
-      //return view('vuetest');
-
       $data = Schedule::getMonthly($y, $m);
-      return ['schedules' => $data, 'y' => $y, 'm' => $m];
+      $unread_notice = Notice::getUnreadCount();
+      $count = Schedule::countingReserve($data);
+      return ['schedules' => $data, 
+              'unread_notice' => $unread_notice, 
+              'y' => $y, 'm' => $m, 
+              'limit' => Auth::user()->limit,
+              'count' => $count,
+             ];
     }
 
     public function reserve(Request $request)

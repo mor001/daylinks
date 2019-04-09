@@ -85,6 +85,7 @@
 </template>
 
 <script>
+import DialogHelper from '../helper/DialogHelper';
 export default {
   data() {
     return {
@@ -92,7 +93,7 @@ export default {
       showAlert: false,
       detail: null,
       contactForm: {
-        user_id: this.$store.getters['auth/user'].id,
+        user_id: this.$store.getters['user/user'].id,
         schedule_id: null,
         destination: '0',
         contents: '',
@@ -112,25 +113,25 @@ export default {
       }
     },
     reserve_status: function() {
-      if(Array.isArray(this.detail.reserves) && this.detail.reserves.length > 0) {
-        if(this.detail.reserves[0].status === 'app_r') {
+      if(this.detail.reserve) {
+        if(this.detail.reserve.status === 'app_r') {
           return '予約申請中'
-        } else if(this.detail.reserves[0].status === 'reserved') {
+        } else if(this.detail.reserve.status === 'reserved') {
           return '予約済'
-        } else if(this.detail.reserves[0].status === 'app_c') {
+        } else if(this.detail.reserve.status === 'app_c') {
           return 'キャンセル申請中'
-        } else if(this.detail.reserves[0].status === 'canceled') {
+        } else if(this.detail.reserve.status === 'canceled') {
           return 'キャンセル済'
         } else {
-          return this.detail.reserves[0].status
+          return this.detail.reserve.status
         }
       } else {
         return 'なし'
       }
     },
     reserve_id: function() {
-      if(Array.isArray(this.detail.reserves) && this.detail.reserves.length > 0) {
-        return this.detail.reserves[0].id
+      if(this.detail.reserve) {
+        return this.detail.reserve.id
       } else {
         return null
       }
@@ -178,21 +179,23 @@ export default {
       })
     },
     async postReserve(id, status) {
-      /*
-      let msg = ''
+      let message = ''
       let ret = false
       if(id == null) {
-        msg = '予約申請を行います。よろしいですか？'
+        message = '予約申請を行います。よろしいですか？'
       } else {
-        msg = '予約キャンセル申請を行います。よろしいですか？'
+        message = '予約キャンセル申請を行います。よろしいですか？'
       }
-      const options = {title: '確認', size: 'lg', okLabel: 'OK', cancelLabel: 'キャンセル'}
-      await this.$dialogs.confirm(msg, options)
-      .then(res => {
-        ret = res.ok // {ok: true|false|undefined}
+      await DialogHelper.showDialog(this, {
+        subject: '確認',
+        message: message,
+        primaryLabel: 'ええで',
+        secondaryLabel: 'やっぱやめとくわ',
+        ok: () => { ret = true },
+        cancel: () => { }
       })
+      console.log('戻り値: '+ret)
       if(ret !== true) return
-      */
       const self = this
       this.loading = true
       this.showAlert = false
