@@ -46,7 +46,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/contact/read', 'ContactsController@setRead');
     Route::post('/contact/save', 'ContactsController@save');
     Route::get('/contact/general', 'ContactsController@getGeneralContacts');
+    Route::get('/contact/general/all', 'ContactsController@getGeneralContactsAll');
     Route::get('/notice', 'NoticesController@getUnread');
+    Route::get('/notice/all', 'NoticesController@getAll');
     Route::post('/notice/read', 'NoticesController@setRead');
 });
 

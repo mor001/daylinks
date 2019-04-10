@@ -22,6 +22,10 @@ class ContactsController extends Controller
     {
       return ['result' => true, 'contacts' => Contact::getGeneralContacts(Auth::user()->id, 0)];
     }
+    public function getGeneralContactsAll()
+    {
+      return ['result' => true, 'contacts' => Contact::getGeneralContacts(Auth::user()->id, 1)];
+    }
     public function save(Request $request)
     {
       $contact = new Contact;
