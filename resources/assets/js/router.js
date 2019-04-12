@@ -15,6 +15,8 @@ import AdminLogin from './admin/pages/AdminLogin';
 import AdminHome from './admin/pages/AdminHome';
 import AdminUsersList from './admin/pages/AdminUsersList';
 import AdminUserForm from './admin/pages/AdminUserForm';
+import AdminSchedulesList from './admin/pages/AdminSchedulesList';
+import AdminScheduleForm from './admin/pages/AdminScheduleForm';
 
 import SystemError from './pages/errors/System.vue'
 import NotFound from './pages/errors/NotFound.vue'
@@ -40,8 +42,11 @@ const routes = [
           { path: 'login', component: AdminLogin, },
           { path: '', name: 'adminHome', component: AdminHome, meta: { requiresAdminAuth: true } },
           { path: 'users/list', component: AdminUsersList, meta: { requiresAdminAuth: true } },
-          { path: 'user/form/:userid', component: AdminUserForm, meta: { requiresAdminAuth: true } },
-          { path: 'user/form', component: AdminUserForm, meta: { requiresAdminAuth: true } },
+          { path: 'users/form/:userid', component: AdminUserForm, meta: { requiresAdminAuth: true } },
+          { path: 'users/form', component: AdminUserForm, meta: { requiresAdminAuth: true } },
+          { path: 'schedules/list', component: AdminSchedulesList, meta: { requiresAdminAuth: true } },
+          { path: 'schedules/form/:year/:month/:day', component: AdminScheduleForm, meta: { requiresAdminAuth: true } },
+
         ],
      },
     

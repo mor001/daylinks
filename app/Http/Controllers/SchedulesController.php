@@ -33,7 +33,31 @@ class SchedulesController extends Controller
               'count' => $count,
              ];
     }
-
+    public function getAdminMonthly($y = null, $m = null)
+    {
+      $data = Schedule::getMonthly($y, $m, false);
+      return ['schedules' => $data, 
+              'y' => $y, 'm' => $m, 
+             ];
+    }
+    public function getDaily($y = null, $m = null, $d = null)
+    {
+      $data = Schedule::getDaily($y, $m, $d);
+      if(!empty($data)) {
+        // 取得した問合せは既読に設定する
+        foreach($data->contacts as $contact) {
+          Contact::where('id', $contact->id)->update(['is_read' => true]);
+        }
+        return ['schedules' => $data];
+      } else {
+        return response()->json(['error' => 'Not Found'], 404);
+      }
+    }
+    public function getAdminDaily($y = null, $m = null, $d = null)
+    {
+      $data = Schedule::getDaily($y, $m, $d);
+      return ['schedules' => $data];
+    }
     public function reserve(Request $request)
     {
       if(empty($request->reserve_id)) {
@@ -50,25 +74,5 @@ class SchedulesController extends Controller
       $reserve->save();
       //$last_insert_id = $reserve->id;
       return ['result' => true];
-    }
-
-    public function getDaily($y = null, $m = null, $d = null)
-    {
-      $data = Schedule::getDaily($y, $m, $d);
-      if(!empty($data)) {
-        // 取得した問合せは既読に設定する
-        foreach($data->contacts as $contact) {
-          Contact::where('id', $contact->id)->update(['is_read' => true]);
-        }
-        return ['schedules' => $data];
-      } else {
-        return response()->json(['error' => 'Not Found'], 404);
-      }
-    }
-
-    public function hoge(Request $request) {
-      //echo 'Hello '.$request->subdomain;
-      //return view('vuetest');
-      return ['subdomain' => $request->subdomain, 'result' => true, 'message' => 'ほげええええ'];
     }
 }

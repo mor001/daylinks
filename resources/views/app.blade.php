@@ -17,6 +17,16 @@
   <link rel="apple-touch-icon" href="images/favicons/apple-touch-icon.png">
   <link rel="icon" type="image/png" href="images/favicons/android-chrome-256x256.png">
   <!--ここまでfavicon-->
+  <link rel="manifest" href="/manifest.json" />
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+  <script>
+    var OneSignal = window.OneSignal || [];
+      OneSignal.push(function() {
+      OneSignal.init({
+      appId: "708de202-2ba3-4679-b73b-df88682f854b",
+    });
+  });
+  </script>
 </head>
 <body>
 <div id="wrapper">

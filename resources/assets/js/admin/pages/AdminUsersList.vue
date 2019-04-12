@@ -1,6 +1,6 @@
 <template>
   <div>
-    <loading v-if="loading" class="loading"></loading>
+    <div v-show="loading" class="loader">読み込み中...</div>
     <div v-if="showAlert" class="error">
       <p>情報の取得に失敗しました。</p>
     </div>

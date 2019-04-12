@@ -45,15 +45,17 @@ class Schedule extends Model
     /**
      * 
      */
-    public static function getMonthly($y = null, $m = null)
+    public static function getMonthly($y = null, $m = null, $publish = true)
     {
         $current_y = $y == null ? date('Y') : $y;
         $current_m = $m == null ? date('m') : $m;
         $from = date('Y-m-d', mktime(0, 0, 0, $current_m, 1, $current_y));
         $to = date('Y-m-d', mktime(0, 0, 0, $current_m + 1, 0, $current_y));
-        $now = date('Y-m-d H:i:s');
         $schedules = self::whereBetween('date', array($from, $to))
-                     ->where('publish', '<=', $now)
+                     ->when($publish === true, function ($query) {
+                       $now = date('Y-m-d H:i:s');
+                       return $query->where('publish', '<=', $now);
+                     })
                      ->with(['reserve' => function($query) {
                          $query->where('user_id', '=', Auth::user()->id);
                      }])
@@ -116,6 +118,10 @@ class Schedule extends Model
           }
         }
         return ["app_r" => $app_r, "reserved" => $reserved, "app_c" => $app_c, "canceled" => $canceled];
+    }
+    public function scopePublish($query, $date = null) {
+        if(empty($date)) return ''; 
+        return $query->where('publish', '<=', $date);
     }
     public function reserve()
     {
