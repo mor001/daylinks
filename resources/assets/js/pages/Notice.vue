@@ -1,6 +1,6 @@
 <template>
   <div id="tab">
-    <loading v-if="loading" class="loading"></loading>
+    <div v-show="loading" class="loader">読み込み中...</div>
     <ul class="tabMenu">
       <li @click="isSelect('1')">お知らせ</li>
       <li @click="isSelect('2')">お問合せ</li>
@@ -14,13 +14,16 @@
         </template>
       </div>
       <div v-else-if="isActive === '2'">
-        <template v-if="contacts">
+        <template v-if="contacts && contacts.length > 0">
           <div v-for="(contact, index) in contacts" :key="index">
-            <p>[{{contact.created_at}}] {{contact.contents}} 返信:{{contact.replies.length}}件 <a href="#" @click="readNotice(contact)">{{ readLabel(contact) }}</a></p>
+            <p>[{{contact.created_at}}] {{contact.contents}} 返信:{{contact.replies.length}}件 <a v-if="contact.is_read === 0" href="#" @click="readContacts(contact)">{{ readLabel(contact) }}</a></p>
             <p v-for="(reply, index) in contact.replies" :key="index">
               [{{reply.created_at}}] {{reply.contents}}
             </p>
           </div>
+        </template>
+        <template v-else>
+          <p>未読のお問い合わせはありません。<span><a href="#" @click="fetchContact(true)">全て表示する</a></span></p>
         </template>
       </div>
     </div>
@@ -43,12 +46,13 @@
     components: {
     },
     methods: {
-      fetch () {
+      fetchNotice (getAll = false) {
         const self = this
         this.loading = true
         this.showAlert = false
         this.alertMessage = ''
-        let url = '/api/notice'
+        let url = ''
+        getAll === false ? url = '/api/notice' : url = '/api/notice/all'
         window.axios.get(url)
         .then(response => {
           if(response.data.notices.length <= 0) {
@@ -64,11 +68,16 @@
         }).finally(() => {
           self.loading = false
         })
-
-        url = '/api/contact/general'
+      },
+      fetchContact (getAll = false) {
+        const self = this
+        this.loading = true
+        this.showAlert = false
+        this.alertMessage = ''
+        let url = ''
+        getAll === false ? url = '/api/contact/general' : url = '/api/contact/general/all'
         window.axios.get(url)
         .then(response => {
-          console.log(response.data)
           self.$set(self, 'contacts', response.data.contacts)
         }).catch(error => {
           console.log(error.response)
@@ -94,12 +103,29 @@
           self.loading = false
         })
       },
+      readContacts (contact) {
+        const self = this
+        this.loading = true
+        this.showAlert = false
+        self.$set(self, 'contacts', null)
+        let url = '/api/contact/read'
+        window.axios.post(url, contact)
+        .then(function (response) {
+          console.log(response.data)
+          self.$set(self, 'contacts', response.data.contacts)
+        }).catch(function (error) {
+          self.showAlert = true
+        }).finally(() => {
+          self.loading = false
+        })
+      },
       isSelect (num) {
         this.isActive = num;
       },
     },
     mounted() {
-      this.fetch()
+      this.fetchNotice()
+      this.fetchContact()
     },
     computed: {
       readLabel: function() {

@@ -27,32 +27,19 @@
         </div><!--date_cnt-->
 
         <template v-if="date.schedule">
-          <router-link v-bind:to="detailUrl(date.schedule.date)" class="title">
+          <router-link v-bind:to="formUrl(date.schedule.date)" class="title">
             <div class="title_cnt">
               <span class="title">{{date.schedule.title}}<br /></span>
               <!--<span class="sub_title">イベントのサブタイトルなどの詳細</span>-->
             </div><!--title_cnt-->
-            <template v-if="date.schedule.reserve">
-              <div class="status_cnt reserve_info">
-                <span v-if="date.schedule.reserve.status === 'app_r'" class="reserve"><span class="inner">予約<span class="br">申請中</span></span></span>
-                <span v-if="date.schedule.reserve.status === 'reserved'" class="reserve"><span class="inner">予約<span class="br">済</span></span></span>
-                <span v-if="date.schedule.reserve.status === 'app_c'" class="reserve"><span class="inner">キャンセル<span class="br">申請中</span></span></span>
-                <span v-if="date.schedule.reserve.status === 'canceled'" class="reserve"><span class="inner">キャンセル<span class="br">済</span></span></span>
-                <div class="msg_cnt unread" v-if="unread(date.schedule) > 0">
-                  <span class="num">{{unread(date.schedule)}}</span>
-                  <span class="message">件の未読メッセージ</span>
-                </div><!--.msg_cnt-->
-                <div class="msg_cnt read" v-else>
-                  <span class="num">{{unread(date.schedule)}}</span>
-                  <span class="message">件の未読メッセージ</span>
-                </div><!--.msg_cnt-->
-               </div><!--.status_cnt-->
-            </template>
-            <template v-else>
-              <span>予約なし</span>
-            </template>
           </router-link>
         </template>
+        <template v-else>
+          <router-link v-if="date.date" v-bind:to="formUrl(date.date)" class="title">
+            未登録
+          </router-link>
+        </template>
+        
       </div><!--.date_wrap-->
     </div><!--.calendar_body-->
   </div><!-- calendar -->
@@ -73,10 +60,10 @@
     components: {
     },
     computed: {
-      detailUrl: function() {
+      formUrl: function() {
         return function (date) {
           const arr = date.split('-')
-          return '/detail/'+arr[0]+'/'+arr[1]+'/'+arr[2]
+          return '/admin/schedules/form/'+arr[0]+'/'+arr[1]+'/'+arr[2]
         }
       },
       schedule: function() {

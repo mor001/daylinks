@@ -1,34 +1,15 @@
-import * as CONSTS from '../common/const';
-
 const state = {
-  user: null,
-  token: null,
-  isLogin: false
-}
 
+}
 const getters = {
-  token: state => state.token,
-  username: state => state.user ? state.user.name : '',
-  user: state => state.user,
-  isLogin: state => state.isLogin
-}
 
+}
 const computed = {
 
 }
-
 const mutations = {
-  setUser (state, user) {
-    state.user = user;
-  },
-  setToken (state, token) {
-    state.token = token
-  },
-  setIsLogin (state, islogin) {
-    state.isLogin = islogin
-  }
-}
 
+}
 const actions = {
   // ログイン
   async login(context, data) {
@@ -43,14 +24,14 @@ const actions = {
         localStorage.setItem('token', token)
         //localStorage.setItem('isLogin', true)
         context.commit('appdata/setTenantName', response.data.tenant, { root: true }) 
-        context.commit('setUser', response.data.user) // state.userに値をセット
-        context.commit('setToken', token)
-        context.commit('setIsLogin', true)
+        context.commit('user/setUser', response.data.user, { root: true }) // state.userに値をセット
+        context.commit('user/setToken', token, { root: true })
+        context.commit('user/setIsLogin', true, { root: true })
       } else {
         context.commit('appdata/setTenantName', null, { root: true })
-        context.commit('setUser', null)
-        context.commit('setToken', null)
-        context.commit('setIsLogin', false)
+        context.commit('user/setUser', null, { root: true })
+        context.commit('user/setToken', null, { root: true })
+        context.commit('user/setIsLogin', false, { root: true })
         context.commit('error/setMessage', 'ログインに失敗しました。ID、パスワードをご確認ください。', { root: true })
       }
     })
@@ -63,9 +44,9 @@ const actions = {
       window.axios.defaults.headers.common['Authorization'] = null;
       localStorage.removeItem('token')
       context.commit('appdata/setTenantName', null, { root: true })
-      context.commit('setUser', null)
-      context.commit('setToken', null)
-      context.commit('setIsLogin', false)
+      context.commit('user/setUser', null, { root: true })
+      context.commit('user/setToken', null, { root: true })
+      context.commit('user/setIsLogin', false, { root: true })
     })
   },
 }

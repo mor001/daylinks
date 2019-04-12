@@ -30,6 +30,10 @@ class NoticesController extends Controller
       ];
       */
     }
+    public function getAll()
+    {
+      return ['result' => true, 'notices' => Notice::where('user_id', Auth::user()->id)->get()];
+    }
     public function getUnreadAdmin()
     {
       return ['result' => true, 'notices' => Notice::where('is_read', 0)->get()];

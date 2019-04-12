@@ -1,37 +1,31 @@
 <template>
-<v-app id="inspire">
-  <v-content>
-    <v-container fluid fill-height>
-      <v-layout align-center justify-center>
-        <v-flex xs12 sm8 md4>
-          <v-card class="elevation-12">
-            <v-toolbar dark color="primary">
-              <v-toolbar-title>管理画面ログイン</v-toolbar-title>
-              <v-spacer></v-spacer>
-            </v-toolbar>
-            <v-card-text>
-              <v-form>
-                <v-text-field prepend-icon="person" name="userid" label="ユーザーID" type="text" v-model="loginForm.userid"></v-text-field>
-                <v-text-field prepend-icon="lock" name="password" label="パスワード" id="password" type="password" v-model="loginForm.password"></v-text-field>
-              </v-form>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn @click="login" color="primary">ログイン</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-flex>
-      </v-layout>
-    </v-container>
-  </v-content>
-</v-app>
+<div class="login-box">
+  <p v-if="showAlert">{{ alertMessage }}</p>
+  <div class="login-logo">
+    <p>daylinks管理画面</p>
+  </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <form @submit.prevent="login">
+      <p>
+        <input type="userid" v-model="form.userid">
+      </p>
+      <p>
+        <input type="password" v-model="form.password">
+      </p>
+      <button type="submit">ログイン</button>
+    </form>
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
 </template>
 
 <script>
 export default {
   data () {
     return {
-      loginForm: {
+      form: {
         userid: 'admin',
         password: 'aaa111'
       },
@@ -44,12 +38,15 @@ export default {
   methods: {
     async login () {
       const self = this
-      await this.$store.dispatch('admin/login' , this.loginForm)
+      await this.$store.dispatch('admin/login' , this.form)
       .then(function (response) {
-        const m = window.moment()
-        self.$store.commit('appdata/setCurrentYear', m.format('YYYY'))
-        self.$store.commit('appdata/setCurrentMonth', m.format('MM'))
-        self.$router.push('/admin')
+        console.log(response)
+        if(self.$store.getters['error/message'] !== '') {
+          self.showAlert = true
+          self.alertMessage = self.$store.getters['error/message']
+        } else {
+          self.$router.push('/admin')
+        }
       }).catch(function (error) {
         console.log(error)
         self.showAlert = true

@@ -1,61 +1,26 @@
 <template>
-  <div class="calendar">
-    <div class="calendar_header">
-      <div class="weekday"><span>月</span></div>
-      <div class="weekday"><span>火</span></div>
-      <div class="weekday"><span>水</span></div>
-      <div class="weekday"><span>木</span></div>
-      <div class="weekday"><span>金</span></div>
-      <div class="saturday"><span>土</span></div>
-      <div class="sunday"><span>日</span></div>
-    </div><!--.calendar_header-->
-    <div class="calendar_body">
-      <!--ここから繰り返し(calendar_body内 date_wrap)-->
-      <!--****************************************************************
-        date_cntにクラス名をつける ( date_wrap > a > date_cnt )
-        平日 : "weekday"  土曜 : "saturday"  日曜 : "sunday"  祝日 : "holiday"
-        status_cntにクラス名をつける ( date_wrap > a > status_cnt )
-        予約申請中 : "reserve_info"          予約済み："reserve_success"
-        キャンセル申請中："reserve_warning"  キャンセル済："reserve_danger"
-      ********************************************************************-->
-      <div class="date_wrap" :class="{'today': date.today, 'blank': date.blank, }"
-            v-for="date in dateList" :key="date.key" :data-date="date.date">
+  <div class="calendar_body">
+    <div class="date_wrap">
+      <a href="detail.html">
         <div class="date_cnt">
-          <span class="month">{{this.currentMonth}}月</span>
-          <span class="date">{{date.dayNumber}}<span class="date_list_type">日</span></span>
-          <span class="day">{{date.weekDay}}</span>
+          <span class="month">3月</span>
+          <span class="date">1<span class="date_list_type">日</span></span>
+          <span class="day">金曜日</span>
         </div><!--date_cnt-->
-
-        <template v-if="date.schedule">
-          <router-link v-bind:to="detailUrl(date.schedule.date)" class="title">
-            <div class="title_cnt">
-              <span class="title">{{date.schedule.title}}<br /></span>
-              <!--<span class="sub_title">イベントのサブタイトルなどの詳細</span>-->
-            </div><!--title_cnt-->
-            <template v-if="date.schedule.reserve">
-              <div class="status_cnt reserve_info">
-                <span v-if="date.schedule.reserve.status === 'app_r'" class="reserve"><span class="inner">予約<span class="br">申請中</span></span></span>
-                <span v-if="date.schedule.reserve.status === 'reserved'" class="reserve"><span class="inner">予約<span class="br">済</span></span></span>
-                <span v-if="date.schedule.reserve.status === 'app_c'" class="reserve"><span class="inner">キャンセル<span class="br">申請中</span></span></span>
-                <span v-if="date.schedule.reserve.status === 'canceled'" class="reserve"><span class="inner">キャンセル<span class="br">済</span></span></span>
-                <div class="msg_cnt unread" v-if="unread(date.schedule) > 0">
-                  <span class="num">{{unread(date.schedule)}}</span>
-                  <span class="message">件の未読メッセージ</span>
-                </div><!--.msg_cnt-->
-                <div class="msg_cnt read" v-else>
-                  <span class="num">{{unread(date.schedule)}}</span>
-                  <span class="message">件の未読メッセージ</span>
-                </div><!--.msg_cnt-->
-               </div><!--.status_cnt-->
-            </template>
-            <template v-else>
-              <span>予約なし</span>
-            </template>
-          </router-link>
-        </template>
-      </div><!--.date_wrap-->
-    </div><!--.calendar_body-->
-  </div><!-- calendar -->
+        <div class="title_cnt">
+          <span class="title">test1: 2019-03-01のイベントです。</span>
+          <span class="sub_title">イベントのサブタイトルなどの詳細</span>
+        </div><!--title_cnt-->
+        <div class="status_cnt reserve_info">
+          <span class="reserve"><span class="inner">予約<span class="br">申請中</span></span></span>
+          <div class="msg_cnt unread">
+            <span class="num">2</span>
+            <span class="message">件の未読メッセージ</span>
+          </div><!--.msg_cnt-->
+        </div><!--.status_cnt-->
+      </a>
+    </div><!--.date_wrap-->
+  </div><!--.calendar_body-->
 </template>
 
 <script>

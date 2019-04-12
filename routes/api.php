@@ -24,12 +24,20 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/admin/users/list', 'UsersController@getUserslist');
     Route::get('/admin/users/detail/{id}', 'UsersController@getUserDetail')->where(['id' => '[0-9]']);
     Route::post('/admin/users/save', 'UsersController@save');
+    Route::get('/admin/schedule/monthly/{year}/{month}', 'SchedulesController@getAdminMonthly')->where([
+        'year' => '[0-9]{4}',
+        'month' => '[0-9]{2}'
+    ]);
+    Route::get('/admin/schedule/daily/{year}/{month}/{day}', 'SchedulesController@getAdminDaily')->where([
+        'year' => '[0-9]{4}',
+        'month' => '[0-9]{2}',
+        'day' => '[0-9]{2}'
+    ]);
 });
 
 Route::post('/login', 'AuthController@login');
 Route::get('/logout', 'AuthController@logout');
 Route::post('/password/reset/request', 'UsersController@sendResetLinkEmail');
-//Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('/password/reset', 'UsersController@resetPassword');
 
 Route::group(['middleware' => 'auth:api'], function () {
@@ -47,10 +55,12 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/contact/read', 'ContactsController@setRead');
     Route::post('/contact/save', 'ContactsController@save');
     Route::get('/contact/general', 'ContactsController@getGeneralContacts');
+    Route::get('/contact/general/all', 'ContactsController@getGeneralContactsAll');
     Route::get('/notice', 'NoticesController@getUnread');
+    Route::get('/notice/all', 'NoticesController@getAll');
     Route::post('/notice/read', 'NoticesController@setRead');
 });
 
-Route::any('{all}', function() {
-    return App::abort(404);
-});
+Route::any('/{any}', function() {
+    return response()->json(['message' => 'API Not Found'], 404);
+})->where('any', '.*');

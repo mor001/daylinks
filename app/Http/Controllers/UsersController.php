@@ -28,7 +28,7 @@ class UsersController extends Controller
     }
     public function getUserDetail($id = null)
     {
-        return ['result' => true, 'users' => User::where('id', $id)->get()];
+        return ['result' => true, 'user' => User::find($id)];
     }
     public function save(Request $request)
     {

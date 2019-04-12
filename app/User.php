@@ -28,7 +28,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'tid', 'userid', 'name', 'email', 'password',
+        'tid', 'userid', 'name', 'kana', 'email', 'password', 'limit'
     ];
 
     /**
@@ -54,4 +54,20 @@ class User extends Authenticatable implements JWTSubject
     {
         $this->notify(new CustomPasswordReset($token));
     }
+
+    /**
+     * 月の利用上限日数を返す
+     */
+    public function getLimitAttribute($value)
+    {
+        if($value < 0) {
+          // マイナス値が入力されている場合は当月から引いた数を返す
+          $lastDay = date("t", mktime(0, 0, 0, date('m'), 1, date('Y')));
+          return $lastDay + $value;
+        } else {
+          // 整数値が入力されている場合はそのまま返す
+          return $value;
+        }
+    }
+
 }
