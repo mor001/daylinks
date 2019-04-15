@@ -1,5 +1,6 @@
 <template>
   <div class="calendar">
+    <button id="buttonRegist" @click="register()" >登録</button>
     <div class="calendar_header">
       <div class="weekday"><span>月</span></div>
       <div class="weekday"><span>火</span></div>
@@ -19,7 +20,8 @@
         キャンセル申請中："reserve_warning"  キャンセル済："reserve_danger"
       ********************************************************************-->
       <div class="date_wrap" :class="{'today': date.today, 'blank': date.blank, }"
-            v-for="date in dateList" :key="date.key" :data-date="date.date">
+            v-for="date in this.dateList" :key="date.key" :data-date="date.date">
+        <template v-if="!date.blank">
         <div class="date_cnt">
           <span class="month">{{this.currentMonth}}月</span>
           <span class="date">{{date.dayNumber}}<span class="date_list_type">日</span></span>
@@ -38,8 +40,9 @@
           <router-link v-if="date.date" v-bind:to="formUrl(date.date)" class="title">
             未登録
           </router-link>
+          <input type="checkbox" id="selected" :value="date.date" v-model="date.checked" />
         </template>
-        
+      </template>
       </div><!--.date_wrap-->
     </div><!--.calendar_body-->
   </div><!-- calendar -->
@@ -50,6 +53,8 @@
     data() {
       return {
         days: ["日", "月", "火", "水", "木", "金", "土"],
+        checkList: null,
+        dateList: [],
       }
     },
     props: {
@@ -94,26 +99,27 @@
           return sum
         }
       },
-      dateList: function() {
+    },
+    methods: {
+      emitOpenForm () {
+        this.$emit('open-form')
+      },
+      getDateList: function() {
+        this.dateList = []
         const year = this.currentYear
         const month = this.currentMonth
-        const currentYM = moment([year, month - 1, 1])  // 引数の年月で初期化
-        //const currentYM = moment(year+month+'01', 'YYYYMMDD')  // 引数の年月で初期化
+        const currentYM = moment([year, month - 1, 1])          // 引数の年月で初期化
+        //const currentYM = moment(year+month+'01', 'YYYYMMDD') // 引数の年月で初期化
         const startDate = moment(currentYM.startOf('month'))    // 月の最初の日を取得
         const endDate = moment(currentYM.endOf('month'))        // 月の最後の日を取得
-        const endDayCount = endDate.date()              // 月の末日
-        let startDay = startDate.day()                // 月の最初の日の曜日を取得
-        let dayCount = 1                                // 日にちのカウント
+        const endDayCount = endDate.date()                      // 月の末日
+        let startDay = startDate.day()                          // 月の最初の日の曜日を取得
+        let dayCount = 1                                        // 日にちのカウント
         let index = 0
-        let dateList = []
 
-        /*
-        console.log(currentYM)
-        console.log(startDate)
-        console.log(endDate)
-        console.log('月初曜日: ' + startDate.day())
-        console.log('月末曜日: ' + currentYM.endOf('month').format('YYYY-MM-DD dddd'))
-        */
+        console.log('対象年月: ' + currentYM.format('YYYY-MM'))
+        console.log('月初日: ' + startDate + '(' + startDate.day() + ')')
+        console.log('月末曜日: ' + endDate + '(' + currentYM.endOf('month').format('YYYY-MM-DD dddd') + ')')
 
         if(startDay === 0) {
           startDay = 7
@@ -124,13 +130,13 @@
             const currentDate = moment([year, month - 1, dayCount])
             if (w == 0 && d < startDay) {
               // 1行目で1日の曜日の前
-              dateList[index] = {}
+              this.dateList[index] = {blank: true}
             } else if (dayCount > endDayCount) {
               // 末尾の日数を超えた
-              dateList[index] = {}
+              this.dateList[index] = {blank: true}
             } else {
               let schedule = this.schedule(currentDate.format('YYYY-MM-DD'))
-              dateList[index] = {
+              this.dateList[index] = {
                 key: dayCount,
                 dayNumber: dayCount,
                 date: year + "-" + month  + "-" + dayCount,
@@ -140,52 +146,36 @@
                 weekDay: d,
                 moment: currentDate,
                 schedule: schedule,
+                checked: false,
               };
               dayCount++
             }
             index++
           }
         }
-
-/*
-        for (let w = 0; w < 6; w++) {
-          for (let d = 0; d < 7; d++) {
-            const currentDate = moment([year, month - 1, dayCount])
-            if (w == 0 && d < startDay) {
-              // 1行目で1日の曜日の前
-              dateList[index] = {}
-            } else if (dayCount > endDayCount) {
-              // 末尾の日数を超えた
-              dateList[index] = {}
-            } else {
-              let schedule = this.schedule(currentDate.format('YYYY-MM-DD'))
-              dateList[index] = {
-                key: dayCount,
-                dayNumber: dayCount,
-                date: year + "-" + month  + "-" + dayCount,
-                blank: false,
-                today: currentDate.format('YYYYMMDD') == moment().format('YYYYMMDD'), 
-                additional: false,
-                weekDay: d,
-                moment: currentDate,
-                schedule: schedule,
-              };
-              dayCount++
-            }
-            index++
+        console.log(this.dateList)
+      },
+      register: function() {
+        console.log('call register')
+        const checkList = []
+        for (var i = 0; i < this.dateList.length; i++) {
+          if(this.dateList[i].checked) {
+            checkList.push(this.dateList[i].date)
           }
         }
-*/
-        //console.log(dateList)
-        return dateList.filter(function() {
-          return true;
-        });
+        this.$emit('openForm', checkList)
       },
     },
-    methods: {
-    },
     filters: {
-    }
+    },
+    watch: {
+      currentMonth: function () {
+        this.getDateList()
+      }
+    },
+    created() {
+      this.getDateList()
+    },
 }
 </script>
 

@@ -10,19 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::match(['get', 'post'], 'admin/{any}', function () {
+Route::prefix('admin')->group(function(){
+    Route::any('/', function () {
+      return view('admin');
+    });
+    
+    Route::any('{all}', function () {
     return view('admin');
-})->where(['all' => '.*']);
+  })->where(['all' => '.*']);
+});
 Route::any('{all}', function () {
     return view('app');
 })->where(['all' => '.*']);
-
-/*
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-*/

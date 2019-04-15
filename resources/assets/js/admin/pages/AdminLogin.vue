@@ -40,11 +40,12 @@ export default {
       const self = this
       await this.$store.dispatch('admin/login' , this.form)
       .then(function (response) {
-        console.log(response)
         if(self.$store.getters['error/message'] !== '') {
           self.showAlert = true
           self.alertMessage = self.$store.getters['error/message']
         } else {
+          self.$store.commit('appdata/setCurrentYear', window.moment().format('YYYY'))
+          self.$store.commit('appdata/setCurrentMonth', window.moment().format('MM'))
           self.$router.push('/admin')
         }
       }).catch(function (error) {

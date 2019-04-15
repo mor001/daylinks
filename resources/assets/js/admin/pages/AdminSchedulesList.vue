@@ -9,7 +9,10 @@
       <a href="#" class="prev" @click="prev"><i class="fas fa-caret-square-left"></i></a>
       <p><span>{{this.y}}</span>年<span>{{this.m}}</span>月 スケジュール一覧</p>
       <a href="#" class="next" @click="next"><i class="fas fa-caret-square-right"></i></a>
-      <Calendar v-if="showCalendar" :schedules="schedules" :current-year="this.y" :current-month="this.m" />
+      <Calendar v-if="this.showCalendar && schedules" :schedules="this.schedules" :current-year="this.y" :current-month="this.m" @openForm="onOpenForm" />
+      <div v-for="chk in this.checkList" :key="chk.key">
+        <p>{{chk}}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -20,7 +23,7 @@
   export default {
     data() {
       return {
-        schedules: [],
+        schedules: null,
         showAlert: false,
         alertMessage: '',
         loading: true,
@@ -29,6 +32,7 @@
         m: 0,
         d: 0,
         limit: 0,
+        checkList: null,
       }
     },
     components: {
@@ -36,14 +40,20 @@
       //ListView,
     },
     methods: {
-      fetchSchedules () {
+      onOpenForm (arg) {
+        this.checkList = arg
+        console.log(this.checkList)
+        this.showCalendar = false
+      },
+      async fetchSchedules () {
+        console.log('fetchSchedules YM = ' +  this.y + '/' + this.m)
         const self = this
         this.loading = true
         this.showAlert = false
         this.alertMessage = ''
-        
+        this.schedules = null
         let url = '/api/admin/schedule/monthly/' + this.y + '/' + this.m
-        window.axios.get(url)
+        await window.axios.get(url)
         .then(response => {
           self.schedules = response.data.schedules
           self.y = response.data.y
@@ -76,8 +86,14 @@
     },
     mounted() {
       const m = window.moment()
-      this.y = m.format("YYYY")
-      this.m = m.format("MM")
+      this.y = this.$store.getters['appdata/currentYear']
+      this.m = this.$store.getters['appdata/currentMonth']
+      if(!this.y) {
+        this.y = m.format("YYYY")
+      }
+      if(!this.m) {
+        this.m = m.format("MM")
+      }
       this.fetchSchedules()
     },
     computed: {

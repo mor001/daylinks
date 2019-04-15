@@ -18,20 +18,29 @@ class AuthController extends Controller
 
       //もし認証エラーなら
       if(!$token = auth($target)->attempt($credentials)){
-          return response()->json(['login' => false, 'error' => 'The login attempt failed.'], 200);
+        return response()->json(['login' => false, 'error' => 'The login attempt failed.'], 200);
       }
       //OKならtoken発行
       return $this->respondWithToken($token, $isAdmin);
     }
-    //id,pwで認証してtokenを発行
+    //管理画面ログイン
     public function adminLogin()
     {
       return $this->login(true);
     }
-    public function logout()
+    //ログアウト
+    public function logout($isAdmin = false)
     {
-      auth()->logout();
-      return response()->json(['message' => 'logout']);
+      $target = 'api';
+      if($isAdmin) $target = 'admin';
+
+      auth($target)->logout();
+      return response()->json(['login' => false, 'message' => 'logout']);
+    }
+    //管理画面ログアウト
+    public function adminLogout()
+    {
+      return $this->logout(true);
     }
     //自分の情報返す
     public function me()

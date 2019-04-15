@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 //});
 
 Route::post('/admin/login', 'AuthController@adminLogin');
+Route::get('/admin/logout', 'AuthController@adminLogout');
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/admin/me', 'AuthController@adminMe');
     Route::get('/admin/notice/unread', 'NoticesController@getUnreadAdmin');

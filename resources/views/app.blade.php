@@ -18,20 +18,24 @@
   <link rel="icon" type="image/png" href="images/favicons/android-chrome-256x256.png">
   <!--ここまでfavicon-->
   <link rel="manifest" href="/manifest.json" />
-  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-  <script>
-    var OneSignal = window.OneSignal || [];
-      OneSignal.push(function() {
-      OneSignal.init({
-      appId: "708de202-2ba3-4679-b73b-df88682f854b",
-    });
-  });
-  </script>
 </head>
 <body>
 <div id="wrapper">
    <app></app>
 </div>
+<script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBRuLDAwt1YdSf0W7-IgUK_GWhPTgctFDU",
+    authDomain: "daylinks-c5a0a.firebaseapp.com",
+    databaseURL: "https://daylinks-c5a0a.firebaseio.com",
+    projectId: "daylinks-c5a0a",
+    storageBucket: "daylinks-c5a0a.appspot.com",
+    messagingSenderId: "785019687094"
+  };
+  firebase.initializeApp(config);
+</script>
 <script src="{{ mix('/js/app.js') }}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script src="/js/jquery.matchHeight-min.js"></script>
