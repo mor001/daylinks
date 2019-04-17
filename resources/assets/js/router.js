@@ -73,6 +73,7 @@ router.beforeEach((to, from, next) => {
     }
   } else if (to.matched.some(record => record.meta.requiresAdminAuth)) {
     if (!store.getters['admin/isLogin']) {
+      console.log('[VueRouterでadmin/loginにリダイレクト] admin/isLogin: ' + store.getters['admin/isLogin'])
       next({
         path: '/admin/login',
         query: { redirect: to.fullPath }

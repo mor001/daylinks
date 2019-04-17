@@ -40,7 +40,7 @@ const actions = {
   // ログアウト
   async logout(context) {
     await window.axios.get('/api/logout')
-    .then(function (response) {
+    .finally( () => {
       window.axios.defaults.headers.common['Authorization'] = null;
       localStorage.removeItem('token')
       context.commit('appdata/setTenantName', null, { root: true })

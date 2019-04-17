@@ -26,6 +26,9 @@
         schedule: null,
       }
     },
+    props: {
+      targetDateList: { required: true },
+    },
     components: {
     },
     methods: {

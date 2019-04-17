@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 
 class AuthController extends Controller
 {
@@ -34,7 +35,12 @@ class AuthController extends Controller
       $target = 'api';
       if($isAdmin) $target = 'admin';
 
-      auth($target)->logout();
+      try {
+        auth($target)->logout();
+      } catch (Exception $e) {
+        // トークン有効期限切れなら401を返す
+        return response()->json(['login' => false, 'message' => 'logout'], 401);
+      }
       return response()->json(['login' => false, 'message' => 'logout']);
     }
     //管理画面ログアウト

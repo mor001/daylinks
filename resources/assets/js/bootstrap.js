@@ -28,8 +28,14 @@ window.axios.interceptors.response.use(function (response) {
 }, function (error) {
   if (error.response.status === 401) {
     console.log('response status is 401')
-    store.dispatch('auth/logout')
-    router.push('/login')
+    var path = location.pathname;
+    if ( path.match(/admin/)) {
+      store.dispatch('admin/logout')
+      router.push('/admin/login')
+    } else {
+      store.dispatch('auth/logout')
+      router.push('/login')
+    }
   } else if (error.response.status === 500) {
     console.log('response status is 500')
     window.location = "/500"

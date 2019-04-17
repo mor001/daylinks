@@ -4785,6 +4785,13 @@ module.exports = function normalizeComponent (
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(161);
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
@@ -5089,13 +5096,6 @@ module.exports = {
   extend: extend,
   trim: trim
 };
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(161);
 
 
 /***/ }),
@@ -5498,7 +5498,7 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 var normalizeHeaderName = __webpack_require__(263);
 
 var DEFAULT_CONTENT_TYPE = {
@@ -5688,6 +5688,7 @@ router.beforeEach(function (to, from, next) {
     return record.meta.requiresAdminAuth;
   })) {
     if (!__WEBPACK_IMPORTED_MODULE_19__store__["a" /* default */].getters['admin/isLogin']) {
+      console.log('[VueRouterでadmin/loginにリダイレクト] admin/isLogin: ' + __WEBPACK_IMPORTED_MODULE_19__store__["a" /* default */].getters['admin/isLogin']);
       next({
         path: '/admin/login',
         query: { redirect: to.fullPath }
@@ -18143,7 +18144,7 @@ module.exports = function bind(fn, thisArg) {
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 var settle = __webpack_require__(264);
 var buildURL = __webpack_require__(266);
 var parseHeaders = __webpack_require__(267);
@@ -18451,9 +18452,9 @@ window._ = __webpack_require__(256);
  */
 
 try {
-    window.$ = window.jQuery = __webpack_require__(257);
+  window.$ = window.jQuery = __webpack_require__(257);
 
-    __webpack_require__(258);
+  __webpack_require__(258);
 } catch (e) {}
 
 /**
@@ -18465,24 +18466,30 @@ try {
 window.axios = __webpack_require__(259);
 
 window.axios.interceptors.response.use(function (response) {
-    return response;
+  return response;
 }, function (error) {
-    if (error.response.status === 401) {
-        console.log('response status is 401');
-        __WEBPACK_IMPORTED_MODULE_1__store__["a" /* default */].dispatch('auth/logout');
-        __WEBPACK_IMPORTED_MODULE_0__router__["a" /* default */].push('/login');
-    } else if (error.response.status === 500) {
-        console.log('response status is 500');
-        window.location = "/500";
+  if (error.response.status === 401) {
+    console.log('response status is 401');
+    var path = location.pathname;
+    if (path.match(/admin/)) {
+      __WEBPACK_IMPORTED_MODULE_1__store__["a" /* default */].dispatch('admin/logout');
+      __WEBPACK_IMPORTED_MODULE_0__router__["a" /* default */].push('/admin/login');
+    } else {
+      __WEBPACK_IMPORTED_MODULE_1__store__["a" /* default */].dispatch('auth/logout');
+      __WEBPACK_IMPORTED_MODULE_0__router__["a" /* default */].push('/login');
     }
-    return Promise.reject(error);
-    //return error
+  } else if (error.response.status === 500) {
+    console.log('response status is 500');
+    window.location = "/500";
+  }
+  return Promise.reject(error);
+  //return error
 });
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 if (localStorage.getItem('token')) {
-    window.axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+  window.axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
 }
 
 window.moment = __webpack_require__(0);
@@ -18496,9 +18503,9 @@ window.moment = __webpack_require__(0);
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
-    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
-    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
 /**
@@ -33603,7 +33610,7 @@ exports.push([module.i, "\n[v-cloak] {\r\n  display: none;\n}\r\n", ""]);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 
 
@@ -36915,7 +36922,7 @@ exports.push([module.i, "", ""]);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helper_DialogHelper__ = __webpack_require__(196);
 
@@ -37180,7 +37187,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue__);
@@ -38263,7 +38270,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 
 
@@ -38508,7 +38515,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 
 
@@ -38849,7 +38856,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 
 
@@ -38973,7 +38980,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 
 
@@ -39209,7 +39216,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 
 
@@ -39993,7 +40000,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Calendar__ = __webpack_require__(231);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Calendar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Calendar__);
@@ -40753,6 +40760,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
 
+  props: {
+    targetDateList: { required: true }
+  },
   components: {},
   methods: {
     fetchData: function fetchData() {
@@ -42227,7 +42237,7 @@ function t(t,n,r){return void 0===(t=(n.split?n.split("."):n).reduce(function(t,
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 
 
@@ -42292,7 +42302,7 @@ var actions = {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return window.axios.get('/api/logout').then(function (response) {
+              return window.axios.get('/api/logout').finally(function () {
                 window.axios.defaults.headers.common['Authorization'] = null;
                 localStorage.removeItem('token');
                 context.commit('appdata/setTenantName', null, { root: true });
@@ -42334,7 +42344,7 @@ var methods = {};
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 
 
@@ -42428,7 +42438,7 @@ var actions = {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return window.axios.get('/api/admin/logout').then(function (response) {
+              return window.axios.get('/api/admin/logout').finally(function () {
                 window.axios.defaults.headers.common['Authorization'] = null;
                 localStorage.removeItem('token');
                 context.commit('appdata/setTenantName', null, { root: true });
@@ -42623,7 +42633,7 @@ var actions = {};
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 
 
@@ -72790,7 +72800,7 @@ module.exports = __webpack_require__(260);
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 var bind = __webpack_require__(140);
 var Axios = __webpack_require__(262);
 var defaults = __webpack_require__(9);
@@ -72877,7 +72887,7 @@ function isSlowBuffer (obj) {
 
 
 var defaults = __webpack_require__(9);
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 var InterceptorManager = __webpack_require__(271);
 var dispatchRequest = __webpack_require__(272);
 
@@ -72962,7 +72972,7 @@ module.exports = Axios;
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 module.exports = function normalizeHeaderName(headers, normalizedName) {
   utils.forEach(headers, function processHeader(value, name) {
@@ -73042,7 +73052,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 function encode(val) {
   return encodeURIComponent(val).
@@ -73117,7 +73127,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 // Headers whose duplicates are ignored by node
 // c.f. https://nodejs.org/api/http.html#http_message_headers
@@ -73177,7 +73187,7 @@ module.exports = function parseHeaders(headers) {
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -73295,7 +73305,7 @@ module.exports = btoa;
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -73355,7 +73365,7 @@ module.exports = (
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 function InterceptorManager() {
   this.handlers = [];
@@ -73414,7 +73424,7 @@ module.exports = InterceptorManager;
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 var transformData = __webpack_require__(273);
 var isCancel = __webpack_require__(143);
 var defaults = __webpack_require__(9);
@@ -73507,7 +73517,7 @@ module.exports = function dispatchRequest(config) {
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 /**
  * Transform the data for a request or a response
@@ -73720,6 +73730,12 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
 //
 //
 //
@@ -73728,18 +73744,50 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   mounted: function mounted() {
-    /*
-    const self = this
-    if(localStorage.getItem('token')) {
-      await window.axios.get('/api/me')
-      .then(function (response) {
-      }).catch(async function (error) {
-        console.log('[app.vueで/api/meに失敗してリダイレクト]')
-        await self.$store.dispatch('auth/logout')
-        self.$router.push('/login')
-      })
-    }
-    */
+    var _this = this;
+
+    var self = this;
+    _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              if (!localStorage.getItem('token')) {
+                _context2.next = 3;
+                break;
+              }
+
+              _context2.next = 3;
+              return window.axios.get('/api/me').then(function (response) {}).catch(function () {
+                var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(error) {
+                  return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                    while (1) {
+                      switch (_context.prev = _context.next) {
+                        case 0:
+                          console.log('[app.vueで/api/meに失敗してリダイレクト]');
+                          self.$store.dispatch('auth/logout');
+                          self.$router.push('/login');
+
+                        case 3:
+                        case 'end':
+                          return _context.stop();
+                      }
+                    }
+                  }, _callee, this);
+                }));
+
+                return function (_x) {
+                  return _ref2.apply(this, arguments);
+                };
+              }());
+
+            case 3:
+            case 'end':
+              return _context2.stop();
+          }
+        }
+      }, _callee2, _this);
+    }));
   }
 });
 
