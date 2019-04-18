@@ -1,7 +1,7 @@
 import * as CONSTS from './const';
 
-export const Common = {
-    methods: {
+export default {
+  methods: {
     /**
      * 指定した日付からXヶ月後のDateオブジェクトを取得する
      * @param {object} date   - 基準のDateオブジェクト
@@ -32,6 +32,10 @@ export const Common = {
         nextDate.setDate(day);
       }
       return nextDate;
-    }
+    },
+    detailUrl(date) {
+      const arr = date.split('-')
+      return '/detail/'+arr[0]+'/'+arr[1]+'/'+arr[2]
+    },
   }
 }

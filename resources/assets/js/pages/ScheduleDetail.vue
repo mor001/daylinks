@@ -81,6 +81,16 @@
         </div><!--.detail_wrap-->
       </article><!--.container-->
     </div><!--#main_contents-->
+    <div v-else id="main_contents">
+      <article class="container">
+        <div class="common_cnt">
+          <h2>{{$store.getters['appdata/tenantName']}}</h2>
+        </div>
+        <div class="detail_wrap">
+          <p>予定が登録されていません。</p>
+        </div><!--.detail_wrap-->
+      </article><!--.container-->
+    </div><!--#main_contents-->
   </div>
 </template>
 
@@ -155,10 +165,12 @@ export default {
     fetchData() {
       window.axios.get('/api/schedule/daily/'+this.$route.params.year+'/'+this.$route.params.month+'/'+this.$route.params.day)
       .then( response => {
-        //this.$set(this, 'detail', response.data.schedules)
-        this.detail = response.data.schedules
-        this.contactForm.schedule_id = this.detail.id
-        console.log(this.detail)
+        if(response.data.schedules) {
+          console.log(response.data)
+          //this.$set(this, 'detail', response.data.schedules)
+          this.detail = response.data.schedules
+          this.contactForm.schedule_id = this.detail.id
+        }
       }).finally(() => {
         this.loading = false
       })

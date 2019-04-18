@@ -37,8 +37,10 @@ class AuthController extends Controller
 
       try {
         auth($target)->logout();
-      } catch (Exception $e) {
-        // トークン有効期限切れなら401を返す
+      } catch (TokenExpiredException $e) {
+        // Logoutでもトークンチェックが入るのでトークン有効期限切れなら401を返す
+        return response()->json(['login' => false, 'message' => 'logout'], 401);
+      } catch(\Exception $e) {
         return response()->json(['login' => false, 'message' => 'logout'], 401);
       }
       return response()->json(['login' => false, 'message' => 'logout']);

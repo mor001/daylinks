@@ -90,7 +90,9 @@ class Schedule extends Model
                     }])
                     ->with('holiday')
                     ->first();
-        $schedule->contacts = Contact::getScheduleContacts($schedule->id, Auth::user()->id);
+        if($schedule) {
+          $schedule->contacts = Contact::getScheduleContacts($schedule->id, Auth::user()->id);
+        }
         return $schedule;
     }
     public static function countingReserve($schedules) 

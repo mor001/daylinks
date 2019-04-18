@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import UserLayout from './layouts/user.vue';
+import UserLayout from './layouts/LayoutUser.vue';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import User from './pages/User';
@@ -10,7 +10,7 @@ import Notice from './pages/Notice';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 
-import AdminLayout from './layouts/admin.vue';
+import AdminLayout from './layouts/LayoutAdmin.vue';
 import AdminLogin from './admin/pages/AdminLogin';
 import AdminHome from './admin/pages/AdminHome';
 import AdminUsersList from './admin/pages/AdminUsersList';

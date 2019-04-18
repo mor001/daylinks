@@ -33,9 +33,7 @@
 </template>
 
 <script>
-import { Common } from '../common/common'
 export default {
-  mixins: [ Common ],
   data () {
     return {
       loading: true,

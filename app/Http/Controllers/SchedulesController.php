@@ -50,7 +50,8 @@ class SchedulesController extends Controller
         }
         return ['schedules' => $data];
       } else {
-        return response()->json(['error' => 'Not Found'], 404);
+        return ['schedules' => $data];
+        //return response()->json(['error' => 'Not Found'], 404);
       }
     }
     public function getAdminDaily($y = null, $m = null, $d = null)

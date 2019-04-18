@@ -4,26 +4,23 @@
     <p v-if="showAlert">{{ alertMessage }}</p>
     <div v-show="!loading" id="main_contents">
       <article class="container">
-        <div class="common_cnt">
-          <h2>{{$store.getters['appdata/tenantName']}}</h2>
-        </div>
-        <div class="calendar_wrap month-type">
-          <div class="pager_wrap">
-            <div>
-              <a href="#" class="prev" @click="prev"><i class="fas fa-caret-square-left"></i></a>
-              <p><span>{{this.y}}</span>年<span>{{this.m}}</span>月</p>
-              <a href="#" class="next" @click="next"><i class="fas fa-caret-square-right"></i></a>
-            </div>
-            <nav class="clearfix">
-              <ul>
-                <li class="trigger-month carrent" title="月表示"><a href="#" @click="setCalendarView(true)"></a></li>
-                <li class="trigger-list" title="リスト表示"><a href="#" @click="setCalendarView(false)"></a></li>
-              </ul>
-            </nav>
+        <div id="pager" class="pager_wrap">
+          <div class="inner">
+            <a href="#" class="prev" @click="prev"><i class="fas fa-caret-square-left"></i></a>
+            <p><span>{{this.y}}</span>年<span>{{this.m}}</span>月</p>
+            <a href="#" class="next" @click="next"><i class="fas fa-caret-square-right"></i></a>
           </div>
-          <Calendar v-if="showCalendar" :schedules="schedules" :current-year="this.y" :current-month="this.m" />
-          <ListView v-else :schedules="schedules" :current-year="this.y" :current-month="this.m" />
-        </div> <!--.calendar_wrap-->
+        </div>
+
+        <div class="calender_nav full-width">
+          <ul class="clearfix">
+            <li class="col-4"><a href="#" @click="setCalendarView(true)"><i class="fas fa-calendar-alt"></i>MONTH</a></li>
+            <li class="col-4"><a href="#" @click="setCalendarView(false)"><i class="fas fa-calendar-week"></i>LIST</a></li>
+            <li class="col-4"><router-link v-bind:to="detailUrl('2019-08-21')" class="title"><i class="fas fa-calendar-day"></i>TODAY</router-link></li>
+          </ul>
+        </div>
+        <Calendar v-if="showCalendar" :schedules="schedules" :current-year="this.y" :current-month="this.m" />
+        <ListView v-else :schedules="schedules" :current-year="this.y" :current-month="this.m" />
       </article><!--.container-->
     </div><!--#main_contents-->
   </main><!--#main-->
@@ -32,7 +29,9 @@
 <script>
   import Calendar from '../components/Calendar'
   import ListView from '../components/ListView'
+  import Common from '../common/common'
   export default {
+    mixins: [ Common ],
     data() {
       return {
         schedules: [],
@@ -111,6 +110,9 @@
       this.fetchSchedules()
     },
     computed: {
+      today: function() {
+        return window.moment().format('YYYY-MM-DD')
+      },
     },
     filters: {
     },

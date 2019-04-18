@@ -1,5 +1,5 @@
 <template>
-  <div class="calendar">
+  <div class="calendar_wrap month-type">
     <div class="calendar_header">
       <div class="weekday"><span>月</span></div>
       <div class="weekday"><span>火</span></div>
@@ -43,8 +43,8 @@
                   <span class="message">件の未読メッセージ</span>
                 </div><!--.msg_cnt-->
                 <div class="msg_cnt read" v-else>
-                  <span class="num">{{unread(date.schedule)}}</span>
-                  <span class="message">件の未読メッセージ</span>
+                  <span class="num">{{date.schedule.contacts.length}}</span>
+                  <span class="message">件の既読メッセージ</span>
                 </div><!--.msg_cnt-->
                </div><!--.status_cnt-->
             </template>
@@ -59,7 +59,9 @@
 </template>
 
 <script>
-  export default {
+import Common from '../common/common'
+export default {
+    mixins: [ Common ],
     data() {
       return {
         days: ["日", "月", "火", "水", "木", "金", "土"],
@@ -73,12 +75,6 @@
     components: {
     },
     computed: {
-      detailUrl: function() {
-        return function (date) {
-          const arr = date.split('-')
-          return '/detail/'+arr[0]+'/'+arr[1]+'/'+arr[2]
-        }
-      },
       schedule: function() {
         const self = this
         return function(date) {
