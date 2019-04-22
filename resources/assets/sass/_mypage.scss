@@ -1,0 +1,138 @@
+@charset "UTF-8";
+@import "settings";
+@import "color";
+@import "mixin";
+
+#main_contents article .mypage_cnt {
+  padding-left: $gutter-width / 2;
+  padding-right: $gutter-width / 2;
+}
+.user_table {
+   .title, .content, .button {
+    display: block;
+    padding: 0.5em $gutter-width / 2;
+  }
+  .title {
+    background-color: $color-gray-pale;
+    border-top: 1px solid $color-gray-middle;
+    border-bottom: 1px solid $color-gray-middle;
+
+  }
+  .title, .content {
+    margin-left: -$gutter-width / 2;
+    margin-right: -$gutter-width / 2;
+  }
+  .change_wrap {
+
+  }
+  .keep_wrap {
+    .content {
+      &:last-child {
+        border-bottom: 1px solid $color-gray-middle;
+      }
+    }
+  }
+}
+.mypage_cnt {
+  background-color: $color-white;
+  h3 {
+    margin: 0;
+    margin-bottom: 1em;
+  }
+}
+
+.button {
+  margin-top: $gutter-width;
+  input {
+    width: 110px;
+    padding: 0.7em 0.5em;
+    @include radius(5px);
+    background-color: $color-main;
+    color: $color-white;
+    cursor: pointer;
+  }
+}
+
+
+@media#{$md-up} {
+  .mypage_cnt {
+    padding-bottom: 2em;
+  }
+  .user_table .title, .user_table .content, .user_table .button {
+    padding: 1em;
+  }
+  .user_table {
+     .title, .content {
+      display: inline-block;
+      border: none;
+      border-top: 1px solid $color-gray-middle;
+      border-right: 1px solid $color-gray-middle;
+      margin: 0;
+    }
+    .title {
+      width: 30%;
+      background-color: inherit;
+      border-left: 1px solid $color-gray-middle;
+      background-color: $color-gray-pale;
+    }
+    .content {
+      width: 70%;
+    }
+    .change_wrap {
+      position: relative;
+      font-size: 0;
+      .title, .content, .button {
+        font-size: 1.6rem;
+      }
+      .button {
+        width: 20%;
+        position: absolute;
+        text-align: center;
+        margin: 0 auto;
+        right: 0;
+        top: 0;
+        padding: 37px 0;
+        border: none;
+        border: 1px solid $color-gray-middle;
+        border-left: none;
+        border-bottom: none;
+        input {
+          padding: 12px 24px;
+        }
+      }
+    }
+    .keep_wrap {
+      font-size: 0;
+      .title, .content {
+        font-size: 1.6rem;
+      }
+      div {
+        &:nth-last-child(2) {
+          border-bottom: 1px solid $color-gray-middle;
+        }
+      }
+    }
+  }
+  .button {
+    padding-top: 0;
+    margin-top: $gutter-width * 2;
+    input {
+      @include box-shadow();
+      width: 140px;
+      padding: 1em;
+      @include radius(7px);
+      font-size: 1.4rem;
+      font-weight: bold;
+      transition: .3s;
+      &:hover {
+        @include box-shadow-hover();
+        background-color: $color-main-deep;
+      }
+    }
+  }
+  #main_contents article .mypage_cnt {
+    padding: 2em 4em;
+    margin-top: 2em;
+    @include box-shadow2();
+  }
+}

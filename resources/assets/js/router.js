@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import store from './store'
 
 import UserLayout from './layouts/LayoutUser.vue';
 import Home from './pages/Home';
@@ -20,7 +21,6 @@ import AdminScheduleForm from './admin/pages/AdminScheduleForm';
 
 import SystemError from './pages/errors/System.vue'
 import NotFound from './pages/errors/NotFound.vue'
-import store from './store'
 
 Vue.use(VueRouter);
 

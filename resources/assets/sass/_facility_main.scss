@@ -1,0 +1,74 @@
+@charset "UTF-8";
+@import "settings";
+@import "color";
+@import "mixin";
+.facility_main {
+  padding-top: $mainHeader !important;
+  .btn_cnt {
+    padding: 1em 0;
+    padding-left: $gutter-width / 2;
+  }
+  .common_cnt {
+    padding: $gutter-width / 2;
+    padding-top: 0;
+    .inner {
+      padding: 1em;
+      background-color: $color-gray-pale;
+      .btn_cnt {
+        padding: 0;
+      }
+    }
+    h4 {
+      font-size: 1.6rem;
+      line-height: 1.6rem;
+      margin-bottom: 4px;
+    }
+    p {
+      font-size: 1.4rem;
+      line-height: 1.8rem;
+    }
+  }
+}
+@media#{$md-up} {
+  main.facility_main {
+    /*
+    margin-left: $facility-header-width;
+    padding-top: $mainHeader !important;
+    .btn_cnt {
+      padding-left: 0;
+    }
+    */
+   .btn_cnt {
+     padding-left: 0;
+   }
+    .common_cnt {
+      padding: 0;
+      margin: 2rem 0;
+      h4 {
+        font-size: 1.8rem;
+        p {
+          font-size: 1.6rem;
+        }
+      }
+      .inner {
+        background-color: inherit;
+        padding: 0;
+        .btn_cnt {
+          margin-top: $gutter-width;
+        }
+      }
+    }
+  }
+  table.userlist {
+    @include box-shadow2();
+  }
+}
+@media#{$lg-up} {
+  main.facility_main {
+    margin-left: $facility-header-width;
+    padding-top: $mainHeader !important;
+    .btn_cnt {
+      padding-left: 0;
+    }
+  }
+}

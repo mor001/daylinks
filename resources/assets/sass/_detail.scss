@@ -1,0 +1,440 @@
+@charset "UTF-8";
+@import "settings";
+@import "color";
+@import "mixin";
+
+.detail_wrap {
+  .reserve_info, .reserve_success, .reserve_danger {
+    color: $color-white;
+  }
+  .status_title {
+    .reserve.warning, .reserve.info  {
+      background-color: $color-main-sub !important;
+    }
+    .reserve.danger {
+      background-color: $color-gray-light !important;
+    }
+  }
+  .status_title  {
+    background-color: $color-main;
+    padding: 0 1em;
+  }
+  .inner {
+  }
+  h4 {
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    margin-bottom: 0.5em;
+  }
+  p, li {
+    font-size: 1.4rem;
+    line-height: 2rem;
+  }
+  .text_box {
+    border-top: none;
+    .inner_box {
+      margin: 0.5em 0;
+      border: 1px solid $color-font-pale;
+      padding: 0.5em 1em;
+    }
+  }
+  .bring_title {
+    font-weight: bold;
+  }
+  .bring {
+    li {
+      position: relative;
+      margin-left: 10px;
+      &:before {
+        content: '';
+        width: 6px;
+        height: 6px;
+        @include radius(50%);
+        background-color: $color-gray-deep;
+        display: inline-block;
+        padding-right: 4px;
+        position: absolute;
+        position: absolute;
+        top: 50%;
+        left: -10px;;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+      }
+    }
+  }
+  .reserve_info, .reserve_success, .reserve_danger, .reserve_warning {
+    border: none;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+  }
+}
+.detail_cnt {
+  background-color: $color-white;
+  padding: 1em;
+}
+
+
+/*以下、②左側のコメント*/
+
+$icon-width: 34px;
+$chat-says-max: 300px;
+
+.chat_wrap {
+  padding-top: $gutter-width / 2;
+  text-align: right;
+  //background-color: $color-white;
+  h4 {
+    padding: 0;
+    background-color: inherit;
+    margin: $gutter-width / 2 0;
+    padding-left: 0.5em;
+    text-align: left;
+    border: none;
+    border-bottom: 2px solid $color-gray-middle;
+  }
+  .inner {
+    padding: $gutter-width / 2 0;
+    background-color: $color-white;
+    min-height: 70px;
+  }
+}
+.mycomment {
+  position: relative;
+  margin: $gutter-width / 2 0;
+  .chatting {
+    width: 100%;
+    padding: 0 $icon-width 0 $icon-width + 8px;
+    text-align: left;
+    &:before {
+      font-family: "Font Awesome 5 Free";
+      content: "\f2bd";
+      font-weight: bold;
+      font-size: 2.4rem;
+      display: inline-block;
+      position: absolute;
+      left: 8px;
+      color: $color-main;
+    }
+    &:after {
+      content: '利用者';
+      font-size: 1.2rem;
+      position: absolute;
+      top: $icon-width - 6px;
+      left: 0;
+      color: $color-main;
+    }
+  }
+  .says {
+    background-color: $color-main-pale;
+    &:after {
+      border-right: 18px solid $color-main-pale;
+    }
+  }
+}
+.says {
+  text-align: left;
+  margin-right: auto;
+  display: block;
+  position: relative;
+  padding: $gutter-width / 4 $gutter-width / 2;
+  //max-width: $chat-says-max;
+  @include radius(12px);
+  //background: $color-gray-pale;
+  &:after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 3px;
+    left: -19px;
+    border: 8px solid transparent;
+    -ms-transform: rotate(35deg);
+    -webkit-transform: rotate(35deg);
+    transform: rotate(35deg);
+  }
+  p {
+    padding: $gutter-width / 4;
+    font-size: 1.4rem;
+  }
+  span.time {
+    display: block;
+    text-align: right;
+    padding-bottom: $gutter-width / 4;
+    font-size: 1rem;
+    color: $color-gray-deep;
+    &:before {
+      font-family: "Font Awesome 5 Free";
+      content: "\f017";
+      font-weight: bold;
+      padding-right: 4px;
+    }
+  }
+}
+/*以下、③右側の緑コメント*/
+.facility_cnt {
+  margin: $gutter-width / 2 0;
+  position: relative;
+  .chatting {
+    width: 100%;
+    text-align: right;
+    padding: 0 $icon-width - 8px  0 $icon-width + 8px;
+    &:before {
+      font-family: "Font Awesome 5 Free";
+      content: "\f2bd";
+      font-weight: bold;
+      font-size: 2.4rem;
+      display: inline-block;
+      position: absolute;
+      right: 0;
+    }
+    &:after {
+      content: '運営';
+      font-size: 1rem;
+      position: absolute;
+      top: $icon-width - 6px;
+      right: 0;
+    }
+  }
+
+  .says {
+    position: relative;
+    margin: 0 10px 0 0;
+    //max-width: $chat-says-max;
+    @include radius(12px);
+    background-color: $color-gray-pale;
+    p {
+      &:after {
+        content: "";
+        position: absolute;
+        top: 3px;
+        right: -19px;
+        border: 8px solid transparent;
+        border-left: 18px solid $color-gray-pale;
+        -ms-transform: rotate(-35deg);
+        -webkit-transform: rotate(-35deg);
+        transform: rotate(-35deg);
+      }
+    }
+  }
+}
+
+.comment_wrap {
+  //background-color: $color-white;
+  padding-top: $gutter-width;
+  h4 {
+    padding: 0;
+    background-color: inherit;
+    margin: $gutter-width / 2 0;
+    padding-left: 0.5em;
+    text-align: left;
+    border: none;
+  }
+  .mycomment {
+    .chatting {
+      padding: 0 $icon-width 0 $icon-width + 8px;
+      .says {
+        padding: $gutter-width;
+      }
+    }
+  }
+  .textlines {
+    @include radius(8px);
+    padding: 0.5em 1em;
+    background-color: inherit;
+    width: 100%;
+    height: 80px;
+    font-size: 1.4em;
+    line-height: 2rem;
+    background-color: $color-white;
+    border: 2px solid $color-main;
+    &:focus {
+      box-shadow: none;
+      border-color: $color-main-deep;
+      background-color: $color-white;
+    }
+  }
+  button {
+    float: right;
+    font-size: 3rem;
+    text-align: right;
+    margin-left: auto;
+    color: $color-base-blue;
+    cursor: pointer;
+  }
+  /*
+  .textarea_wrap {
+    &:after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      right: -19px;
+      border: 8px solid transparent;
+      border-left: 18px solid $color-main-pale;
+      -ms-transform: rotate(-35deg);
+      -webkit-transform: rotate(-35deg);
+      transform: rotate(-35deg);
+    }
+  }
+  */
+  .submit_wrap {
+    padding-top: $gutter-width / 2;
+    button {
+      padding: 0.5em 1em;
+      color: $color-white;
+      float: none;
+      font-size: 1.2rem;
+      background-color: $color-main;
+      @include radius(5px);
+      i {
+        padding-right: 6px;
+      }
+    }
+  }
+}
+
+.detail_wrap {
+}
+.btn_cnt {
+  padding: 1em;
+  .back {
+    background-color: $color-gray-middle;
+    color: $color-gray-dark;
+  }
+  .reserve_info  {
+    background-color: $color-main !important;
+    color: $color-white;
+  }
+  .reserve_warning  {
+    background-color: $color-main-accent !important;
+    color: $color-font;
+  }
+  .btn {
+    padding: 0.5em;
+    display: inline-block;
+    &:first-child {
+      padding-left: 0;
+    }
+    button {
+      width: 110px;
+      padding: 0.7em 0.5em;
+      @include radius(5px);
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+  }
+}
+
+@media#{$md-up} {
+  .btn_cnt {
+    .btn {
+      button {
+        @include box-shadow();
+        &:hover {
+          @include box-shadow-hover();
+        }
+      }
+    }
+  }
+
+  .detail_wrap {
+    h3 {
+      margin-top: 0;
+      padding-top: 0;
+    }
+    .status_title {
+      margin-bottom: 1.5em;
+    }
+    .text_box {
+      .inner_box {
+        margin: 1em 0 2em 0;
+      }
+    }
+  }
+  .detail_cnt {
+    @include box-shadow2();
+    padding: 2em 4em;
+    padding-bottom: 5em;
+    margin-top: 2em;
+  }
+  .chat_cnt {
+    padding: 0 1.5em;
+    border: 1px solid $color-font-pale;
+    .chat_wrap {
+      padding-top: 0;
+    }
+  }
+  #main_contents .detail_wrap .pager_wrap p {
+    padding: 0;
+  }
+  .comment_wrap {
+    padding: $gutter-width;
+    button {
+      transition: .3s;
+      &:hover {
+        background-color: $color-main-deep;
+      }
+    }
+    .textlines {
+      font-size: 1.6rem;
+    }
+  }
+  .detail_wrap {
+    h4, .text_box {
+      border: none;
+    }
+    h4 {
+      font-size: 2rem;
+      line-height: 2.8rem;
+    }
+    p, li {
+      font-size: 1.6rem;
+      line-height: 2.4rem;
+    }
+  }
+  .chat_wrap .inner {
+    padding: $gutter-width;
+    min-height: 100px;
+  }
+  .detail_wrap {
+  }
+  .btn_cnt {
+    margin-top: $gutter-width * 2;
+    padding: 0;
+    .btn {
+      padding: 0;
+      &:first-child {
+        padding-left: 0;
+      }
+      button {
+        width: 140px;
+        padding: 1em;
+        @include radius(7px);
+        font-size: 1.4rem;
+        font-weight: bold;
+        transition: .3s;
+        margin-right: $gutter-width / 2;
+      }
+    }
+  }
+
+  .btn_cnt .btn button.reserve_info {
+    &:hover {
+      background-color: $color-main-deep !important;
+    }
+  }
+  .btn_cnt .btn button.reserve_warning {
+    &:hover {
+      background-color: $color-main-accent-dark !important;
+    }
+  }
+  .btn_cnt .btn button.back {
+    &:hover {
+      background-color: $color-font-pale !important;
+      color: $color-font !important;
+    }
+  }
+  .comment_wrap .submit_wrap button {
+    &:hover {
+      background-color: $color-main-deep;
+    }
+  }
+}

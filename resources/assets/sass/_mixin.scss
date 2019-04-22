@@ -1,0 +1,165 @@
+@charset "UTF-8";
+@mixin grid($i) {
+  $grid-width: percentage(1/$columns);
+  width: $grid-width*$i;
+}
+@mixin float() {
+  display: block;
+  position: relative;
+  float: left;
+  width: 100%;
+  min-height: 1px;
+}
+
+@mixin trans($value: .1s) {
+  -webkit-transition: all $value ease-in-out;
+   -moz-transition: all $value ease-in-out;
+        transition: all $value ease-in-out;
+}
+@mixin radius($value: 5px) {
+  -webkit-border-radius: $value;
+  -moz-border-radius: $value;
+  border-radius: $value;
+}
+@mixin radius_top($value: 5px) {
+  border-top-left-radius: $value;
+border-top-right-radius: $value;
+-webkit-border-top-left-radius: $value;
+-webkit-border-top-right-radius: $value;
+-moz-border-radius-topleft: $value;
+-moz-border-radius-topright: $value;
+}
+@mixin radius_top_right($value: 5px) {
+border-top-right-radius: $value;
+-webkit-border-top-right-radius: $value;
+-moz-border-radius-topright: $value;
+}
+@mixin radius_bottom($value: 5px) {
+  border-bottom-left-radius: $value;
+border-bottom-right-radius: $value;
+-webkit-border-bottom-left-radius: $value;
+-webkit-border-bottom-right-radius: $value;
+-moz-border-radius-bottomleft: $value;
+-moz-border-radius-bottomright: $value;
+}
+
+@mixin border_45($value: 10px, $value_in: 6px, $color: $color-white-deep) {
+  width: 100%;
+   height: $value;
+   background-image: linear-gradient(
+     -45deg,
+     $color-white 25%,
+     $color 25%, $color 50%,
+     $color-white 50%, $color-white 75%,
+     $color 75%, $color
+   );
+   /* 幅8px、高さ8pxで背景画像のサイズを指定 */
+   background-size: $value_in $value_in;
+}
+
+/* BOXシャドウ　
+--------------------------------------------------------------------------------------------------------*/
+@mixin box-shadow() {
+box-shadow: 0 2px 4px rgba(0,0,0,.3);
+-webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+@mixin box-shadow-hover() {
+  -webkit-box-shadow:  0 15px 30px -5px  rgba(0,0,0,0.25);
+  -moz-box-shadow:  0 15px 30px -5px  rgba(0,0,0,0.25);
+  box-shadow:  0 15px 30px -5px  rgba(0,0,0,0.25);
+  transform: translateY(-4px);
+}
+
+@mixin box-shadow2(){
+  webkit-box-shadow:
+  0 2px 4px -1px rgba(0,0,0,0.06),
+  0 4px 5px 0 rgba(0,0,0,0.06),
+  0 1px 10px 0 rgba(0,0,0,0.08);
+  box-shadow:
+  0 2px 4px -1px rgba(0,0,0,0.06),
+  0 4px 5px 0 rgba(0,0,0,0.06),
+  0 1px 10px 0 rgba(0,0,0,0.08);
+}
+/* 拡散型シャドウ　http://photoshopvip.net/91770
+--------------------------------------------------------------------------------------------------------*/
+@mixin kakusan-shadow() {
+  will-change: transform, filter;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+
+}
+@mixin kakusan-shadow-hover($value: 0.23) {
+  -webkit-transform: scale(1.04);
+          transform: scale(1.04);
+  -webkit-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  -moz-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+
+/* hover under-line https://www.nxworld.net/tips/css-hover-underline-animation-examples-and-sass-mixin.html
+
+type（タイプ） $dir（方向） $weight（ラインウェイト） $color（ラインカラー）
+--------------------------------------------------------------------------------------------------------*/
+// mixin
+@mixin hover-underline($type: fade, $dir: null, $weight: 2px, $color: #000) {
+  @if $dir == null {
+    @if $type == fade {
+      $dir: 'top';
+    } @else if $type == slide {
+      $dir: 'center';
+    }
+  }
+
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  &::after {
+    position: absolute;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: $weight;
+    background: $color;
+    @if $type == fade {
+      transition: .3s;
+      opacity: 0;
+      visibility: hidden;
+      @if $dir == bottom {
+        bottom: $weight * -4;
+      } @else {
+        bottom: $weight;
+      }
+    } @else if $type == slide {
+      bottom: $weight * -2;
+      transform: scale(0, 1);
+      transition: transform .3s;
+      @if $dir == left-right or $dir == right-in-left {
+        transform-origin: left top;
+      } @else if $dir == right-left or $dir == left-in-right {
+        transform-origin: right top;
+      } @else {
+        transform-origin: center top;
+      }
+    }
+  }
+  &:hover::after {
+    @if $type == fade {
+      bottom: $weight * -2;
+      opacity: 1;
+      visibility: visible;
+    } @else if $type == slide {
+      @if $dir == left-in-right {
+        transform-origin: left top;
+      } @else if $dir == right-in-left {
+        transform-origin: right top;
+      }
+      transform: scale(1, 1);
+    }
+  }
+}

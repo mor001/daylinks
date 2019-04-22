@@ -1,0 +1,85 @@
+@charset "UTF-8";
+@import "settings";
+@import "color";
+
+html {
+  //width: 100%;
+  height: auto !important;
+//  overflow-y: scroll;
+  overflow-x: hidden;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: $body-font-color;
+  font-family:$body-font-family;
+  font-size: $body-font-size;
+  line-height: $body-line-height;
+  -webkit-text-size-adjust: 100%;
+  cursor: auto;
+  position: relative;
+  left: 0;
+  height: auto !important;
+  background-color: $body-background-color;
+}
+
+//CSSでテキストの文字詰めができる自動カーニング
+body {
+	font-feature-settings: "palt";
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	::i-block-chrome, body {
+		font-feature-settings: "pkna";
+	}
+}
+ol, ul {
+  list-style: none;
+}
+p.br, a.br, li.br, h3.br, h2.br, .br {
+  display: inline-block;
+}
+.border_none {
+  border: none !important;
+}
+#wrapper {
+	width: 100%;
+  height: auto;
+  position: relative;
+  //overflow-x: hidden;
+}
+body, #wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.display_pc {
+  display: block !important;
+}
+.display_sp {
+  display: none !important;
+}
+
+@media#{$md-down} {
+  .display_pc {
+    display: none !important;
+  }
+  .display_sp {
+    display: block !important;
+  }
+}
+@media#{$sm-down} {
+}

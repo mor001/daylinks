@@ -1,0 +1,124 @@
+@charset "UTF-8";
+@import "settings";
+@import "color";
+@import "mixin";
+
+/*-----------------------
+カラー
+-------------------------*/
+html {
+  font-size: 100%;
+  font-size: 62.5%;/* 16px x 0.625 = 10px(=1rem) */
+  font-size: 10px 1rem;
+}
+img {
+max-width: 100%;
+height: auto;
+display: block;
+}
+h5, h6 {
+  padding-top: $gutter-width / 4;
+  margin-bottom: $gutter-width / 2;
+}
+h1 {
+  font-size: 4rem;
+  line-height: 5.6rem;
+}
+.logo-erea h1 {
+  margin-top: -20px;
+  a {
+    font-size: 1.8rem;
+    color: $color-white;
+    text-decoration: none;
+    line-height: 1;
+  }
+}
+h2 {
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  padding: $gutter-width / 2 0 0 0;
+  color: $color-font-light;
+  padding-left: $gutter-width / 2;
+}
+h3 {
+  font-size: 1.6rem;
+  line-height: 2rem;
+  font-weight: bold;
+  padding: $gutter-width / 2 0;
+}
+@media#{$md-up} {
+  h3 {
+    background-color: inherit;
+  }
+}
+h4 {
+  font-size: 2rem;
+  line-height: 3rem;
+}
+h5 {
+  font-size: 2rem;
+  line-height: 3.2rem;
+}
+h6 {
+  font-size: 1.8rem;
+  line-height: 3rem;
+}
+p {
+  font-size: 1.6rem;
+  line-height: 2.6rem;
+}
+a {
+  text-decoration: underline;
+  color: $color-link;
+}
+@media#{$md-up} {
+  a {
+    &:hover {
+      text-decoration: none;
+      color: $color-link-hover;
+    }
+  }
+}
+
+ul, ol, {
+  font-size: 1.6rem;
+  line-height: 2.6rem;
+}
+ul li {
+  //padding-bottom: 3px;
+}
+dl {
+  font-size: 1.6rem;
+  line-height: 2.6rem;
+}
+dt {
+}
+dd {
+}
+
+
+img {
+  display: block;
+}
+article,aside,details,footer,header,main,menu,nav,section,summary {
+	display: block;
+}
+
+@media #{$md-up} {
+  h2 {
+    font-size: 3rem;
+    line-height: 4rem;
+    padding-top: $gutter-width;
+    padding-bottom: 0;
+    margin-bottom: $gutter-width / 2;
+  }
+  h3 {
+    font-size: 2.8rem;
+    line-height: 3rem;
+    padding-top: $gutter-width;
+    padding-left: $gutter-width / 2;
+    padding-bottom: $gutter-width / 4;
+    border-bottom: 2px solid $color-main;
+    margin-bottom: $gutter-width;
+  }
+}

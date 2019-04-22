@@ -1,0 +1,61 @@
+@charset "UTF-8";
+@import "color";
+$container-max-width: 960px;
+$columns: 12;
+$gutter-width: 24px;
+$gutter-height: 24px;
+
+$topHeader: 28px;
+$mainHeader: 46px;
+$header-height: $topHeader + $mainHeader;
+
+$logo-width: 150px;
+$logo-height: 40px;
+$logo-height-sp: 60px;
+$footer-main-height: 300px;
+$iframe-news-height: 420px;
+$iframe-free-height: 500px;
+
+/* Body
+------------------------------------------------------*/
+@font-face {
+  font-family: YuGothicM;
+  src: local("Yu Gothic Medium");
+}
+$body-font-family:　-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "游ゴシック Medium",YuGothic,YuGothicM,"Hiragino Kaku Gothic ProN",メイリオ,Meiryo, sans-serif;
+$midashi-font-family: "a-otf-futo-min-a101-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+$body-font-size: 1.6rem 16px;
+$body-font-color: $color-font;
+$body-line-height: 2.8rem 28px;
+$body-background-color: $color-font-white;
+
+/* 明朝体
+$body-font-family: "a-otf-ryumin-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+$midashi-font-family: "a-otf-futo-min-a101-pr6n", "YuMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", 游明朝体, "Yu Mincho", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+------------------------------------------------------*/
+
+/* Breackpoint
+------------------------------------------------------*/
+$screen-xs-min: 400px;
+$screen-sm-min: 500px;
+$screen-md-min: 750px;
+$screen-lg-min: 960px;
+$screen-ug-min: 1140px;
+$screen-xs-max: 400px;
+$screen-sm-max: 500px;
+$screen-md-max: 750px;
+$screen-lg-max: 960px;
+$screen-ug-max: 1140px;
+
+
+
+$xs-up: "only screen and (min-width:#{$screen-xs-min})";
+$sm-up: "only screen and (min-width:#{$screen-sm-min})";
+$md-up: "only screen and (min-width:#{$screen-md-min})", print;
+$lg-up: "only screen and (min-width:#{$screen-lg-min})", print;
+$ug-up: "only screen and (min-width:#{$screen-ug-min})", print;
+$xs-down: "only screen and (max-width:#{$screen-xs-max})";
+$sm-down: "only screen and (max-width:#{$screen-sm-max})";
+$md-down: "only screen and (max-width:#{$screen-md-max})";
+$lg-down: "only screen and (max-width:#{$screen-lg-max})";
+$ug-down: "only screen and (max-width:#{$screen-ug-max})";

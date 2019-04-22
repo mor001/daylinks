@@ -1,0 +1,107 @@
+@charset "UTF-8";
+@import "settings";
+@import "color";
+@import "mixin";
+$facility-header-width: 220px;
+.facility_header {
+  height: $mainHeader;
+  #nav-content {
+    background-color: $color-font;
+    .menu {
+      ul {
+        li {
+          border-color: $color-font-light;
+          a {
+            color: $color-font-white;
+          }
+        }
+        li.carrent {
+          a {
+            color: $color-main-accent;
+            background-color: $color-font-deep;
+          }
+        }
+      }
+    }
+  }
+  #main_header {
+    h1 {
+      float: right;
+      color: $color-white;
+      padding: 6px 0;
+    }
+    h2 {
+      padding: 0;
+      padding-left: 36px;
+      margin: 0;
+      color: $color-white;
+      font-size: 1.2rem;
+    }
+  }
+}
+.facility_footer {
+  border-top: 1px solid $color-font-light;
+  #bottom-footer {
+    background-color: $color-font-white;
+    color: $color-font;
+    p a {
+      color: $color-font;
+    }
+  }
+}
+@media#{$md-up} {
+  .facility_header {
+    height: $mainHeader + 6px;
+    .nav-drawer-wrap {
+      display: block;
+    }
+  }
+}
+@media#{$lg-up} {
+  .facility_header {
+    height: $mainHeader;
+    .nav-drawer-wrap {
+      display: block;
+    }
+    #nav-content {
+      display: block;
+      transform: none;
+      width: $facility-header-width;
+      max-width: $facility-header-width;
+      .menu {
+        ul li {
+          border-color: $color-font-light;
+          a {
+            color: $color-font-white;
+            &:hover {
+              color: $color-white;
+              background-color: $color-font-deep;
+            }
+          }
+        }
+      }
+    }
+    #nav-open {
+      display: none;
+    }
+    #nav-header {
+      margin-left: $facility-header-width;
+    }
+    #main_header {
+      h1 a img{
+        height: 38px;
+        width: auto;
+        text-align: right;
+        margin-left: auto;
+      }
+      h2 {
+        padding-left: 0;
+        font-size: 2rem;
+        padding-top: 4px;
+      }
+    }
+  }
+  .facility_footer {
+    margin-left: $facility-header-width;
+  }
+}

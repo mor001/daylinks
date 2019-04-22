@@ -1,0 +1,257 @@
+@charset "UTF-8";
+@import "settings";
+@import "color";
+@import "mixin";
+$tabItemHeight: 36px;
+
+/*タブ切り替え全体のスタイル*/
+.tabs {
+  margin-top: 50px;
+  padding-bottom: $gutter-width;
+  background-color: #fff;
+  margin: 0 auto;
+}
+
+/*タブのスタイル*/
+.tab_item {
+  width: calc(100%/2);
+  height: $tabItemHeight;
+  border-bottom: 3px solid $color-main;
+  background-color: #d9d9d9;
+  line-height: $tabItemHeight;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #565656;
+  display: block;
+  float: left;
+  text-align: center;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+.tab_item:hover {
+  opacity: 0.75;
+}
+
+/*ラジオボタンを全て消す*/
+input[name="tab_item"] {
+  display: none;
+}
+
+/*タブ切り替えの中身のスタイル*/
+.tab_content {
+  display: none;
+  padding: $gutter-width /2;
+  clear: both;
+  overflow: hidden;
+  h4 {
+    font-size: 1.6rem;
+    border: none !important;
+  }
+}
+
+
+/*選択されているタブのコンテンツのみを表示*/
+#tabs_01:checked ~ #tabs_01_content,
+#tabs_02:checked ~ #tabs_02_content,
+#tabs_03:checked ~ #tabs_03_content {
+  display: block;
+}
+
+/*選択されているタブのスタイルを変える*/
+.tabs input:checked + .tab_item {
+  background-color: $color-main;
+  color: #fff;
+}
+
+
+.status {
+  margin: 0;
+  float: right;
+  li {
+    float: left;
+    input[type=radio], input[type=checkbox] {
+      display: none;
+    }
+    input[type=radio]:checked + .button0,
+    input[type=checkbox]:checked + .button0,
+    input[type=radio]:checked + .button2,
+    input[type=checkbox]:checked + .button2 {
+      background-color: $color-base-red;
+      color: $color-white;
+    }
+    input[type=radio]:checked + .button1,
+    input[type=checkbox]:checked + .button1,
+    input[type=radio]:checked + .button3,
+    input[type=checkbox]:checked + .button3 {
+      background-color: $color-base-blue;
+      color: $color-white;
+    }
+    label {
+      display: block;
+      background-color: $color-gray-pale;
+      color: $color-gray-deep;
+      text-align: center;
+      margin: 0 auto;
+      cursor: pointer;
+      padding: $gutter-width / 4;
+      line-height: 1;
+      transition: 0.2s;
+      width: 60px;
+    }
+  }
+}
+.tabs_01_inner, .tabs_02_inner {
+  h4 {
+    float: left;
+  }
+}
+ul.list_news {
+  margin-top: $gutter-width / 2;
+  font-size: 1.4rem;
+  line-height: 2rem;
+  li {
+    border-bottom: 2px dotted $color-gray-middle;
+    padding:  $gutter-width / 2 0 ;
+    text-align: right;
+    margin-left: auto;
+    &:first-child {
+      border-top: 2px dotted $color-gray-middle;
+    }
+    .news_date, .news_text_wrap {
+      text-align: left;
+      display: block;
+    }
+    .news_text_wrap {
+      a {
+        text-decoration: none;
+        span {
+          display: block;
+        }
+        .news_title {
+          color: $color-main;
+          font-size: 1.4rem;
+          font-weight: bold;
+        }
+        .news_comment {
+          color: $color-font;
+          text-decoration: underline;
+        }
+        &:hover {
+          .news_title {
+            color: $color-main-light;
+          }
+          .news_comment {
+            color: $color-gray-deep;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+    .news_btn {
+      font-size: 1.2rem;
+      display: inline-block;
+      padding: 0.2em 0.5em;
+      border: 1px solid $color-base-blue;
+      color: $color-base-blue;
+      margin-top: 0.5em;
+      transition: .3s;
+      text-decoration: none;
+      &:hover {
+        background-color: $color-base-blue;
+        color: $color-white;
+      }
+    }
+  }
+}
+.chat_scroll, .comment_wrap {
+  max-height: 600px !important;
+  overflow-y: auto !important;
+  padding-bottom: $gutter-width;
+}
+.tabs_02_inner {
+  .chat_wrap {
+    border-bottom: 1px solid $color-gray-middle;
+  }
+  a .contact_title {
+    color: $color-font;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+      color: $color-gray-deep;
+    }
+  }
+}
+
+.news_detail_wrap {
+  .chat_wrap {
+    padding-top: 0;
+  }
+  .inner .chat_scroll {
+    padding-top: 0;
+  }
+
+}
+.news_detail_cnt {
+  background-color: $color-white;
+}
+
+@media#{$md-up} {
+  .tabs {
+    @include box-shadow2();
+  }
+  .news_detail_cnt {
+    @include box-shadow2();
+  }
+  $tabItemHeight: 50px;
+  .tab_item {
+    height: $tabItemHeight;
+    line-height: $tabItemHeight;
+    font-size: 1.6rem;
+  }
+  .tab_content {
+    padding: 2em 4em;
+    h4 {
+      font-size: 2rem;
+    }
+  }
+  ul.list_news {
+    font-size: 1.6rem;
+    li {
+      *zoom: 1;
+      .news_date {
+        margin-bottom: 0.7em;
+      }
+      .news_text_wrap {
+        float: left;
+        width: calc(100% - 100px);
+        padding-right: $gutter-width / 2;
+        a {
+          .news_title, .contact_title {
+            font-size: 1.8rem;
+            margin-bottom: 0.3em;
+          }
+        }
+      }
+      .news_btn {
+        float: right;
+        width: 100px;
+        text-align: center;
+        margin: 0 auto;
+      }
+      &:before, &:after {
+        content: " ";
+        display: table;
+      }
+      &:after {
+        clear: both;
+      }
+    }
+  }
+  .status li label {
+    font-size: 1.4rem;
+    width: 100px;
+    padding: 0.7em 0;
+  }
+}

@@ -1,0 +1,183 @@
+@charset "UTF-8";
+@import "settings";
+@import "color";
+@import "mixin";
+
+/*-----------------------
+カラー
+-------------------------*/
+$table-border-color: $color-font-white;
+$theadBg-color: $color-main;
+$thBg-color: $color-font-pale;
+$theadText-color: $color-white;
+$tbodyBg-color: $color-white;
+
+table {
+  width: 100%;
+  //border: 1px solid $table-border-color;
+  font-size: 1.6rem;
+  thead {
+    th {
+      background-color: $theadBg-color;
+      color: $theadText-color;
+    }
+    th, td {
+      font-weight: bold;
+    }
+  }
+  tbody {
+    background-color: $tbodyBg-color;
+  }
+  th, td {
+  padding: 7px;
+  border: 1px solid $table-border-color;
+  text-align: left;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  }
+  th {
+    vertical-align: middle;
+    font-weight: normal;
+    padding: 9px 7px;
+    border-bottom: none;
+    background-color: $color-main-pale;
+  }
+}
+table.mypage_table {
+  th, td {
+    display: block;
+    padding-left: $gutter-width / 2;
+    border-left: none;
+    border-right: none;
+    border: none;
+  }
+  tr {
+    border-top: 1px solid $color-main-light;
+    &:last-child {
+      border-bottom: 1px solid $color-main-light;
+    }
+  }
+}
+table.userlist_table {
+  padding-left: $gutter-width / 2;
+  padding-right: $gutter-width / 2;
+  tr th, tr td {
+    font-size: 1.2rem;
+    padding: 4px 12px;
+    &:nth-child(2), &:nth-child(5), &:nth-child(6) {
+      display: none;
+    }
+    &:first-child {
+      width: 42px;
+    }
+  }
+  /*Checkboxes styles*/
+  input[type="checkbox"] {
+    display: none;
+    & + label {
+      display: block;
+      position: relative;
+      padding-left: 24px;
+      //margin-bottom: 20px;
+      //font: 14px/20px 'Open Sans', Arial, sans-serif;
+      //color: #ddd;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      &:before {
+        content: '';
+        display: block;
+        width: 24px;
+        height: 24px;
+        border: 2px solid $color-gray-light;
+        @include radius(3px);
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 2;
+      }
+      &:after {
+        content: '';
+        display: block;
+        width: 24px;
+        height: 24px;
+        border: 2px solid $color-white;
+        @include radius(3px);
+        position: absolute;
+        left: 0;
+        top: 0;
+        -webkit-transition: all .12s, border-color .08s;
+        transition: all .12s, border-color .08s;
+        z-index: 1;
+      }
+
+    }
+  }
+  input[type="checkbox"]:checked + label:after {
+    border-color: $color-main;
+    width: 10px;
+    top: -5px;
+    left: 5px;
+    border-radius: 0;
+    opacity: 1;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    z-index: 3;
+  }
+}
+@media #{$md-up} {
+  table {
+    @include box-shadow2();
+    th {
+      border-bottom: 1px solid $table-border-color;
+    }
+  }
+  table.mypage_table {
+    th, td {
+      display: table-cell;
+    }
+    tr {
+      &:first-child {
+        border-top: none;
+      }
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+  table.userlist_table {
+    tr th, tr td {
+      font-size: 1.4rem;
+      padding: 8px 12px;
+      &:nth-child(2), &:nth-child(5), &:nth-child(6) {
+        display: table-cell;
+      }
+      &:first-child {
+        width: auto;
+      }
+    }
+  }
+  table.registration {
+    tbody {
+      tr {
+        th {
+          width: 20%;
+        }
+      }
+      tr.limit_wrap {
+        td {
+          select {
+            width: 100px;
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+}
