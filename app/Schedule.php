@@ -51,7 +51,9 @@ class Schedule extends Model
         $current_m = $m == null ? date('m') : $m;
         $from = date('Y-m-d', mktime(0, 0, 0, $current_m, 1, $current_y));
         $to = date('Y-m-d', mktime(0, 0, 0, $current_m + 1, 0, $current_y));
+        // ここでholidayを取得するとschedulesのデータに依存するので別途取得する
         $schedules = self::whereBetween('date', array($from, $to))
+                     // ->with('holiday')
                      ->when($publish === true, function ($query) {
                        $now = date('Y-m-d H:i:s');
                        return $query->where('publish', '<=', $now);
@@ -59,7 +61,6 @@ class Schedule extends Model
                      ->with(['reserve' => function($query) {
                          $query->where('user_id', '=', Auth::user()->id);
                      }])
-                     ->with('holiday')
                      ->select(['*'])->get();
 
         foreach($schedules as $schedule) {

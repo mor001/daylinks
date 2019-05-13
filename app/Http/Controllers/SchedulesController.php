@@ -8,6 +8,7 @@ use App\Schedule;
 use App\Reserve;
 use App\Contact;
 use App\Notice;
+use App\Holiday;
 
 class SchedulesController extends Controller
 {
@@ -23,6 +24,9 @@ class SchedulesController extends Controller
 
     public function getMonthly($y = null, $m = null)
     {
+      $from = date('Y-m-d', mktime(0, 0, 0, $m, 1, $y));
+      $to = date('Y-m-d', mktime(0, 0, 0, $m + 1, 0, $y));
+      $holidays = Holiday::whereBetween('date', array($from, $to))->get();
       $data = Schedule::getMonthly($y, $m);
       $unread_notice = Notice::getUnreadCount();
       $count = Schedule::countingReserve($data);
@@ -31,13 +35,18 @@ class SchedulesController extends Controller
               'y' => $y, 'm' => $m, 
               'limit' => Auth::user()->limit,
               'count' => $count,
+              'holidays' => $holidays,
              ];
     }
     public function getAdminMonthly($y = null, $m = null)
     {
+      $from = date('Y-m-d', mktime(0, 0, 0, $m, 1, $y));
+      $to = date('Y-m-d', mktime(0, 0, 0, $m + 1, 0, $y));
+      $holidays = Holiday::whereBetween('date', array($from, $to))->get();
       $data = Schedule::getMonthly($y, $m, false);
       return ['schedules' => $data, 
               'y' => $y, 'm' => $m, 
+              'holidays' => $holidays,
              ];
     }
     public function getDaily($y = null, $m = null, $d = null)

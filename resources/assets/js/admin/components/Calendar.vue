@@ -22,27 +22,30 @@
       <div class="date_wrap" :class="{'today': date.today, 'blank': date.blank, }"
             v-for="date in this.dateList" :key="date.key" :data-date="date.date">
         <template v-if="!date.blank">
-        <div class="date_cnt">
-          <span class="month">{{this.currentMonth}}月</span>
-          <span class="date">{{date.dayNumber}}<span class="date_list_type">日</span></span>
-          <span class="day">{{date.weekDay}}</span>
-        </div><!--date_cnt-->
+          <div class="date_cnt">
+            <span class="month">{{currentMonth}}月</span>
+            <span class="date">{{date.dayNumber}}<span class="date_list_type">日</span></span>
+            <span class="day">({{days[date.weekDay - 1]}})</span>
+            <span class="day">{{date.holiday}}</span>
+          </div><!--date_cnt-->
 
-        <template v-if="date.schedule">
-          <router-link v-bind:to="formUrl(date.schedule.date)" class="title">
-            <div class="title_cnt">
-              <span class="title">{{date.schedule.title}}<br /></span>
-              <!--<span class="sub_title">イベントのサブタイトルなどの詳細</span>-->
-            </div><!--title_cnt-->
-          </router-link>
+          <template v-if="date.schedule">
+            <!--既存データがある場合-->
+            <router-link v-bind:to="formUrl(date.schedule.date)" class="title">
+              <div class="title_cnt">
+                <span class="title">{{date.schedule.title}}<br /></span>
+                <!--<span class="sub_title">イベントのサブタイトルなどの詳細</span>-->
+              </div><!--title_cnt-->
+            </router-link>
+          </template>
+          <template v-else>
+            <!--既存データがない場合-->
+            <router-link v-if="date.date" v-bind:to="formUrl(date.date)" class="title">
+              未登録
+            </router-link>
+            <input type="checkbox" id="selected" :value="date.date" v-model="date.checked" />
+          </template>
         </template>
-        <template v-else>
-          <router-link v-if="date.date" v-bind:to="formUrl(date.date)" class="title">
-            未登録
-          </router-link>
-          <input type="checkbox" id="selected" :value="date.date" v-model="date.checked" />
-        </template>
-      </template>
       </div><!--.date_wrap-->
     </div><!--.calendar_body-->
   </div><!-- calendar -->
@@ -52,13 +55,15 @@
   export default {
     data() {
       return {
-        days: ["日", "月", "火", "水", "木", "金", "土"],
+        days: ["月", "火", "水", "木", "金", "土", "日"],
         checkList: null,
         dateList: [],
+        m: this.currentMonth,
       }
     },
     props: {
       schedules: { required: true },
+      holidays: { required: true },
       currentYear: { required: true },
       currentMonth: { required: true },
     },
@@ -76,13 +81,25 @@
         return function(date) {
           for (var i = 0; i < self.schedules.length; i++) {
             const schedule = self.schedules[i]
-            if(schedule.date == date) {
+            if(schedule.date === date) {
               return schedule
             }
           }
           return false
         }
       },
+      holiday: function() {
+        const self = this
+        return function(date) {
+          for (var i = 0; i < self.holidays.length; i++) {
+            const holiday = self.holidays[i]
+            if(holiday.date === date) {
+              return holiday.title
+            }
+          }
+          return false
+        }
+      },      
       unread: function() {
         const self = this
         return function(schedule) {
@@ -120,6 +137,7 @@
         console.log('対象年月: ' + currentYM.format('YYYY-MM'))
         console.log('月初日: ' + startDate + '(' + startDate.day() + ')')
         console.log('月末曜日: ' + endDate + '(' + currentYM.endOf('month').format('YYYY-MM-DD dddd') + ')')
+        console.log(this.schedules)
 
         if(startDay === 0) {
           startDay = 7
@@ -135,11 +153,12 @@
               // 末尾の日数を超えた
               this.dateList[index] = {blank: true}
             } else {
-              let schedule = this.schedule(currentDate.format('YYYY-MM-DD'))
+              const schedule = this.schedule(currentDate.format('YYYY-MM-DD'))
+              const holiday = this.holiday(currentDate.format('YYYY-MM-DD'))
               this.dateList[index] = {
                 key: dayCount,
-                dayNumber: dayCount,
-                date: year + "-" + month  + "-" + dayCount,
+                dayNumber: currentDate.format('DD'),
+                date: year + "-" + month  + "-" + currentDate.format('DD'),
                 blank: false,
                 today: currentDate.format('YYYYMMDD') == moment().format('YYYYMMDD'), 
                 additional: false,
@@ -147,6 +166,7 @@
                 moment: currentDate,
                 schedule: schedule,
                 checked: false,
+                holiday: holiday ? holiday : '',
               };
               dayCount++
             }
@@ -169,9 +189,9 @@
     filters: {
     },
     watch: {
-      currentMonth: function () {
-        this.getDateList()
-      }
+      //currentMonth: function () {
+      //  this.getDateList()
+      //}
     },
     created() {
       this.getDateList()

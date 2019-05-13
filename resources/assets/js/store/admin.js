@@ -1,14 +1,20 @@
 const state = {
   staff: null,
   token: null,
-  isLogin: false
+  isLogin: false,
+  tenantName: null,
+  currentYear: null,
+  currentMonth: null,
 }
 
 const getters = {
   token: state => state.token,
   staffname: state => state.staff ? state.staff.name : '',
   staff: state => state.staff,
-  isLogin: state => state.isLogin
+  isLogin: state => state.isLogin,
+  tenantName: state => state.tenantName,
+  currentYear: state => state.currentYear,
+  currentMonth: state => state.currentMonth,
 }
 
 const computed = {
@@ -24,7 +30,16 @@ const mutations = {
   },
   setIsLogin (state, islogin) {
     state.isLogin = islogin
-  }
+  },
+  setTenantName (state, value) {
+    state.tenantName = value
+  },
+  setCurrentYear (state, y) {
+    state.currentYear = y
+  },
+  setCurrentMonth (state, m) {
+    state.currentMonth = m
+  },
 }
 
 const actions = {

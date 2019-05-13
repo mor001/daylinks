@@ -9,7 +9,7 @@
       <a href="#" class="prev" @click="prev"><i class="fas fa-caret-square-left"></i></a>
       <p><span>{{this.y}}</span>年<span>{{this.m}}</span>月 スケジュール一覧</p>
       <a href="#" class="next" @click="next"><i class="fas fa-caret-square-right"></i></a>
-      <Calendar v-if="this.showCalendar && schedules" :schedules="this.schedules" :current-year="this.y" :current-month="this.m" @openForm="onOpenForm" />
+      <Calendar v-if="this.showCalendar && schedules" :schedules="this.schedules" :holidays="this.holidays" :current-year="this.y" :current-month="this.m" @openForm="onOpenForm" />
       <div v-for="chk in this.checkList" :key="chk.key">
         <p>{{chk}}</p>
       </div>
@@ -24,6 +24,7 @@
     data() {
       return {
         schedules: null,
+        holidays: null,
         showAlert: false,
         alertMessage: '',
         loading: true,
@@ -42,11 +43,9 @@
     methods: {
       onOpenForm (arg) {
         this.checkList = arg
-        console.log(this.checkList)
         this.showCalendar = false
       },
       async fetchSchedules () {
-        console.log('fetchSchedules YM = ' +  this.y + '/' + this.m)
         const self = this
         this.loading = true
         this.showAlert = false
@@ -56,6 +55,7 @@
         await window.axios.get(url)
         .then(response => {
           self.schedules = response.data.schedules
+          self.holidays = response.data.holidays
           self.y = response.data.y
           self.m = response.data.m
         }).catch(error => {
@@ -64,8 +64,8 @@
           self.alertMessage = 'データ取得に失敗しました。'
         }).finally(() => {
           self.loading = false
-          self.$store.commit('appdata/setCurrentYear', self.y)
-          self.$store.commit('appdata/setCurrentMonth', self.m)
+          self.$store.commit('admin/setCurrentYear', self.y)
+          self.$store.commit('admin/setCurrentMonth', self.m)
         })
       },
       prev() {
@@ -86,8 +86,8 @@
     },
     mounted() {
       const m = window.moment()
-      this.y = this.$store.getters['appdata/currentYear']
-      this.m = this.$store.getters['appdata/currentMonth']
+      this.y = this.$store.getters['admin/currentYear']
+      this.m = this.$store.getters['admin/currentMonth']
       if(!this.y) {
         this.y = m.format("YYYY")
       }
