@@ -13,13 +13,13 @@ const DialogHelper = {
         secondaryLabel: secondaryLabel,
       }
     });
-    await vm.show().then(function (response) {
+    await vm.show().then( (response) => {
         ok()
         vm.close()
-    }).catch(function (error) {
+    }).catch( (error) => {
         cancel()
         vm.close()
     })
   }
 }
-export default DialogHelper;
+export default DialogHelper

@@ -31,18 +31,16 @@
 
           <template v-if="date.schedule">
             <!--既存データがある場合-->
-            <router-link v-bind:to="formUrl(date.schedule.date)" class="title">
+            <a v-on:click.stop="selected(date.schedule.date)">
               <div class="title_cnt">
                 <span class="title">{{date.schedule.title}}<br /></span>
                 <!--<span class="sub_title">イベントのサブタイトルなどの詳細</span>-->
               </div><!--title_cnt-->
-            </router-link>
+            </a>
           </template>
           <template v-else>
             <!--既存データがない場合-->
-            <router-link v-if="date.date" v-bind:to="formUrl(date.date)" class="title">
-              未登録
-            </router-link>
+            <a v-on:click.stop="selected(date.date)">未登録</a>
             <input type="checkbox" id="selected" :value="date.date" v-model="date.checked" />
           </template>
         </template>
@@ -71,13 +69,13 @@
     },
     computed: {
       formUrl: function() {
-        return function (date) {
+        return (date) => {
           const arr = date.split('-')
           return '/admin/schedules/form/'+arr[0]+'/'+arr[1]+'/'+arr[2]
         }
       },
       schedule: function() {
-        const self = this
+        self = this
         return function(date) {
           for (var i = 0; i < self.schedules.length; i++) {
             const schedule = self.schedules[i]
@@ -89,7 +87,7 @@
         }
       },
       holiday: function() {
-        const self = this
+        self = this
         return function(date) {
           for (var i = 0; i < self.holidays.length; i++) {
             const holiday = self.holidays[i]
@@ -99,10 +97,9 @@
           }
           return false
         }
-      },      
+      },
       unread: function() {
-        const self = this
-        return function(schedule) {
+        return (schedule) => {
           if(Array.isArray(schedule.contacts) && schedule.contacts.length <= 0) {
             return 0
           }
@@ -118,10 +115,7 @@
       },
     },
     methods: {
-      emitOpenForm () {
-        this.$emit('open-form')
-      },
-      getDateList: function() {
+      getDateList() {
         this.dateList = []
         const year = this.currentYear
         const month = this.currentMonth
@@ -137,8 +131,7 @@
         console.log('対象年月: ' + currentYM.format('YYYY-MM'))
         console.log('月初日: ' + startDate + '(' + startDate.day() + ')')
         console.log('月末曜日: ' + endDate + '(' + currentYM.endOf('month').format('YYYY-MM-DD dddd') + ')')
-        console.log(this.schedules)
-
+        
         if(startDay === 0) {
           startDay = 7
         }
@@ -175,7 +168,13 @@
         }
         console.log(this.dateList)
       },
-      register: function() {
+      selected(date) {
+        console.log(date)
+        const checkList = []
+        checkList.push(date)
+        this.$emit('openForm', checkList)
+      },
+      register() {
         console.log('call register')
         const checkList = []
         for (var i = 0; i < this.dateList.length; i++) {
@@ -193,7 +192,9 @@
       //  this.getDateList()
       //}
     },
-    created() {
+    mounted() {
+      console.log('thisは何？')
+      console.log(this)
       this.getDateList()
     },
 }

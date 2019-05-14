@@ -5,14 +5,11 @@
       <p>情報の取得に失敗しました。</p>
       <router-link to="/admin">戻る</router-link>
     </div>
-    <div v-if="schedule">
-      <p v-if="schedule.id">更新</p>
-      <p v-else>新規登録</p>
-      <form>
-        <p>タイトル：<input type="text" name="title" id="title" required="required" placeholder="タイトル" v-model="schedule.title" /></p>
-        <p>内容：<textarea name="tenantnote" id="tenantnote" placeholder="内容" v-model="schedule.description"></textarea></p>
-        <p><router-link to="/admin/schedules/list">戻る</router-link><input type="submit" class="button" value="登録" /></p>
-      </form>
+    <div v-if="this.schedules">
+      <div v-for="date in this.schedules" :key="date.key">
+        <p>{{date}}</p>
+      </div>
+      <a @click="$emit('closeForm', 'OK')">戻る</a>
     </div>
   </div>
 </template>
@@ -21,12 +18,13 @@
   export default {
     data: () => {
       return {
-        loading: true,
+        loading: false,
         showAlert: false,
         schedule: null,
       }
     },
     props: {
+      schedules: { required: true },
     },
     components: {
     },
@@ -53,7 +51,7 @@
       },
     },
     mounted() {
-      this.fetchData()
+      //this.fetchData()
     },
     computed: {
     },

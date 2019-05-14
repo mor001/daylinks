@@ -60,22 +60,22 @@ export default {
     }
   },
   computed: {
-    isLogin () {
+    isLogin: () => {
       return this.$store.getters['user/isLogin']
     },
-    username () {
+    username: () => {
       return this.$store.getters['user/username']
     },
-    unreadNotice () {
+    unreadNotice: () => {
       return this.$store.getters['user/unread_notice']
     },
-    tenantName () {
+    tenantName: () => {
       return this.$store.getters['appdata/tenantName']
     },
   },
   methods: {
     // ログアウト
-    async  logout() {
+    logout: async () => {
       await this.$store.dispatch('auth/logout')
       this.$router.push('/login')
     },

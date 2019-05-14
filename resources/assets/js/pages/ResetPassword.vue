@@ -78,18 +78,17 @@ export default {
   },
   methods: {
     async reset () {
-      const self = this
       this.loading = true
       this.showAlert = false
       this.success = false
       await window.axios.post('/api/password/reset' , this.form)
-      .then(response => {
-        self.success = true
-      }).catch(error => {
+      .then( (response) => {
+        this.success = true
+      }).catch( (error) => {
         console.log(error)
-        self.showAlert = true
-      }).finally(() => {
-        self.loading = false
+        this.showAlert = true
+      }).finally( () => {
+        this.loading = false
       })
     }
   }

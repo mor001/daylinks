@@ -176,18 +176,17 @@ export default {
       })
     },
     postContact() {
-      const self = this
       this.loading = true
       this.showAlert = false
       let url = '/api/contact/save'
       window.axios.post(url, this.contactForm)
-      .then(function (response) {
-        self.$set(self.detail, 'contacts', response.data.contacts)
-        self.contactForm.contents = ''
-      }).catch(function (error) {
-        self.showAlert = true
-      }).finally(() => {
-        self.loading = false
+      .then( (response) => {
+        this.$set(this.detail, 'contacts', response.data.contacts)
+        this.contactForm.contents = ''
+      }).catch( (error) => {
+        this.showAlert = true
+      }).finally( () => {
+        this.loading = false
       })
     },
     async postReserve(id, status) {
@@ -208,20 +207,19 @@ export default {
       })
       console.log('戻り値: '+ret)
       if(ret !== true) return
-      const self = this
       this.loading = true
       this.showAlert = false
       let url = '/api/schedule/reserve'
       const data = {reserve_id: id, schedule_id: this.detail.id, leave_school_time: null, status: status}
       this.$set(this, 'detail', null)
       window.axios.post(url, data)
-      .then(function (response) {
-      }).catch(function (error) {
+      .then( (response) => {
+      }).catch( (error) => {
         console.log(error)
-        self.showAlert = true
-      }).finally(() => {
-        self.fetchData()
-        self.loading = false
+        this.showAlert = true
+      }).finally( () => {
+        this.fetchData()
+        this.loading = false
       })
     },
   }

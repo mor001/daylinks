@@ -51,34 +51,30 @@
     },
     methods: {
       fetchSchedules () {
-        const self = this
         this.loading = true
         this.showAlert = false
         this.alertMessage = ''
-        
         //this.$store.dispatch('schedule/fetchMonthly' , this.y, this.m)
         //this.schedules = this.$store.getters['schedule/schedules']
-
         let url = '/api/schedule/monthly/' + this.y + '/' + this.m
         window.axios.get(url)
-        .then(response => {
+        .then( (response) => {
           if(response.data.schedules.length <= 0) {
-            self.showAlert = true
-            self.alertMessage = 'データが存在しませんでした。'
+            this.showAlert = true
+            this.alertMessage = 'データが存在しませんでした。'
           }
-          self.schedules = response.data.schedules
-          self.y = response.data.y
-          self.m = response.data.m
-          self.limit = response.data.limit
-          self.$store.commit('user/setUnreadNotice', response.data.unread_notice)
-        }).catch(error => {
-          console.log(error.response)
-          self.showAlert = true
-          self.alertMessage = 'データ取得に失敗しました。'
+          this.schedules = response.data.schedules
+          this.y = response.data.y
+          this.m = response.data.m
+          this.limit = response.data.limit
+          this.$store.commit('user/setUnreadNotice', response.data.unread_notice)
+        }).catch( (error) => {
+          this.showAlert = true
+          this.alertMessage = 'データ取得に失敗しました。'
         }).finally(() => {
-          self.loading = false
-          self.$store.commit('appdata/setCurrentYear', self.y)
-          self.$store.commit('appdata/setCurrentMonth', self.m)
+          this.loading = false
+          this.$store.commit('appdata/setCurrentYear', this.y)
+          this.$store.commit('appdata/setCurrentMonth', this.m)
         })
       },
       prev() {

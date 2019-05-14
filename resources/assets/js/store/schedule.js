@@ -24,20 +24,19 @@ const getters = {
 }
 
 const actions = {
-  async fetchMonthly (context, y, m) {
-    console.log('scheduleでゲット')
+  async fetchMonthly(context, y, m) {
     let url = '/api/schedule/monthly/' + y + '/' + m
     await window.axios.get(url)
-    .then(response => {
+    .then( (response) => {
       context.commit('setSchedules', response.data.schedules)
       context.commit('setYear', response.data.y)
       context.commit('setMonth', response.data.m)
-    }).catch(error => {
+    }).catch( (error) => {
       if(!error.response) {
         context.commit('error/setCode', error.response.status, { root: true })
       }
       context.commit('error/setMessage', 'データの取得に失敗しました。', { root: true })
-    }).finally(() => {
+    }).finally( () => {
     })
   },
 }

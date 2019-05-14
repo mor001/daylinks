@@ -35760,9 +35760,8 @@ var actions = {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              console.log('scheduleでゲット');
               url = '/api/schedule/monthly/' + y + '/' + m;
-              _context.next = 4;
+              _context.next = 3;
               return window.axios.get(url).then(function (response) {
                 context.commit('setSchedules', response.data.schedules);
                 context.commit('setYear', response.data.y);
@@ -35774,7 +35773,7 @@ var actions = {
                 context.commit('error/setMessage', 'データの取得に失敗しました。', { root: true });
               }).finally(function () {});
 
-            case 4:
+            case 3:
             case 'end':
               return _context.stop();
           }
@@ -36071,6 +36070,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 
 
+var _this = this;
+
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 //
@@ -36136,16 +36137,16 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
   computed: {
     isLogin: function isLogin() {
-      return this.$store.getters['user/isLogin'];
+      return _this.$store.getters['user/isLogin'];
     },
     username: function username() {
-      return this.$store.getters['user/username'];
+      return _this.$store.getters['user/username'];
     },
     unreadNotice: function unreadNotice() {
-      return this.$store.getters['user/unread_notice'];
+      return _this.$store.getters['user/unread_notice'];
     },
     tenantName: function tenantName() {
-      return this.$store.getters['appdata/tenantName'];
+      return _this.$store.getters['appdata/tenantName'];
     }
   },
   methods: {
@@ -36157,17 +36158,17 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return this.$store.dispatch('auth/logout');
+                return _this.$store.dispatch('auth/logout');
 
               case 2:
-                this.$router.push('/login');
+                _this.$router.push('/login');
 
               case 3:
               case 'end':
                 return _context.stop();
             }
           }
-        }, _callee, this);
+        }, _callee, _this);
       }));
 
       function logout() {
@@ -36716,33 +36717,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   methods: {
     fetchSchedules: function fetchSchedules() {
-      var self = this;
+      var _this = this;
+
       this.loading = true;
       this.showAlert = false;
       this.alertMessage = '';
-
       //this.$store.dispatch('schedule/fetchMonthly' , this.y, this.m)
       //this.schedules = this.$store.getters['schedule/schedules']
-
       var url = '/api/schedule/monthly/' + this.y + '/' + this.m;
       window.axios.get(url).then(function (response) {
         if (response.data.schedules.length <= 0) {
-          self.showAlert = true;
-          self.alertMessage = 'データが存在しませんでした。';
+          _this.showAlert = true;
+          _this.alertMessage = 'データが存在しませんでした。';
         }
-        self.schedules = response.data.schedules;
-        self.y = response.data.y;
-        self.m = response.data.m;
-        self.limit = response.data.limit;
-        self.$store.commit('user/setUnreadNotice', response.data.unread_notice);
+        _this.schedules = response.data.schedules;
+        _this.y = response.data.y;
+        _this.m = response.data.m;
+        _this.limit = response.data.limit;
+        _this.$store.commit('user/setUnreadNotice', response.data.unread_notice);
       }).catch(function (error) {
-        console.log(error.response);
-        self.showAlert = true;
-        self.alertMessage = 'データ取得に失敗しました。';
+        _this.showAlert = true;
+        _this.alertMessage = 'データ取得に失敗しました。';
       }).finally(function () {
-        self.loading = false;
-        self.$store.commit('appdata/setCurrentYear', self.y);
-        self.$store.commit('appdata/setCurrentMonth', self.m);
+        _this.loading = false;
+        _this.$store.commit('appdata/setCurrentYear', _this.y);
+        _this.$store.commit('appdata/setCurrentMonth', _this.m);
       });
     },
     prev: function prev() {
@@ -36880,6 +36879,8 @@ exports.push([module.i, "\nbody[data-v-5700b516] {\n  font-weight: 300;\n  -webk
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_common__ = __webpack_require__(12);
+var _this = this;
+
 //
 //
 //
@@ -36958,11 +36959,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   components: {},
   computed: {
     schedule: function schedule() {
-      var self = this;
       return function (date) {
-        for (var i = 0; i < self.schedules.length; i++) {
-          var schedule = self.schedules[i];
-          if (schedule.date == date) {
+        for (var i = 0; i < _this.schedules.length; i++) {
+          var schedule = _this.schedules[i];
+          if (schedule.date === date) {
             return schedule;
           }
         }
@@ -36970,7 +36970,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       };
     },
     unread: function unread() {
-      var self = this;
       return function (schedule) {
         if (Array.isArray(schedule.contacts) && schedule.contacts.length <= 0) {
           return 0;
@@ -36986,8 +36985,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       };
     },
     dateList: function dateList() {
-      var year = this.currentYear;
-      var month = this.currentMonth;
+      var year = _this.currentYear;
+      var month = _this.currentMonth;
       var currentYM = moment([year, month - 1, 1]); // 引数の年月で初期化
       //const currentYM = moment(year+month+'01', 'YYYYMMDD')  // 引数の年月で初期化
       var startDate = moment(currentYM.startOf('month')); // 月の最初の日を取得
@@ -37020,7 +37019,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // 末尾の日数を超えた
             dateList[index] = {};
           } else {
-            var schedule = this.schedule(currentDate.format('YYYY-MM-DD'));
+            var schedule = _this.schedule(currentDate.format('YYYY-MM-DD'));
             dateList[index] = {
               key: dayCount,
               dayNumber: dayCount,
@@ -37644,6 +37643,8 @@ exports.push([module.i, "\nbody[data-v-7165701a] {\n  font-weight: 300;\n  -webk
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _this = this;
+
 //
 //
 //
@@ -37691,7 +37692,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       };
     },
     schedule: function schedule() {
-      var self = this;
       return function (date) {
         for (var i = 0; i < self.schedules.length; i++) {
           var schedule = self.schedules[i];
@@ -37703,7 +37703,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       };
     },
     unread: function unread() {
-      var self = this;
       return function (schedule) {
         if (Array.isArray(schedule.contacts) && schedule.contacts.length <= 0) {
           return 0;
@@ -37719,8 +37718,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       };
     },
     dateList: function dateList() {
-      var year = this.currentYear;
-      var month = this.currentMonth;
+      var year = _this.currentYear;
+      var month = _this.currentMonth;
       var currentYM = moment([year, month - 1, 1]); // 引数の年月で初期化
       //const currentYM = moment(year+month+'01', 'YYYYMMDD')  // 引数の年月で初期化
       var startDate = moment(currentYM.startOf('month')); // 月の最初の日を取得
@@ -37753,7 +37752,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // 末尾の日数を超えた
             dateList[index] = {};
           } else {
-            var schedule = this.schedule(currentDate.format('YYYY-MM-DD'));
+            var schedule = _this.schedule(currentDate.format('YYYY-MM-DD'));
             dateList[index] = {
               key: dayCount,
               dayNumber: dayCount,
@@ -38150,21 +38149,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   computed: {},
   methods: {
     login: function login() {
+      var _this = this;
+
       var self = this;
       this.$store.dispatch('auth/login', this.loginForm).then(function (response) {
-        if (self.$store.getters['error/message'] !== '') {
-          self.showAlert = true;
-          self.alertMessage = self.$store.getters['error/message'];
+        if (_this.$store.getters['error/message'] !== '') {
+          _this.showAlert = true;
+          _this.alertMessage = _this.$store.getters['error/message'];
         } else {
-          self.$store.commit('appdata/setCurrentYear', window.moment().format('YYYY'));
-          self.$store.commit('appdata/setCurrentMonth', window.moment().format('MM'));
-          self.$router.push('/');
+          _this.$store.commit('appdata/setCurrentYear', window.moment().format('YYYY'));
+          _this.$store.commit('appdata/setCurrentMonth', window.moment().format('MM'));
+          _this.$router.push('/');
         }
       }).catch(function (error) {
         console.log('ログインに失敗しました。');
         console.log(error);
-        self.showAlert = true;
-        self.alertMessage = 'ログインに失敗しました。';
+        _this.showAlert = true;
+        _this.alertMessage = 'ログインに失敗しました。';
       });
     }
   },
@@ -38414,7 +38415,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   mounted: function mounted() {
     var _this = this;
 
-    var self = this;
     window.axios.get('/api/me').then(function (response) {
       _this.user = response.data;
     }).catch(function (error) {
@@ -38790,22 +38790,25 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       });
     },
     postContact: function postContact() {
-      var self = this;
+      var _this2 = this;
+
       this.loading = true;
       this.showAlert = false;
       var url = '/api/contact/save';
       window.axios.post(url, this.contactForm).then(function (response) {
-        self.$set(self.detail, 'contacts', response.data.contacts);
-        self.contactForm.contents = '';
+        _this2.$set(_this2.detail, 'contacts', response.data.contacts);
+        _this2.contactForm.contents = '';
       }).catch(function (error) {
-        self.showAlert = true;
+        _this2.showAlert = true;
       }).finally(function () {
-        self.loading = false;
+        _this2.loading = false;
       });
     },
     postReserve: function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(id, status) {
-        var message, ret, self, url, data;
+        var _this3 = this;
+
+        var message, ret, url, data;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -38841,8 +38844,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 return _context.abrupt('return');
 
               case 8:
-                self = this;
-
                 this.loading = true;
                 this.showAlert = false;
                 url = '/api/schedule/reserve';
@@ -38851,13 +38852,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 this.$set(this, 'detail', null);
                 window.axios.post(url, data).then(function (response) {}).catch(function (error) {
                   console.log(error);
-                  self.showAlert = true;
+                  _this3.showAlert = true;
                 }).finally(function () {
-                  self.fetchData();
-                  self.loading = false;
+                  _this3.fetchData();
+                  _this3.loading = false;
                 });
 
-              case 15:
+              case 14:
               case 'end':
                 return _context.stop();
             }
@@ -39039,6 +39040,8 @@ exports.push([module.i, "\n.overlay[data-v-54a5ae3f] {\n  position: fixed;\n  to
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _this = this;
+
 //
 //
 //
@@ -39090,45 +39093,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     attach: function attach() {
-      if (!this.$parent) {
-        this.$mount();
-        document.body.appendChild(this.$el);
+      if (!_this.$parent) {
+        _this.$mount();
+        document.body.appendChild(_this.$el);
       } else {
-        this.$mount();
-        this.$parent.$el.appendChild(this.$el);
+        _this.$mount();
+        _this.$parent.$el.appendChild(_this.$el);
       }
     },
     remove: function remove() {
-      if (!this.$parent) {
-        document.body.removeChild(this.$el);
-        this.$destroy();
+      if (!_this.$parent) {
+        document.body.removeChild(_this.$el);
+        _this.$destroy();
       } else {
-        this.$parent.$el.removeChild(this.$el);
-        this.$destroy();
+        _this.$parent.$el.removeChild(_this.$el);
+        _this.$destroy();
       }
     },
     close: function close() {
-      this.isShow = false;
+      _this.isShow = false;
     },
     show: function show() {
-      var _this = this;
-
-      this.attach();
-      this.isShow = true;
-      this.promise = new Promise(function (resolve, reject) {
+      _this.attach();
+      _this.isShow = true;
+      _this.promise = new Promise(function (resolve, reject) {
         _this.resolve = resolve;
         _this.reject = reject;
       });
-      return this.promise;
+      return _this.promise;
     },
     submit: function submit() {
-      this.resolve(true);
+      _this.resolve(true);
     },
     cancel: function cancel() {
-      this.reject(false);
+      _this.reject(false);
     },
     afterLeave: function afterLeave() {
-      this.remove();
+      _this.remove();
     }
   }
 });
@@ -39660,9 +39661,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   components: {},
   methods: {
     fetchNotice: function fetchNotice() {
+      var _this = this;
+
       var getAll = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
-      var self = this;
       this.loading = true;
       this.showAlert = false;
       this.alertMessage = '';
@@ -39670,66 +39672,68 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       getAll === false ? url = '/api/notice' : url = '/api/notice/all';
       window.axios.get(url).then(function (response) {
         if (response.data.notices.length <= 0) {
-          //self.showAlert = true
-          //self.alertMessage = 'データが存在しませんでした。'
+          //this.showAlert = true
+          //this.alertMessage = 'データが存在しませんでした。'
         }
-        self.$set(self, 'notices', response.data.notices);
-        //self.$set(self, 'contacts', response.data.contacts)
+        _this.$set(_this, 'notices', response.data.notices);
+        //self.$set(this, 'contacts', response.data.contacts)
       }).catch(function (error) {
         console.log(error.response);
-        self.showAlert = true;
-        self.alertMessage = 'データ取得に失敗しました。';
+        _this.showAlert = true;
+        _this.alertMessage = 'データ取得に失敗しました。';
       }).finally(function () {
-        self.loading = false;
+        _this.loading = false;
       });
     },
     fetchContact: function fetchContact() {
+      var _this2 = this;
+
       var getAll = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
-      var self = this;
       this.loading = true;
       this.showAlert = false;
       this.alertMessage = '';
       var url = '';
       getAll === false ? url = '/api/contact/general' : url = '/api/contact/general/all';
       window.axios.get(url).then(function (response) {
-        self.$set(self, 'contacts', response.data.contacts);
+        _this2.$set(_this2, 'contacts', response.data.contacts);
       }).catch(function (error) {
         console.log(error.response);
-        self.showAlert = true;
-        self.alertMessage = 'データ取得に失敗しました。';
+        _this2.showAlert = true;
+        _this2.alertMessage = 'データ取得に失敗しました。';
       }).finally(function () {
-        self.loading = false;
+        _this2.loading = false;
       });
     },
     readNotice: function readNotice(notice) {
-      var self = this;
+      var _this3 = this;
+
       this.loading = true;
       this.showAlert = false;
-      self.$set(self, 'notices', null);
+      this.$set(this, 'notices', null);
       var url = '/api/notice/read';
       window.axios.post(url, notice).then(function (response) {
-        console.log(response.data);
-        self.$set(self, 'notices', response.data.notices);
+        _this3.$set(_this3, 'notices', response.data.notices);
       }).catch(function (error) {
-        self.showAlert = true;
+        _this3.showAlert = true;
       }).finally(function () {
-        self.loading = false;
+        _this3.loading = false;
       });
     },
     readContacts: function readContacts(contact) {
-      var self = this;
+      var _this4 = this;
+
       this.loading = true;
       this.showAlert = false;
-      self.$set(self, 'contacts', null);
+      this.$set(this, 'contacts', null);
       var url = '/api/contact/read';
       window.axios.post(url, contact).then(function (response) {
         console.log(response.data);
-        self.$set(self, 'contacts', response.data.contacts);
+        _this4.$set(_this4, 'contacts', response.data.contacts);
       }).catch(function (error) {
-        self.showAlert = true;
+        _this4.showAlert = true;
       }).finally(function () {
-        self.loading = false;
+        _this4.loading = false;
       });
     },
     isSelect: function isSelect(num) {
@@ -40027,26 +40031,25 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
   methods: {
     sendResetMail: function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-        var self;
+        var _this = this;
+
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                self = this;
-
                 this.loading = true;
                 this.showAlert = false;
                 this.success = false;
-                _context.next = 6;
+                _context.next = 5;
                 return window.axios.post('/api/password/reset/request', this.form).then(function (response) {
-                  self.success = true;
+                  _this.success = true;
                 }).catch(function (error) {
-                  self.showAlert = true;
+                  _this.showAlert = true;
                 }).finally(function () {
-                  self.loading = false;
+                  _this.loading = false;
                 });
 
-              case 6:
+              case 5:
               case 'end':
                 return _context.stop();
             }
@@ -40311,27 +40314,26 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
   methods: {
     reset: function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-        var self;
+        var _this = this;
+
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                self = this;
-
                 this.loading = true;
                 this.showAlert = false;
                 this.success = false;
-                _context.next = 6;
+                _context.next = 5;
                 return window.axios.post('/api/password/reset', this.form).then(function (response) {
-                  self.success = true;
+                  _this.success = true;
                 }).catch(function (error) {
                   console.log(error);
-                  self.showAlert = true;
+                  _this.showAlert = true;
                 }).finally(function () {
-                  self.loading = false;
+                  _this.loading = false;
                 });
 
-              case 6:
+              case 5:
               case 'end':
                 return _context.stop();
             }
@@ -40694,6 +40696,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 
 
+var _this = this;
+
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 //
@@ -40736,34 +40740,32 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
   methods: {
     login: function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-        var self;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                self = this;
-                _context.next = 3;
-                return this.$store.dispatch('admin/login', this.form).then(function (response) {
-                  if (self.$store.getters['error/message'] !== '') {
-                    self.showAlert = true;
-                    self.alertMessage = self.$store.getters['error/message'];
+                _context.next = 2;
+                return _this.$store.dispatch('admin/login', _this.form).then(function (response) {
+                  if (_this.$store.getters['error/message'] !== '') {
+                    _this.showAlert = true;
+                    _this.alertMessage = _this.$store.getters['error/message'];
                   } else {
-                    self.$store.commit('appdata/setCurrentYear', window.moment().format('YYYY'));
-                    self.$store.commit('appdata/setCurrentMonth', window.moment().format('MM'));
-                    self.$router.push('/admin');
+                    _this.$store.commit('appdata/setCurrentYear', window.moment().format('YYYY'));
+                    _this.$store.commit('appdata/setCurrentMonth', window.moment().format('MM'));
+                    _this.$router.push('/admin');
                   }
                 }).catch(function (error) {
                   console.log(error);
-                  self.showAlert = true;
-                  self.alertMessage = 'ログインに失敗しました。';
+                  _this.showAlert = true;
+                  _this.alertMessage = 'ログインに失敗しました。';
                 });
 
-              case 3:
+              case 2:
               case 'end':
                 return _context.stop();
             }
           }
-        }, _callee, this);
+        }, _callee, _this);
       }));
 
       function login() {
@@ -40930,6 +40932,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 
 
+var _this = this;
+
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 //
@@ -40962,17 +40966,17 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return this.$store.dispatch('admin/logout');
+                return _this.$store.dispatch('admin/logout');
 
               case 2:
-                this.$router.push('/admin/login');
+                _this.$router.push('/admin/login');
 
               case 3:
               case 'end':
                 return _context.stop();
             }
           }
-        }, _callee, this);
+        }, _callee, _this);
       }));
 
       function logout() {
@@ -41124,6 +41128,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _this = this;
+
 //
 //
 //
@@ -41147,28 +41153,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       loading: true
     };
   },
-
   components: {},
   methods: {
     fetchData: function fetchData() {
-      var self = this;
-      this.loading = true;
-      this.showAlert = false;
-      this.alertMessage = '';
+      _this.loading = true;
+      _this.showAlert = false;
+      _this.alertMessage = '';
 
       var url = '/api/admin/users/list';
       window.axios.get(url).then(function (response) {
         if (response.data.users.length <= 0) {
-          self.showAlert = true;
-          self.alertMessage = 'データが存在しませんでした。';
+          _this.showAlert = true;
+          _this.alertMessage = 'データが存在しませんでした。';
         }
-        self.users = response.data.users;
+        _this.users = response.data.users;
       }).catch(function (error) {
         console.log(error.response);
-        self.showAlert = true;
-        self.alertMessage = 'データ取得に失敗しました。';
+        _this.showAlert = true;
+        _this.alertMessage = 'データ取得に失敗しました。';
       }).finally(function () {
-        self.loading = false;
+        _this.loading = false;
       });
     }
   },
@@ -41322,30 +41326,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       userid: null
     };
   },
-
   components: {},
   methods: {
     fetchData: function fetchData() {
-      var self = this;
+      var _this = this;
+
       this.loading = true;
       this.showAlert = false;
       this.alertMessage = '';
 
       var url = '/api/admin/users/detail/' + this.userid;
       window.axios.get(url).then(function (response) {
-        console.log(response.data);
         if (response.data.user === null) {
-          self.showAlert = true;
-          self.alertMessage = 'データが存在しませんでした。';
+          _this.showAlert = true;
+          _this.alertMessage = 'データが存在しませんでした。';
         } else {
-          self.user = response.data.user;
+          _this.user = response.data.user;
         }
       }).catch(function (error) {
         console.log(error.response);
-        self.showAlert = true;
-        self.alertMessage = 'データ取得に失敗しました。';
+        _this.showAlert = true;
+        _this.alertMessage = 'データ取得に失敗しました。';
       }).finally(function () {
-        self.loading = false;
+        _this.loading = false;
       });
     }
   },
@@ -41714,6 +41717,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Calendar__ = __webpack_require__(241);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Calendar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Calendar__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ScheduleForm__ = __webpack_require__(285);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ScheduleForm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_ScheduleForm__);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -41737,6 +41742,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+
 
 
 //import ListView from '../components/ListView'
@@ -41758,43 +41766,54 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
   },
 
   components: {
-    Calendar: __WEBPACK_IMPORTED_MODULE_1__components_Calendar___default.a
+    Calendar: __WEBPACK_IMPORTED_MODULE_1__components_Calendar___default.a,
     //ListView,
+    ScheduleForm: __WEBPACK_IMPORTED_MODULE_2__components_ScheduleForm___default.a
   },
   methods: {
     onOpenForm: function onOpenForm(arg) {
+      console.log('call onOpenForm');
       this.checkList = arg;
+      console.log(arg);
       this.showCalendar = false;
+    },
+    onCloseForm: function onCloseForm(arg) {
+      console.log('call onCloseForm');
+      console.log(arg);
+      this.showCalendar = true;
     },
     fetchSchedules: function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-        var self, url;
+        var _this = this;
+
+        var url;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                self = this;
-
                 this.loading = true;
                 this.showAlert = false;
                 this.alertMessage = '';
                 this.schedules = null;
                 url = '/api/admin/schedule/monthly/' + this.y + '/' + this.m;
-                _context.next = 8;
+                _context.next = 7;
                 return window.axios.get(url).then(function (response) {
-                  self.schedules = response.data.schedules;
-                  self.holidays = response.data.holidays;
-                  self.y = response.data.y;
-                  self.m = response.data.m;
+                  _this.schedules = response.data.schedules;
+                  _this.holidays = response.data.holidays;
+                  _this.y = response.data.y;
+                  _this.m = response.data.m;
                 }).catch(function (error) {
                   console.log(error.response);
-                  self.showAlert = true;
-                  self.alertMessage = 'データ取得に失敗しました。';
+                  _this.showAlert = true;
+                  _this.alertMessage = 'データ取得に失敗しました。';
                 }).finally(function () {
-                  self.loading = false;
-                  self.$store.commit('admin/setCurrentYear', self.y);
-                  self.$store.commit('admin/setCurrentMonth', self.m);
+                  _this.loading = false;
+                  _this.$store.commit('admin/setCurrentYear', _this.y);
+                  _this.$store.commit('admin/setCurrentMonth', _this.m);
                 });
+
+              case 7:
+                console.log(this.schedules);
 
               case 8:
               case 'end':
@@ -41991,8 +42010,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -42019,7 +42036,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       };
     },
     schedule: function schedule() {
-      var self = this;
+      self = this;
       return function (date) {
         for (var i = 0; i < self.schedules.length; i++) {
           var schedule = self.schedules[i];
@@ -42031,7 +42048,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       };
     },
     holiday: function holiday() {
-      var self = this;
+      self = this;
       return function (date) {
         for (var i = 0; i < self.holidays.length; i++) {
           var holiday = self.holidays[i];
@@ -42043,7 +42060,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       };
     },
     unread: function unread() {
-      var self = this;
       return function (schedule) {
         if (Array.isArray(schedule.contacts) && schedule.contacts.length <= 0) {
           return 0;
@@ -42060,10 +42076,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   methods: {
-    emitOpenForm: function emitOpenForm() {
-      this.$emit('open-form');
-    },
-
     getDateList: function getDateList() {
       this.dateList = [];
       var year = this.currentYear;
@@ -42080,7 +42092,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       console.log('対象年月: ' + currentYM.format('YYYY-MM'));
       console.log('月初日: ' + startDate + '(' + startDate.day() + ')');
       console.log('月末曜日: ' + endDate + '(' + currentYM.endOf('month').format('YYYY-MM-DD dddd') + ')');
-      console.log(this.schedules);
 
       if (startDay === 0) {
         startDay = 7;
@@ -42118,6 +42129,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
       console.log(this.dateList);
     },
+    selected: function selected(date) {
+      console.log(date);
+      var checkList = [];
+      checkList.push(date);
+      this.$emit('openForm', checkList);
+    },
     register: function register() {
       console.log('call register');
       var checkList = [];
@@ -42135,7 +42152,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     //  this.getDateList()
     //}
   },
-  created: function created() {
+  mounted: function mounted() {
+    console.log('thisは何？');
+    console.log(this);
     this.getDateList();
   }
 });
@@ -42203,10 +42222,14 @@ var render = function() {
                   date.schedule
                     ? [
                         _c(
-                          "router-link",
+                          "a",
                           {
-                            staticClass: "title",
-                            attrs: { to: _vm.formUrl(date.schedule.date) }
+                            on: {
+                              click: function($event) {
+                                $event.stopPropagation()
+                                return _vm.selected(date.schedule.date)
+                              }
+                            }
                           },
                           [
                             _c("div", { staticClass: "title_cnt" }, [
@@ -42219,16 +42242,18 @@ var render = function() {
                         )
                       ]
                     : [
-                        date.date
-                          ? _c(
-                              "router-link",
-                              {
-                                staticClass: "title",
-                                attrs: { to: _vm.formUrl(date.date) }
-                              },
-                              [_vm._v("\n            未登録\n          ")]
-                            )
-                          : _vm._e(),
+                        _c(
+                          "a",
+                          {
+                            on: {
+                              click: function($event) {
+                                $event.stopPropagation()
+                                return _vm.selected(date.date)
+                              }
+                            }
+                          },
+                          [_vm._v("未登録")]
+                        ),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -42354,50 +42379,51 @@ var render = function() {
       : _c(
           "div",
           [
-            _c(
-              "a",
-              {
-                staticClass: "prev",
-                attrs: { href: "#" },
-                on: { click: _vm.prev }
-              },
-              [_c("i", { staticClass: "fas fa-caret-square-left" })]
-            ),
-            _vm._v(" "),
-            _c("p", [
-              _c("span", [_vm._v(_vm._s(this.y))]),
-              _vm._v("年"),
-              _c("span", [_vm._v(_vm._s(this.m))]),
-              _vm._v("月 スケジュール一覧")
-            ]),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass: "next",
-                attrs: { href: "#" },
-                on: { click: _vm.next }
-              },
-              [_c("i", { staticClass: "fas fa-caret-square-right" })]
-            ),
-            _vm._v(" "),
             this.showCalendar && _vm.schedules
-              ? _c("Calendar", {
-                  attrs: {
-                    schedules: this.schedules,
-                    holidays: this.holidays,
-                    "current-year": this.y,
-                    "current-month": this.m
-                  },
-                  on: { openForm: _vm.onOpenForm }
-                })
-              : _vm._e(),
-            _vm._v(" "),
-            _vm._l(this.checkList, function(chk) {
-              return _c("div", { key: chk.key }, [
-                _c("p", [_vm._v(_vm._s(chk))])
-              ])
-            })
+              ? [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "prev",
+                      attrs: { href: "#" },
+                      on: { click: _vm.prev }
+                    },
+                    [_c("i", { staticClass: "fas fa-caret-square-left" })]
+                  ),
+                  _vm._v(" "),
+                  _c("p", [
+                    _c("span", [_vm._v(_vm._s(this.y))]),
+                    _vm._v("年"),
+                    _c("span", [_vm._v(_vm._s(this.m))]),
+                    _vm._v("月 スケジュール一覧")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "next",
+                      attrs: { href: "#" },
+                      on: { click: _vm.next }
+                    },
+                    [_c("i", { staticClass: "fas fa-caret-square-right" })]
+                  ),
+                  _vm._v(" "),
+                  _c("Calendar", {
+                    attrs: {
+                      schedules: this.schedules,
+                      holidays: this.holidays,
+                      "current-year": this.y,
+                      "current-month": this.m
+                    },
+                    on: { openForm: _vm.onOpenForm }
+                  })
+                ]
+              : [
+                  _c("ScheduleForm", {
+                    attrs: { schedules: this.checkList },
+                    on: { closeForm: _vm.onCloseForm }
+                  })
+                ]
           ],
           2
         )
@@ -42466,6 +42492,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _this = this;
+
 //
 //
 //
@@ -42494,15 +42522,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       schedule: null
     };
   },
-
   props: {},
   components: {},
   methods: {
     fetchData: function fetchData() {
-      var _this = this;
-
-      var self = this;
-      window.axios.get('/api/admin/schedule/daily/' + this.$route.params.year + '/' + this.$route.params.month + '/' + this.$route.params.day).then(function (response) {
+      window.axios.get('/api/admin/schedule/daily/' + _this.$route.params.year + '/' + _this.$route.params.month + '/' + _this.$route.params.day).then(function (response) {
         if (response.data.schedules) {
           _this.schedule = response.data.schedules;
         } else {
@@ -73874,7 +73898,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
   mounted: function mounted() {
     var _this = this;
 
-    var self = this;
     _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
       return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
         while (1) {
@@ -73893,15 +73916,15 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                       switch (_context.prev = _context.next) {
                         case 0:
                           console.log('[app.vueで/api/meに失敗してリダイレクト]');
-                          self.$store.dispatch('auth/logout');
-                          self.$router.push('/login');
+                          _this.$store.dispatch('auth/logout');
+                          _this.$router.push('/login');
 
                         case 3:
                         case 'end':
                           return _context.stop();
                       }
                     }
-                  }, _callee, this);
+                  }, _callee, _this);
                 }));
 
                 return function (_x) {
@@ -73944,6 +73967,194 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 282 */,
+/* 283 */,
+/* 284 */,
+/* 285 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(286)
+/* template */
+var __vue_template__ = __webpack_require__(287)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/admin/components/ScheduleForm.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3884f8f2", Component.options)
+  } else {
+    hotAPI.reload("data-v-3884f8f2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 286 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _this = this;
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      loading: false,
+      showAlert: false,
+      schedule: null
+    };
+  },
+  props: {
+    schedules: { required: true }
+  },
+  components: {},
+  methods: {
+    fetchData: function fetchData() {
+      window.axios.get('/api/admin/schedule/daily/' + _this.$route.params.year + '/' + _this.$route.params.month + '/' + _this.$route.params.day).then(function (response) {
+        if (response.data.schedules) {
+          _this.schedule = response.data.schedules;
+        } else {
+          _this.schedule = [];
+          _this.schedule.id = null;
+          _this.schedule.title = null;
+          _this.schedule.description = null;
+        }
+      }).finally(function () {
+        _this.loading = false;
+      });
+    },
+    goBack: function goBack() {
+      window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/');
+    }
+  },
+  mounted: function mounted() {
+    //this.fetchData()
+  },
+
+  computed: {}
+});
+
+/***/ }),
+/* 287 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.loading,
+            expression: "loading"
+          }
+        ],
+        staticClass: "loader"
+      },
+      [_vm._v("読み込み中...")]
+    ),
+    _vm._v(" "),
+    _vm.showAlert
+      ? _c(
+          "div",
+          { staticClass: "error" },
+          [
+            _c("p", [_vm._v("情報の取得に失敗しました。")]),
+            _vm._v(" "),
+            _c("router-link", { attrs: { to: "/admin" } }, [_vm._v("戻る")])
+          ],
+          1
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    this.schedules
+      ? _c(
+          "div",
+          [
+            _vm._l(this.schedules, function(date) {
+              return _c("div", { key: date.key }, [
+                _c("p", [_vm._v(_vm._s(date))])
+              ])
+            }),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                on: {
+                  click: function($event) {
+                    return _vm.$emit("closeForm", "OK")
+                  }
+                }
+              },
+              [_vm._v("戻る")]
+            )
+          ],
+          2
+        )
+      : _vm._e()
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3884f8f2", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

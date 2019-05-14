@@ -51,20 +51,20 @@ export default {
     login () {
       const self = this
       this.$store.dispatch('auth/login' , this.loginForm)
-      .then(response => {
-        if(self.$store.getters['error/message'] !== '') {
-          self.showAlert = true
-          self.alertMessage = self.$store.getters['error/message']
+      .then( (response) => {
+        if(this.$store.getters['error/message'] !== '') {
+          this.showAlert = true
+          this.alertMessage = this.$store.getters['error/message']
         } else {
-          self.$store.commit('appdata/setCurrentYear', window.moment().format('YYYY'))
-          self.$store.commit('appdata/setCurrentMonth', window.moment().format('MM'))
-          self.$router.push('/')
+          this.$store.commit('appdata/setCurrentYear', window.moment().format('YYYY'))
+          this.$store.commit('appdata/setCurrentMonth', window.moment().format('MM'))
+          this.$router.push('/')
         }
-      }).catch(error => {
+      }).catch( (error) => {
         console.log('ログインに失敗しました。')
         console.log(error)
-        self.showAlert = true
-        self.alertMessage = 'ログインに失敗しました。'
+        this.showAlert = true
+        this.alertMessage = 'ログインに失敗しました。'
       })
     }
   },

@@ -13,7 +13,7 @@
 
 <script>
   export default {
-    data() {
+    data: () => {
       return {
         users: [],
         showAlert: false,
@@ -24,26 +24,25 @@
     components: {
     },
     methods: {
-      fetchData () {
-        const self = this
+      fetchData: () => {
         this.loading = true
         this.showAlert = false
         this.alertMessage = ''
         
         let url = '/api/admin/users/list'
         window.axios.get(url)
-        .then(response => {
+        .then( (response) => {
           if(response.data.users.length <= 0) {
-            self.showAlert = true
-            self.alertMessage = 'データが存在しませんでした。'
+            this.showAlert = true
+            this.alertMessage = 'データが存在しませんでした。'
           }
-          self.users = response.data.users
-        }).catch(error => {
+          this.users = response.data.users
+        }).catch( (error) => {
           console.log(error.response)
-          self.showAlert = true
-          self.alertMessage = 'データ取得に失敗しました。'
-        }).finally(() => {
-          self.loading = false
+          this.showAlert = true
+          this.alertMessage = 'データ取得に失敗しました。'
+        }).finally( () => {
+          this.loading = false
         })
       },
     },

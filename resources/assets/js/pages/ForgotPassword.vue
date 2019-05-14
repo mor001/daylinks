@@ -39,17 +39,16 @@ export default {
   },
   methods: {
     async sendResetMail () {
-      const self = this
       this.loading = true
       this.showAlert = false
       this.success = false
       await window.axios.post('/api/password/reset/request', this.form)
-      .then(response => {
-        self.success = true
+      .then( (response) => {
+        this.success = true
       }).catch(error => {
-        self.showAlert = true
+        this.showAlert = true
       }).finally(() => {
-        self.loading = false
+        this.loading = false
       })
     }
   }

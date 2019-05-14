@@ -16,7 +16,7 @@ const actions = {
     context.commit('error/setCode', null, { root: true })
     context.commit('error/setMessage', '', { root: true })
     await window.axios.post('/api/login', data)
-    .then(function (response) {
+    .then( (response) => {
       if(response.data.login) {
         const token = 'Bearer ' + response.data.access_token
         window.axios.defaults.headers.common['Authorization'] = token;

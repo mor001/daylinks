@@ -75,21 +75,19 @@ export default {
     components: {
     },
     computed: {
-      schedule: function() {
-        const self = this
-        return function(date) {
-          for (var i = 0; i < self.schedules.length; i++) {
-            const schedule = self.schedules[i]
-            if(schedule.date == date) {
+      schedule: () => {
+        return (date) => {
+          for (var i = 0; i < this.schedules.length; i++) {
+            const schedule = this.schedules[i]
+            if(schedule.date === date) {
               return schedule
             }
           }
           return false
         }
       },
-      unread: function() {
-        const self = this
-        return function(schedule) {
+      unread: () => {
+        return (schedule) => {
           if(Array.isArray(schedule.contacts) && schedule.contacts.length <= 0) {
             return 0
           }
@@ -103,7 +101,7 @@ export default {
           return sum
         }
       },
-      dateList: function() {
+      dateList: () => {
         const year = this.currentYear
         const month = this.currentMonth
         const currentYM = moment([year, month - 1, 1])  // 引数の年月で初期化
@@ -186,9 +184,9 @@ export default {
         }
 */
         //console.log(dateList)
-        return dateList.filter(function() {
-          return true;
-        });
+        return dateList.filter( () => {
+          return true
+        })
       },
     },
     methods: {
