@@ -47,76 +47,71 @@
     },
     methods: {
       fetchNotice (getAll = false) {
-        const self = this
         this.loading = true
         this.showAlert = false
         this.alertMessage = ''
         let url = ''
         getAll === false ? url = '/api/notice' : url = '/api/notice/all'
         window.axios.get(url)
-        .then(response => {
+        .then( (response) => {
           if(response.data.notices.length <= 0) {
-            //self.showAlert = true
-            //self.alertMessage = 'データが存在しませんでした。'
+            //this.showAlert = true
+            //this.alertMessage = 'データが存在しませんでした。'
           }
-          self.$set(self, 'notices', response.data.notices)
-          //self.$set(self, 'contacts', response.data.contacts)
-        }).catch(error => {
+          this.$set(this, 'notices', response.data.notices)
+          //self.$set(this, 'contacts', response.data.contacts)
+        }).catch( (error) => {
           console.log(error.response)
-          self.showAlert = true
-          self.alertMessage = 'データ取得に失敗しました。'
-        }).finally(() => {
-          self.loading = false
+          this.showAlert = true
+          this.alertMessage = 'データ取得に失敗しました。'
+        }).finally( () => {
+          this.loading = false
         })
       },
       fetchContact (getAll = false) {
-        const self = this
         this.loading = true
         this.showAlert = false
         this.alertMessage = ''
         let url = ''
         getAll === false ? url = '/api/contact/general' : url = '/api/contact/general/all'
         window.axios.get(url)
-        .then(response => {
-          self.$set(self, 'contacts', response.data.contacts)
-        }).catch(error => {
+        .then( (response) => {
+          this.$set(this, 'contacts', response.data.contacts)
+        }).catch( (error) => {
           console.log(error.response)
-          self.showAlert = true
-          self.alertMessage = 'データ取得に失敗しました。'
-        }).finally(() => {
-          self.loading = false
+          this.showAlert = true
+          this.alertMessage = 'データ取得に失敗しました。'
+        }).finally( () => {
+          this.loading = false
         })
       },
       readNotice (notice) {
-        const self = this
         this.loading = true
         this.showAlert = false
-        self.$set(self, 'notices', null)
+        this.$set(this, 'notices', null)
         let url = '/api/notice/read'
         window.axios.post(url, notice)
-        .then(function (response) {
-          console.log(response.data)
-          self.$set(self, 'notices', response.data.notices)
-        }).catch(function (error) {
-          self.showAlert = true
-        }).finally(() => {
-          self.loading = false
+        .then( (response) => {
+          this.$set(this, 'notices', response.data.notices)
+        }).catch( (error) => {
+          this.showAlert = true
+        }).finally( () => {
+          this.loading = false
         })
       },
       readContacts (contact) {
-        const self = this
         this.loading = true
         this.showAlert = false
-        self.$set(self, 'contacts', null)
+        this.$set(this, 'contacts', null)
         let url = '/api/contact/read'
         window.axios.post(url, contact)
-        .then(function (response) {
+        .then( (response) => {
           console.log(response.data)
-          self.$set(self, 'contacts', response.data.contacts)
-        }).catch(function (error) {
-          self.showAlert = true
-        }).finally(() => {
-          self.loading = false
+          this.$set(this, 'contacts', response.data.contacts)
+        }).catch( (error) => {
+          this.showAlert = true
+        }).finally( () => {
+          this.loading = false
         })
       },
       isSelect (num) {

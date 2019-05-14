@@ -23,13 +23,19 @@ try {
 
 window.axios = require('axios');
 
-window.axios.interceptors.response.use(function (response) {
+window.axios.interceptors.response.use( (response) => {
     return response
-}, function (error) {
+}, (error) => {
   if (error.response.status === 401) {
     console.log('response status is 401')
-    store.dispatch('auth/logout')
-    router.push('/login')
+    let path = location.pathname
+    if ( path.match(/admin/)) {
+      store.dispatch('admin/logout')
+      router.push('/admin/login')
+    } else {
+      store.dispatch('auth/logout')
+      router.push('/login')
+    }
   } else if (error.response.status === 500) {
     console.log('response status is 500')
     window.location = "/500"
@@ -41,10 +47,10 @@ window.axios.interceptors.response.use(function (response) {
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
 if (localStorage.getItem('token')) {
-    window.axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+  window.axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
 }
 
-window.moment = require('moment');
+window.moment = require('moment')
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
@@ -52,12 +58,12 @@ window.moment = require('moment');
  * a simple convenience so we don't have to attach every token manually.
  */
 
-let token = document.head.querySelector('meta[name="csrf-token"]');
+let token = document.head.querySelector('meta[name="csrf-token"]')
 
 if (token) {
-    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content
 } else {
-    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token')
 }
 
 /**

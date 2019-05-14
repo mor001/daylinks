@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+.clearfix:before,
+.clearfix:after,
+.row:before,
+.row:after{
+    content: " ";
+    display: table;
+}
+.clearfix:after,
+.row:after{
+    clear: both;
+}
+.clearfix
+.row {
+    *zoom: 1;
+}
+
+.clear_both {
+  clear: both;
+}

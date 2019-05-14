@@ -33,9 +33,7 @@
 </template>
 
 <script>
-import { Common } from '../common/common'
 export default {
-  mixins: [ Common ],
   data () {
     return {
       loading: true,
@@ -44,13 +42,12 @@ export default {
     }
   },
   mounted() {
-    const self = this
     window.axios.get('/api/me')
-    .then(response => {
+    .then( (response) => {
       this.user = response.data
-    }).catch(error => {
+    }).catch( (error) => {
       this.showAlert = true
-    }).finally(() => {
+    }).finally( () => {
       this.loading = false
     })
   }

@@ -47,44 +47,44 @@ export default {
     }
   },
   methods: {
-    attach () {
+    attach: () => {
       if (!this.$parent) {
-        this.$mount();
-        document.body.appendChild(this.$el);
+        this.$mount()
+        document.body.appendChild(this.$el)
       } else {
-        this.$mount();
-        this.$parent.$el.appendChild(this.$el);
+        this.$mount()
+        this.$parent.$el.appendChild(this.$el)
       }
     },
-    remove () {
+    remove: () => {
       if (!this.$parent) {
-        document.body.removeChild(this.$el);
-        this.$destroy();
+        document.body.removeChild(this.$el)
+        this.$destroy()
       } else {
-        this.$parent.$el.removeChild(this.$el);
-        this.$destroy();
+        this.$parent.$el.removeChild(this.$el)
+        this.$destroy()
       }
     },
-    close () {
-      this.isShow = false;
+    close: () => {
+      this.isShow = false
     },
-    show () {
-      this.attach();
-      this.isShow = true;
+    show: () => {
+      this.attach()
+      this.isShow = true
       this.promise = new Promise((resolve, reject) => {
-        this.resolve = resolve;
-        this.reject = reject;
+        this.resolve = resolve
+        this.reject = reject
       });
-      return this.promise;
+      return this.promise
     },
-    submit() {
-       this.resolve(true);
+    submit: () => {
+       this.resolve(true)
     },
-    cancel() {
-       this.reject(false);
+    cancel: () => {
+       this.reject(false)
     },
-    afterLeave () {
-      this.remove();
+    afterLeave: () => {
+      this.remove()
     },
   }
 }

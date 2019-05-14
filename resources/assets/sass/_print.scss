@@ -1,0 +1,24 @@
+@charset "UTF-8";
+@import "settings";
+@import "color";
+@import "mixin";
+
+@media print {
+
+  body {
+    //width: $container-max-width;
+    height: auto;
+    -webkit-print-color-adjust: exact;
+    //transform: scale(0.8);
+    //-moz-transform: scale(0.8);
+    //-webkit-transform: scale(0.8);
+    //transform-origin: 0 0;
+  }
+  .head_wrap, .ft_top, .ft_main,
+  #page_top {
+    display: none !important;
+  }
+  .other #main {
+    padding-top: 0 !important;
+  }
+}

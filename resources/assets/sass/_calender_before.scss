@@ -1,0 +1,162 @@
+@charset "UTF-8";
+@import "settings";
+@import "color";
+@import "mixin";
+.calendar_wrap {
+  margin-top: $gutter-width / 2;
+}
+table.calendar {
+  border: none;
+  th, td {
+    border: none;
+  }
+  td.today {
+    background-color: $color-main-pale;
+  }
+  caption {
+    margin-bottom: $gutter-width / 2;
+    font-size: 1.8rem;
+    font-weight: bold;
+    a {
+      color: $color-font;
+      text-decoration: none;
+      &:nth-child(2) {
+        padding: 0 $gutter-width / 2;
+      }
+    }
+  }
+  tr {
+    border-top: 1px solid $color-gray-middle;
+    &:last-child {
+      border-bottom: 1px solid $color-gray-middle;
+    }
+    th, td {
+      text-align: center;
+      margin: 0 auto;
+      font-weight: bold;
+      a {
+        text-decoration: none;
+        color: $color-font;
+      }
+    }
+    td {
+      padding: 0;
+      padding-bottom: 8px;
+      span.day {
+        font-size: 1.4rem;
+      }
+    }
+    td.saturday, td.saturday a {
+      color: $color-base-blue;
+    }
+    td.sunday, td.sunday a,
+    td.holiday, td.holiday a {
+      color: $color-base-red;
+    }
+  }
+
+  tr.calendar_header {
+    th {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: $color-font;
+      width: calc(100% / 7) ;
+    }
+    th.saturday {
+      color: $color-base-blue;
+    }
+    th.sunday {
+      color: $color-base-red;
+    }
+  }
+  .title, .msg_cnt{
+    display: none;
+  }
+
+  .reserve_info, .reserve_success,
+  .reserve_warning, .reserve_danger,
+  .reserve_none{
+    padding: 0.1em;
+    p {
+      font-size: 0.7rem;
+      line-height: 1.2rem;
+      font-weight: normal;
+      padding: 0.2em 0.1em;
+      background-color: $color-gray-deep;
+      color: $color-white;
+      @include radius();
+    }
+  }
+  .reserve_none p {
+    background-color: inherit;
+    color: $color-gray-dark;
+  }
+  .reserve_info p {
+    background-color: $color-base-blue;
+  }
+  .reserve_success p {
+    background-color: $color-base-green;
+  }
+  .reserve_warning p {
+    background-color: $color-base-yellow;
+    color: $color-font;
+  }
+  .reserve_danger p {
+    background-color: $color-base-red;
+  }
+  .day {
+    font-size: 1.6rem;
+    padding: 0.5em;
+  }
+  .spacing_sm {
+    letter-spacing:-0.2em;
+  }
+  .msg_num {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: normal;
+    text-decoration: underline;
+    color: $color-link;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+.upright {
+  writing-mode: vertical-rl;
+  -moz-writing-mode: vertical-rl;
+  -o-writing-mode: vertical-rl;
+  -webkit-writing-mode: vertical-rl;
+  -moz-text-orientation : upright;
+  -o-text-orientation : upright;
+  -webkit-text-orientation : upright;
+}
+.ft_btm_cnt {
+  //margin-left: $gutter-width / 2;
+  //margin-right: $gutter-width / 2;
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  width: 90%;
+  .container {
+    box-shadow: 0 0 8px gray;
+    @include radius();
+    p {
+      font-size: 1.4rem;
+      padding: $gutter-width / 4;
+      span.num {
+        font-size: 1.8rem;
+        font-weight: bold;
+        padding: 0 2px;
+      }
+    }
+  }
+}
+@media #{$md-up} {
+  table.calendar {
+    .title, .msg_cnt {
+      display: block;
+    }
+  }
+}

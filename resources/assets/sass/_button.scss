@@ -1,0 +1,48 @@
+@charset "UTF-8";
+@import "settings";
+@import "color";
+@import "mixin";
+/*-----------------------
+カラー
+-------------------------*/
+$button-padding: 10px 40px;
+$button-width: 100%;
+$button-height: 40px;
+$button-font-size: 1.6rem;
+$button-bottom-margin: 10px;
+$button-font-color: #000;
+$button-change-font-color: #fff;
+$button-background: #ccc;
+$button-change-background: #888;
+$button-shadow-color: #888;
+
+
+/*reset------------------------------*/
+button {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+
+/*button-----------------------------
+http://design.aekana.com/blog/css-mouseover-effect----*/
+//基本
+.btn_wrap p {
+  margin-bottom: $button-bottom-margin;
+}
+.btn_a, .btn_b, .btn_c {
+  width: $button-width;
+  text-align: center;
+  margin: 0 auto;
+  text-decoration: none;
+}
+
+@media #{$md-down} {
+}

@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import store from './store'
 
-import UserLayout from './layouts/user.vue';
+import UserLayout from './layouts/LayoutUser.vue';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import User from './pages/User';
@@ -10,7 +11,7 @@ import Notice from './pages/Notice';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 
-import AdminLayout from './layouts/admin.vue';
+import AdminLayout from './layouts/LayoutAdmin.vue';
 import AdminLogin from './admin/pages/AdminLogin';
 import AdminHome from './admin/pages/AdminHome';
 import AdminUsersList from './admin/pages/AdminUsersList';
@@ -20,7 +21,6 @@ import AdminScheduleForm from './admin/pages/AdminScheduleForm';
 
 import SystemError from './pages/errors/System.vue'
 import NotFound from './pages/errors/NotFound.vue'
-import store from './store'
 
 Vue.use(VueRouter);
 
@@ -73,6 +73,7 @@ router.beforeEach((to, from, next) => {
     }
   } else if (to.matched.some(record => record.meta.requiresAdminAuth)) {
     if (!store.getters['admin/isLogin']) {
+      console.log('[VueRouterでadmin/loginにリダイレクト] admin/isLogin: ' + store.getters['admin/isLogin'])
       next({
         path: '/admin/login',
         query: { redirect: to.fullPath }

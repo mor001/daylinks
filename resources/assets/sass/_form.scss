@@ -1,0 +1,163 @@
+@charset "UTF-8";
+@import "settings";
+@import "color";
+@import "mixin";
+/*
+https://www.nxworld.net/tips/15-useful-css-snippets-in-form-style.html
+*/
+$button-padding: 10px 40px;
+$button-width: 300px;
+$button-height: 60px;
+$button-font-size: 1.6rem;
+$form-border-color: $color-main-light;
+$form-erea-color: #fff;
+$focus-border-color: $color-main;
+$focus-background-color: $color-main-accent-pale;
+$focus-shadow-color: $color-main;
+$placeholder-color: $color-font-pale;
+$button-change-font-color: $color-main;
+$button-background: $color-main;
+$button-change-background: $color-main;
+
+/*reset------------------------------*/
+input, button, textarea, select {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea,select {
+  outline: none;
+  border: 2px solid $form-border-color;
+  background-color: $form-erea-color;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+  padding: 10px;
+  width: 100%;
+  font-family: $body-font-family;
+  font-size: 1.6rem;
+}
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+textarea:focus,select:focus {
+  box-shadow: 0 0 7px $focus-border-color;
+  border-color: $focus-shadow-color;
+  background: $focus-background-color;
+}
+@media#{$md-down} {
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  textarea,select {
+    padding: 3px;
+    font-size: 1.4rem;
+  }
+}
+$color1: #f4f4f4;
+$color2: $color-main;
+.radio {
+  margin: 0.5rem;
+  input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    + .radio-label {
+      &:before {
+        content: '';
+        background: $color1;
+        border-radius: 100%;
+        border: 1px solid darken($color1, 25%);
+        display: inline-block;
+        width: 1.4em;
+        height: 1.4em;
+        position: relative;
+        top: -0.2em;
+        margin-right: 1em;
+        vertical-align: top;
+        cursor: pointer;
+        text-align: center;
+        transition: all 250ms ease;
+      }
+    }
+    &:checked {
+      + .radio-label {
+        &:before {
+          background-color: $color2;
+          box-shadow: inset 0 0 0 4px $color1;
+        }
+      }
+    }
+    &:focus {
+      + .radio-label {
+        &:before {
+          outline: none;
+          border-color: $color2;
+        }
+      }
+    }
+    &:disabled {
+      + .radio-label {
+        &:before {
+          box-shadow: inset 0 0 0 4px $color1;
+          border-color: darken($color1, 25%);
+          background: darken($color1, 25%);
+        }
+      }
+    }
+    + .radio-label {
+      &:empty {
+        &:before {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+/*placeholder-----------------*/
+/* Chrome */
+::-webkit-input-placeholder {
+  color: $placeholder-color;
+}
+/* Firefox */
+::-moz-placeholder {
+  color: $placeholder-color;
+}
+/* IE */
+:-ms-input-placeholder {
+  color: $placeholder-color;
+}
+/*textareaのリサイズ機能を制限する-----------------*/
+/* 横のみリサイズ可
+textarea {
+  resize: horizontal;
+}
+*/
+/* 縦のみリサイズ可
+textarea {
+  resize: vertical;
+}
+*/
+/* 縦横ともにリサイズ不可 */
+textarea {
+  resize: none;
+}
+
+/*checkbox-----------------*/
+input[type=checkbox]{
+  display: none;
+}
+input[type=checkbox]:checked + .checkbox:before {
+  opacity: 1;
+}
+
+@media#{$md-up} {
+
+}

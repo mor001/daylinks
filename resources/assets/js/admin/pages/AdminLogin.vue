@@ -36,21 +36,21 @@ export default {
   computed: {
   },
   methods: {
-    async login () {
-      const self = this
+    login: async () => {
       await this.$store.dispatch('admin/login' , this.form)
-      .then(function (response) {
-        console.log(response)
-        if(self.$store.getters['error/message'] !== '') {
-          self.showAlert = true
-          self.alertMessage = self.$store.getters['error/message']
+      .then( (response) => {
+        if(this.$store.getters['error/message'] !== '') {
+          this.showAlert = true
+          this.alertMessage = this.$store.getters['error/message']
         } else {
-          self.$router.push('/admin')
+          this.$store.commit('appdata/setCurrentYear', window.moment().format('YYYY'))
+          this.$store.commit('appdata/setCurrentMonth', window.moment().format('MM'))
+          this.$router.push('/admin')
         }
-      }).catch(function (error) {
+      }).catch( (error) => {
         console.log(error)
-        self.showAlert = true
-        self.alertMessage = 'ログインに失敗しました。'
+        this.showAlert = true
+        this.alertMessage = 'ログインに失敗しました。'
       })
     }
   },

@@ -1,0 +1,154 @@
+@charset "UTF-8";
+@import "settings";
+@import "color";
+
+//ログイン画面
+/* Form Layout */
+$login-width: calc(100% - #{$gutter-width});
+$max-width: 400px;
+
+.login {
+  padding: 8% 0 0;
+  margin: auto;
+  margin-top: -$header-height;
+  //position: relative;
+  height: 100vh;
+  //background: $color-gray-pale;
+  #login_message {
+    //width: $login-width;
+    max-width: $max-width;
+    background-color: $color-base-blue;
+    text-align: left;
+    color: $color-white;
+    //@include radius();
+    //border: 1px solid $color-base-blue;
+    //@include box-shadow();
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: $gutter-width / 2;
+    padding: $gutter-width / 2;
+    font-weight: bold;
+    p {
+      text-align: left;
+      margin-right: auto;
+      font-size: 1.4rem;
+      line-height: 2rem;
+    }
+  }
+  #login_message.login_error {
+    //border-color: $color-base-red;
+    background-color: $color-base-red;
+  }
+    #login_form {
+      background: $color-white;
+      max-width: $max-width;
+      padding: $gutter-width / 2;
+      text-align: center;
+      margin: 0 auto;
+      form {
+        .login_item {
+          width: 100%;
+          input {
+            background: $color-white;
+            border: none;
+            border-bottom: 2px solid $color-gray-deep;
+            color: #666;
+            font-size: 1.6rem;
+            height: 50px;
+            transition: border-color 0.3s;
+            width: 100%;
+            &:focus {
+              box-shadow: none;
+              background: $color-main-pale;
+              border-bottom: 2px solid $color-main;
+              outline: none;
+            }
+          }
+        }
+      }
+    }
+    h1 {
+      padding-bottom: $gutter-width;
+      img {
+        width: 100px;
+        height: auto;
+        text-align: center;
+        margin: 0 auto;
+      }
+    }
+
+}
+.button-panel {
+  margin: $gutter-width 0;
+  width: 100%;
+  .button {
+    background: $color-main;
+    border: none;
+    color: $color-white;
+    font-weight: bold;
+    cursor: pointer;
+    height: 50px;
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    text-align: center;
+    text-transform: uppercase;
+    transition: background 0.3s ease-in-out;
+    width: 100%;
+    @include radius();
+    font-size: 1.4rem;
+    line-height: 2rem;
+  }
+}
+.login-footer {
+  max-width: $max-width;
+  font-size: 1.4rem;
+  padding-top: $gutter-width / 2;
+  text-align: left;
+  padding-left: $gutter-width / 2;
+  text-align: center;
+  margin: 0 auto;
+  p {
+    text-align: left;
+    margin-right: auto;
+  }
+  a {
+    font-size: 1.4rem;
+  }
+}
+i.right_pd {
+  padding-right: $gutter-width / 4
+}
+i.left_pd {
+  padding-left: $gutter-width / 4
+}
+
+
+@media#{$md-up} {
+  .button-panel .button,
+  .login #login_message p,
+  .login-footer a {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    width: $login-width;
+  }
+  .login {
+    #login_form {
+     padding: $gutter-width;
+   }
+    #login_form, #login_message {
+     @include box-shadow2();
+   }
+   #login_message, #login_form {
+     width: $login-width;
+     margin-bottom: $gutter-width;
+
+   }
+  }
+  .button-panel {
+    .button {
+      &:hover {
+        background: $color-main-deep;
+      }
+    }
+  }
+}

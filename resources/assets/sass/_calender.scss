@@ -1,0 +1,902 @@
+@charset "UTF-8";
+@import "settings";
+@import "color";
+@import "mixin";
+
+.saturday {
+  //color: #3B9DED !important;
+}
+.sunday, .holiday {
+  //color: #EF3B9E !important;
+}
+.reserve.success .inner {
+  border-color: $color-main !important;
+}
+.reserve.warning, .reserve.info  {
+  .inner {
+    border-color: $color-main-sub !important;
+    &:before {
+      background-color: $color-main-sub !important;
+    }
+  }
+}
+.reserve.danger .inner {
+  border-color: $color-font-pale !important;
+  &:before {
+    background-color: $color-font-pale !important;
+  }
+}
+.list-type .reserve.danger .inner {
+  letter-spacing: 0 !important;
+  border: 1px solid $color-font-pale !important;
+  padding-left: 1.2em !important;
+}
+
+.reserve .inner {
+  border-left: 5px solid $color-main;
+  padding-left: 0.2em;
+}
+.list-type .reserve .inner {
+  border: 1px solid $color-main;
+  width: 70%;
+  padding: 0.5em;
+  padding-left: 1.2em;
+  display: inline-block !important;
+  position: relative;
+  &:before {
+    position: absolute;
+    left: 0.5em;
+    display: block;
+    content: "";
+    width: 7px;
+    height: 1em;
+    background-color: $color-main;
+  }
+}
+
+.status_cnt {
+  .reserve {
+    color: $color-white;
+    @include radius(3px);
+    .inner {
+      display: block;
+      color: $color-font;
+    }
+  }
+}
+.reserve.warning, .reserve.info {
+  .inner {
+    .first {
+      display: none;
+    }
+    .br {
+      display: block;
+    }
+  }
+}
+.reserve.danger {
+  .inner {
+    letter-spacing: -0.2em;
+    border: none !important;
+    padding-left: 0 !important;
+    .br {
+      display: none;
+    }
+  }
+}
+.msg_cnt.unread {
+  color: $color-font;
+}
+.msg_cnt.already-read {
+  display: none;
+}
+.msg_cnt.msg-none {
+  &:before, .num {
+    display: none;
+  }
+}
+
+#main_contents {
+  background-color: $color-font-white;
+  .pager_wrap {
+    width: 250px;
+    color: $color-white;
+    position: fixed;
+    top: 50px;
+    left: 50%;
+    transform: translateY(-50%)translateX(-50%);
+    -webkit-transform: translateY(-50%)translateX(-50%);
+    font-weight: bold;
+    text-align: center;
+    margin: 0 auto;
+    z-index: 11;
+    .inner {
+      display: inline-block;
+    }
+    a, p {
+      display: inline-block;
+    }
+    p {
+      font-size: 2rem;
+      padding-left: $gutter-width / 2;
+      padding-right: $gutter-width / 2;
+    }
+    a {
+      color: $color-white;
+      font-size: 1.8rem;
+    }
+  }
+  .pager_wrap.active {
+    z-index: 1;
+  }
+  .calender_nav {
+    background-color: $color-main;
+    ul {
+      li {
+        text-align: center;
+        margin: 0 auto;
+        a {
+          display: block;
+          font-size: 1.2rem;
+          color: $color-gray-middle;
+          padding: 0.2em;
+          text-decoration: none;
+          i {
+            padding-right: 0.5em;
+          }
+        }
+      }
+      li.carrent a {
+        color: $color-white;
+        box-shadow: 0 0 0 2px $color-main-accent inset;
+      }
+    }
+  }
+}
+.calendar_wrap {
+  .date_wrap {
+    .date_cnt {
+      text-align: left;
+    }
+  }
+  .today {
+    background-color: $color-main-accent !important;
+  }
+}
+.calendar_wrap.month-type {
+  background-color: $color-white;
+  //@include box-shadow2();
+  .calendar_header {
+    display: flex;
+    text-align: center;
+    margin: 0 auto;
+    .weekday, .saturday, .sunday {
+      width: calc(100% / 7);
+      padding: 0.5em 0;
+      background-color: $color-font;
+      color: $color-white;
+      font-weight: normal;
+      font-size: 1.4rem;
+    }
+  }
+  .calendar_body {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: $gutter-width / 4;
+    padding-right: $gutter-width / 4;
+
+    //text-align: center;
+  //  margin: 0 auto;
+    .date_wrap {
+      width: calc(100% / 7);
+      min-height: 5rem;
+      padding: 0.25em;
+      border-right: 1px solid $color-font-white;
+      border-bottom: 1px solid $color-font-white;
+      &:nth-child(n+29):nth-child(-n+35) {
+        border-bottom: none !important;
+      }
+      &:nth-child(7),&:nth-child(14),&:nth-child(21),
+      &:nth-child(28),&:nth-child(35) {
+        border-right: none;
+      }
+      &:hover {
+        color: inherit;
+        .status_cnt {
+          .reserve.success {
+            background-color: $color-main-deep !important;
+          }
+          .reserve.warning, .reserve.info  {
+            background-color: $color-main-accent-deep !important;
+          }
+          .reserve.danger {
+            background-color: $color-font-white !important;
+          }
+        }
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+    }
+    .date_wrap.none {
+      background-color: $color-font-off;
+    }
+  }
+
+  .date_cnt {
+    padding-bottom: 1em;
+    .month, .day {
+      display: none;
+    }
+    .date {
+      font-size: 1.6rem;
+      font-weight: bold;
+      .date_list_type {
+        display: none;
+      }
+      &:hover {
+      }
+    }
+  }
+  .title_cnt {
+    display: none;
+  }
+  .status_cnt {
+    /*
+    .reserve {
+      display: inline-block;
+      font-size: 0.8rem;
+      line-height: 1.1rem;
+      padding: 0.5em 0.3em;
+      width: 100%;
+      height: 38px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .inner {
+         //display: block;
+         width: 100%;
+       }
+    }
+    */
+  }
+
+  .msg_cnt {
+    //color: $color-link;
+    font-size: 1.2rem;
+    margin-top: 0.5em;
+    .message {
+      display: none;
+    }
+    &:before {
+      font-family: "Font Awesome 5 Free";
+      content: "\f4ad";
+      font-weight: bold;
+    }
+  }
+  /*
+  .pager_wrap {
+    margin: 0 auto;
+    padding: 0.5em 0;
+    background-color: $color-main-dark;
+    margin-top: $gutter-width / 4;
+    margin-left: -$gutter-width / 2;
+    margin-right: -$gutter-width / 2;
+    position: relative;
+    color: $color-white;
+    p {
+      padding: 0.25em;
+      font-weight: bold;
+    }
+    p, a {
+      display: inline-block;
+    }
+    a {
+      text-decoration: underline;
+      font-size: 1.2rem;
+      color: $color-white;
+      transition: .3s;
+      &:hover {
+        text-decoration: none;
+        color: $color-font-white !important;
+      }
+      i {
+        font-size: 1.3em;
+        padding: $gutter-width / 4 $gutter-width / 2;
+      }
+    }
+  }
+  */
+
+
+
+  nav {
+    display: inline-block;
+    position: absolute;
+    right: $gutter-width + $gutter-width / 2;
+    top: 0;
+   ul {
+     li {
+       display: inline-block;
+       font-size: 1.4rem;
+       position: relative;
+       a {
+         text-decoration: none;
+         text-align: center;
+         margin: 0 auto;
+         &:before {
+           font-family: "Font Awesome 5 Free";
+           font-weight: bold;
+           font-size: 2.4rem;
+           display: block;
+         }
+       }
+     }
+     li.carrent a {
+       color: $color-main-sub !important;
+     }
+     .trigger-month a {
+       margin-right: 10px;
+       padding-left: 0.15em;
+       position: relative;
+       &:before {
+         content: "\f073";
+         position: absolute;
+         right: -4px;
+         top: -10px;
+       }
+     }
+     .trigger-list a {
+       margin-right: 10px;
+       padding-left: 0.15em;
+       position: relative;
+       &:before {
+         content: "\f784";
+         position: absolute;
+         right: 0;
+         top: -10px;
+       }
+     }
+   }
+  }
+}
+
+.today_container {
+  background-color: $color-font-white;
+  height: 300px;
+  margin-top: $gutter-width / 4;
+  padding-left: $gutter-width / 2;
+  padding-right: $gutter-width / 2;
+  h2 {
+    padding: 1em 0;
+  }
+  h3 {
+    padding: 0;
+    margin: 0;
+  }
+  .card_wrap {
+    .inner {
+      background-color: $color-white;
+      margin-bottom: $gutter-width / 2;
+      padding: 1em 0.5em;
+      .status, .event {
+        font-size: 1.4rem;
+      }
+      .status {
+        float: none;
+        .reserve {
+          display: block;
+          font-weight: bold;
+          padding: 0.5em;
+          margin-bottom: 0.5em;
+          background-color: $color-main;
+          color: $color-white;
+        }
+        .msg_cnt.already-read {
+          display: block;
+          padding-left: 0.5em;
+          &:before {
+            font-family: "Font Awesome 5 Free";
+            content: "\f4ad";
+            font-weight: bold;
+            font-size: 1.6rem;
+            //color: $color-font-pale;
+          }
+        }
+      }
+      .event {
+        h3 {
+          font-size: 1.6rem;
+          line-height: 2.4rem;
+          border: none;
+          margin-bottom: 0.5em;
+        }
+        h4 {
+          font-size: 1.6rem;
+          line-height: 2.4rem;
+          font-weight: normal;
+          margin-bottom: 0.3em;
+        }
+        p {
+          font-size: 1.4rem;
+          line-height: 2rem;
+        }
+      }
+    }
+  }
+}
+.calendar_wrap.list-type {
+  padding-left: $gutter-width / 2;
+  padding-right: $gutter-width / 2;
+  .reserve {
+  }
+  .today {
+    background-color: $color-main-accent !important;
+  }
+  .calendar_header {
+    display: none;
+  }
+  .calendar_body {
+    a {
+      text-decoration: none;
+      color: inherit;
+      font-size: 1.4rem;
+    }
+    .date_wrap {
+      background-color: $color-white;
+      margin: 0.5em 0;
+    }
+    .date_wrap, .date_cnt {
+      margin-left: -$gutter-width / 2;
+      margin-right: -$gutter-width / 2;
+      padding-left: $gutter-width / 2;
+      padding-right: $gutter-width / 2;
+    }
+    .date_cnt {
+      //background-color: $color-gray-pale;
+      font-weight: bold;
+      //color: $color-font;
+      padding-top: $gutter-width / 4;
+      padding-bottom: $gutter-width / 4;
+    }
+    .date_wrap {
+      background-color: $color-white;
+    }
+    .title_cnt {
+      span {
+        display: block;
+      }
+      .title {
+        font-size: 1.6rem;
+        padding-bottom: 0.25em;
+      }
+    }
+    .status_cnt {
+      padding: 0.5em 0;
+      .reserve {
+        margin-bottom: 0.3em;
+      }
+      .reserve.warning, .reserve.info,
+      .reserve.danger {
+        .inner {
+          .first, .br {
+            display: inline;
+          }
+        }
+      }
+      .msg_cnt {
+        display: block;
+        margin-top: 0.5em;
+        .message {
+          font-size: 1.2rem;
+        }
+        &:before {
+          font-family: "Font Awesome 5 Free";
+          content: "\f4ad";
+          font-weight: bold;
+          font-size: 1.6rem;
+        }
+      }
+      .msg_cnt.msg-none {
+        display: none;
+      }
+      .msg_cnt.already-read .num {
+        display: inline;
+      }
+    }
+  }
+  .date_wrap.none {
+    display: none;
+    border: none;
+    margin: 0;
+  }
+  /*
+  .pager_wrap {
+    p {
+      padding: 0.25em $gutter-width / 2;
+      //color: $color-white;
+      font-weight: bold;
+    }
+    p, a {
+      display: inline-block;
+    }
+    a {
+      text-decoration: underline;
+      font-size: 1.2rem;
+      color: $color-font;
+      transition: .3s;
+      &:hover {
+        text-decoration: none;
+        color: $color-main;
+      }
+      i {
+        font-size: 1.3em;
+      }
+    }
+  }
+  */
+  nav {
+    display: inline-block;
+    position: absolute;
+    right: $gutter-width + $gutter-width / 2;
+    top: 34px;
+   ul {
+     li {
+       display: inline-block;
+       font-size: 1.4rem;
+       position: relative;
+       a {
+         text-decoration: none;
+         text-align: center;
+         margin: 0 auto;
+         color: $color-font;
+         //color: $color-white !important;
+         transition: .3s;
+         &:hover {
+           color: $color-main !important;
+         }
+         &:before {
+           font-family: "Font Awesome 5 Free";
+           font-weight: bold;
+           font-size: 2.4rem;
+           display: block;
+         }
+       }
+     }
+     li.carrent a {
+       color: $color-main !important;
+     }
+     .trigger-month a {
+       margin-right: 10px;
+       padding-left: 0.15em;
+       position: relative;
+       &:before {
+         content: "\f073";
+         position: absolute;
+         right: -4px;
+         top: -16px;
+       }
+     }
+     .trigger-list a {
+       margin-right: 10px;
+       padding-left: 0.15em;
+       position: relative;
+       &:before {
+         content: "\f784";
+         position: absolute;
+         right: 0;
+         top: -16px;
+       }
+     }
+   }
+  }
+}
+#main_contents article {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
+@media #{$xs-up} {
+  .calendar_wrap.month-type .status_cnt .reserve {
+    font-size: 1rem;
+    line-height: 1.4rem;
+  }
+  /*
+  .reserve.success {
+    padding-top: 1.2em !important;
+    padding-bottom: 1.2em !important;
+  }
+  */
+}
+
+@media #{$md-up} {
+  .calendar_wrap.month-type {
+    margin-top: $gutter-width;
+    @include box-shadow2();
+    .status_cnt .reserve {
+      font-size: 1.2rem;
+      line-height: 1.8rem;
+    }
+  }
+  .today_container {
+    padding-left: 0;
+    padding-right: 0;
+    .card_wrap .inner {
+      @include box-shadow2();
+    }
+  }
+}
+@media #{$md-up} {
+  #main_contents {
+     article {
+      padding-left: $gutter-width / 2;
+      padding-right: $gutter-width / 2;
+    }
+    .container {
+      position: relative !important;
+    }
+    .pager_wrap {
+      position: static;
+      position: fixed;
+      top: 55px;
+      left: inherit;
+      transform: none;
+      -webkit-transform: none;
+      text-align: left;
+    }
+    .calender_nav {
+      ul {
+        li {
+          a {
+            font-size: 1.6rem;
+            padding: 0.5em 0;
+            transition: .3s;
+          }
+          &:hover a {
+            color: $color-white !important;
+          }
+        }
+      }
+    }
+  }
+  .calendar_wrap.month-type  {
+    font-size: 1.6rem;
+    .calendar_header {
+      .weekday, .saturday, .sunday {
+        font-size: 1.8rem;
+        font-weight: bold;
+        padding: 1em 0;
+      }
+    }
+    .calendar_body  {
+      .date_wrap {
+        padding: 1em 0.5em;
+        transition: .3s;
+        position: relative;
+        border-right: 1px solid $color-font-pale;
+        border-bottom: 1px solid $color-font-pale;
+        &:hover {
+          background-color: $color-main-pale;
+          .reserve.info, .reserve.warning {
+            .inner {
+              background-color: $color-main-sub-deep !important;
+            }
+          }
+          .reserve.success .inner {
+            background-color: $color-main-deep !important;
+          }
+          .reserve.danger .inner {
+            background-color: $color-font-white !important;
+          }
+          .msg_cnt {
+            color: $color-link-hover;
+            text-decoration: none;
+          }
+          .msg_cnt.msg-none {
+            color: $color-font;
+          }
+        }
+        .reserve {
+          position: absolute;
+          top: 16px;
+          right: 8px;
+        }
+      }
+      .date_wrap.none {
+        &:hover {
+          background-color: $color-font-off;
+        }
+      }
+      .date_wrap.today {
+        &:hover {
+          background-color: $color-main-accent-deep;
+        }
+      }
+    }
+    .date_cnt  {
+      .date {
+        font-size: 2.4rem;
+      }
+    }
+    .status_cnt {
+      .reserve  {
+        .inner {
+          border: none;
+          text-align: center;
+          margin: 0 auto;
+          background-color: $color-main;
+          height: 40px;
+          width: 56px;
+          color: $color-white;
+          font-size: 1.2rem;
+          @include radius();
+          padding: 2px;
+          letter-spacing: -0.1em;
+        }
+      }
+    }
+    .title_cnt {
+      display: block;
+      line-height: 2.2rem;
+      padding-top: 0.5em;
+      .sub_title {
+        display: none;
+      }
+    }
+    .msg_cnt {
+      font-size: 1.4rem;
+      line-height: 2rem;
+      color: $color-link;
+      text-decoration: underline;
+      .message {
+        display: inline;
+      }
+    }
+    .msg_cnt.msg-none {
+      color: $color-font;
+      text-decoration: none;
+    }
+  }
+  .reserve.success .inner {
+    line-height: 36px;
+  }
+  .month-type {
+    .reserve.info, .reserve.warning {
+      .inner {
+        background-color: $color-main-sub !important;
+        color: $color-font !important;
+      }
+    }
+  }
+  .reserve.success {
+    .inner {
+    //  line-height: 40px;
+    //  padding-top: 0 !important;
+    }
+  }
+  .reserve.danger .inner {
+    background-color: inherit !important;
+    color: $color-font !important;
+    border: 1px solid $color-font !important;
+    .first {
+      letter-spacing: 0;
+    }
+  }
+  .reserve.warning .inner .first,
+  .reserve.info .inner .first,
+  .reserve.danger .inner .br {
+    display: inline-block;
+  }
+  .today_container .card_wrap {
+    display: inline-block;
+  }
+  .today_container {
+    h2 {
+      padding: 0.5em;
+    }
+    .card_wrap {
+      .inner {
+        padding: 2em 1.5em;
+        .event {
+          h3 {
+            font-size: 2.2rem;
+            color: $color-main-deep;
+            border: none;
+          }
+          h4 {
+            font-size: 1.8rem;
+            font-weight: normal;
+          }
+          p {
+            font-size: 1.6rem;
+            line-height: 2rem;
+          }
+        }
+        .msg_cnt {
+          font-size: 1.4rem;
+          line-height: 2rem;
+          color: $color-link;
+          text-decoration: underline;
+          &:hover {
+            color: $color-link-hover;
+            text-decoration: none;
+          }
+          .message {
+            display: inline;
+          }
+        }
+        .status {
+          .reserve {
+            font-size: 1.6rem;
+            padding: 1em;
+            margin-bottom: 1em;
+          }
+        }
+      }
+    }
+  }
+  .calendar_wrap.month-type .calendar_body {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .calendar_wrap.list-type {
+    background-color: $color-white;
+    @include box-shadow2();
+    margin-top: 2em;
+    padding: 2em 4em;
+    .calendar_body .date_wrap {
+      border-bottom: 1px solid $color-font-pale;
+      &:last-child {
+        border: none;
+      }
+    }
+  }
+  .list-type .reserve .inner {
+    width: 240px;
+    line-height: 1.6rem;
+  }
+  .list-type .title_cnt {
+    padding-top: 0.5em;
+  }
+  .calendar_wrap.list-type .calendar_body .date_wrap {
+    margin: 0;
+    transition: .3s;
+    &:hover {
+      background-color: $color-font-white;
+      .date_cnt {
+        background-color: $color-main-pale;
+      }
+      .reserve .inner {
+        background-color: $color-main;
+        color: $color-white;
+      }
+      .reserve.info, .reserve.warning {
+        .inner {
+          background-color: $color-main-sub;
+          color: $color-font;
+        }
+      }
+      .reserve.danger .inner {
+        background-color: $color-font-pale !important;
+        color: $color-white !important;
+      }
+    }
+  }
+  .calendar_wrap.list-type .calendar_body .date_wrap.today {
+    background-color: inherit !important;
+    .date_cnt {
+      background: $color-main-accent;
+    }
+  }
+}
+@media #{$lg-up} {
+  .calendar_wrap.month-type .status_cnt .reserve .inner {
+    letter-spacing: 0;
+    width: 80px;
+    font-size: 1.4rem;
+  }
+}

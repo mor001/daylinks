@@ -1,0 +1,79 @@
+/* original
+------------------------------------------------------*/
+//$color-main: rgba(#7ACCAC, 1) ;
+//$color-main: rgba(#00bfa5, 1) ;
+//$color-main: rgba(#00D6B6, 1) ;
+$color-main: rgba(#53bad1, 1) ;
+$color-main-light: lighten( $color-main, 15% ) ;
+$color-main-pale: lighten( $color-main, 30% ) ;
+$color-main-deep: #4092a2;
+$color-main-dark: #285763 ;
+
+$color-main-sub: rgba(#91f6bb, 1) ;
+$color-main-sub-pale: lighten( $color-main-sub, 15% ) ;
+$color-main-sub-deep: darken( $color-main-sub, 10% ) ;
+
+$color-main-accent: rgba(#ffe95b, 1) ;
+$color-main-accent-light: lighten( $color-main-accent, 10% ) ;
+$color-main-accent-pale: lighten( $color-main-accent, 20% ) ;
+$color-main-accent-deep: darken( $color-main-accent, 15% ) ;
+$color-main-accent-dark: darken( $color-main-accent,30% ) ;
+
+
+
+//$color-main-accent: rgba(#BF0082, 1) ;
+
+$color-main-beige: #f9f8f2;
+
+//$color-main-sub: rgba(#16BF00, 1) ;
+
+//$color-font:  rgba(#545454, 1) ;
+$color-font:  rgba(#545454, 1) ;
+$color-font-light: lighten( $color-font, 20% ) ;
+$color-font-pale: lighten( $color-font, 35% ) ;
+$color-font-white: lighten( $color-font, 60% ) ;
+$color-font-off: rgba(#fafafa, 1) ;
+$color-font-midashi: darken( $color-font, 15% ) ;
+$color-font-deep: darken( $color-font, 10% ) ;
+$color-font-dark: darken( $color-font, 25% ) ;
+
+
+/* base color
+------------------------------------------------------*/
+//$color-link: #3366ff;
+//$color-link-hover: #3292FF;
+$color-link: #3366ff;
+$color-link-hover: #00bcd4;
+
+
+$color-base-red: #f44336;
+$color-base-yellow: #ffeb3b;
+$color-base-blue: #03a9f4;
+$color-base-green: #00bfa5;
+$color-base-ygreen: #8bc34a;
+$color-base-blgreen: #00bcd4;
+//$color-base-red: #F25F5C;
+//$color-base-yellow: #FFE066;
+//$color-base-blue: #2595C7;
+//$color-base-green: #70C1B3;
+//$color-base-ygreen: #A5FF60;
+//$color-base-blgreen: #5ab4bd;
+
+$color-base-ltblue: lighten( $color-base-blue, 45% ) ;
+$color-base-pink: lighten( $color-base-red, 28% ) ;
+$color-base-dkygreen: darken( $color-base-ygreen, 20% ) ;
+/* Gray color
+------------------------------------------------------*/
+$color-white: rgba(#FFFFFF, 1) ;
+$color-white-pale: #FAFAFA;
+$color-white-light: #F5F5F5;
+$color-white-middle: #F0F0F0;
+$color-gray-pale: #E5E5E5;
+$color-gray-light: #DFDFDF;
+$color-gray-middle: #ccc;
+$color-gray-deep: #aaa;
+$color-gray-dark: #666;
+$color-black-pale: #444444;
+$color-black-light: #333333;
+$color-black: rgba(#222222, 1) ;
+$color-black-blue: #25283D;
