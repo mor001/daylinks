@@ -22,7 +22,7 @@
     },
     methods: {
       // ログアウト
-      logout: async () => {
+      async logout() {
         await this.$store.dispatch('admin/logout')
         this.$router.push('/admin/login')
       },

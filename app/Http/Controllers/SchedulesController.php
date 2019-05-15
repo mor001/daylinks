@@ -85,4 +85,23 @@ class SchedulesController extends Controller
       //$last_insert_id = $reserve->id;
       return ['result' => true];
     }
+    public function save(Request $request)
+    {
+      if(is_array($request->dateList)) {
+        foreach($request->dateList as $date) {
+          $schedule = new Schedule;
+          $schedule->tid = config('tid');
+          $schedule->date = $date;
+          $schedule->title = $request->title;
+          $schedule->description = $request->description;
+          $schedule->register = Auth::user()->id;
+          $schedule->publish = $request->publish;
+          $schedule->status = 'open';
+          $schedule->created_at = date('Y-m-d H:i:s');
+          $schedule->updated_at = date('Y-m-d H:i:s');
+          $schedule->save();
+        }
+      }
+      return ['result' => true];
+    }
 }

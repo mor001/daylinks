@@ -38,13 +38,13 @@
     components: {
     },
     computed: {
-      detailUrl: () => {
+      detailUrl() {
         return (date) => {
           const arr = date.split('-')
           return '/detail/'+arr[0]+'/'+arr[1]+'/'+arr[2]
         }
       },
-      schedule: () => {
+      schedule() {
         return (date) => {
           for (var i = 0; i < self.schedules.length; i++) {
             const schedule = self.schedules[i]
@@ -55,7 +55,7 @@
           return false
         }
       },
-      unread: () => {
+      unread() {
         return function(schedule) {
           if(Array.isArray(schedule.contacts) && schedule.contacts.length <= 0) {
             return 0
@@ -70,7 +70,7 @@
           return sum
         }
       },
-      dateList: () => {
+      dateList() {
         const year = this.currentYear
         const month = this.currentMonth
         const currentYM = moment([year, month - 1, 1])  // 引数の年月で初期化

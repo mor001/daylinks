@@ -77,7 +77,7 @@ export default {
 
   },
   methods: {
-    async reset () {
+    async reset() {
       this.loading = true
       this.showAlert = false
       this.success = false

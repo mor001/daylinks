@@ -50,7 +50,7 @@
       ListView,
     },
     methods: {
-      fetchSchedules () {
+      fetchSchedules() {
         this.loading = true
         this.showAlert = false
         this.alertMessage = ''

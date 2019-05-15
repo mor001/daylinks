@@ -36,7 +36,7 @@ export default {
   computed: {
   },
   methods: {
-    login: async () => {
+    async login() {
       await this.$store.dispatch('admin/login' , this.form)
       .then( (response) => {
         if(this.$store.getters['error/message'] !== '') {

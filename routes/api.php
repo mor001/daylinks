@@ -34,6 +34,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
         'month' => '[0-9]{2}',
         'day' => '[0-9]{2}'
     ]);
+    Route::post('/admin/schedule/save', 'SchedulesController@save');
 });
 
 Route::post('/login', 'AuthController@login');

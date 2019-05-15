@@ -68,17 +68,16 @@
     components: {
     },
     computed: {
-      formUrl: function() {
+      formUrl() {
         return (date) => {
           const arr = date.split('-')
           return '/admin/schedules/form/'+arr[0]+'/'+arr[1]+'/'+arr[2]
         }
       },
-      schedule: function() {
-        self = this
-        return function(date) {
-          for (var i = 0; i < self.schedules.length; i++) {
-            const schedule = self.schedules[i]
+      schedule() {
+        return (date) => {
+          for (var i = 0; i < this.schedules.length; i++) {
+            const schedule = this.schedules[i]
             if(schedule.date === date) {
               return schedule
             }
@@ -86,11 +85,10 @@
           return false
         }
       },
-      holiday: function() {
-        self = this
-        return function(date) {
-          for (var i = 0; i < self.holidays.length; i++) {
-            const holiday = self.holidays[i]
+      holiday() {
+        return (date) => {
+          for (var i = 0; i < this.holidays.length; i++) {
+            const holiday = this.holidays[i]
             if(holiday.date === date) {
               return holiday.title
             }
@@ -98,7 +96,7 @@
           return false
         }
       },
-      unread: function() {
+      unread() {
         return (schedule) => {
           if(Array.isArray(schedule.contacts) && schedule.contacts.length <= 0) {
             return 0

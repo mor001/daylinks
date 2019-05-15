@@ -12,8 +12,8 @@
         <a href="#" class="next" @click="next"><i class="fas fa-caret-square-right"></i></a>
         <Calendar :schedules="this.schedules" :holidays="this.holidays" :current-year="this.y" :current-month="this.m" @openForm="onOpenForm" />
       </template>
-      <template v-else>
-        <ScheduleForm :schedules="this.checkList" @closeForm="onCloseForm" />
+      <template v-if="!this.showCalendar">
+        <ScheduleForm :dateList="this.checkList" @closeForm="onCloseForm" />
       </template>
     </div>
   </div>
