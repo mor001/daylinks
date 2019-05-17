@@ -31,7 +31,7 @@ class Schedule extends Model
      * @var array
      */
     protected $fillable = [
-        'tid', 'date', 'title', 'description', 'register',
+        'tid', 'date', 'title', 'description', 'register', 'publish', 'status'
     ];
 
     /**
@@ -122,7 +122,22 @@ class Schedule extends Model
         }
         return ["app_r" => $app_r, "reserved" => $reserved, "app_c" => $app_c, "canceled" => $canceled];
     }
-    public function scopePublish($query, $date = null) {
+    public static function save2($date, $title, $description, $register, $publish)
+    {
+      self::updateOrCreate(
+        ['date' => $date],
+        ['tid' => config('tid'),
+         'date' => $date,
+         'title' => $title,
+         'description' => $description,
+         'register' => $register,
+         'publish' => $publish,
+         'status' => 'open',
+        ] 
+      );
+    }
+    public function scopePublish($query, $date = null)
+    {
         if(empty($date)) return ''; 
         return $query->where('publish', '<=', $date);
     }

@@ -99,7 +99,7 @@ class SchedulesController extends Controller
           $schedule->status = 'open';
           $schedule->created_at = date('Y-m-d H:i:s');
           $schedule->updated_at = date('Y-m-d H:i:s');
-          $schedule->save();
+          Schedule::updateOrCreate(['tid' => $schedule->tid, 'date' => $schedule->date], (array)$schedule);
         }
       }
       return ['result' => true];

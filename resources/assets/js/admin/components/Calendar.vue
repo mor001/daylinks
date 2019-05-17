@@ -31,7 +31,7 @@
 
           <template v-if="date.schedule">
             <!--既存データがある場合-->
-            <a v-on:click.stop="selected(date.schedule.date)">
+            <a v-on:click.stop="selected(date.schedule.id, date.schedule.date)">
               <div class="title_cnt">
                 <span class="title">{{date.schedule.title}}<br /></span>
                 <!--<span class="sub_title">イベントのサブタイトルなどの詳細</span>-->
@@ -40,7 +40,7 @@
           </template>
           <template v-else>
             <!--既存データがない場合-->
-            <a v-on:click.stop="selected(date.date)">未登録</a>
+            <a v-on:click.stop="selected(null, date.date)">未登録</a>
             <input type="checkbox" id="selected" :value="date.date" v-model="date.checked" />
           </template>
         </template>
@@ -166,18 +166,16 @@
         }
         console.log(this.dateList)
       },
-      selected(date) {
-        console.log(date)
+      selected(id, date) {
         const checkList = []
-        checkList.push(date)
+        checkList.push({id: id, date: date})
         this.$emit('openForm', checkList)
       },
       register() {
-        console.log('call register')
         const checkList = []
         for (var i = 0; i < this.dateList.length; i++) {
           if(this.dateList[i].checked) {
-            checkList.push(this.dateList[i].date)
+            checkList.push({id: null, date: this.dateList[i].date})
           }
         }
         this.$emit('openForm', checkList)

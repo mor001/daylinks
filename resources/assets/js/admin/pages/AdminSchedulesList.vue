@@ -46,14 +46,10 @@
     },
     methods: {
       onOpenForm(arg) {
-        console.log('call onOpenForm')
         this.checkList = arg
-        console.log(arg)
         this.showCalendar = false
       },
       onCloseForm(arg) {
-        console.log('call onCloseForm')
-        console.log(arg)
         this.showCalendar = true
       },
       async fetchSchedules() {
