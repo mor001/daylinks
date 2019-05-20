@@ -67,6 +67,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::prefix('api')
              ->middleware('api')
+             ->header('Accept', 'application/json') // 強制的にJSONをリクエスト
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
     }

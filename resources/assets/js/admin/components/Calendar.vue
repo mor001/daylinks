@@ -126,9 +126,9 @@
         let dayCount = 1                                        // 日にちのカウント
         let index = 0
 
-        console.log('対象年月: ' + currentYM.format('YYYY-MM'))
-        console.log('月初日: ' + startDate + '(' + startDate.day() + ')')
-        console.log('月末曜日: ' + endDate + '(' + currentYM.endOf('month').format('YYYY-MM-DD dddd') + ')')
+        //console.log('対象年月: ' + currentYM.format('YYYY-MM'))
+        //console.log('月初日: ' + startDate + '(' + startDate.day() + ')')
+        //console.log('月末曜日: ' + endDate + '(' + currentYM.endOf('month').format('YYYY-MM-DD dddd') + ')')
         
         if(startDay === 0) {
           startDay = 7
@@ -164,7 +164,7 @@
             index++
           }
         }
-        console.log(this.dateList)
+        //console.log(this.dateList)
       },
       selected(id, date) {
         const checkList = []
@@ -189,8 +189,6 @@
       //}
     },
     mounted() {
-      console.log('thisは何？')
-      console.log(this)
       this.getDateList()
     },
 }

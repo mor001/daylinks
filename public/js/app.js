@@ -41768,6 +41768,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       this.showCalendar = false;
     },
     onCloseForm: function onCloseForm(arg) {
+      if (arg) {
+        this.fetchSchedules();
+      }
       this.showCalendar = true;
     },
     fetchSchedules: function () {
@@ -42079,9 +42082,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var dayCount = 1; // 日にちのカウント
       var index = 0;
 
-      console.log('対象年月: ' + currentYM.format('YYYY-MM'));
-      console.log('月初日: ' + startDate + '(' + startDate.day() + ')');
-      console.log('月末曜日: ' + endDate + '(' + currentYM.endOf('month').format('YYYY-MM-DD dddd') + ')');
+      //console.log('対象年月: ' + currentYM.format('YYYY-MM'))
+      //console.log('月初日: ' + startDate + '(' + startDate.day() + ')')
+      //console.log('月末曜日: ' + endDate + '(' + currentYM.endOf('month').format('YYYY-MM-DD dddd') + ')')
 
       if (startDay === 0) {
         startDay = 7;
@@ -42117,7 +42120,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           index++;
         }
       }
-      console.log(this.dateList);
+      //console.log(this.dateList)
     },
     selected: function selected(id, date) {
       var checkList = [];
@@ -42141,8 +42144,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     //}
   },
   mounted: function mounted() {
-    console.log('thisは何？');
-    console.log(this);
     this.getDateList();
   }
 });
@@ -42419,6 +42420,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -42454,17 +42456,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       //}
       //e.preventDefault();
     },
-    fetchData: function fetchData() {
+    fetchData: function fetchData(id) {
       var _this = this;
 
-      window.axios.get('/api/admin/schedule/daily/' + this.$route.params.year + '/' + this.$route.params.month + '/' + this.$route.params.day).then(function (response) {
+      this.loading = true;
+      //window.axios.get('/api/admin/schedule/daily/'+this.$route.params.year+'/'+this.$route.params.month+'/'+this.$route.params.day)
+      window.axios.get('/api/admin/schedule/daily/id/' + id).then(function (response) {
         if (response.data.schedules) {
           _this.schedule = response.data.schedules;
-        } else {
-          _this.schedule = [];
-          _this.schedule.id = null;
-          _this.schedule.title = null;
-          _this.schedule.description = null;
         }
       }).finally(function () {
         _this.loading = false;
@@ -42475,6 +42474,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     },
     regist: function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+        var _this2 = this;
+
         var postData;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
           while (1) {
@@ -42499,7 +42500,11 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 };
                 _context.next = 7;
                 return window.axios.post('/api/admin/schedule/save', postData).then(function (response) {
-                  console.log(response.data);
+                  if (response.data.result) {
+                    _this2.$emit('closeForm', true);
+                  } else {
+                    console.log(response.data.message);
+                  }
                 }).catch(function (error) {
                   console.log(error);
                 });
@@ -42520,7 +42525,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     }()
   },
   mounted: function mounted() {
-    //this.fetchData()
+    if (this.dateList) {
+      this.fetchData(this.dateList[0].id);
+    }
   },
 
   computed: {}
@@ -42564,147 +42571,153 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
-    _c(
-      "div",
-      [
-        _vm._l(this.dateList, function(date) {
-          return _c("div", { key: date.key }, [_c("p", [_vm._v(_vm._s(date))])])
-        }),
-        _vm._v(" "),
-        _vm.errors.length
-          ? _c("p", [
-              _c("b", [_vm._v("入力エラーがあります:")]),
-              _vm._v(" "),
-              _c(
-                "ul",
-                _vm._l(_vm.errors, function(error) {
-                  return _c("li", { key: error.key }, [_vm._v(_vm._s(error))])
-                }),
-                0
-              )
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c("form", [
-          _c("p", [
-            _vm._v("タイトル："),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.schedule.title,
-                  expression: "schedule.title"
-                }
-              ],
-              attrs: {
-                type: "text",
-                name: "title",
-                id: "title",
-                required: "required",
-                placeholder: "タイトル"
-              },
-              domProps: { value: _vm.schedule.title },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.schedule, "title", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("p", [
-            _vm._v("内容："),
-            _c("textarea", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.schedule.description,
-                  expression: "schedule.description"
-                }
-              ],
-              attrs: {
-                name: "description",
-                id: "description",
-                placeholder: "内容"
-              },
-              domProps: { value: _vm.schedule.description },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.schedule, "description", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("p", [
-            _vm._v("公開日時："),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.schedule.publish,
-                  expression: "schedule.publish"
-                }
-              ],
-              attrs: {
-                type: "text",
-                name: "publish",
-                id: "publish",
-                required: "required",
-                placeholder: "公開日時"
-              },
-              domProps: { value: _vm.schedule.publish },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.schedule, "publish", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("p", [
-            _c(
-              "a",
-              {
-                on: {
-                  click: function($event) {
-                    return _vm.$emit("closeForm", "OK")
-                  }
-                }
-              },
-              [_vm._v("戻る")]
-            ),
+    !_vm.loading
+      ? _c(
+          "div",
+          [
+            _vm._l(this.dateList, function(date) {
+              return _c("div", { key: date.key }, [
+                _c("p", [_vm._v(_vm._s(date))])
+              ])
+            }),
             _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "reserve_info",
-                attrs: { type: "button", value: "予約する" },
-                on: {
-                  click: function($event) {
-                    return _vm.regist()
+            _vm.errors.length
+              ? _c("p", [
+                  _c("b", [_vm._v("入力エラーがあります:")]),
+                  _vm._v(" "),
+                  _c(
+                    "ul",
+                    _vm._l(_vm.errors, function(error) {
+                      return _c("li", { key: error.key }, [
+                        _vm._v(_vm._s(error))
+                      ])
+                    }),
+                    0
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("form", [
+              _c("p", [
+                _vm._v("タイトル："),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.schedule.title,
+                      expression: "schedule.title"
+                    }
+                  ],
+                  attrs: {
+                    type: "text",
+                    name: "title",
+                    id: "title",
+                    required: "required",
+                    placeholder: "タイトル"
+                  },
+                  domProps: { value: _vm.schedule.title },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.schedule, "title", $event.target.value)
+                    }
                   }
-                }
-              },
-              [_vm._v("登録")]
-            )
-          ])
-        ])
-      ],
-      2
-    )
+                })
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v("内容："),
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.schedule.description,
+                      expression: "schedule.description"
+                    }
+                  ],
+                  attrs: {
+                    name: "description",
+                    id: "description",
+                    placeholder: "内容"
+                  },
+                  domProps: { value: _vm.schedule.description },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.schedule, "description", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v("公開日時："),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.schedule.publish,
+                      expression: "schedule.publish"
+                    }
+                  ],
+                  attrs: {
+                    type: "text",
+                    name: "publish",
+                    id: "publish",
+                    required: "required",
+                    placeholder: "公開日時"
+                  },
+                  domProps: { value: _vm.schedule.publish },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.schedule, "publish", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _c(
+                  "a",
+                  {
+                    on: {
+                      click: function($event) {
+                        return _vm.$emit("closeForm", false)
+                      }
+                    }
+                  },
+                  [_vm._v("戻る")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "reserve_info",
+                    attrs: { type: "button", value: "予約する" },
+                    on: {
+                      click: function($event) {
+                        return _vm.regist()
+                      }
+                    }
+                  },
+                  [_vm._v("登録")]
+                )
+              ])
+            ])
+          ],
+          2
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = []

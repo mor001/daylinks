@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use DB;
+use Illuminate\Support\Facades\Log;
 
 class Schedule extends Model
 {
@@ -122,12 +123,12 @@ class Schedule extends Model
         }
         return ["app_r" => $app_r, "reserved" => $reserved, "app_c" => $app_c, "canceled" => $canceled];
     }
-    public static function save2($date, $title, $description, $register, $publish)
+    public static function regist($date, $title, $description, $register, $publish)
     {
-      self::updateOrCreate(
-        ['date' => $date],
+      $ret = self::updateOrCreate(
+        ['date' => $date['date']],
         ['tid' => config('tid'),
-         'date' => $date,
+         'date' => $date['date'],
          'title' => $title,
          'description' => $description,
          'register' => $register,
@@ -135,10 +136,11 @@ class Schedule extends Model
          'status' => 'open',
         ] 
       );
+      Log::info($ret);
     }
     public function scopePublish($query, $date = null)
     {
-        if(empty($date)) return ''; 
+        if(empty($date)) return '';
         return $query->where('publish', '<=', $date);
     }
     public function reserve()

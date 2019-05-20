@@ -50,6 +50,9 @@
         this.showCalendar = false
       },
       onCloseForm(arg) {
+        if(arg) {
+          this.fetchSchedules()
+        }
         this.showCalendar = true
       },
       async fetchSchedules() {

@@ -68,6 +68,11 @@ class SchedulesController extends Controller
       $data = Schedule::getDaily($y, $m, $d);
       return ['schedules' => $data];
     }
+    public function getAdminDailyById($id)
+    {
+      $data = Schedule::find($id);
+      return ['schedules' => $data];
+    }
     public function reserve(Request $request)
     {
       if(empty($request->reserve_id)) {
@@ -89,17 +94,7 @@ class SchedulesController extends Controller
     {
       if(is_array($request->dateList)) {
         foreach($request->dateList as $date) {
-          $schedule = new Schedule;
-          $schedule->tid = config('tid');
-          $schedule->date = $date;
-          $schedule->title = $request->title;
-          $schedule->description = $request->description;
-          $schedule->register = Auth::user()->id;
-          $schedule->publish = $request->publish;
-          $schedule->status = 'open';
-          $schedule->created_at = date('Y-m-d H:i:s');
-          $schedule->updated_at = date('Y-m-d H:i:s');
-          Schedule::updateOrCreate(['tid' => $schedule->tid, 'date' => $schedule->date], (array)$schedule);
+          Schedule::regist($date, $request->title, $request->description, Auth::user()->id, $request->publish);
         }
       }
       return ['result' => true];
