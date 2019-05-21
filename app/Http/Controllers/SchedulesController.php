@@ -94,7 +94,7 @@ class SchedulesController extends Controller
     {
       if(is_array($request->dateList)) {
         foreach($request->dateList as $date) {
-          Schedule::regist($date, $request->title, $request->description, Auth::user()->id, $request->publish);
+          Schedule::regist($date['date'], $request->title, $request->description, Auth::user()->id, $request->publish);
         }
       }
       return ['result' => true];

@@ -36,6 +36,10 @@ Route::group(['middleware' => 'auth:admin'], function () {
         'day' => '[0-9]{2}'
     ]);
     Route::post('/admin/schedule/save', 'SchedulesController@save');
+    Route::get('/admin/reserve/monthly/{year}/{month}', 'ReservesController@getAdminMonthly')->where([
+        'year' => '[0-9]{4}',
+        'month' => '[0-9]{2}'
+    ]);
 });
 
 Route::post('/login', 'AuthController@login');

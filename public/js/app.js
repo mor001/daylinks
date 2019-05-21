@@ -5630,10 +5630,13 @@ module.exports = defaults;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__admin_pages_AdminSchedulesList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16__admin_pages_AdminSchedulesList__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__admin_pages_AdminScheduleForm__ = __webpack_require__(250);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__admin_pages_AdminScheduleForm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17__admin_pages_AdminScheduleForm__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_errors_System_vue__ = __webpack_require__(253);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_errors_System_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18__pages_errors_System_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_errors_NotFound_vue__ = __webpack_require__(256);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_errors_NotFound_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19__pages_errors_NotFound_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__admin_pages_AdminReserve__ = __webpack_require__(288);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__admin_pages_AdminReserve___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18__admin_pages_AdminReserve__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_errors_System_vue__ = __webpack_require__(253);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_errors_System_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19__pages_errors_System_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_errors_NotFound_vue__ = __webpack_require__(256);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_errors_NotFound_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20__pages_errors_NotFound_vue__);
+
 
 
 
@@ -5663,8 +5666,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 var routes = [{ path: '/', component: __WEBPACK_IMPORTED_MODULE_3__layouts_LayoutUser_vue___default.a,
   children: [{ path: 'login', component: __WEBPACK_IMPORTED_MODULE_5__pages_Login___default.a }, { path: 'forgot', component: __WEBPACK_IMPORTED_MODULE_9__pages_ForgotPassword___default.a }, { path: 'reset/:token', component: __WEBPACK_IMPORTED_MODULE_10__pages_ResetPassword___default.a }, { path: '', component: __WEBPACK_IMPORTED_MODULE_4__pages_Home___default.a, meta: { requiresAuth: true } }, { path: 'detail/:year/:month/:day', component: __WEBPACK_IMPORTED_MODULE_7__pages_ScheduleDetail___default.a, meta: { requiresAuth: true } }, { path: 'user', component: __WEBPACK_IMPORTED_MODULE_6__pages_User___default.a, meta: { requiresAuth: true } }, { path: 'notice', component: __WEBPACK_IMPORTED_MODULE_8__pages_Notice___default.a, meta: { requiresAuth: true } }]
 }, { path: '/admin', component: __WEBPACK_IMPORTED_MODULE_11__layouts_LayoutAdmin_vue___default.a,
-  children: [{ path: 'login', component: __WEBPACK_IMPORTED_MODULE_12__admin_pages_AdminLogin___default.a }, { path: '', name: 'adminHome', component: __WEBPACK_IMPORTED_MODULE_13__admin_pages_AdminHome___default.a, meta: { requiresAdminAuth: true } }, { path: 'users/list', component: __WEBPACK_IMPORTED_MODULE_14__admin_pages_AdminUsersList___default.a, meta: { requiresAdminAuth: true } }, { path: 'users/form/:userid', component: __WEBPACK_IMPORTED_MODULE_15__admin_pages_AdminUserForm___default.a, meta: { requiresAdminAuth: true } }, { path: 'users/form', component: __WEBPACK_IMPORTED_MODULE_15__admin_pages_AdminUserForm___default.a, meta: { requiresAdminAuth: true } }, { path: 'schedules/list', component: __WEBPACK_IMPORTED_MODULE_16__admin_pages_AdminSchedulesList___default.a, meta: { requiresAdminAuth: true } }, { path: 'schedules/form/:year/:month/:day', component: __WEBPACK_IMPORTED_MODULE_17__admin_pages_AdminScheduleForm___default.a, meta: { requiresAdminAuth: true } }]
-}, { path: '/500', component: __WEBPACK_IMPORTED_MODULE_18__pages_errors_System_vue___default.a }, { path: '/404', component: __WEBPACK_IMPORTED_MODULE_19__pages_errors_NotFound_vue___default.a }];
+  children: [{ path: 'login', component: __WEBPACK_IMPORTED_MODULE_12__admin_pages_AdminLogin___default.a }, { path: '', name: 'adminHome', component: __WEBPACK_IMPORTED_MODULE_13__admin_pages_AdminHome___default.a, meta: { requiresAdminAuth: true } }, { path: 'users/list', component: __WEBPACK_IMPORTED_MODULE_14__admin_pages_AdminUsersList___default.a, meta: { requiresAdminAuth: true } }, { path: 'users/form/:userid', component: __WEBPACK_IMPORTED_MODULE_15__admin_pages_AdminUserForm___default.a, meta: { requiresAdminAuth: true } }, { path: 'users/form', component: __WEBPACK_IMPORTED_MODULE_15__admin_pages_AdminUserForm___default.a, meta: { requiresAdminAuth: true } }, { path: 'schedules/list', component: __WEBPACK_IMPORTED_MODULE_16__admin_pages_AdminSchedulesList___default.a, meta: { requiresAdminAuth: true } }, { path: 'schedules/form/:year/:month/:day', component: __WEBPACK_IMPORTED_MODULE_17__admin_pages_AdminScheduleForm___default.a, meta: { requiresAdminAuth: true } }, { path: 'reserve', component: __WEBPACK_IMPORTED_MODULE_18__admin_pages_AdminReserve___default.a, meta: { requiresAdminAuth: true } }]
+}, { path: '/500', component: __WEBPACK_IMPORTED_MODULE_19__pages_errors_System_vue___default.a }, { path: '/404', component: __WEBPACK_IMPORTED_MODULE_20__pages_errors_NotFound_vue___default.a }];
 
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
   mode: 'history',
@@ -35417,8 +35420,10 @@ var state = {
   token: null,
   isLogin: false,
   tenantName: null,
-  currentYear: null,
-  currentMonth: null
+  currentYearSchedule: null,
+  currentMonthSchedule: null,
+  currentYearReserve: null,
+  currentMonthReserve: null
 };
 
 var getters = {
@@ -35437,11 +35442,17 @@ var getters = {
   tenantName: function tenantName(state) {
     return state.tenantName;
   },
-  currentYear: function currentYear(state) {
-    return state.currentYear;
+  currentYearSchedule: function currentYearSchedule(state) {
+    return state.currentYearSchedule;
   },
-  currentMonth: function currentMonth(state) {
-    return state.currentMonth;
+  currentMonthSchedule: function currentMonthSchedule(state) {
+    return state.currentMonthSchedule;
+  },
+  currentYearReserve: function currentYearReserve(state) {
+    return state.currentYearReserve;
+  },
+  currentMonthReserve: function currentMonthReserve(state) {
+    return state.currentMonthReserve;
   }
 };
 
@@ -35460,11 +35471,17 @@ var mutations = {
   setTenantName: function setTenantName(state, value) {
     state.tenantName = value;
   },
-  setCurrentYear: function setCurrentYear(state, y) {
-    state.currentYear = y;
+  setCurrentYearSchedule: function setCurrentYearSchedule(state, y) {
+    state.currentYearSchedule = y;
   },
-  setCurrentMonth: function setCurrentMonth(state, m) {
-    state.currentMonth = m;
+  setCurrentMonthSchedule: function setCurrentMonthSchedule(state, m) {
+    state.currentMonthSchedule = m;
+  },
+  setCurrentYearReserve: function setCurrentYearReserve(state, y) {
+    state.currentYearReserve = y;
+  },
+  setCurrentMonthReserve: function setCurrentMonthReserve(state, m) {
+    state.currentMonthReserve = m;
   }
 };
 
@@ -40942,6 +40959,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -41004,6 +41022,16 @@ var render = function() {
         [
           _c("router-link", { attrs: { to: "admin/schedules/list" } }, [
             _vm._v("スケジュールリスト")
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "li",
+        [
+          _c("router-link", { attrs: { to: "admin/reserve" } }, [
+            _vm._v("予約管理")
           ])
         ],
         1
@@ -41799,8 +41827,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   _this.alertMessage = 'データ取得に失敗しました。';
                 }).finally(function () {
                   _this.loading = false;
-                  _this.$store.commit('admin/setCurrentYear', _this.y);
-                  _this.$store.commit('admin/setCurrentMonth', _this.m);
+                  _this.$store.commit('admin/setCurrentYearSchedule', _this.y);
+                  _this.$store.commit('admin/setCurrentMonthSchedule', _this.m);
                 });
 
               case 7:
@@ -41838,8 +41866,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
   },
   mounted: function mounted() {
     var m = window.moment();
-    this.y = this.$store.getters['admin/currentYear'];
-    this.m = this.$store.getters['admin/currentMonth'];
+    this.y = this.$store.getters['admin/currentYearSchedule'];
+    this.m = this.$store.getters['admin/currentMonthSchedule'];
     if (!this.y) {
       this.y = m.format("YYYY");
     }
@@ -74361,6 +74389,538 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 285 */,
+/* 286 */,
+/* 287 */,
+/* 288 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(289)
+/* template */
+var __vue_template__ = __webpack_require__(290)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/admin/pages/AdminReserve.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-76f753ea", Component.options)
+  } else {
+    hotAPI.reload("data-v-76f753ea", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 289 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_ReserveTable__ = __webpack_require__(291);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_ReserveTable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_ReserveTable__);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+//import ListView from '../components/ListView'
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      reserves: null,
+      holidays: null,
+      users: null,
+      showAlert: false,
+      alertMessage: '',
+      loading: true,
+      showCalendar: true,
+      y: 0,
+      m: 0,
+      d: 0,
+      limit: 0,
+      checkList: null
+    };
+  },
+
+  components: {
+    ReserveTable: __WEBPACK_IMPORTED_MODULE_1__components_ReserveTable___default.a
+  },
+  methods: {
+    onOpenForm: function onOpenForm(arg) {
+      this.checkList = arg;
+      this.showCalendar = false;
+    },
+    onCloseForm: function onCloseForm(arg) {
+      if (arg) {
+        this.fetchSchedules();
+      }
+      this.showCalendar = true;
+    },
+    fetchSchedules: function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+        var _this = this;
+
+        var url;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                this.loading = true;
+                this.showAlert = false;
+                this.alertMessage = '';
+                this.reserves = null;
+                url = '/api/admin/reserve/monthly/' + this.y + '/' + this.m;
+                _context.next = 7;
+                return window.axios.get(url).then(function (response) {
+                  console.log(response.data.reserves);
+                  _this.reserves = response.data.reserves;
+                  _this.holidays = response.data.holidays;
+                  _this.users = response.data.users;
+                  _this.y = response.data.y;
+                  _this.m = response.data.m;
+                }).catch(function (error) {
+                  console.log(error.response);
+                  _this.showAlert = true;
+                  _this.alertMessage = 'データ取得に失敗しました。';
+                }).finally(function () {
+                  _this.loading = false;
+                  _this.$store.commit('admin/setCurrentYearReserve', _this.y);
+                  _this.$store.commit('admin/setCurrentMonthReserve', _this.m);
+                });
+
+              case 7:
+              case 'end':
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function fetchSchedules() {
+        return _ref.apply(this, arguments);
+      }
+
+      return fetchSchedules;
+    }(),
+    prev: function prev() {
+      var m = window.moment([this.y, this.m - 1, 1]).add(-1, 'month');
+      this.y = m.format('YYYY');
+      this.m = m.format('MM');
+      this.fetchSchedules();
+    },
+    next: function next() {
+      var m = window.moment([this.y, this.m - 1, 1]).add(1, 'month');
+      this.y = m.format('YYYY');
+      this.m = m.format('MM');
+      this.fetchSchedules();
+    },
+    setCalendarView: function setCalendarView(showCalendar) {
+      this.showCalendar = showCalendar;
+    }
+  },
+  mounted: function mounted() {
+    var m = window.moment();
+    this.y = this.$store.getters['admin/currentYearReserve'];
+    this.m = this.$store.getters['admin/currentMonthReserve'];
+    if (!this.y) {
+      this.y = m.format("YYYY");
+    }
+    if (!this.m) {
+      this.m = m.format("MM");
+    }
+    this.fetchSchedules();
+  },
+
+  computed: {},
+  filters: {}
+});
+
+/***/ }),
+/* 290 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.loading,
+              expression: "loading"
+            }
+          ],
+          staticClass: "loader"
+        },
+        [_vm._v("読み込み中...")]
+      ),
+      _vm._v(" "),
+      _vm.showAlert
+        ? _c(
+            "div",
+            { staticClass: "error" },
+            [
+              _c("p", [_vm._v("情報の取得に失敗しました。")]),
+              _vm._v(" "),
+              _c("router-link", { attrs: { to: "/admin" } }, [_vm._v("戻る")])
+            ],
+            1
+          )
+        : _c(
+            "div",
+            { staticStyle: { display: "flex" } },
+            [
+              !_vm.loading
+                ? [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "prev",
+                        attrs: { href: "#" },
+                        on: { click: _vm.prev }
+                      },
+                      [_c("i", { staticClass: "fas fa-caret-square-left" })]
+                    ),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("span", [_vm._v(_vm._s(this.y))]),
+                      _vm._v("年"),
+                      _c("span", [_vm._v(_vm._s(this.m))]),
+                      _vm._v("月 予約状況一覧")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "next",
+                        attrs: { href: "#" },
+                        on: { click: _vm.next }
+                      },
+                      [_c("i", { staticClass: "fas fa-caret-square-right" })]
+                    )
+                  ]
+                : _vm._e()
+            ],
+            2
+          ),
+      _vm._v(" "),
+      _c("ReserveTable", {
+        attrs: {
+          reserves: this.reserves,
+          holidays: this.holidays,
+          users: this.users,
+          "current-year": this.y,
+          "current-month": this.m
+        }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-76f753ea", module.exports)
+  }
+}
+
+/***/ }),
+/* 291 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(294)
+/* template */
+var __vue_template__ = __webpack_require__(296)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/admin/components/ReserveTable.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-73a0c9e9", Component.options)
+  } else {
+    hotAPI.reload("data-v-73a0c9e9", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 292 */,
+/* 293 */,
+/* 294 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      days: ["月", "火", "水", "木", "金", "土", "日"],
+      checkList: null,
+      dateList: [],
+      m: this.currentMonth
+    };
+  },
+
+  props: {
+    reserves: { required: true },
+    holidays: { required: true },
+    users: { required: true },
+    currentYear: { required: true },
+    currentMonth: { required: true }
+  },
+  components: {},
+  computed: {
+    status: function status() {
+      var _this = this;
+
+      return function (date, user_id) {
+        for (var i = 0; i < _this.reserves.length; i++) {
+          var data = _this.reserves[i];
+          if (data.date === date) {
+            if (data.schedule && data.schedule.reserves) {
+              for (var j = 0; j < data.schedule.reserves.length; j++) {
+                var reserve = data.schedule.reserves[j];
+                if (reserve.user_id === user_id) {
+                  return reserve.status;
+                }
+              }
+            }
+          }
+        }
+        return '';
+      };
+    },
+    formUrl: function formUrl() {
+      return function (date) {
+        var arr = date.split('-');
+        return '/admin/schedules/form/' + arr[0] + '/' + arr[1] + '/' + arr[2];
+      };
+    },
+    schedule: function schedule() {
+      var _this2 = this;
+
+      return function (date) {
+        for (var i = 0; i < _this2.schedules.length; i++) {
+          var schedule = _this2.schedules[i];
+          if (schedule.date === date) {
+            return schedule;
+          }
+        }
+        return false;
+      };
+    },
+    holiday: function holiday() {
+      var _this3 = this;
+
+      return function (date) {
+        for (var i = 0; i < _this3.holidays.length; i++) {
+          var holiday = _this3.holidays[i];
+          if (holiday.date === date) {
+            return holiday.title;
+          }
+        }
+        return false;
+      };
+    },
+    unread: function unread() {
+      return function (schedule) {
+        if (Array.isArray(schedule.contacts) && schedule.contacts.length <= 0) {
+          return 0;
+        }
+        var sum = 0;
+        for (var i = 0; i < schedule.contacts.length; i++) {
+          var contact = schedule.contacts[i];
+          if (contact.is_read === 0) {
+            sum++;
+          }
+        }
+        return sum;
+      };
+    }
+  },
+  methods: {},
+  filters: {},
+  watch: {},
+  mounted: function mounted() {}
+});
+
+/***/ }),
+/* 295 */,
+/* 296 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "table",
+      [
+        _c(
+          "tr",
+          [
+            _c("th"),
+            _vm._v(" "),
+            _vm._l(_vm.reserves, function(date) {
+              return _c(
+                "th",
+                { key: date.key, staticStyle: { border: "1px solid" } },
+                [_vm._v("\n        " + _vm._s(date.label) + "\n      ")]
+              )
+            })
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _vm._l(this.users, function(user) {
+          return _c(
+            "tr",
+            { key: user.key },
+            [
+              _c("td", [_vm._v(_vm._s(user.name))]),
+              _vm._v(" "),
+              _vm._l(_vm.reserves, function(date) {
+                return _c(
+                  "td",
+                  { key: date.key, staticStyle: { border: "1px solid" } },
+                  [
+                    _vm._v(
+                      "\n        " +
+                        _vm._s(_vm.status(date.date, user.id)) +
+                        "\n      "
+                    )
+                  ]
+                )
+              })
+            ],
+            2
+          )
+        })
+      ],
+      2
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-73a0c9e9", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
