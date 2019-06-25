@@ -14,7 +14,7 @@ class ReservesTableSeeder extends Seeder
       DB::table('reserves')->delete();
       
       DB::table('reserves')->insert([
-        'schedule_id' => 63,
+        'schedule_id' => 123,
         'user_id' => 1,
         'leave_school_time' => '15:30',
         'status' => 'app_r',
@@ -22,16 +22,16 @@ class ReservesTableSeeder extends Seeder
         'updated_at' => date('Y-m-d H:i:s'),
       ]);
       DB::table('reserves')->insert([
-        'schedule_id' => 65,
-        'user_id' => 1,
+        'schedule_id' => 123,
+        'user_id' => 2,
         'leave_school_time' => '15:30',
         'status' => 'reserved',
         'created_at' => date('Y-m-d H:i:s'),
         'updated_at' => date('Y-m-d H:i:s'),
       ]);
       DB::table('reserves')->insert([
-        'schedule_id' => 69,
-        'user_id' => 1,
+        'schedule_id' => 123,
+        'user_id' => 3,
         'leave_school_time' => '15:30',
         'status' => 'app_c',
         'created_at' => date('Y-m-d H:i:s'),

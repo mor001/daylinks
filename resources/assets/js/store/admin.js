@@ -3,8 +3,10 @@ const state = {
   token: null,
   isLogin: false,
   tenantName: null,
-  currentYear: null,
-  currentMonth: null,
+  currentYearSchedule: null,
+  currentMonthSchedule: null,
+  currentYearReserve: null,
+  currentMonthReserve: null,
 }
 
 const getters = {
@@ -13,8 +15,10 @@ const getters = {
   staff: state => state.staff,
   isLogin: state => state.isLogin,
   tenantName: state => state.tenantName,
-  currentYear: state => state.currentYear,
-  currentMonth: state => state.currentMonth,
+  currentYearSchedule: state => state.currentYearSchedule,
+  currentMonthSchedule: state => state.currentMonthSchedule,
+  currentYearReserve: state => state.currentYearReserve,
+  currentMonthReserve: state => state.currentMonthReserve,
 }
 
 const computed = {
@@ -34,12 +38,19 @@ const mutations = {
   setTenantName (state, value) {
     state.tenantName = value
   },
-  setCurrentYear (state, y) {
-    state.currentYear = y
+  setCurrentYearSchedule (state, y) {
+    state.currentYearSchedule = y
   },
-  setCurrentMonth (state, m) {
-    state.currentMonth = m
+  setCurrentMonthSchedule (state, m) {
+    state.currentMonthSchedule = m
   },
+  setCurrentYearReserve (state, y) {
+    state.currentYearReserve = y
+  },
+  setCurrentMonthReserve (state, m) {
+    state.currentMonthReserve = m
+  },
+
 }
 
 const actions = {

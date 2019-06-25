@@ -31,7 +31,7 @@
 
           <template v-if="date.schedule">
             <!--既存データがある場合-->
-            <a v-on:click.stop="selected(date.schedule.date)">
+            <a v-on:click.stop="selected(date.schedule.id, date.schedule.date)">
               <div class="title_cnt">
                 <span class="title">{{date.schedule.title}}<br /></span>
                 <!--<span class="sub_title">イベントのサブタイトルなどの詳細</span>-->
@@ -40,7 +40,7 @@
           </template>
           <template v-else>
             <!--既存データがない場合-->
-            <a v-on:click.stop="selected(date.date)">未登録</a>
+            <a v-on:click.stop="selected(null, date.date)">未登録</a>
             <input type="checkbox" id="selected" :value="date.date" v-model="date.checked" />
           </template>
         </template>
@@ -68,17 +68,16 @@
     components: {
     },
     computed: {
-      formUrl: function() {
+      formUrl() {
         return (date) => {
           const arr = date.split('-')
           return '/admin/schedules/form/'+arr[0]+'/'+arr[1]+'/'+arr[2]
         }
       },
-      schedule: function() {
-        self = this
-        return function(date) {
-          for (var i = 0; i < self.schedules.length; i++) {
-            const schedule = self.schedules[i]
+      schedule() {
+        return (date) => {
+          for (var i = 0; i < this.schedules.length; i++) {
+            const schedule = this.schedules[i]
             if(schedule.date === date) {
               return schedule
             }
@@ -86,11 +85,10 @@
           return false
         }
       },
-      holiday: function() {
-        self = this
-        return function(date) {
-          for (var i = 0; i < self.holidays.length; i++) {
-            const holiday = self.holidays[i]
+      holiday() {
+        return (date) => {
+          for (var i = 0; i < this.holidays.length; i++) {
+            const holiday = this.holidays[i]
             if(holiday.date === date) {
               return holiday.title
             }
@@ -98,7 +96,7 @@
           return false
         }
       },
-      unread: function() {
+      unread() {
         return (schedule) => {
           if(Array.isArray(schedule.contacts) && schedule.contacts.length <= 0) {
             return 0
@@ -128,9 +126,9 @@
         let dayCount = 1                                        // 日にちのカウント
         let index = 0
 
-        console.log('対象年月: ' + currentYM.format('YYYY-MM'))
-        console.log('月初日: ' + startDate + '(' + startDate.day() + ')')
-        console.log('月末曜日: ' + endDate + '(' + currentYM.endOf('month').format('YYYY-MM-DD dddd') + ')')
+        //console.log('対象年月: ' + currentYM.format('YYYY-MM'))
+        //console.log('月初日: ' + startDate + '(' + startDate.day() + ')')
+        //console.log('月末曜日: ' + endDate + '(' + currentYM.endOf('month').format('YYYY-MM-DD dddd') + ')')
         
         if(startDay === 0) {
           startDay = 7
@@ -166,20 +164,18 @@
             index++
           }
         }
-        console.log(this.dateList)
+        //console.log(this.dateList)
       },
-      selected(date) {
-        console.log(date)
+      selected(id, date) {
         const checkList = []
-        checkList.push(date)
+        checkList.push({id: id, date: date})
         this.$emit('openForm', checkList)
       },
       register() {
-        console.log('call register')
         const checkList = []
         for (var i = 0; i < this.dateList.length; i++) {
           if(this.dateList[i].checked) {
-            checkList.push(this.dateList[i].date)
+            checkList.push({id: null, date: this.dateList[i].date})
           }
         }
         this.$emit('openForm', checkList)
@@ -193,8 +189,6 @@
       //}
     },
     mounted() {
-      console.log('thisは何？')
-      console.log(this)
       this.getDateList()
     },
 }

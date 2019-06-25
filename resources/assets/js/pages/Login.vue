@@ -35,21 +35,19 @@
 <script>
 export default {
   data () {
-    const self = this
     return {
       loginForm: {
         userid: 'muto',
         password: 'aaa111'
       },
       showAlert: false,
-      alertMessage: self.$store.getters['error/message'],
+      alertMessage: this.$store.getters['error/message'],
     }
   },
   computed: {
   },
   methods: {
-    login () {
-      const self = this
+    login() {
       this.$store.dispatch('auth/login' , this.loginForm)
       .then( (response) => {
         if(this.$store.getters['error/message'] !== '') {

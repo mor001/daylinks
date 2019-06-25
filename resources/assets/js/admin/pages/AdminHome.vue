@@ -3,6 +3,7 @@
   <ul>
     <li><router-link to="admin/">ホーム</router-link></li>
     <li><router-link to="admin/schedules/list">スケジュールリスト</router-link></li>
+    <li><router-link to="admin/reserve">予約管理</router-link></li>
     <li><router-link to="admin/users/list">利用者一覧</router-link></li>
     <li><router-link to="admin/users/form">利用者新規登録</router-link></li>
     <li><router-link to="admin/users/form/1">利用者更新</router-link></li>
@@ -22,7 +23,7 @@
     },
     methods: {
       // ログアウト
-      logout: async () => {
+      async logout() {
         await this.$store.dispatch('admin/logout')
         this.$router.push('/admin/login')
       },

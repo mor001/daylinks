@@ -123,8 +123,8 @@
       this.fetchContact()
     },
     computed: {
-      readLabel: function() {
-        return function (obj) {
+      readLabel() {
+        return (obj) => {
           if(obj.is_read === 1) {
             return '既読'
           } else {

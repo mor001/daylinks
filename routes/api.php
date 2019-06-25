@@ -29,10 +29,16 @@ Route::group(['middleware' => 'auth:admin'], function () {
         'year' => '[0-9]{4}',
         'month' => '[0-9]{2}'
     ]);
+    Route::get('/admin/schedule/daily/id/{id}', 'SchedulesController@getAdminDailyById');
     Route::get('/admin/schedule/daily/{year}/{month}/{day}', 'SchedulesController@getAdminDaily')->where([
         'year' => '[0-9]{4}',
         'month' => '[0-9]{2}',
         'day' => '[0-9]{2}'
+    ]);
+    Route::post('/admin/schedule/save', 'SchedulesController@save');
+    Route::get('/admin/reserve/monthly/{year}/{month}', 'ReservesController@getAdminMonthly')->where([
+        'year' => '[0-9]{4}',
+        'month' => '[0-9]{2}'
     ]);
 });
 

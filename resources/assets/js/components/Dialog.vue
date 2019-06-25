@@ -47,7 +47,7 @@ export default {
     }
   },
   methods: {
-    attach: () => {
+    attach() {
       if (!this.$parent) {
         this.$mount()
         document.body.appendChild(this.$el)
@@ -56,7 +56,7 @@ export default {
         this.$parent.$el.appendChild(this.$el)
       }
     },
-    remove: () => {
+    remove() {
       if (!this.$parent) {
         document.body.removeChild(this.$el)
         this.$destroy()
@@ -65,10 +65,10 @@ export default {
         this.$destroy()
       }
     },
-    close: () => {
+    close() {
       this.isShow = false
     },
-    show: () => {
+    show() {
       this.attach()
       this.isShow = true
       this.promise = new Promise((resolve, reject) => {
@@ -77,13 +77,13 @@ export default {
       });
       return this.promise
     },
-    submit: () => {
-       this.resolve(true)
+    submit() {
+      this.resolve(true)
     },
-    cancel: () => {
-       this.reject(false)
+    cancel() {
+      this.reject(false)
     },
-    afterLeave: () => {
+    afterLeave() {
       this.remove()
     },
   }

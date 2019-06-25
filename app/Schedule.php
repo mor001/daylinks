@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use DB;
+use Illuminate\Support\Facades\Log;
 
 class Schedule extends Model
 {
@@ -31,7 +32,7 @@ class Schedule extends Model
      * @var array
      */
     protected $fillable = [
-        'tid', 'date', 'title', 'description', 'register',
+        'tid', 'date', 'title', 'description', 'register', 'publish', 'status'
     ];
 
     /**
@@ -96,6 +97,29 @@ class Schedule extends Model
         }
         return $schedule;
     }
+    /**
+     * 
+     */
+    public static function getMonthlyAdmin($y = null, $m = null)
+    {
+        $from = date('Y-m-d', mktime(0, 0, 0, $m, 1, $y));
+        $to = date('Y-m-d', mktime(0, 0, 0, $m + 1, 0, $y));
+        // ここでholidayを取得するとschedulesのデータに依存するので別途取得する
+        $schedules = self::whereBetween('date', array($from, $to))
+                       ->with('reserves')
+                       ->with('holiday')
+                       ->select(['*'])->get();
+        return $schedules;
+    }
+    public static function getDailyAdmin($y = null, $m = null, $d = null)
+    {
+        $date = date('Y-m-d', mktime(0, 0, 0, $m, $d, $y));
+        $schedule = self::where('date', $date)
+                    ->with('reserves')
+                    ->with('holiday')
+                    ->first();
+        return $schedule;
+    }
     public static function countingReserve($schedules) 
     {
         $app_r = 0;
@@ -122,9 +146,32 @@ class Schedule extends Model
         }
         return ["app_r" => $app_r, "reserved" => $reserved, "app_c" => $app_c, "canceled" => $canceled];
     }
-    public function scopePublish($query, $date = null) {
-        if(empty($date)) return ''; 
+    public static function regist($date, $title, $description, $register, $publish)
+    {
+      //$validator = \Validator::validate(  $this->attributes, $rules );
+      //$validator->passes();  // 成功したら true
+      //$validator->fails();   // 失敗したら true
+      $ret = self::updateOrCreate(
+        ['date' => $date],
+        ['tid' => config('tid'),
+         'date' => $date,
+         'title' => $title,
+         'description' => $description,
+         'register' => $register,
+         'publish' => $publish,
+         'status' => 'open',
+        ] 
+      );
+      Log::info($ret);
+    }
+    public function scopePublish($query, $date = null)
+    {
+        if(empty($date)) return '';
         return $query->where('publish', '<=', $date);
+    }
+    public function reserves()
+    {
+        return $this->hasMany('App\Reserve', 'schedule_id');
     }
     public function reserve()
     {

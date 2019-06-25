@@ -75,7 +75,7 @@ export default {
     components: {
     },
     computed: {
-      schedule: () => {
+      schedule() {
         return (date) => {
           for (var i = 0; i < this.schedules.length; i++) {
             const schedule = this.schedules[i]
@@ -86,7 +86,7 @@ export default {
           return false
         }
       },
-      unread: () => {
+      unread() {
         return (schedule) => {
           if(Array.isArray(schedule.contacts) && schedule.contacts.length <= 0) {
             return 0
@@ -101,7 +101,7 @@ export default {
           return sum
         }
       },
-      dateList: () => {
+      dateList() {
         const year = this.currentYear
         const month = this.currentMonth
         const currentYM = moment([year, month - 1, 1])  // 引数の年月で初期化

@@ -111,7 +111,7 @@ export default {
     }
   },
   computed: {
-    canReserve: function() {
+    canReserve() {
       if(this.detail.status === 'open') {
         if(moment().isBefore(moment(this.detail.date), 'day')) {
           return true
@@ -122,7 +122,7 @@ export default {
         return false
       }
     },
-    reserve_status: function() {
+    reserve_status() {
       if(this.detail.reserve) {
         if(this.detail.reserve.status === 'app_r') {
           return '予約申請中'
@@ -139,14 +139,14 @@ export default {
         return 'なし'
       }
     },
-    reserve_id: function() {
+    reserve_id() {
       if(this.detail.reserve) {
         return this.detail.reserve.id
       } else {
         return null
       }
     },
-    contacts: function() {
+    contacts() {
       if(this.detail) {
         if(Array.isArray(this.detail.contacts) && this.detail.contacts.length > 0) {
           return this.detail.contacts
