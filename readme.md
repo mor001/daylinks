@@ -41,6 +41,7 @@ DB_DATABASE=(自分で作ったDBに合わせる)
 DB_USERNAME=root(自分で作ったDBに合わせる)
 DB_PASSWORD=(自分で作ったDBに合わせる)
 
+(MACでMAMPの場合)DB_SOCKET＝'/Applications/MAMP/tmp/mysql/mysql.sock'
 (以下を追記する)
 DEBUGBAR_ENABLED=true
 JWT_SECRET=3yV5xVWwAAcrfh29aISjIEb1Rdscmkv4

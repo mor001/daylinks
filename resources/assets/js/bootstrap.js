@@ -30,10 +30,10 @@ window.axios.interceptors.response.use( (response) => {
     console.log('response status is 401')
     let path = location.pathname
     if ( path.match(/admin/)) {
-      store.dispatch('admin/logout')
+      //store.dispatch('admin/logout')
       router.push('/admin/login')
     } else {
-      store.dispatch('auth/logout')
+      //store.dispatch('auth/logout')
       router.push('/login')
     }
   } else if (error.response.status === 500) {

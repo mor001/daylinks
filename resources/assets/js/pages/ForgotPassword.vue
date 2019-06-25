@@ -1,25 +1,37 @@
 <template>
-    <div>
-      <loading v-if="loading" class="loading"></loading>
-      <div v-if="showAlert" class="error">
-        <p>パスワードリセットの送信に失敗しました。</p>
-      </div>
-      <div v-if="success" class="info">
-        <p>パスワードリセットのご案内メールを{{email}}に送信しました。</p>
-      </div>
-      <div v-else class="content">
-        <form @submit.prevent="sendResetMail">
-          <p>登録されているメールアドレスにパスワードリセットの手順を送信致します。</p>
-          <p>登録されているメールアドレスを入力してメール送信をクリックしてください。</p>
-          <p>登録されているメールアドレスが分からない場合は事業者までお問い合わせください。</p>
-          <div class="login_item">
-            <label for="email"></label>
-            <input type="email" name="email" required="required" placeholder="メールアドレス" v-model="form.email" />
+  <main id="main">
+    <article class="login">
+      <div id="login_wrap">
+        <h1><img src="images/logo_green.png" alt="ロゴマーク" /></h1>
+          <div id="login_message">
+            <p>メールアドレスを入力してください。新しいパスワードを作成するためのリンクをメールでお送りします。</p>
           </div>
-          <button type="submit">メール送信</button>
-        </form>
-      </div>
-    </div>
+
+          <div v-if="showAlert" id="login_message" class="login_error">
+            <p>入力されたメールアドレスは登録されていません。</p>
+          </div>
+          <div v-if="success" class="info">
+            <p>パスワードリセットのご案内メールを{{email}}に送信しました。</p>
+          </div>
+          <div v-else id="login_form">
+            <form @submit.prevent="sendResetMail">
+              <div class="login_item">
+                <label for="email"></label>
+            <input type="email" name="email" required="required" placeholder="メールアドレス" v-model="form.email" />
+              </div>
+              <div class="button-panel">
+                <input type="submit" class="button" title="新しいパスワードを取得" value="新しいパスワードを取得" />
+              </div>
+            </form>
+          </div><!--#login_form-->
+
+          <div class="login-footer">
+            <p><RouterLink to="/login"><i class="fas fa-long-arrow-alt-left right_pd"></i>ログイン画面へ戻る</RouterLink></p>
+          </div>
+
+        </div><!--#login_wrap-->
+      </article>
+    </main><!--#main-->
 </template>
 
 <script>
