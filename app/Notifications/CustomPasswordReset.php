@@ -51,7 +51,7 @@ class CustomPasswordReset extends Notification
     {
         return (new MailMessage)
                     ->line('お客様のアカウントのパスワード再設定リクエストを受信したため、このメールを受信して​​います。')
-                    ->action('Reset Password', url(config('app.url').'/reset/'.$this->token, false))
+                    ->action('Reset Password', url(sprintf(config('app.url'), config('tid')).'/reset/'.$this->token, false))
                     ->line('パスワード再設定リクエストを操作した覚えがなければこのメールを破棄してください。');
     }
 

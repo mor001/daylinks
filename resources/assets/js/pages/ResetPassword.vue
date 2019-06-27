@@ -1,61 +1,37 @@
 <template>
-    <div>
-      <loading v-if="loading" class="loading"></loading>
-      <div v-if="showAlert" class="error">
-        <p>パスワードリセットに失敗しました。</p>
+  <main id="main">
+    <article class="login">
+      <h1><img src="images/logo_green.png" alt="ロゴマーク" /></h1>
+      <!--▼▼エラーメッセージここから-->
+      <div id="login_message" class="login_error" v-if="showAlert">
+        <p>パスワードを再設定に失敗しました。</p>
       </div>
       <div v-if="success" class="info">
         <p>パスワードを再設定しました。</p>
         <p><RouterLink to="/login">ログイン</RouterLink>へ戻る</p>
       </div>
-      <div v-else class="content">
-        <b-form @submit.prevent="reset">
+      <div v-else id="login_form">
+        <form @submit.prevent="reset">
           <input id="token" type="hidden" :value="form.token" />
-          <b-form-group
-            id="igEmail"
-            label="メールアドレス:"
-            label-for="email"
-          >
-            <b-form-input
-              id="email"
-              type="text"
-              v-model="form.email"
-              required />
-          </b-form-group>
-
-          <b-form-group
-              id="igPassword"
-              label="新しいパスワード:"
-              label-for="password"
-          >
-          <b-form-input
-              id="password"
-              type="password"
-              v-model="form.password"
-              required />
-          </b-form-group>
-
-          <b-form-group
-              id="igPasswordConfirmation"
-              label="新しいパスワード確認入力:"
-              label-for="password_confirmation"
-          >
-          <b-form-input
-              id="password_confirmation"
-              type="password"
-              v-model="form.password_confirmation"
-              required />
-          </b-form-group>
-
-          <b-button
-            size="lg"
-            type="submit"
-            variant="outline-primary">
-            リセット
-          </b-button>
-        </b-form>
+          <div class="login_item">
+            <label for="email"></label>
+            <input type="text" name="email" id="email" required="required" placeholder="メールアドレス" v-model="form.email" />
+          </div>
+          <div class="login_item">
+            <label for="password"></label>
+            <input type="password" name="password" id="password" required="required" placeholder="新しいパスワード" v-model="form.password" />
+          </div>
+          <div class="login_item">
+            <label for="password_confirmation"></label>
+            <input type="password" name="password_confirmation" id="password_confirmation" required="required" placeholder="新しいパスワード確認入力" v-model="form.password_confirmation" />
+          </div>
+          <div class="button-panel">
+            <input type="submit" class="button" title="リセット" value="リセット">
+          </div>
+        </form>
       </div>
-    </div>
+    </article>
+  </main>
 </template>
 
 <script>
