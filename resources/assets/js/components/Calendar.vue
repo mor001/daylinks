@@ -34,10 +34,10 @@
             </div><!--title_cnt-->
             <template v-if="date.schedule.reserve">
               <div class="status_cnt reserve_info">
-                <span v-if="date.schedule.reserve.status === 'app_r'" class="reserve"><span class="inner">予約<span class="br">申請中</span></span></span>
+                <span v-if="date.schedule.reserve.status === 'reserve'" class="reserve"><span class="inner">予約<span class="br">申請中</span></span></span>
                 <span v-if="date.schedule.reserve.status === 'reserved'" class="reserve"><span class="inner">予約<span class="br">済</span></span></span>
-                <span v-if="date.schedule.reserve.status === 'app_c'" class="reserve"><span class="inner">キャンセル<span class="br">申請中</span></span></span>
-                <span v-if="date.schedule.reserve.status === 'canceled'" class="reserve"><span class="inner">キャンセル<span class="br">済</span></span></span>
+                <span v-if="date.schedule.reserve.status === 'cancel'" class="reserve"><span class="inner">キャンセル<span class="br">申請中</span></span></span>
+                <span v-if="date.schedule.reserve.status === 'cancelled'" class="reserve"><span class="inner">キャンセル<span class="br">済</span></span></span>
                 <div class="msg_cnt unread" v-if="unread(date.schedule) > 0">
                   <span class="num">{{unread(date.schedule)}}</span>
                   <span class="message">件の未読メッセージ</span>
@@ -142,7 +142,7 @@ export default {
                 dayNumber: dayCount,
                 date: year + "-" + month  + "-" + dayCount,
                 blank: false,
-                today: currentDate.format('YYYYMMDD') == moment().format('YYYYMMDD'), 
+                today: currentDate.format('YYYYMMDD') == moment().format('YYYYMMDD'),
                 additional: false,
                 weekDay: d,
                 moment: currentDate,
@@ -171,7 +171,7 @@ export default {
                 dayNumber: dayCount,
                 date: year + "-" + month  + "-" + dayCount,
                 blank: false,
-                today: currentDate.format('YYYYMMDD') == moment().format('YYYYMMDD'), 
+                today: currentDate.format('YYYYMMDD') == moment().format('YYYYMMDD'),
                 additional: false,
                 weekDay: d,
                 moment: currentDate,
@@ -276,7 +276,7 @@ body {
         }
       }
     }
-  } 
+  }
   &__weekdays {
     display: flex;
     margin-bottom: 1.25rem;

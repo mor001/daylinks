@@ -18,7 +18,7 @@ class CreateReservesTable extends Migration
             $table->integer('schedule_id')->unsigned()->comment('スケジュールID');
             $table->integer('user_id')->unsigned()->comment('ユーザーID');
             $table->time('leave_school_time')->nullable()->comment('下校時間');
-            $table->enum('status', ['app_r', 'reserved', 'app_c', 'canceled'])->comment('ステータス');
+            $table->enum('status', ['reserve', 'reserved', 'cancel', 'cancelled'])->comment('ステータス');
             $table->softDeletes();
             $table->timestamps();
             $table->unique(['schedule_id', 'user_id']);

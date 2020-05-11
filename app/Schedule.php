@@ -44,7 +44,7 @@ class Schedule extends Model
     ];
 
     /**
-     * 
+     *
      */
     public static function getMonthly($y = null, $m = null, $publish = true)
     {
@@ -80,7 +80,7 @@ class Schedule extends Model
         */
     }
     /**
-     * 
+     *
      */
     public static function getDaily($y = null, $m = null, $d = null)
     {
@@ -98,7 +98,7 @@ class Schedule extends Model
         return $schedule;
     }
     /**
-     * 
+     *
      */
     public static function getMonthlyAdmin($y = null, $m = null)
     {
@@ -120,31 +120,31 @@ class Schedule extends Model
                     ->first();
         return $schedule;
     }
-    public static function countingReserve($schedules) 
+    public static function countingReserve($schedules)
     {
-        $app_r = 0;
+        $reserve = 0;
         $reserved = 0;
-        $app_c = 0;
-        $canceled = 0;
+        $cancel = 0;
+        $cancelled = 0;
         foreach($schedules as $schedule) {
           if($schedule->reserve) {
             switch ($schedule->reserve->status) {
-              case "app_r":
-                $app_r++;
+              case "reserve":
+                $reserve++;
                 continue 2;
               case "reserved":
                 $reserved++;
                 continue 2;
-              case "app_c":
-                $app_c++;
+              case "cancel":
+                $cancel++;
                 continue 2;
-              case "canceled":
-                $canceled++;
+              case "cancelled":
+                $cancelled++;
                 continue 2;
             }
           }
         }
-        return ["app_r" => $app_r, "reserved" => $reserved, "app_c" => $app_c, "canceled" => $canceled];
+        return ["reserve" => $reserve, "reserved" => $reserved, "cancel" => $cancel, "cancelled" => $cancelled];
     }
     public static function regist($date, $title, $description, $register, $publish)
     {
@@ -160,7 +160,7 @@ class Schedule extends Model
          'register' => $register,
          'publish' => $publish,
          'status' => 'open',
-        ] 
+        ]
       );
       Log::info($ret);
     }
