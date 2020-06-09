@@ -43,8 +43,11 @@ DB_PASSWORD=(自分で作ったDBに合わせる)
 
 (MACでMAMPの場合)DB_SOCKET＝'/Applications/MAMP/tmp/mysql/mysql.sock'
 (以下を追記する)
-DEBUGBAR_ENABLED=true
-JWT_SECRET=3yV5xVWwAAcrfh29aISjIEb1Rdscmkv4
+
+~~DEBUGBAR_ENABLED=true~~
+
+~~ JWT_SECRET=3yV5xVWwAAcrfh29aISjIEb1Rdscmkv4 ~~
+
 JWT_TTL=300
 
 ```
@@ -55,6 +58,7 @@ JWT_TTL=300
 - composer install と入力してエンター (しばらく時間がかかる) ※ちなみにLaravelが使用するライブラリをインストールしている
 - composer dump-autoload と入力してエンター
 - php artisan key:generate と入力してエンター
+- php artisan jwt:secret と入力してエンター
 - php artisan config:cache と入力してエンター
 
 ## DBへデータ投入
