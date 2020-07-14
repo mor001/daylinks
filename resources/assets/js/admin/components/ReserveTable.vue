@@ -48,7 +48,7 @@
                   const reserve = data.schedule.reserves[j]
                   if(reserve.user_id === user_id) {
                     return reserve.status
-                  } 
+                  }
                 }
               }
             }

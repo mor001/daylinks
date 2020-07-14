@@ -11,6 +11,7 @@ class TenantsTableSeeder extends Seeder
      */
     public function run()
     {
+      DB::statement('SET FOREIGN_KEY_CHECKS=0;');
       DB::table('tenants')->delete();
 
       DB::table('tenants')->insert([
@@ -25,5 +26,6 @@ class TenantsTableSeeder extends Seeder
         'created_at' => date('Y-m-d H:i:s'),
         'updated_at' => date('Y-m-d H:i:s'),
       ]);
+      DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
