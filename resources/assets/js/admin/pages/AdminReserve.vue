@@ -12,7 +12,9 @@
         <a href="#" class="next" @click="next"><i class="fas fa-caret-square-right"></i></a>
       </template>
     </div>
-    <ReserveTable :reserves="this.reserves" :holidays="this.holidays" :users="this.users" :current-year="this.y" :current-month="this.m" />
+    <template v-if="!loading">
+      <ReserveTable :reserves="this.reserves" :holidays="this.holidays" :users="this.users" :current-year="this.y" :current-month="this.m" />
+    </template>
   </div>
 </template>
 

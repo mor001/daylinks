@@ -23,7 +23,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/admin/me', 'AuthController@adminMe');
     Route::get('/admin/notice/unread', 'NoticesController@getUnreadAdmin');
     Route::get('/admin/users/list', 'UsersController@getUserslist');
-    Route::get('/admin/users/detail/{id}', 'UsersController@getUserDetail')->where(['id' => '[0-9]']);
+    Route::get('/admin/users/detail/{id}', 'UsersController@getUserDetail')->where(['id' => '^[0-9]+$']);
     Route::post('/admin/users/save', 'UsersController@save');
     Route::get('/admin/schedule/monthly/{year}/{month}', 'SchedulesController@getAdminMonthly')->where([
         'year' => '[0-9]{4}',

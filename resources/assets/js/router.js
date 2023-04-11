@@ -50,7 +50,7 @@ const routes = [
           { path: 'reserve', component: AdminReserve, meta: { requiresAdminAuth: true } },
         ],
      },
-    
+
     { path: '/500',  component: SystemError },
     { path: '/404',  component: NotFound },
 

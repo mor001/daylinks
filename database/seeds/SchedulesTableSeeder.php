@@ -11,11 +11,11 @@ class SchedulesTableSeeder extends Seeder
    */
   public function run()
   {
+    DB::statement('SET FOREIGN_KEY_CHECKS=0;');
     DB::table('schedules')->delete();
 
-    $y = 2019;
-    $m = 1;
-    for($m = 3; $m < 6; $m++) {
+    $y = 2020;
+    for($m = 1; $m <= 12; $m++) {
       $lastday = date('d', mktime(0, 0, 0, $m + 1, 0, $y));
       $publish = date('Y-m-d H:i:s', mktime(10, 0, 0, $m - 1, 15, $y) );
       for($i = 1; $i <= $lastday; $i++) {
@@ -46,5 +46,6 @@ class SchedulesTableSeeder extends Seeder
         ]);
       }
     }
+    DB::statement('SET FOREIGN_KEY_CHECKS=1;');
   }
 }

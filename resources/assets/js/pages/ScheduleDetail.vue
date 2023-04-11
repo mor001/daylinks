@@ -71,10 +71,10 @@
             </template>
             <template v-else>
               <div class="btn" v-if="reserve_status === 'なし'">
-                <button type="submit" class="reserve_info" value="予約する" @click="postReserve(null, 'app_r')">予約する</button>
+                <button type="submit" class="reserve_info" value="予約する" @click="postReserve(null, 'reserve')">予約する</button>
               </div>
               <div class="btn" v-if="reserve_status === '予約済' || reserve_status === '予約申請中'">
-                <button type="submit" class="reserve_warning" value="予約をキャンセル" @click="postReserve(reserve_id, 'app_c')">予約をキャンセル</button>
+                <button type="submit" class="reserve_warning" value="予約をキャンセル" @click="postReserve(reserve_id, 'cancel')">予約をキャンセル</button>
               </div>
             </template>
           </div>
@@ -124,13 +124,13 @@ export default {
     },
     reserve_status() {
       if(this.detail.reserve) {
-        if(this.detail.reserve.status === 'app_r') {
+        if(this.detail.reserve.status === 'reserve') {
           return '予約申請中'
         } else if(this.detail.reserve.status === 'reserved') {
           return '予約済'
-        } else if(this.detail.reserve.status === 'app_c') {
+        } else if(this.detail.reserve.status === 'cancel') {
           return 'キャンセル申請中'
-        } else if(this.detail.reserve.status === 'canceled') {
+        } else if(this.detail.reserve.status === 'cancelled') {
           return 'キャンセル済'
         } else {
           return this.detail.reserve.status

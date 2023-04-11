@@ -8,6 +8,7 @@
     <ul v-for="(user, index) in users" :key="index">
       <li>[{{user.id}}] {{user.name}}</li>
     </ul>
+    <router-link to="/admin">ホーム</router-link>
   </div>
 </template>
 
@@ -24,13 +25,13 @@
     components: {
     },
     methods: {
-      fetchData: () => {
+      async fetchData() {
         this.loading = true
         this.showAlert = false
         this.alertMessage = ''
-        
+
         let url = '/api/admin/users/list'
-        window.axios.get(url)
+        await window.axios.get(url)
         .then( (response) => {
           if(response.data.users.length <= 0) {
             this.showAlert = true

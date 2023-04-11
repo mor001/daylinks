@@ -11,13 +11,14 @@ class ReservesTableSeeder extends Seeder
      */
     public function run()
     {
+      DB::statement('SET FOREIGN_KEY_CHECKS=0;');
       DB::table('reserves')->delete();
-      
+
       DB::table('reserves')->insert([
         'schedule_id' => 123,
         'user_id' => 1,
         'leave_school_time' => '15:30',
-        'status' => 'app_r',
+        'status' => 'reserve',
         'created_at' => date('Y-m-d H:i:s'),
         'updated_at' => date('Y-m-d H:i:s'),
       ]);
@@ -33,7 +34,7 @@ class ReservesTableSeeder extends Seeder
         'schedule_id' => 123,
         'user_id' => 3,
         'leave_school_time' => '15:30',
-        'status' => 'app_c',
+        'status' => 'cancel',
         'created_at' => date('Y-m-d H:i:s'),
         'updated_at' => date('Y-m-d H:i:s'),
       ]);
@@ -41,9 +42,10 @@ class ReservesTableSeeder extends Seeder
         'schedule_id' => 71,
         'user_id' => 1,
         'leave_school_time' => '16:00',
-        'status' => 'canceled',
+        'status' => 'cancelled',
         'created_at' => date('Y-m-d H:i:s'),
         'updated_at' => date('Y-m-d H:i:s'),
       ]);
+      DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
